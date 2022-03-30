@@ -1,18 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
 import About_list from './About_list';
-const Layout = styled.div`
+import imgA from '../../images/main1.png'
+
+const Layout = styled.img`
   width: 100%;
-  height: 720px;
-  background-color: pink;
+  height: 950px;
+  background-image: url(${imgA}) ;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid red;
 `;
 function MainLayout() {
   return (
     <div>
-      <About_list/>
-        <Layout>
-            
-        </Layout>
+      <About_list />
+      <Layout>
+
+      </Layout>
     </div>
   )
 }
