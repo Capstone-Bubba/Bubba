@@ -18,7 +18,10 @@ android {
         versionName "1.0"
 
         buildConfigField "String", "KaKao_appkey", properties['KaKao_appkey'] //kakao appkey buildconfig에 저장
+        buildConfigField "String", "google_debug", properties['google_debug'] //google debug key
         manifestPlaceholders = ["KaKao_Native_key":Kakao_Native_key] //manifest에 등록하기 위해 등록
+        buildConfigField "String", "naver_ClientID", properties['naver_ClientID']
+        buildConfigField "String", "naver_Client_Secret", properties['naver_Client_Secret']
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -50,4 +53,7 @@ dependencies {
 
     implementation "com.kakao.sdk:v2-user:2.9.0"//카카오 로그인
     implementation "com.google.android.gms:play-services-auth:20.1.0" //google로그인
+    implementation 'com.navercorp.nid:oauth:5.0.1' // jdk 11
+
+
 }

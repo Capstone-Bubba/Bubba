@@ -6,16 +6,38 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/google_login_button"
+    <Button
+        android:id="@+id/kakao_login_unlink"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/kakao_login_button"
-        app:layout_constraintVertical_bias="0.98"
-        />
+        android:text="카카오 연결 끊기"/>
+
+    <Button
+        android:id="@+id/naver_login_button"
+        android:background="#03C75A"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:drawableLeft="@drawable/naver_login_icon"
+        android:text="네이버 로그인"
+        android:textColor="@color/white"
+        android:paddingRight="50dp"
+        app:layout_constraintLeft_toLeftOf="@+id/kakao_login_button"
+        app:layout_constraintRight_toRightOf="@+id/kakao_login_button"
+        app:layout_constraintBottom_toTopOf="@id/google_login_button"
+        android:layout_marginBottom="10dp"/>
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/google_login_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintLeft_toLeftOf="@+id/kakao_login_button"
+        app:layout_constraintRight_toRightOf="@+id/kakao_login_button"
+        app:layout_constraintBottom_toTopOf="@id/kakao_login_button"
+        android:layout_marginBottom="10dp" />
 
     <ImageButton
         android:id="@+id/kakao_login_button"

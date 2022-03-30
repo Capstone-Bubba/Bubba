@@ -2,6 +2,7 @@ package com.twogudak.bubba.SNSLogin
 
 import android.content.ContentValues
 import android.content.Context
+import android.nfc.Tag
 import android.util.Log
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
@@ -53,6 +54,7 @@ class Kakao_Login_class(context: Context) {
             UserApiClient.instance.accessTokenInfo{ _, error ->
                 if(error != null) {
                     if(error is KakaoSdkError && error.isInvalidTokenError() == true){
+                        Log.e(ContentValues.TAG, "카카오톡 로그인 필요", error)
                         kakaoLogin() //토큰 정보가 없음 로그인 구현
                     }
                     else {
@@ -68,7 +70,32 @@ class Kakao_Login_class(context: Context) {
             }
         }
         else {
+            Log.e(ContentValues.TAG, "else 카카오톡 로그인 필요 ")
             kakaoLogin()
+        }
+    }
+
+    fun kakaoTokenCheck(){
+        if(AuthApiClient.instance.hasToken()){
+            UserApiClient.instance.accessTokenInfo{ _, error ->
+                if(error != null) {
+                    if(error is KakaoSdkError && error.isInvalidTokenError() == true){
+                        Log.e(ContentValues.TAG, "카카오톡 로그인 필요", error)
+                    }
+                    else {
+                        //토큰 정보 불러오는대 오류가 발생함
+                        Log.e(ContentValues.TAG, "카카오톡 로그인확인 오류", error)
+                    }
+                }
+                else {
+                    //토큰이 있는것이 확인됨 토큰 정보를 출력함
+                    Log.e(ContentValues.TAG, "카카오톡 토큰이 이미 있음.", error)
+                    kakaoTokeninfo()
+                }
+            }
+        }
+        else {
+            Log.e(ContentValues.TAG, "else 카카오톡 로그인 필요 ")
         }
     }
 
@@ -83,6 +110,16 @@ class Kakao_Login_class(context: Context) {
                     ContentValues.TAG, "토큰 정보 보기 성공" +
                         "\n회원번호: ${tokenInfo.id}" +
                         "\n만료시간: ${tokenInfo.expiresIn} 초")
+            }
+        }
+    }
+
+    fun kakaounlink(){
+        UserApiClient.instance.unlink { error ->
+            if(error != null){
+                Log.e("kakao Account", "연결 끊기 실패",error)
+            } else {
+                Log.e("KaKao Account", "연결 끊기 성공 삭제됬음.")
             }
         }
     }
