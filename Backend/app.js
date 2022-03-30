@@ -7,9 +7,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
 
-app.get('/', (req, res) => {
-  console.log('root');
-  res.sendStatus(200);
-})
+const userRouter = require('./routes/user');
+const noticeRouter = require('./routes/notice');
+
+app.use('/', userRouter);
+app.use('/news', noticeRouter);
 
 module.exports = app;
