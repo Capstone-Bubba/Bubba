@@ -24,6 +24,7 @@ const createNotice = async (req, res) => {
 
     try {
         await noticeDAO.create_notice(parameters);
+        res.sendStatus(200);
     } catch(err) {
         console.log(err);
     }
@@ -37,6 +38,19 @@ const updateNotice = async (req, res) => {
     }
     try {
         await noticeDAO.update_notice(parameters);
+        res.sendStatus(200);
+    } catch(err) {
+        console.log(err);
+    }
+}
+
+const deleteNotice = async (req, res) => {
+    const parameters = {
+        "notice_num" : req.query.num
+    }
+
+    try {
+        await noticeDAO.delete_notice(parameters);
     } catch(err) {
         console.log(err);
     }
@@ -46,5 +60,6 @@ module.exports = {
     readNoticeList,
     readNotice,
     createNotice,
-    updateNotice
+    updateNotice,
+    deleteNotice
 }
