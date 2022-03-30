@@ -52,9 +52,23 @@ const update_notice = (parameters) => {
     })
 }
 
+const delete_notice = (parameters) => {
+    return new Promise((resolve ,reject) => {
+        db.query(`DELETE FROM notice WHERE notice_num = ?`, parameters, (err, db_data) => {
+            if(err) {
+                reject(err);
+                console.log(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     read_notice_list,
     read_notice,
     create_notice,
-    update_notice
+    update_notice,
+    delete_notice
 }
