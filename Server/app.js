@@ -1,23 +1,31 @@
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
-const flash = require('connect-flash');
 const passportConfig = require('./passport/passportConfig');
+const session = require('express-session');
+
+const sessionStore = require('./config/sessionConn');
 
 const app = express();
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false, limit: "5mb" }));
-app.use(express.static(path.join(__dirname)));
-
-passportConfig();
 
 const userRouter = require('./routes/user');
 const noticeRouter = require('./routes/notice');
 const authRouter = require('./routes/auth');
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false, limit: "5mb" }));
+app.use(express.static(path.join(__dirname)));
+
+app.use(session({
+    secret: "bubba",
+    resave: false,
+    saveUninitialized: true,
+    store: sessionStore
+}))
+
+passportConfig();
 app.use(passport.initialize());
-app.use(flash());
+app.use(passport.session());
 
 app.use('/', userRouter);
 app.use('/news', noticeRouter);

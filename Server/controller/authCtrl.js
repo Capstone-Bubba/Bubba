@@ -1,11 +1,14 @@
 const authDAO = require('../model/authDAO');
+const passport = require('passport');
 
-const loginFail = async (req, res) => {
-    res.send("fail");
+const loginSuccess = async (req, res) => {
+    res.redirect('/');
 }
 
-
+const googleLogin = (req, res) => {
+    passport.authenticate('google', {scope: ['email']});
+}
 
 module.exports = {
-    loginFail
+    loginSuccess
 }

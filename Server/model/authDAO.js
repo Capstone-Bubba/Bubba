@@ -1,6 +1,6 @@
 const db = require('../config/dbConn');
 
-function checkUserID(parameters) {
+const checkUserID = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT * FROM User WHERE user_id =?`;
         db.query(queryData, [parameters.user_id], (error, db_data) => {
@@ -13,7 +13,7 @@ function checkUserID(parameters) {
     })
 }
 
-function insertUser(parameters) {
+const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `INSERT INTO User (user_id, user_pw, salt, displayName) VALUES (?, ?, ?, ?)`;
         db.query(queryData, [parameters.user_id, parameters.user_pw, parameters.salt, parameters.displayName], (error, db_data) => {
@@ -25,7 +25,7 @@ function insertUser(parameters) {
     })
 }
 
-function passportCheckUser(parameters) {
+const passportCheckUser = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT user_id, displayName FROM User Where user_id =?`;
         db.query(queryData, [parameters], (error, db_data) => {
@@ -33,5 +33,11 @@ function passportCheckUser(parameters) {
             else resolve(db_data[0])
         })
     })
+}
+
+module.exports = {
+    checkUserID,
+    insertUser,
+    passportCheckUser
 }
 
