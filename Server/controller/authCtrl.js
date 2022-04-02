@@ -5,10 +5,12 @@ const loginSuccess = async (req, res) => {
     res.redirect('/');
 }
 
-const googleLogin = (req, res) => {
-    passport.authenticate('google', {scope: ['email']});
+const logout = (req, res) => {
+    req.logout();
+    res.redirect('/');
 }
 
 module.exports = {
-    loginSuccess
+    loginSuccess,
+    logout
 }

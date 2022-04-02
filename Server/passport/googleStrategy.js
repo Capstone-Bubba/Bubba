@@ -11,17 +11,34 @@ module.exports = () => {
         passReqToCallback: true
     }, async (req, accessToken, refreshToken, profile, done) => {
         try {
-            // const user = await authDAO.passportCheckGoogle(profile);
-            console.log(profile);
-            console.log(accessToken);
-            // if (user == '' || user == undefined) {
-            //     const insertUser = await authDAO.insertNaverUser(profile);
-            //     const newuser = await authDAO.passportCheckNaver(profile);
-            //     return done(null, newuser);
-            // }
-            return done(null, profile);
+            const parameters = {
+                email: profile.emails[0].value,
+                platform: profile.provider
+            }
+            const isUser = await authDAO.checkUserID(parameters);
+            
+            if(isUser[0].exist == 0) {
+                await authDAO.insertUser(parameters);
+            }
+
+            const data = await authDAO.sessionCheck();
+
+            data.forEach(el => {
+                const sessionPassport = JSON.parse(el.data).passport;
+                if(sessionPassport != undefined) {
+                    if(JSON.stringify(sessionPassport.user) === JSON.stringify(parameters)) {
+                        console.log('1');
+                        return done(null, false, {"msg": "err"});
+                        // return false;
+                    } else {
+                        console.log('2');
+                        return [done(null, {"email": profile.emails[0].value, "platform": profile.provider}), false];
+                    }
+                }
+            });
         } catch (err) {
             console.log(err);
+            return done(null, false, { message: err });
         }
     }))
 }

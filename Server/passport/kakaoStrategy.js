@@ -10,17 +10,18 @@ module.exports = () => {
         passReqToCallback: true
     }, async (req, accessToken, refreshToken, profile, done) => {
         try {
-            // const user = await authDAO.passportCheckGoogle(profile);
-            console.log(profile);
-            console.log(accessToken);
-            // if (user == '' || user == undefined) {
-            //     const insertUser = await authDAO.insertNaverUser(profile);
-            //     const newuser = await authDAO.passportCheckNaver(profile);
-            //     return done(null, newuser);
-            // }
-            return done(null, profile);
+            const parameters = {
+                platform: profile.provider,
+                email: profile._json.kakao_account.email
+            }
+            const isUser = await authDAO.checkUserID(parameters);
+            if(isUser[0].exist == 0) {
+                await authDAO.insertUser(parameters);
+            }
+
+            return done(null, [profile._json.kakao_account.email, profile.provider]);
         } catch (err) {
-            console.log(err);
+            return done(null, false, { message: err });
         }
     }))
 }

@@ -1,5 +1,5 @@
 const passport = require('passport');
-const NaverLogin = require('./naver-login');
+const NaverLogin = require('./naverStrategy');
 const GoogleLogin = require('./googleStrategy');
 const KakaoLogin = require('./kakaoStrategy');
 // const FacebookLogin = require('./facebook-login');
