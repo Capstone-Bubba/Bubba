@@ -11,15 +11,15 @@ module.exports = () => {
         passReqToCallback: true
     }, async (req, accessToken, refreshToken, profile, done) => {
         try {
-            // const user = await authDAO.passportCheckNaver(profile);
-            console.log(profile);
-            console.log(accessToken);
-            // if (user == 0){
-            //     const insertUser = await authDAO.insertNaverUser(profile);
-            //     const newuser = await authDAO.passportCheckNaver(profile);
-            //     return done(null, newuser);
-            // }
-            return done(null, profile);
+            const parameters = {
+                platform: profile.provider,
+                email: profile.emails[0].value
+            }
+            const isUser = await authDAO.checkUserID(profile.emails[0].value);
+            if(isUser[0].exist == 0) {
+                await authDAO.insertUser(parameters);
+            }
+            return done(null, [profile.emails[0].value, profile.provider]);
         } catch (err) {
             return done(null, false, { message: err });
         }

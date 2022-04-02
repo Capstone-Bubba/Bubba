@@ -12,6 +12,8 @@ const userRouter = require('./routes/user');
 const noticeRouter = require('./routes/notice');
 const authRouter = require('./routes/auth');
 
+const auth = require('./middleware/sessoinCheck');
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
@@ -29,6 +31,7 @@ app.use(passport.session());
 
 app.use('/', userRouter);
 app.use('/news', noticeRouter);
+// app.use('/auth', auth.sessionCheck, authRouter);
 app.use('/auth', authRouter);
 
 module.exports = app;
