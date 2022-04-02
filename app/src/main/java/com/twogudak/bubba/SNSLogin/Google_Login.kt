@@ -13,16 +13,19 @@ import com.twogudak.bubba.BuildConfig
 class Google_Login(context: Context) {
 
     val context = context
+    val tag = "Google Account"
 
     //Google 로그인이 되어 있는지 확인한다.
     //null을 반환하면 로그인을 안한것, 다른것을 반환하면 이미 앱에 로그인된 것
 
-    fun googleAccount() {
+    fun googleAccount():Int {
         val account = GoogleSignIn.getLastSignedInAccount(context)
         if (account == null) {
-            Log.e("Google account", "로그인 안되있음")
+            Log.e(tag, "로그인 안되있음")
+            return 0
         } else {
-            Log.e("Google account", "로그인 완료된 상태")
+            Log.e(tag, "로그인 완료된 상태")
+            return 1
         }
     }
 
@@ -45,11 +48,11 @@ class Google_Login(context: Context) {
             var googletoken = account?.idToken.toString()
             var googletokenAuth = account?.serverAuthCode.toString()
 
-            Log.e("Google account",email)
-            Log.e("Google account",googletoken)
-            Log.e("Google account", googletokenAuth)
+            Log.e(tag,email)
+            Log.e(tag,googletoken)
+            Log.e(tag, googletokenAuth)
         } catch (e: ApiException){
-            Log.e("Google account","signInResult:failed Code = " + e.statusCode)
+            Log.e(tag,"signInResult:failed Code = " + e.statusCode)
         }
     }
 }

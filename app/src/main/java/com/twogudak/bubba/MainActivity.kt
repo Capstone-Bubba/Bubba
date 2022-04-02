@@ -17,11 +17,10 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.common.util.Utility
 import com.navercorp.nid.NaverIdLoginSDK
-import com.navercorp.nid.oauth.OAuthLoginCallback
-import com.navercorp.nid.oauth.view.NidOAuthLoginButton
 import com.twogudak.bubba.SNSLogin.Google_Login
 import com.twogudak.bubba.SNSLogin.Kakao_Login_class
 import com.twogudak.bubba.SNSLogin.Naver_login
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,16 +41,18 @@ class MainActivity : AppCompatActivity() {
         var keyHash = Utility.getKeyHash(this)
         Log.e("Hash",keyHash)
 
+        //네아로 객체 초기화
         NaverIdLoginSDK.initialize(this,BuildConfig.naver_ClientID,BuildConfig.naver_Client_Secret,"bubba")
 
-
-        //로그인 버튼 id, size 설정
+        //구글 버튼
         val google_login_button = findViewById<SignInButton>(R.id.google_login_button)
         google_login_button.setSize(SignInButton.SIZE_WIDE)
 
-        //kakao loginbt
+        //카카오톡 로그인 버튼
         val kakao_login_button = findViewById<ImageButton>(R.id.kakao_login_button)
         val kakao_unlink_button = findViewById<Button>(R.id.kakao_login_unlink)
+
+        //네이버 로그인 버튼
         val naver_login_button = findViewById<Button>(R.id.naver_login_button)
 
         //GoogleActivityResultLauncher 구현
@@ -61,11 +62,8 @@ class MainActivity : AppCompatActivity() {
             google_login.handleSignInResult(task)
         }
 
-        //naver login callback
-        val oauthLoginCallback = naver_login.oauthLoginCallback
-
-
         //setonClickListener 구현
+
         // 카카오톡이 설치되어 있으면 카카오톡으로 로그인, 아니면 카카오계정으로 로그인
         kakao_login_button.setOnClickListener {
                 kakao_login.hasKakaoToken()
@@ -73,6 +71,18 @@ class MainActivity : AppCompatActivity() {
 
         kakao_unlink_button.setOnClickListener {
             kakao_login.kakaounlink()
+        }
+
+        val kakao_load_user = findViewById<Button>(R.id.kakao_login_load_user)
+        val kakao_logout = findViewById<Button>(R.id.kakao_login_logout)
+
+        kakao_load_user.setOnClickListener {
+            kakao_login.kakaoloaduser()
+        }
+
+        kakao_logout.setOnClickListener {
+            kakao_login.kakaologout()
+            NaverIdLoginSDK.logout()
         }
 
 
@@ -83,22 +93,29 @@ class MainActivity : AppCompatActivity() {
             GoogleSignResultLauncher.launch(signIntent)
         }
 
+
+        //naver login callback 객체생성
+        val oauthLoginCallback = naver_login.oauthLoginCallback
+
+        //naver 로그인 버튼
         naver_login_button.setOnClickListener {
             NaverIdLoginSDK.authenticate(this,oauthLoginCallback)
         }
-
-
-
-
-
     }
 
     override fun onStart() {
         super.onStart()
 
         //구글 카카오 토큰 확인
-        google_login.googleAccount()
-        kakao_login.kakaoTokenCheck()
+        val google_logined = google_login.googleAccount()
+        val kakao_logined = kakao_login.kakaoTokenCheck()
+        val naver_logined = naver_login.CheckToken()
+
+        if(google_logined == 1 || kakao_logined == 1 || naver_logined == 1){
+            Log.i("Account","로그인 되어있음")
+        } else {
+            Log.e("Account","로그인 필요")
+        }
 
     }
 

@@ -5,7 +5,7 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream()) //local.properties 가지고 오기
-def Kakao_Native_key = properties.getProperty('KaKao_appkey') //manifest에 넣기 위해 변수로 만듬
+def kakao_manifest = properties.getProperty('kakao_manifest') //manifest에 넣기 위해 변수로 만듬
 
 android {
     compileSdk 32
@@ -19,7 +19,7 @@ android {
 
         buildConfigField "String", "KaKao_appkey", properties['KaKao_appkey'] //kakao appkey buildconfig에 저장
         buildConfigField "String", "google_debug", properties['google_debug'] //google debug key
-        manifestPlaceholders = ["KaKao_Native_key":Kakao_Native_key] //manifest에 등록하기 위해 등록
+        manifestPlaceholders = ["Kakao_Native_key":kakao_manifest] //manifest에 등록하기 위해 등록
         buildConfigField "String", "naver_ClientID", properties['naver_ClientID']
         buildConfigField "String", "naver_Client_Secret", properties['naver_Client_Secret']
 

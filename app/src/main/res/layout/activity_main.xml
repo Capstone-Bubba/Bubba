@@ -14,6 +14,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:text="카카오 연결 끊기"/>
+    <Button
+        android:id="@+id/kakao_login_load_user"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/kakao_login_unlink"
+        android:text="유저 데이타 불러오기"/>
+    <Button
+        android:id="@+id/kakao_login_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/kakao_login_load_user"
+        android:text="카카오 연결 끊기"/>
 
     <Button
         android:id="@+id/naver_login_button"
