@@ -22,20 +22,21 @@ module.exports = () => {
             }
 
             const data = await authDAO.sessionCheck();
+            console.log(data);
 
-            data.forEach(el => {
+            const even = (el) => {
                 const sessionPassport = JSON.parse(el.data).passport;
-                if(sessionPassport != undefined) {
-                    if(JSON.stringify(sessionPassport.user) === JSON.stringify(parameters)) {
-                        console.log('1');
-                        return done(null, false, {"msg": "err"});
-                        // return false;
-                    } else {
-                        console.log('2');
-                        return [done(null, {"email": profile.emails[0].value, "platform": profile.provider}), false];
-                    }
-                }
-            });
+                const result = JSON.stringify(sessionPassport.user) === JSON.stringify(parameters);
+                return result;
+            }
+
+            if(data.some(even)) {
+                return done(null, false)
+            } else {
+                return done(null, {"email": profile.emails[0].value, "platform": profile.provider});
+            }
+           
+            
         } catch (err) {
             console.log(err);
             return done(null, false, { message: err });

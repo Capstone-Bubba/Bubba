@@ -12,13 +12,15 @@ module.exports = () => {
     }, async (req, accessToken, refreshToken, profile, done) => {
         try {
             const parameters = {
-                platform: profile.provider,
-                email: profile.emails[0].value
+                email: profile.emails[0].value,
+                platform: profile.provider
             }
-            const isUser = await authDAO.checkUserID(profile.emails[0].value);
+            const isUser = await authDAO.checkUserID(parameters);
+            
             if(isUser[0].exist == 0) {
                 await authDAO.insertUser(parameters);
             }
+            
             return done(null, [profile.emails[0].value, profile.provider]);
         } catch (err) {
             return done(null, false, { message: err });
