@@ -10,4 +10,13 @@ const sessionStore = new MysqlStore({
     database: process.env.DB_DATABASE
 });
 
-module.exports = sessionStore;
+const SessionOption = {
+    secret : process.env.SESSION_SECRET,
+    resave : false,
+    saveUninitialized: true,
+    store : sessionStore
+}
+
+const Session = session(SessionOption);
+
+module.exports = Session;
