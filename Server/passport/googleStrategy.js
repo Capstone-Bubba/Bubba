@@ -22,7 +22,6 @@ module.exports = () => {
             }
 
             const data = await authDAO.sessionCheck();
-            console.log(data);
 
             const even = (el) => {
                 const sessionPassport = JSON.parse(el.data).passport;

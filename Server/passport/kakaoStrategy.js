@@ -11,15 +11,29 @@ module.exports = () => {
     }, async (req, accessToken, refreshToken, profile, done) => {
         try {
             const parameters = {
-                platform: profile.provider,
-                email: profile._json.kakao_account.email
+                email: profile.emails[0].value,
+                platform: profile.provider
             }
             const isUser = await authDAO.checkUserID(parameters);
+            
             if(isUser[0].exist == 0) {
                 await authDAO.insertUser(parameters);
             }
 
-            return done(null, [profile._json.kakao_account.email, profile.provider]);
+            const data = await authDAO.sessionCheck();
+
+            const even = (el) => {
+                const sessionPassport = JSON.parse(el.data).passport;
+                const result = JSON.stringify(sessionPassport.user) === JSON.stringify(parameters);
+                return result;
+            }
+
+            if(data.some(even)) {
+                return done(null, false)
+            } else {
+                return done(null, {"email": profile._json.kakao_account.email, "platform": profile.provider});
+            }
+
         } catch (err) {
             return done(null, false, { message: err });
         }
