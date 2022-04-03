@@ -2,9 +2,7 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const passportConfig = require('./passport/passportConfig');
-const session = require('express-session');
-
-const sessionStore = require('./config/sessionConn');
+const Session = require('./config/sessionConn');
 
 const app = express();
 
@@ -18,14 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
 
-app.use(session({
-    secret: "bubba",
-    resave: false,
-    saveUninitialized: true,
-    store: sessionStore
-}))
+app.use(Session);
 
 passportConfig();
+
 app.use(passport.initialize());
 app.use(passport.session());
 

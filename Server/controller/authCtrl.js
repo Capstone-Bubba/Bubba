@@ -1,6 +1,3 @@
-const authDAO = require('../model/authDAO');
-const passport = require('passport');
-
 const loginSuccess = async (req, res) => {
     res.redirect('/');
 }
