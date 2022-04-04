@@ -20,6 +20,9 @@ import com.navercorp.nid.NaverIdLoginSDK
 import com.twogudak.bubba.SNSLogin.Google_Login
 import com.twogudak.bubba.SNSLogin.Kakao_Login_class
 import com.twogudak.bubba.SNSLogin.Naver_login
+import com.twogudak.bubba.SNSLogin.SNS_LOGINED_class
+import kotlinx.coroutines.*
+import okhttp3.internal.wait
 import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
@@ -33,9 +36,12 @@ class MainActivity : AppCompatActivity() {
     val naver_login = Naver_login(this)
 
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
 
         //Android Hash값 얻어오기 Kakao api 사용
         var keyHash = Utility.getKeyHash(this)
@@ -80,10 +86,6 @@ class MainActivity : AppCompatActivity() {
             kakao_login.kakaoloaduser()
         }
 
-        kakao_logout.setOnClickListener {
-            kakao_login.kakaologout()
-            NaverIdLoginSDK.logout()
-        }
 
 
         //구글 로그인 버튼
@@ -91,6 +93,7 @@ class MainActivity : AppCompatActivity() {
             val mGoogleSignInClient = GoogleSignIn.getClient(this,google_login.gso)
             var signIntent: Intent = mGoogleSignInClient.getSignInIntent()
             GoogleSignResultLauncher.launch(signIntent)
+            onStart()
         }
 
 
@@ -105,18 +108,32 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
+        Log.e("mainActivtiy","onStart")
 
         //구글 카카오 토큰 확인
-        val google_logined = google_login.googleAccount()
-        val kakao_logined = kakao_login.kakaoTokenCheck()
-        val naver_logined = naver_login.CheckToken()
-
-        if(google_logined == 1 || kakao_logined == 1 || naver_logined == 1){
-            Log.i("Account","로그인 되어있음")
-        } else {
-            Log.e("Account","로그인 필요")
+        val check = CoroutineScope(Dispatchers.IO).async {
+            google_login.googleAccount()
+            naver_login.CheckToken()
+            kakao_login.kakaoTokenCheck()
+            delay(1000L)
         }
 
-    }
+        CoroutineScope(Dispatchers.IO).launch {
 
+           val chekc =  check.await()
+
+            Log.e("kakao Account",kakao_login.kakao_login_state.toString())
+            Log.e("kakaoAccount",chekc.toString())
+
+            if(google_login.google_login_State == SNS_LOGINED_class.logined ||
+                kakao_login.kakao_login_state == SNS_LOGINED_class.logined ||
+                naver_login.Naver_Logined_state == SNS_LOGINED_class.logined){
+                Log.i("Account","로그인 되어있음")
+                var rootintent = Intent(this@MainActivity,rootActivty::class.java)
+                startActivity(rootintent)
+            } else {
+                Log.e("Account","로그인 필요")
+            }
+        }
+    }
 }

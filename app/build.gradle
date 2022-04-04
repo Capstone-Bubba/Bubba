@@ -54,6 +54,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-user:2.9.0"//카카오 로그인
     implementation "com.google.android.gms:play-services-auth:20.1.0" //google로그인
     implementation 'com.navercorp.nid:oauth:5.0.1' // jdk 11
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
 
 
 }

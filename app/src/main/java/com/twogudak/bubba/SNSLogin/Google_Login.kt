@@ -14,18 +14,20 @@ class Google_Login(context: Context) {
 
     val context = context
     val tag = "Google Account"
+    var google_login_State = SNS_LOGINED_class.nLogined
+
 
     //Google 로그인이 되어 있는지 확인한다.
     //null을 반환하면 로그인을 안한것, 다른것을 반환하면 이미 앱에 로그인된 것
 
-    fun googleAccount():Int {
+    fun googleAccount() {
         val account = GoogleSignIn.getLastSignedInAccount(context)
         if (account == null) {
             Log.e(tag, "로그인 안되있음")
-            return 0
+            google_login_State = SNS_LOGINED_class.nLogined
         } else {
             Log.e(tag, "로그인 완료된 상태")
-            return 1
+            google_login_State = SNS_LOGINED_class.logined
         }
     }
 
