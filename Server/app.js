@@ -9,6 +9,7 @@ const app = express();
 const userRouter = require('./routes/user');
 const noticeRouter = require('./routes/notice');
 const authRouter = require('./routes/auth');
+const babyRouter = require('./routes/baby');
 
 const auth = require('./middleware/sessoinCheck');
 
@@ -27,5 +28,6 @@ app.use('/', userRouter);
 app.use('/news', noticeRouter);
 // app.use('/auth', auth.sessionCheck, authRouter);
 app.use('/auth', authRouter);
+app.use('/baby', babyRouter);
 
 module.exports = app;
