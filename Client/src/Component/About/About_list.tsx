@@ -1,8 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const List = styled.ul`
 display:flex;
+cursor:pointer;
 justify-content: space-around;
 font-size: 1.6rem;
 list-style: none;
@@ -16,13 +18,13 @@ function About_list() {
         <div>
             <List>
                 <ListItem>
-                    App
+               <Link to='/about_t'>App</Link>
                 </ListItem>
                 <ListItem>
-                    Web
+            <Link to='/about_m'>Web</Link>
                 </ListItem>
                 <ListItem>
-                    Guide
+                <Link to='/about_b'>Guide</Link>
                 </ListItem>
             </List>
         </div>
