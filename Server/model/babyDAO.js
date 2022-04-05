@@ -16,7 +16,7 @@ const read_baby = (parameters) => {
 
 const create_baby = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO notice SET ?`;
+        let queryData = `INSERT INTO baby SET ?`;
         db.query(queryData, parameters, (err, db_data) => {
             if(err){
                 console.log(err);
@@ -29,8 +29,9 @@ const create_baby = (parameters) => {
 }
 
 const update_baby = (parameters) => {
+    console.log(parameters);
     return new Promise((resolve, reject) => {
-        let queryData = `UPDATE baby SET baby_name =?, birth =?, gender=?, baby_picture=? WHERE baby_num =? AND user_num=?`;
+        let queryData = `UPDATE baby SET baby_name =?, birth =?, gender=?, baby_picture=? WHERE baby_num =? && user_num=?`;
         db.query(queryData, [parameters.baby_name, parameters.birth, parameters.gender, parameters.baby_picture, parameters.baby_num, parameters.user_num], (err, db_data) => {
             if(err){
                 console.log(err);
@@ -45,7 +46,7 @@ const update_baby = (parameters) => {
 const delete_baby = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `DELETE from baby where baby_num =?`;
-        db.query(queryData, parameters, (err, db_data) => {
+        db.query(queryData, parameters.baby_num, (err, db_data) => {
             if(err) {
                 console.log(err);
                 reject(err);
