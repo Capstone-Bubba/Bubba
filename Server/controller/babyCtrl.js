@@ -53,6 +53,7 @@ const deleteBaby = async (req, res) => {
     };
     try {
         await babyDAO.delete_baby(parameters);
+        res.sendStatus(200);
     } catch (err) {
         console.log(err);
     }
