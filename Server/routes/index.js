@@ -3,12 +3,7 @@ const router = express.Router();
 
 router.get('/', (req, res) => {
   console.log('dong');
-  res.sendStatus(200);
-})
-
-router.get('/fail', (req, res) => {
-  console.log('fail');
-  res.sendStatus(200);
+  res.send(`<a href="http://localhost:3000/auth">auth</a><br><a href="http://localhost:3000/baby">baby</a>`);
 })
 
 module.exports = router;

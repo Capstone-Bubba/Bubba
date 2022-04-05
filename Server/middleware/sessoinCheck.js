@@ -1,14 +1,24 @@
-const sessionCheck = async (req, res, next) => {
-    if(!(req.session.passport.user)) {
-        console.log('로그인 안되어있음');
-        next();
-    } else if(req.session.passport.user) {
-        console.log('로그인 되어있음');
-        
+const sessionCheck = (req, res, next) => {
+    if(req.isAuthenticated()) {
+        console.log('Already Logged In');
         res.redirect('/');
+    } else {
+        console.log('Not Logged In');
+        next();
+    }
+}
+
+const userCheck = (req, res, next) => {
+    console.log('userCheck');
+    if(req.isAuthenticated()) {
+        next();
+    } else {
+        console.log('Not Logged In');
+        res.redirect('/auth');
     }
 }
 
 module.exports = { 
-    sessionCheck
+    sessionCheck,
+    userCheck
 }

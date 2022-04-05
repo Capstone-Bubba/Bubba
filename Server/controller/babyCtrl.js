@@ -1,13 +1,14 @@
 const babyDAO = require('../model/babyDAO');
 
 const readBabyList = async (req, res) => {
-    const parameters = {
-        "user_num" : 12
-    };
+    res.sendStatus(200);
+    // const parameters = {
+    //     "user_num" : 12
+    // };
     
-    const result = await babyDAO.read_babyList(parameters);
-    res.send({"result" : result});
-    console.log(result);
+    // const result = await babyDAO.read_babyList(parameters);
+    // res.send({"result" : result});
+    // console.log(result);
 }
 
 const readBaby = async (req, res) => {
