@@ -1,5 +1,15 @@
 const babyDAO = require('../model/babyDAO');
 
+const readBabyList = async (req, res) => {
+    const parameters = {
+        "user_num" : 12
+    };
+    
+    const result = await babyDAO.read_babyList(parameters);
+    res.send({"result" : result});
+    console.log(result);
+}
+
 const readBaby = async (req, res) => {
     const parameters = {
         "user_num" : 11
@@ -47,9 +57,8 @@ const updateBaby = async (req, res) => {
 };
 
 const deleteBaby = async (req, res) => {
-    console.log(typeof(req.query.baby_num))
     const parameters = {
-        "baby_num" : req.query.baby_num
+        "baby_num" : req.query.baby_num 
     };
     try {
         await babyDAO.delete_baby(parameters);
@@ -57,9 +66,10 @@ const deleteBaby = async (req, res) => {
     } catch (err) {
         console.log(err);
     }
-}
+};
 
 module.exports = {
+    readBabyList,
     readBaby,
     createBaby,
     updateBaby,

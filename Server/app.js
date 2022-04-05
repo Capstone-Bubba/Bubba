@@ -10,6 +10,8 @@ const userRouter = require('./routes/user');
 const noticeRouter = require('./routes/notice');
 const authRouter = require('./routes/auth');
 const babyRouter = require('./routes/baby');
+const galleryRouter = require('./routes/gallery');
+const diaryRouter = require('./routes/diary');
 
 const auth = require('./middleware/sessoinCheck');
 
@@ -29,5 +31,7 @@ app.use('/news', noticeRouter);
 // app.use('/auth', auth.sessionCheck, authRouter);
 app.use('/auth', authRouter);
 app.use('/baby', babyRouter);
+app.use('/gallery', galleryRouter);
+app.use('/diary', diaryRouter);
 
 module.exports = app;

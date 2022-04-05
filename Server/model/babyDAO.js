@@ -1,5 +1,19 @@
 const db = require('../config/dbConn');
 
+const read_babyList = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT baby_name, gender, baby_picture FROM baby WHERE user_num =?`
+        db.query(queryData, [parameters.user_num], (err, db_data) => {
+            if(err) {
+                console.log(err);
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 const read_baby = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT * FROM baby WHERE user_num =?`;
@@ -58,6 +72,7 @@ const delete_baby = (parameters) => {
 }
 
 module.exports = {
+    read_babyList,
     read_baby,
     create_baby,
     update_baby,
