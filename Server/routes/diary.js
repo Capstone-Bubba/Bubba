@@ -5,9 +5,9 @@ const diaryCtrl = require('../controller/diaryCtrl');
 
 router.get('/', diaryCtrl.readDiary);
 
-router.post('/create', diaryCtrl.createDiary);
+router.post('/create', uploadOriginal.uploadDiary.array('files'), diaryCtrl.createDiary);
 
-router.post('/update', diaryCtrl.updateDiary);
+router.post('/update', uploadOriginal.uploadDiary.array('files'), diaryCtrl.updateDiary);
 
 router.post('/delete', diaryCtrl.deleteDiary);
 

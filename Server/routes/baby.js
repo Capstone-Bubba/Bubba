@@ -6,11 +6,11 @@ const babyCtrl = require('../controller/babyCtrl');
 // 아기 상태 표시 
 router.get('/', babyCtrl.readBabyList);
 
-router.post('/create', babyCtrl.createBaby);
+router.post('/create', uploadOriginal.uploadBaby.single('file'), babyCtrl.createBaby);
 
 router.get('/detail', babyCtrl.readBaby);
 
-router.post('/update', babyCtrl.updateBaby);
+router.post('/update', uploadOriginal.uploadBaby.single('file'), babyCtrl.updateBaby);
 
 router.post('/delete', babyCtrl.deleteBaby);
 

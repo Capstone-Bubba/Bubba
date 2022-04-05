@@ -7,9 +7,9 @@ router.get('/', galleryCtrl.readGalleryList);
 
 router.get('/detail', galleryCtrl.readGallery);
 
-router.post('/create', galleryCtrl.createGallery);
+router.post('/create', uploadOriginal.uploadGallery.single('file'), galleryCtrl.createGallery);
 
-router.post('/update', galleryCtrl.updateGallery);
+router.post('/update', uploadOriginal.uploadGallery.single('file'), galleryCtrl.updateGallery);
 
 router.post('/delete', galleryCtrl.deleteGallery);
 
