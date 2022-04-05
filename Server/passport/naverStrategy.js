@@ -15,27 +15,16 @@ module.exports = () => {
                 email: profile.emails[0].value,
                 platform: profile.provider
             }
+            
             const isUser = await authDAO.checkUserID(parameters);
             
             if(isUser[0].exist == 0) {
                 await authDAO.insertUser(parameters);
             }
 
-            const data = await authDAO.sessionCheck();
-
-            const even = (el) => {
-                const sessionPassport = JSON.parse(el.data).passport;
-                const result = JSON.stringify(sessionPassport.user) === JSON.stringify(parameters);
-                return result;
-            }
-
-            if(data.some(even)) {
-                return done(null, false)
-            } else {
-                return done(null, {"email": profile.emails[0].value, "platform": profile.provider});
-            }
-            
+            return done(null, {"email": profile.emails[0].value, "platform": profile.provider});
         } catch (err) {
+            console.log(err);
             return done(null, false, { message: err });
         }
     }

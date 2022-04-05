@@ -26,22 +26,8 @@ const insertUser = (parameters) => {
     })
 }
 
-const sessionCheck = (parameters) => {
-    return new Promise((resolve, reject) => {
-        let queryData = `SELECT data FROM sessions`;
-        db.query(queryData, (err, db_data) => {
-            if(err) {
-                reject(err);
-            } else {
-                resolve(db_data);
-            }
-        })
-    })
-}
-
 module.exports = {
     checkUserID,
     insertUser,
-    sessionCheck
 }
 

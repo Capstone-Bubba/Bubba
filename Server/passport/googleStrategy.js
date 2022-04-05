@@ -15,30 +15,37 @@ module.exports = () => {
                 email: profile.emails[0].value,
                 platform: profile.provider
             }
+            
             const isUser = await authDAO.checkUserID(parameters);
             
             if(isUser[0].exist == 0) {
                 await authDAO.insertUser(parameters);
             }
 
-            const data = await authDAO.sessionCheck();
+            return done(null, {"email": profile.emails[0].value, "platform": profile.provider});
 
-            const even = (el) => {
-                const sessionPassport = JSON.parse(el.data).passport;
-                const result = JSON.stringify(sessionPassport.user) === JSON.stringify(parameters);
-                return result;
-            }
+            // const data = await authDAO.sessionCheck();
 
-            if(data.some(even)) {
-                return done(null, false)
-            } else {
-                return done(null, {"email": profile.emails[0].value, "platform": profile.provider});
-            }
-           
-            
+            // let result;
+
+            // const even = (el) => {
+            //     const sessionPassport = JSON.parse(el.data).passport;
+            //     if(sessionPassport != undefined) {
+            //         result = JSON.stringify(sessionPassport.user) === JSON.stringify(parameters);
+            //     } else {
+            //         console.log('nothing');
+            //     }
+            //     return result;
+            // }
+
+            // if(data.some(even)) {
+            //     return done(null, false, {message: "asd"});
+            // } else {
+            //     return done(null, {"email": profile.emails[0].value, "platform": profile.provider});
+            // }
         } catch (err) {
             console.log(err);
-            return done(null, false, { message: err });
+            return done(null, false);
         }
     }))
 }
