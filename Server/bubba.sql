@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- 호스트:                          127.0.0.1
--- 서버 버전:                        10.5.11-MariaDB - mariadb.org binary distribution
+-- 서버 버전:                        8.0.28 - MySQL Community Server - GPL
 -- 서버 OS:                        Win64
 -- HeidiSQL 버전:                  11.3.0.6295
 -- --------------------------------------------------------
@@ -14,27 +14,88 @@
 
 
 -- bubba 데이터베이스 구조 내보내기
-CREATE DATABASE IF NOT EXISTS `bubba` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `bubba` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bubba`;
+
+-- 테이블 bubba.baby 구조 내보내기
+CREATE TABLE IF NOT EXISTS `baby` (
+  `baby_num` int NOT NULL AUTO_INCREMENT,
+  `user_num` int NOT NULL,
+  `baby_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `birth` date NOT NULL,
+  `gender` tinyint(1) DEFAULT '0' COMMENT '0 = 남 , 1 = 여',
+  `baby_picture` varchar(100) DEFAULT NULL COMMENT '사진 경로',
+  PRIMARY KEY (`baby_num`),
+  KEY `FK_user_num` (`user_num`),
+  CONSTRAINT `FK_user_num` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 bubba.diary 구조 내보내기
+CREATE TABLE IF NOT EXISTS `diary` (
+  `diary_num` int NOT NULL AUTO_INCREMENT,
+  `baby_num` int NOT NULL DEFAULT '0',
+  `diary_date` datetime NOT NULL,
+  `diary_title` varchar(50) DEFAULT NULL,
+  `diary_content` varchar(50) DEFAULT NULL,
+  `diary_picture` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`diary_num`),
+  KEY `FK_baby_num2` (`baby_num`),
+  CONSTRAINT `FK_baby_num2` FOREIGN KEY (`baby_num`) REFERENCES `baby` (`baby_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 bubba.gallery 구조 내보내기
+CREATE TABLE IF NOT EXISTS `gallery` (
+  `gal_num` int NOT NULL AUTO_INCREMENT,
+  `baby_num` int NOT NULL,
+  `gal_picture` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `gal_date` datetime DEFAULT NULL,
+  `gal_title` varchar(50) DEFAULT NULL,
+  `gal_content` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`gal_num`),
+  KEY `FK_baby_num1` (`baby_num`),
+  CONSTRAINT `FK_baby_num1` FOREIGN KEY (`baby_num`) REFERENCES `baby` (`baby_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 -- 테이블 bubba.notice 구조 내보내기
 CREATE TABLE IF NOT EXISTS `notice` (
-  `notice_num` int(11) NOT NULL AUTO_INCREMENT,
+  `notice_num` int NOT NULL AUTO_INCREMENT,
   `notice_title` varchar(50) NOT NULL DEFAULT '',
   `notice_content` text NOT NULL,
-  `createAt` datetime NOT NULL DEFAULT current_timestamp(),
+  `createAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `writer` varchar(50) NOT NULL DEFAULT '',
-  `views` int(11) NOT NULL DEFAULT 0,
+  `views` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`notice_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
 
--- 테이블 데이터 bubba.notice:~2 rows (대략적) 내보내기
-/*!40000 ALTER TABLE `notice` DISABLE KEYS */;
-INSERT INTO `notice` (`notice_num`, `notice_title`, `notice_content`, `createAt`, `writer`, `views`) VALUES
-	(1, 'test', 'test cntent', '0000-00-00 00:00:00', 'dong', 0),
-	(2, 'test', 'test cntent', '0000-00-00 00:00:00', 'don', 0),
-	(3, 'test', 'test cntent', '2022-03-30 14:03:50', 'don', 0);
-/*!40000 ALTER TABLE `notice` ENABLE KEYS */;
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 bubba.sessions 구조 내보내기
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int unsigned NOT NULL,
+  `data` mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 bubba.user 구조 내보내기
+CREATE TABLE IF NOT EXISTS `user` (
+  `user_num` int NOT NULL AUTO_INCREMENT,
+  `platform` varchar(10) NOT NULL DEFAULT '0',
+  `createAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `authority` tinyint(1) NOT NULL DEFAULT '0',
+  `email` varchar(50) NOT NULL,
+  PRIMARY KEY (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
