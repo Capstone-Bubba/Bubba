@@ -10,8 +10,11 @@
         <entry key="..\:/Users/user/Desktop/coding/And/app/src/main/res/layout/activity_main.xml" value="0.1875" />
         <entry key="..\:/Users/user/Desktop/coding/And/app/src/main/res/layout/activity_root_activty.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.189" />
+        <entry key="app/src/main/res/drawable/menu.xml" value="0.189" />
+        <entry key="app/src/main/res/drawable/menu_selecotr.xml" value="0.189" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/activity_root_activty.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/appbar.xml" value="0.8206388206388207" />
       </map>
     </option>
   </component>

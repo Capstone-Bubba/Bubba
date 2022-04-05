@@ -2,38 +2,74 @@ package com.twogudak.bubba
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.Toast
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.material.navigation.NavigationView
+import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
+import com.twogudak.bubba.SNSLogin.Google_Login
 import com.twogudak.bubba.SNSLogin.Kakao_Login_class
 import com.twogudak.bubba.SNSLogin.SNS_LOGINED_class
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
+import kotlin.coroutines.coroutineContext
 
 class rootActivty : AppCompatActivity() {
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root_activty)
 
-        val kakao_Login = Kakao_Login_class(this)
 
+        val kakao_Login = Kakao_Login_class(this)
         val kakaologout = findViewById<Button>(R.id.kakao_logout)
         val googlelogout = findViewById<Button>(R.id.google_logout)
         val naverlogout = findViewById<Button>(R.id.Naver_logout)
 
+        val toolbar: Toolbar? = findViewById(R.id.root_toolbar)
+        setSupportActionBar(toolbar)
 
-        kakaologout.setOnClickListener {
-            kakao_Login.kakaologout()
-            kakao_Login.kakao_login_state = SNS_LOGINED_class.nLogined
-            finish()
+        val drawerlayout = findViewById<DrawerLayout>(R.id.drawLayout)
+        val rootmenu = findViewById<ImageButton>(R.id.root_menu)
+
+        rootmenu.setOnClickListener {
+            drawerlayout.openDrawer(GravityCompat.START)
         }
 
 
+
+        kakaologout.setOnClickListener {
+            UserApiClient.instance.logout { error ->
+                if(error != null){
+                    Log.e("Kakao Account","로그아웃 실패 . SDK에서 토큰삭제됨", error)
+                } else {
+                    Log.i("Kakao Account","로그아웃 성공 . SDK에서 토큰 삭제됨")
+                    kakao_Login.kakao_login_state = SNS_LOGINED_class.nLogined
+                    Toast.makeText(this,"카카오톡 계정이 로그아웃 되었습니다.",Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+        }
+
+        var google_login = Google_Login(this)
         googlelogout.setOnClickListener {
-            finish()
+
+            val mGoogleSignInClient = GoogleSignIn.getClient(this@rootActivty,google_login.gso)
+            mGoogleSignInClient.signOut().addOnSuccessListener {
+                finish()
+            }
+
         }
 
         naverlogout.setOnClickListener {
-            NaverIdLoginSDK.logout()
+            runBlocking { NaverIdLoginSDK.logout() }
             finish()
         }
 
@@ -44,4 +80,10 @@ class rootActivty : AppCompatActivity() {
     override fun onBackPressed() {
         //super.onBackPressed() 뒤로가기 버튼 막음
     }
+
+    fun getActionToolbar(){
+
+    }
+
+
 }

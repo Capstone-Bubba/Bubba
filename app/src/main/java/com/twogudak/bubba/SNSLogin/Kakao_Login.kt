@@ -25,10 +25,11 @@ class Kakao_Login_class(context: Context) {
     val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {
             Log.e(tag, "카카오계정으로 로그인 실패", error)
-            kakao_login_state = SNS_LOGINED_class.nLogined
+
         } else if (token != null) {
             Log.i(tag, "카카오계정으로 로그인 성공 ${token.accessToken}")
-            kakao_login_state = SNS_LOGINED_class.logined
+            var rootintent = Intent(context, rootActivty::class.java)
+            context.startActivity(rootintent)
         }
     }
 
@@ -90,7 +91,8 @@ class Kakao_Login_class(context: Context) {
         }
     }
 
-    fun kakaoTokenCheck(){
+    suspend fun kakaoTokenCheck(){
+
         if(AuthApiClient.instance.hasToken()){
             Log.e(tag,"검사시작")
             UserApiClient.instance.accessTokenInfo{ _, error ->

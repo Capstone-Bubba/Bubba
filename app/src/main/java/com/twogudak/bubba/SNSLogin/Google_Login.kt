@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.twogudak.bubba.BuildConfig
+import com.twogudak.bubba.rootActivty
 
 class Google_Login(context: Context) {
 
@@ -20,7 +21,7 @@ class Google_Login(context: Context) {
     //Google 로그인이 되어 있는지 확인한다.
     //null을 반환하면 로그인을 안한것, 다른것을 반환하면 이미 앱에 로그인된 것
 
-    fun googleAccount() {
+     fun googleAccount() {
         val account = GoogleSignIn.getLastSignedInAccount(context)
         if (account == null) {
             Log.e(tag, "로그인 안되있음")
@@ -53,6 +54,8 @@ class Google_Login(context: Context) {
             Log.e(tag,email)
             Log.e(tag,googletoken)
             Log.e(tag, googletokenAuth)
+            var rootintent = Intent(context, rootActivty::class.java)
+            context.startActivity(rootintent)
         } catch (e: ApiException){
             Log.e(tag,"signInResult:failed Code = " + e.statusCode)
         }

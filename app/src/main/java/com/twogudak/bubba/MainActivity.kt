@@ -17,10 +17,7 @@ import com.google.android.gms.common.SignInButton
 import com.google.android.gms.tasks.Task
 import com.kakao.sdk.common.util.Utility
 import com.navercorp.nid.NaverIdLoginSDK
-import com.twogudak.bubba.SNSLogin.Google_Login
-import com.twogudak.bubba.SNSLogin.Kakao_Login_class
-import com.twogudak.bubba.SNSLogin.Naver_login
-import com.twogudak.bubba.SNSLogin.SNS_LOGINED_class
+import com.twogudak.bubba.SNSLogin.*
 import kotlinx.coroutines.*
 import okhttp3.internal.wait
 import kotlin.math.log
@@ -56,7 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         //카카오톡 로그인 버튼
         val kakao_login_button = findViewById<ImageButton>(R.id.kakao_login_button)
-        val kakao_unlink_button = findViewById<Button>(R.id.kakao_login_unlink)
+
 
         //네이버 로그인 버튼
         val naver_login_button = findViewById<Button>(R.id.naver_login_button)
@@ -75,16 +72,6 @@ class MainActivity : AppCompatActivity() {
                 kakao_login.hasKakaoToken()
         }
 
-        kakao_unlink_button.setOnClickListener {
-            kakao_login.kakaounlink()
-        }
-
-        val kakao_load_user = findViewById<Button>(R.id.kakao_login_load_user)
-        val kakao_logout = findViewById<Button>(R.id.kakao_login_logout)
-
-        kakao_load_user.setOnClickListener {
-            kakao_login.kakaoloaduser()
-        }
 
 
 
@@ -108,32 +95,16 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.e("mainActivtiy","onStart")
-
-        //구글 카카오 토큰 확인
-        val check = CoroutineScope(Dispatchers.IO).async {
-            google_login.googleAccount()
-            naver_login.CheckToken()
-            kakao_login.kakaoTokenCheck()
-            delay(1000L)
-        }
+        Log.e("Login","onStart")
 
         CoroutineScope(Dispatchers.IO).launch {
+            val refreshToken = CoroutineScope(Dispatchers.IO).async {
+                val token:String? = NaverIdLoginSDK.getRefreshToken()
+                Log.e("test",token.toString())
+                token
+            }.await()
 
-           val chekc =  check.await()
-
-            Log.e("kakao Account",kakao_login.kakao_login_state.toString())
-            Log.e("kakaoAccount",chekc.toString())
-
-            if(google_login.google_login_State == SNS_LOGINED_class.logined ||
-                kakao_login.kakao_login_state == SNS_LOGINED_class.logined ||
-                naver_login.Naver_Logined_state == SNS_LOGINED_class.logined){
-                Log.i("Account","로그인 되어있음")
-                var rootintent = Intent(this@MainActivity,rootActivty::class.java)
-                startActivity(rootintent)
-            } else {
-                Log.e("Account","로그인 필요")
-            }
+            CheckLogin(this@MainActivity).TotalLoginCheck(refreshToken)
         }
     }
 }
