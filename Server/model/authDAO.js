@@ -42,11 +42,10 @@ const insertUser = (parameters) => {
 const checkAuthority = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT authority FROM user WHERE user_num =?`;
-        db.query(queryData, parameters, (err, db_data) => {
+        db.query(queryData, parameters.user_num, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
-                console.log("db", db_data);
                 resolve(db_data);
             }
         })

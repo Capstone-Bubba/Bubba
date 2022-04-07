@@ -26,10 +26,12 @@ const authorityCheck = async (req, res, next) => {
         "user_num" : req.session.passport.user.user_num
     };
     const result = await authDAO.checkAuthority(parameters);
-    console.log(result);
-
-    // next();
-}
+    if(result[0].authority == 1){
+        next();
+    } else {
+        res.send('관리자 권한이 필요합니다');
+    }
+};
 
 module.exports = { 
     sessionCheck,
