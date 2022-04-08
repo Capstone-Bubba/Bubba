@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 const List = styled.ul`
 display:flex;
@@ -18,7 +18,7 @@ function About_list() {
         <div>
             <List>
                 <ListItem>
-               <Link to='/about_t'>App</Link>
+               <Link to='/'>App</Link>
                 </ListItem>
                 <ListItem>
             <Link to='/about_m'>Web</Link>
@@ -27,6 +27,7 @@ function About_list() {
                 <Link to='/about_b'>Guide</Link>
                 </ListItem>
             </List>
+            <Outlet/>
         </div>
     )
 }

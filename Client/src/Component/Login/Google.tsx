@@ -3,7 +3,7 @@ import React from 'react'
 function Google() {
   return (
     <div>
-      <a href="http://localhost:3000/auth/google">fdsafsda</a>
+      <a href="http://localhost:8000/auth/google">GoogleLogin</a>
     </div>
   )
 }

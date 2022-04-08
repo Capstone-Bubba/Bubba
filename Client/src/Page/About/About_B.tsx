@@ -2,8 +2,9 @@ import React from 'react'
 
 function About_B() {
   return (
-    <div>
+    <div style={{marginTop: "5%"}}>
       바텀
+      fdsafds
     </div>
   )
 }
