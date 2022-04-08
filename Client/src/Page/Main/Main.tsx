@@ -3,7 +3,7 @@ import React from 'react'
 function main() {
   return (
     <div>
-        Main Test page
+      메인이에요
     </div>
   )
 }
