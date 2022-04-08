@@ -14,8 +14,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bubba">
         <activity
+            android:name=".Activity.Setting"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.CCTV"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Diary"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Calendar"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Gallery"
+            android:exported="true" />
+        <activity
+            android:name=".Activity.Notice"
+            android:exported="true" />
+        <activity
             android:name=".rootActivty"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -25,12 +43,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -40,7 +58,6 @@
                     android:scheme="kakao${Kakao_Native_key}" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>

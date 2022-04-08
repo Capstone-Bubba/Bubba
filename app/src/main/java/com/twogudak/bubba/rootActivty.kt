@@ -1,5 +1,6 @@
 package com.twogudak.bubba
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.navigation.NavigationView
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
+import com.twogudak.bubba.Activity.*
 import com.twogudak.bubba.SNSLogin.Google_Login
 import com.twogudak.bubba.SNSLogin.Kakao_Login_class
 import com.twogudak.bubba.SNSLogin.SNS_LOGINED_class
@@ -38,12 +40,69 @@ class rootActivty : AppCompatActivity() {
 
         val drawerlayout = findViewById<DrawerLayout>(R.id.drawLayout)
         val rootmenu = findViewById<ImageButton>(R.id.root_menu)
+        val navigationView = findViewById<NavigationView>(R.id.nav_view)
+
+        navigationView.setNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.menu_Home -> {drawerlayout.closeDrawer(GravityCompat.START); false}
+                R.id.menu_CCTV -> {
+                    var CCTVIntent = Intent(this,CCTV::class.java)
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    CCTVIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    CCTVIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(CCTVIntent)
+                    true
+                }
+                R.id.menu_notice -> {
+                    var Intent = Intent(this,Notice::class.java)
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(Intent)
+                    true
+                }
+                R.id.menu_Gallery -> {
+                    var Intent = Intent(this,Gallery::class.java)
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(Intent)
+                    true
+                }
+                R.id.menu_Calendar -> {
+                    var Intent = Intent(this,Calendar::class.java)
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(Intent)
+                    true
+                }
+                R.id.menu_Diary -> {
+                    var Intent = Intent(this,Diary::class.java)
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(Intent)
+                    true
+                }
+                R.id.menu_setting -> {
+                    var Intent = Intent(this,Setting::class.java)
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                    Intent.addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(Intent)
+                    true
+                }
+                else -> false
+            }
+        }
+
+
+
 
         rootmenu.setOnClickListener {
             drawerlayout.openDrawer(GravityCompat.START)
         }
-
-
 
         kakaologout.setOnClickListener {
             UserApiClient.instance.logout { error ->
@@ -80,10 +139,4 @@ class rootActivty : AppCompatActivity() {
     override fun onBackPressed() {
         //super.onBackPressed() 뒤로가기 버튼 막음
     }
-
-    fun getActionToolbar(){
-
-    }
-
-
 }

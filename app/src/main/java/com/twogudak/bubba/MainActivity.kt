@@ -75,6 +75,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
+
         //구글 로그인 버튼
         google_login_button.setOnClickListener {
             val mGoogleSignInClient = GoogleSignIn.getClient(this,google_login.gso)
@@ -107,4 +108,6 @@ class MainActivity : AppCompatActivity() {
             CheckLogin(this@MainActivity).TotalLoginCheck(refreshToken)
         }
     }
+
+
 }

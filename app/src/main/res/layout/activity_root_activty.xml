@@ -52,7 +52,13 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"/>
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/navi_header"
+        app:menu="@menu/navi_menu"
+        app:itemTextAppearance="@style/MenuItems"
+        app:itemIconSize="50dp"
+        app:itemIconPadding="40dp"
+        />
 
 
 
