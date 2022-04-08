@@ -1,9 +1,9 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom'
 function Google() {
   return (
     <div>
-      <a href="http://localhost:8000/auth/google">GoogleLogin</a>
+      <button><Link to="/home">Main</Link></button>
     </div>
   )
 }

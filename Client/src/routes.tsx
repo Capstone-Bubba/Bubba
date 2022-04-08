@@ -3,6 +3,7 @@ import About_T from "./Page/About/About_T"
 import About_M from "./Page/About/About_M";
 import About_B from "./Page/About/About_B";
 import AboutLayout from "./Component/About/AboutLayout"
+import MainLayout from "./Component/About/MainLayout";
 import Main from "./Page/Main/Main";
 
 export default function Router() {
@@ -16,7 +17,7 @@ export default function Router() {
       ]
     },
     {
-        // element: <MainLayout />,
+        element: <MainLayout />,
         children: [
             { path: "home", element: <Main /> },
         ],
