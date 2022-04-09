@@ -1,19 +1,18 @@
 const babyDAO = require('../model/babyDAO');
 
 const readBabyList = async (req, res) => {
-    res.sendStatus(200);
-    // const parameters = {
-    //     "user_num" : 12
-    // };
+    const parameters = {
+        "user_num" : req.session.passport.user.user_num
+    };
     
-    // const result = await babyDAO.read_babyList(parameters);
-    // res.send({"result" : result});
-    // console.log(result);
+    const result = await babyDAO.read_babyList(parameters);
+    res.send({"result" : result});
+    console.log(result);
 }
 
 const readBaby = async (req, res) => {
     const parameters = {
-        "user_num" : 11
+        "user_num" : req.session.passport.user.user_num
     };
     
     const result = await babyDAO.read_baby(parameters);
@@ -27,7 +26,7 @@ const createBaby = async (req, res) => {
         "birth" : req.body.birth,
         "gender" : req.body.gender,
         "baby_picture" : req.body.baby_picture,
-        "user_num" : 11
+        "user_num" : req.session.passport.user.user_num
     };
 
     console.log(parameters);
@@ -46,7 +45,7 @@ const updateBaby = async (req, res) => {
         "birth" : req.body.birth,
         "gender" : req.body.gender,
         "baby_picture" : req.body.baby_picture,
-        "user_num" : 11,
+        "user_num" : req.session.passport.user.user_num,
         "baby_num" : req.query.baby_num
     };
     try {

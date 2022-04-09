@@ -13,6 +13,19 @@ const checkUserID = (parameters) => {
     })
 }
 
+const checkUserNum = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT user_num FROM user WHERE email =? && platform =?`;
+        db.query(queryData, [parameters.email, parameters.platform], (err, db_data) => {
+            if(err){
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `INSERT INTO User (platform, email) VALUES (?, ?)`;
@@ -26,8 +39,23 @@ const insertUser = (parameters) => {
     })
 }
 
+const checkAuthority = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT authority FROM user WHERE user_num =?`;
+        db.query(queryData, parameters.user_num, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     checkUserID,
     insertUser,
+    checkUserNum,
+    checkAuthority,
 }
 

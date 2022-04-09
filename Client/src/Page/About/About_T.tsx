@@ -1,6 +1,4 @@
 import React from 'react'
-import MainLayout from '../../Component/About/MainLayout'
-import About_list from '../../Component/About/About_list'
 import imgA from '../../images/main_1.png'
 import styled from 'styled-components'
 interface animation{
