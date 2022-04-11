@@ -3,6 +3,7 @@ const path = require('path');
 const passport = require('passport');
 const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
+const cors = require('cors');
 
 const app = express();
 
@@ -15,7 +16,7 @@ const galleryRouter = require('./routes/gallery');
 const diaryRouter = require('./routes/diary');
 const auth = require('./middleware/sessoinCheck');
 
-
+app.use(cors({origin:true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
