@@ -1,4 +1,5 @@
 const babyDAO = require('../model/babyDAO');
+let dayjs = require('dayjs');
 
 const readBabyList = async (req, res) => {
     const parameters = {
@@ -11,6 +12,7 @@ const readBabyList = async (req, res) => {
 }
 
 const readBaby = async (req, res) => {
+    console.log(req);
     const parameters = {
         "user_num" : req.session.passport.user.user_num
     };
@@ -21,11 +23,15 @@ const readBaby = async (req, res) => {
 }
 
 const createBaby = async (req, res) => {
+    let date = dayjs(req.body.birth);
+    let birth = date.format('YYYY-MM-DD');
+    let baby_picture = req.file.filename;
+
     const parameters = {
         "baby_name" : req.body.baby_name,
-        "birth" : req.body.birth,
+        "birth" : birth,
         "gender" : req.body.gender,
-        "baby_picture" : req.body.baby_picture,
+        "baby_picture" : baby_picture,
         "user_num" : req.session.passport.user.user_num
     };
 
@@ -40,11 +46,15 @@ const createBaby = async (req, res) => {
 };
 
 const updateBaby = async (req, res) => {
+    let date = dayjs(req.body.birth);
+    let birth = date.format('YYYY-MM-DD');
+    let baby_picture = req.file.filename;
+
     const parameters = {
         "baby_name" : req.body.baby_name,
-        "birth" : req.body.birth,
+        "birth" : birth,
         "gender" : req.body.gender,
-        "baby_picture" : req.body.baby_picture,
+        "baby_picture" : baby_picture,
         "user_num" : req.session.passport.user.user_num,
         "baby_num" : req.query.baby_num
     };
