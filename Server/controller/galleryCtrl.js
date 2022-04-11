@@ -1,4 +1,5 @@
 const galleryDAO = require('../model/galleryDAO');
+let dayjs = require('dayjs');
 
 const readGalleryList = async (req, res) => {
     const parameters = {
@@ -21,10 +22,14 @@ const readGallery = async (req, res) => {
 }
 
 const createGallery = async (req, res) => {
+    let date = dayjs(req.body.gal_date);
+    let gal_date = date.format('YYYY-MM-DD');
+    let gal_picture = req.file.filename;
+
     const parameters = {
         "baby_num" : req.query.baby_num,
-        "gal_picture" : req.body.gal_picture,
-        "gal_date" : req.body.gal_date,
+        "gal_picture" : gal_picture,
+        "gal_date" : gal_date,
         "gal_title" : req.body.gal_title,
         "gal_content" : req.body.gal_content
     };
@@ -40,10 +45,14 @@ const createGallery = async (req, res) => {
 };
 
 const updateGallery = async (req, res) => {
+    let date = dayjs(req.body.gal_date);
+    let gal_date = date.format('YYYY-MM-DD');
+    let gal_picture = req.file.filename;
+
     const parameters = {
         "gal_num" : req.query.gal_num,
-        "gal_picture" : req.body.gal_picture,
-        "gal_date" : req.body.gal_date,
+        "gal_picture" : gal_picture,
+        "gal_date" : gal_date,
         "gal_title" : req.body.gal_title,
         "gal_content" : req.body.gal_content
     };

@@ -3,7 +3,7 @@ const db = require('../config/dbConn');
 const read_diary = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT * FROM diary WHERE baby_num=?`;
-        db.query(queryData, [parameters.diary_num], (err, db_data) => {
+        db.query(queryData, [parameters.baby_num], (err, db_data) => {
             if(err) {
                 console.log(err);
                 reject(err);
