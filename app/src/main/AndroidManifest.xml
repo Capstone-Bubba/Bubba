@@ -13,6 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bubba">
+        <service
+            android:name=".MyFirebaseMessaginService"
+            android:enabled="true"
+            android:exported="true"></service>
+
         <activity
             android:name=".Activity.Setting"
             android:exported="true" />

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1063252296782",
+    "project_id": "bubba-345616",
+    "storage_bucket": "bubba-345616.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1063252296782:android:a04cba509b4412256a2f1f",
+        "android_client_info": {
+          "package_name": "com.twogudak.bubba"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1063252296782-nle0a53irb58qcp83tc50vmcpcm1to6d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfYVK_iPfdtHIX7RS5RF2tagBA4dqaZ8s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1063252296782-nle0a53irb58qcp83tc50vmcpcm1to6d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

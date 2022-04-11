@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'com.google.gms.google-services'
 }
 
 Properties properties = new Properties()
@@ -55,6 +56,14 @@ dependencies {
     implementation "com.google.android.gms:play-services-auth:20.1.0" //google로그인
     implementation 'com.navercorp.nid:oauth:5.0.1' // jdk 11
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+
+    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    implementation 'com.google.android.gms:play-services-auth:15.0.1'
+    implementation 'com.google.firebase:firebase-core:16.0.1'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+    implementation 'com.amazonaws:aws-android-sdk-pinpoint:2.15.+'
 
 
 
