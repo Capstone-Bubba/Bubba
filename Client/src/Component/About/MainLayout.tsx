@@ -1,14 +1,15 @@
 import React from 'react'
+import { Link, Outlet } from 'react-router-dom';
 import styled from 'styled-components'
 
-const Layout = styled.div`
+// const Layout = styled.div`
+
+// `;
+const Sidebar = styled.div`
   width:100vw;
   min-height: 100vh;
-  background: #ededed;
   margin: 0;
   padding: 0;
-`;
-const Sidebar = styled.div`
   position: fixed;
   height:100vh;
   width:250px;
@@ -38,24 +39,47 @@ const List = styled.ul`
   box-sizing: border-box;
   border-top: rgba(255, 255, 255, .1);
   border-bottom: 1px solid black;
+  cursor: pointer;
 `
+
+const StyleLink = styled(Link)`
+  text-decoration: none;
+  color: white;
+`
+
+
+
 
 
 function MainLayout() {
   return (
     <div>
-     
-      <Layout>
+
+      {/* <Layout> */}
         <Sidebar>
           <Head>Bubba</Head>
-          <List>Home</List>
-          <List>Notice</List>
-          <List>Gallery</List>
-          <List>Calendar</List>
-          <List>Diary</List>
-          <List>CCTV</List>
+          <List>
+            <StyleLink to="/home">Home</StyleLink>
+          </List>
+          <List>
+            <StyleLink to="/notice">Notice</StyleLink>
+          </List>
+          <List>
+            <StyleLink to="/gallery">Gallery</StyleLink>
+          </List>
+          <List>
+            <StyleLink to="/calendar">Calendar</StyleLink>
+          </List>
+          <List>
+            <StyleLink to="/diary">Diary</StyleLink>
+            </List>
+          <List>
+           <StyleLink to="/cctv">CCTV</StyleLink> 
+            </List>
         </Sidebar>
-      </Layout>
+      {/* </Layout> */}
+      <Outlet />
+
     </div>
   )
 }
