@@ -27,9 +27,24 @@ const create_push = (parameters) => {
             }
         })
     })
+};
+
+const read_push_num = (paramerters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT push_title, push_content, createAt FROM push WHERE push_num = ?`;
+        db.query(queryData, paramerters.push_num, (err, db_data) => {
+            if(err) {
+                console.log(err);
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
 }
 
 module.exports = {
     read_push,
     create_push,
+    read_push_num,
 }
