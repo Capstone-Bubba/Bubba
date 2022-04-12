@@ -14,6 +14,7 @@ const authRouter = require('./routes/auth');
 const babyRouter = require('./routes/baby');
 const galleryRouter = require('./routes/gallery');
 const diaryRouter = require('./routes/diary');
+const pushRouter = require('./routes/push');
 const auth = require('./middleware/sessoinCheck');
 
 app.use(cors({origin:true}));
@@ -35,5 +36,6 @@ app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
 app.use('/gallery', auth.userCheck, galleryRouter);
 app.use('/diary', auth.userCheck, diaryRouter);
+app.use('/push', auth.authorityCheck, pushRouter);
 
 module.exports = app;

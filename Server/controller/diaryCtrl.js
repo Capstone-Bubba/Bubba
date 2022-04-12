@@ -49,7 +49,7 @@ const updateDiary = async (req, res) => {
     
     for(let k in files){
         console.log(k + " : " + files[k].filename);
-        str += files[k].filename + " ,";
+        str += files[k].filename + ",";
     };
 
     diary_picture = str.slice(0, -1);
