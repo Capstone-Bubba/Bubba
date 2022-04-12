@@ -56,13 +56,14 @@ dependencies {
     implementation "com.kakao.sdk:v2-user:2.9.0"//카카오 로그인
     implementation "com.google.android.gms:play-services-auth:20.1.0" //google로그인
     implementation 'com.navercorp.nid:oauth:5.0.1' // jdk 11
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.2' //coroutines
 
-    implementation platform('com.google.firebase:firebase-bom:29.2.1')
+    implementation platform('com.google.firebase:firebase-bom:29.2.1') //push notification
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-messaging-ktx'
 
-    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    implementation 'androidx.viewpager2:viewpager2:1.0.0' //viewpager
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0' //MPAndroidChart
 
 
 

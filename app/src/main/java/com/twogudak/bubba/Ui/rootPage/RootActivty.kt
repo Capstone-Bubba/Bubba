@@ -15,9 +15,14 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.twogudak.bubba.R
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
+import com.twogudak.bubba.Ui.CCTV.CCTV
+import com.twogudak.bubba.Ui.Calendar.Calendar
+import com.twogudak.bubba.Ui.Diary.Diary
+import com.twogudak.bubba.Ui.Gallery.Gallery
 import com.twogudak.bubba.Ui.Home.Home
 import com.twogudak.bubba.Ui.Notice.Notice
-import com.twogudak.bubba.Ui.ViewPagerAdapter
+import com.twogudak.bubba.Ui.Setting.Setting
+
 
 class rootActivty : AppCompatActivity() {
 
@@ -36,6 +41,12 @@ class rootActivty : AppCompatActivity() {
         val pagerAdapter = com.twogudak.bubba.Ui.rootPage.ViewPagerAdapter(this)
         pagerAdapter.addFragment(Home())
         pagerAdapter.addFragment(Notice())
+        pagerAdapter.addFragment(Gallery())
+        pagerAdapter.addFragment(Calendar())
+        pagerAdapter.addFragment(Diary())
+        pagerAdapter.addFragment(CCTV())
+        pagerAdapter.addFragment(Setting())
+        viewpager2.setUserInputEnabled(false)
         viewpager2.adapter = pagerAdapter
 
         viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
@@ -48,6 +59,39 @@ class rootActivty : AppCompatActivity() {
         val drawerlayout = findViewById<DrawerLayout>(R.id.drawLayout)
         val rootmenu = findViewById<ImageButton>(R.id.root_menu)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
+        navigationView.setNavigationItemSelectedListener { item ->
+            when(item.itemId){
+                R.id.menu_Home ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(0,false)
+                    return@setNavigationItemSelectedListener true }
+                R.id.menu_notice ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(1,false)
+                    return@setNavigationItemSelectedListener true }
+                R.id.menu_Gallery ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(2,false)
+                    return@setNavigationItemSelectedListener true }
+                R.id.menu_Calendar ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(3,false)
+                    return@setNavigationItemSelectedListener true }
+                R.id.menu_Diary ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(4,false)
+                    return@setNavigationItemSelectedListener true }
+                R.id.menu_CCTV ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(5,false)
+                    return@setNavigationItemSelectedListener true }
+                R.id.menu_setting ->  {
+                    drawerlayout.closeDrawer(GravityCompat.START)
+                    viewpager2.setCurrentItem(6,false)
+                    return@setNavigationItemSelectedListener true }
+                else -> return@setNavigationItemSelectedListener false
+            }
+         }
 
         rootmenu.setOnClickListener {
             drawerlayout.openDrawer(GravityCompat.START)

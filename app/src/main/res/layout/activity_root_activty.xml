@@ -41,11 +41,13 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+        android:background="@color/white"
         app:headerLayout="@layout/navi_header"
         app:menu="@menu/navi_menu"
         app:itemTextAppearance="@style/MenuItems"
         app:itemIconSize="50dp"
         app:itemIconPadding="40dp"
+        app:itemBackground="@color/white"
         />
 
 
