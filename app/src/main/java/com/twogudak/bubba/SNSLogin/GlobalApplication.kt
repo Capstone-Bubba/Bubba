@@ -1,4 +1,4 @@
-package com.twogudak.bubba.SDKINIT
+package com.twogudak.bubba.SNSLogin
 
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk

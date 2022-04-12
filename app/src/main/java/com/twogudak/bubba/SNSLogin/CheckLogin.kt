@@ -6,7 +6,7 @@ import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.user.UserApiClient
-import com.twogudak.bubba.rootActivty
+import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 
 class CheckLogin(context: Context) {

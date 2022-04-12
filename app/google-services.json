@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1063252296782-dta29mkntf2er4ho7os1rqvr8lkphum1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.twogudak.bubba",
+            "certificate_hash": "d17864f2a83bce66046aa0def45b34139db19160"
+          }
+        },
+        {
           "client_id": "1063252296782-nle0a53irb58qcp83tc50vmcpcm1to6d.apps.googleusercontent.com",
           "client_type": 3
         }

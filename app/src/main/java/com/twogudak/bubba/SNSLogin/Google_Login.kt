@@ -9,13 +9,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.twogudak.bubba.BuildConfig
-import com.twogudak.bubba.rootActivty
+import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class Google_Login(context: Context) {
 
     val context = context
     val tag = "Google Account"
-    var google_login_State = SNS_LOGINED_class.nLogined
+
 
 
     //Google 로그인이 되어 있는지 확인한다.
@@ -25,10 +25,10 @@ class Google_Login(context: Context) {
         val account = GoogleSignIn.getLastSignedInAccount(context)
         if (account == null) {
             Log.e(tag, "로그인 안되있음")
-            google_login_State = SNS_LOGINED_class.nLogined
+
         } else {
             Log.e(tag, "로그인 완료된 상태")
-            google_login_State = SNS_LOGINED_class.logined
+
         }
     }
 

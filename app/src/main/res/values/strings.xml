@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name"> </string>
+    <!-- push Message Service -->
+    <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_notification_channel_name" translatable="false">test</string>
+    <string name="default_notification_channel_description" translatable="false">BUBBA알림</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

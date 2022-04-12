@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import com.navercorp.nid.NaverIdLoginSDK
 import com.navercorp.nid.oauth.OAuthLoginCallback
-import com.twogudak.bubba.rootActivty
+import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class Naver_login(context: Context) {
     val context = context
@@ -19,7 +19,7 @@ class Naver_login(context: Context) {
             Log.e("Naver Account", "Naver AccessToken: " + getAccessToken.toString())
             Log.e("Naver Account", "Naver RefreshToken: " + getRefreshToken.toString())
 
-            val rootintent = Intent(context,rootActivty::class.java)
+            val rootintent = Intent(context, rootActivty::class.java)
             context.startActivity(rootintent)
         }
 
