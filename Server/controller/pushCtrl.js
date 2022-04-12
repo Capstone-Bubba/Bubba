@@ -15,13 +15,29 @@ const createPush = async (req, res) => {
 
     try{
         await pushDAO.create_push(parameters);
-        res.sendStatus(200);
+        res.send('/push/push_send');
     } catch(err) {
         console.log(err);
     }
 };
 
+const androidPush = async (req, res) => {
+    const parameters = {
+        "push_num" : req.query.push_num
+    };
+
+    console.log(parameters);
+    try{
+        const result = await pushDAO.read_push_num(parameters);
+        console.log(result[0].push_title);
+        res.send({"result" : result});
+    } catch(err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
     readPush,
     createPush,
+    androidPush,
 }
