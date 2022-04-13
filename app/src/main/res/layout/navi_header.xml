@@ -9,7 +9,7 @@
         android:id="@+id/sidemenu_title_image"
         android:layout_width="100dp"
         android:layout_height="150dp"
-        android:src="@drawable/bubba"
+        android:src="@drawable/bubba2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/sidemenu_title_text"
         app:layout_constraintTop_toTopOf="parent"

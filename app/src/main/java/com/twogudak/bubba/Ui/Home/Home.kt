@@ -18,8 +18,6 @@ class Home : Fragment() {
     lateinit var rootActivty: rootActivty
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

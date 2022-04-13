@@ -2,6 +2,7 @@ package com.twogudak.bubba.Ui.rootPage
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.twogudak.bubba.R
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
+import com.twogudak.bubba.Ui.Alarm.AlarmActivity
 import com.twogudak.bubba.Ui.CCTV.CCTV
 import com.twogudak.bubba.Ui.Calendar.Calendar
 import com.twogudak.bubba.Ui.Diary.Diary
@@ -95,6 +97,13 @@ class rootActivty : AppCompatActivity() {
 
         rootmenu.setOnClickListener {
             drawerlayout.openDrawer(GravityCompat.START)
+        }
+
+        val rootalarm = findViewById<ImageButton>(R.id.root_aram)
+        rootalarm.setOnClickListener {
+            var intent = Intent(this, AlarmActivity::class.java)
+            startActivity(intent)
+            overridePendingTransition(R.anim.none,R.anim.horizon_exit)
         }
 
         initFirebase()

@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.cardview.widget.CardView
@@ -22,7 +21,7 @@
             >
 
             <TextView
-                android:id="@+id/classification"
+                android:id="@+id/notice_classcifiation"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginStart="10dp"
@@ -30,7 +29,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/alarm_activity_background_class"
-                android:text="알람"
+                android:text="공지 사항"
                 android:textSize="5pt"
                 android:textColor="@color/black"
                 android:paddingHorizontal="15dp"
@@ -51,15 +50,15 @@
                 android:layout_width="0dp"
                 android:layout_height="2dp"
                 android:background="@color/black"
-                app:layout_constraintStart_toStartOf="@+id/classification"
+                app:layout_constraintStart_toStartOf="@+id/notice_classcifiation"
                 app:layout_constraintEnd_toEndOf="@+id/alarm_time"
-                app:layout_constraintTop_toBottomOf="@+id/classification"
+                app:layout_constraintTop_toBottomOf="@+id/notice_classcifiation"
                 android:layout_marginTop="5dp"/>
             <TextView
                 android:id="@+id/alarm_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아이가 울고 있습니다."
+                android:text="서버점검이 있을 예정입니다."
                 android:textColor="@color/black"
                 app:layout_constraintTop_toTopOf="@id/alarm_seperate"
                 app:layout_constraintStart_toStartOf="@id/alarm_seperate"
@@ -70,28 +69,19 @@
                 android:id="@+id/alarm_AI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="AI 예측"
+                android:text="3월 20일 10am ~ 12am 까지 서버 점검이 있을 예정입니다."
                 android:textSize="6pt"
                 android:textColor="@color/black"
+                android:autoSizeTextType="uniform"
+                android:clipToOutline="true"
+                android:lines="1"
                 app:layout_constraintStart_toStartOf="@id/alarm_seperate"
                 app:layout_constraintTop_toBottomOf="@id/alarm_title"
                 android:layout_marginTop="10dp"/>
-
-            <TextView
-                android:id="@+id/alarm_ai_text"
-                app:layout_constraintTop_toTopOf="@id/alarm_AI"
-                app:layout_constraintStart_toEndOf="@id/alarm_AI"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="불편함"
-                android:textSize="6pt"
-                android:textColor="@color/black"
-                android:layout_marginStart="10dp"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

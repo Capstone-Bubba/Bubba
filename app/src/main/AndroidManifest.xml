@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bubba">
         <activity
-            android:name=".Ui.AlarmActivity"
+            android:name=".Ui.Alarm.AlarmActivity"
             android:exported="false" />
 
         <meta-data
