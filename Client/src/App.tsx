@@ -19,7 +19,8 @@ function App() {
   // }, [])
   return (
     <div>
-      <a href='http://localhost:3000/auth/google'>google</a>
+      {/* <a href='http://localhost:3000/auth/google'>google</a> */}
+      <Router/>
     </div>  
   )
 }

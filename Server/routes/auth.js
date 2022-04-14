@@ -12,8 +12,8 @@ router.get('/naver/callback', passport.authenticate('naver', { failureRedirect: 
 });
 
 router.get('/google',auth.sessionCheck, passport.authenticate('google', { scope: ['email'] }));
-router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:3000/auth/google'}), async (req, res) => {
-    return res.status(200).redirect('http://localhost:3001');
+router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:8000/auth/google'}), async (req, res) => {
+    return res.status(200).redirect('http://localhost:3001/home');
 });
 
 router.get('/kakao', auth.sessionCheck, passport.authenticate('kakao'));

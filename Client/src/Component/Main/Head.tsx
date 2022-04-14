@@ -12,15 +12,15 @@ const HeadContainer = styled.div`
 const GraphBox = styled.div`
   background: white;
   box-shadow: 10px 5px 5px #C0C0C0;
-  margin-top : 30px;
+  border-radius: 3%;
   height: 400px;
   justify-content: center;
 `
 const PatternBox = styled.div`
+  border-radius: 3%;
   margin-right: 20px;
   background: white;
   box-shadow: 5px 5px 5px #C0C0C0;
-  margin-top : 30px;
   height: 400px;
 `
 const Text = styled.h3`
@@ -39,8 +39,6 @@ const FlexBox = styled.div`
 `
 const FlexItem = styled.div`
   border: 1px solid #e8f7f7;
-  
-
 `
 function Head() {
   return (
