@@ -50,7 +50,6 @@ const Item = styled.img`
   }
 `
 const Font = styled.div`
- 
   position: absolute;
   color: #008080;
   font-family: 'Mukta', sans-serif;

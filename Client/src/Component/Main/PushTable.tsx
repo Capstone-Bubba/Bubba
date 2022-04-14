@@ -1,12 +1,11 @@
-import React from 'react'
-import styled from 'styled-components'
-import Profile from './Profile'
+import * as React from 'react';
 import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-// import Table  from 'material-table'
-import PushTable from './PushTable'
-// import PushTable from './PushTable'
+import styled from 'styled-components';
 
-
+// const Layout = styled.div `
+// width: 100%;
+// border-radius: 20%;
+// `
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 130 },
   { field: 'firstName', headerName: 'First name', width: 130 },
@@ -40,51 +39,17 @@ const rows = [
   { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
 ];
 
-const BodyContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  grid-column-gap: 20px;
-  margin-left: 300px;
-  
-`
-const PushBox = styled.div`
-  background: rgba(18,20,34, 0.1);
-  box-shadow: 10px 5px 5px #C0C0C0;
-  border-radius: 3%;
-  height: 320px;
-  padding:1px;
-  
-
-`
-const MemberBox = styled.div`
-  background: white;
-  box-shadow: 10px 5px 5px #C0C0C0;
-  height: 320px;
-  margin-right: 20px;
-  padding:1px;
-  border-radius: 3%;
-  text-align: center;
-`
-
-const Text = styled.h3`
-  text-align: center;
-`
-
-function Body() {
+export default function PushTable() {
   return (
-    <BodyContainer>
-    <PushBox> 
+    <div>
       <DataGrid
-        style={{borderRadius: "3%", height: "320px"}}
+        style={{borderRadius: "5%", height: "320px"}}
         rows={rows}
         columns={columns}
         pageSize={4}
         rowsPerPageOptions={[4]}
         // checkboxSelection
-      /></PushBox>
-    <MemberBox><Profile/></MemberBox>
-  </BodyContainer>
-  )
+      />
+    </div>
+  );
 }
-
-export default Body
