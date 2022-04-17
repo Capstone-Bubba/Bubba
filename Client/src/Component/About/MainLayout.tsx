@@ -25,7 +25,7 @@ const Head = styled.div`
   user-select: none;
 
 `
-const List = styled.ul`
+const List = styled(Link)`
 &:hover{  
   padding-left:50px;
 }
@@ -33,19 +33,17 @@ const List = styled.ul`
   text-align: center;
   display: block;
   width:100%;
-  line-height: 65px;
+  line-height: 94px;
   font-size: 19px;
   color: #fff;
   box-sizing: border-box;
   border-top: rgba(255, 255, 255, .1);
   border-bottom: 1px solid black;
   cursor: pointer;
+  text-decoration: none;
 `
 
-const StyleLink = styled(Link)`
-  text-decoration: none;
-  color: white;
-`
+
 
 
 
@@ -58,23 +56,23 @@ function MainLayout() {
       {/* <Layout> */}
         <Sidebar>
           <Head>Bubba</Head>
-          <List>
-            <StyleLink to="/home">Home</StyleLink>
+          <List to="/home">
+           Home
           </List>
-          <List>
-            <StyleLink to="/notice">Notice</StyleLink>
+          <List to="/notice">
+           Notice
           </List>
-          <List>
-            <StyleLink to="/gallery">Gallery</StyleLink>
+          <List  to="/gallery">
+           Gallery
           </List>
-          <List>
-            <StyleLink to="/calendar">Calendar</StyleLink>
+          <List to="/calendar">
+           Calendar
           </List>
-          <List>
-            <StyleLink to="/diary">Diary</StyleLink>
+          <List to="/diary">
+            Diary
             </List>
-          <List>
-           <StyleLink to="/cctv">CCTV</StyleLink> 
+          <List to="/cctv">
+           CCTV 
             </List>
         </Sidebar>
       {/* </Layout> */}

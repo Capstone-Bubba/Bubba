@@ -12,19 +12,23 @@ list-style: none;
 const ListItem = styled.li`
 
 `
+const StyleLink = styled(Link)`
+  text-decoration: none;
+  color: #000
+`
 
 function About_list() {
     return (
         <div>
             <List>
                 <ListItem>
-               <Link to='/'>App</Link>
+               <StyleLink to='/'>App</StyleLink>
                 </ListItem>
                 <ListItem>
-            <Link to='/about_m'>Web</Link>
+            <StyleLink to='/about_m'>Web</StyleLink>
                 </ListItem>
                 <ListItem>
-                <Link to='/about_b'>Guide</Link>
+                <StyleLink to='/about_b'>Guide</StyleLink>
                 </ListItem>
             </List>
             <Outlet/>
