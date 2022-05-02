@@ -19,8 +19,6 @@ class MPAndroidGraph(context: Context, data: ArrayList<Int>, barchart: BarChart)
     private val barchart = barchart
     private val data = data
 
-
-
     fun sleepgraphinit(){
         barchart.setTouchEnabled(false)
 

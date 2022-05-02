@@ -79,10 +79,6 @@ class rootActivty : AppCompatActivity() {
                     drawerlayout.closeDrawer(GravityCompat.START)
                     viewpager2.setCurrentItem(3,false)
                     return@setNavigationItemSelectedListener true }
-                R.id.menu_Diary ->  {
-                    drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(4,false)
-                    return@setNavigationItemSelectedListener true }
                 R.id.menu_CCTV ->  {
                     drawerlayout.closeDrawer(GravityCompat.START)
                     viewpager2.setCurrentItem(5,false)

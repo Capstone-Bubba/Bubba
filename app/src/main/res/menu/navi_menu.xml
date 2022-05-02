@@ -22,11 +22,6 @@
             android:title="Calendar"
             />
         <item
-            android:id="@+id/menu_Diary"
-            android:icon="@drawable/menu_diary"
-            android:title="Diary"
-            />
-        <item
             android:id="@+id/menu_CCTV"
             android:icon="@drawable/menu_camera"
             android:title="CCTV"

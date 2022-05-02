@@ -5,11 +5,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.twogudak.bubba.R
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class Notice : Fragment() {
+
+    val data = ArrayList<String>()
 
     lateinit var rootActivty: rootActivty
 
@@ -26,6 +29,9 @@ class Notice : Fragment() {
         super.onStart()
 
         val recyclerView = rootActivty.findViewById<RecyclerView>(R.id.notice_recyclerView)
+        val recyclerView_Adapter = Notice_recycler_View(rootActivty,data)
+        recyclerView.adapter = recyclerView_Adapter
+        recyclerView.layoutManager = LinearLayoutManager(rootActivty)
 
 
     }
