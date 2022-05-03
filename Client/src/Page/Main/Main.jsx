@@ -2,11 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import Body from '../../Component/Main/Body'
 import Head from '../../Component/Main/Head'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
 
-interface animation{
-  fontAni: any;
-}
 const Layout = styled.div`
   background: #eaeaea;
   display: grid;
@@ -28,8 +24,8 @@ const Font = styled.div`
   animation: font 1.2s infinite alternate;
   margin-left: 15%;
 `
-const FontItem = styled.span<animation>`
-  animation-delay: ${(props:any) => props.fontAni};
+const FontItem = styled.span`
+  animation-delay: ${props => props.fontAni};
   @keyframes font {
     0% {
       filter: blur(0);
