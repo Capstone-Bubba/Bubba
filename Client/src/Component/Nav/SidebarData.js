@@ -3,51 +3,36 @@ import * as FaIcons from "react-icons/fa";
 import * as GiIcons from "react-icons/gi";
 import * as BsIcons from "react-icons/bs";
 import * as AiIcons from "react-icons/ai";
-import * as RiIcons from "react-icons/ri";
-import * as IoIcons from "react-icons/io";
 
 export const SidebarData= [
     {
         title: 'Home',
-        path: '/chanyoung',
+        path: '/home',
         icon: <AiIcons.AiFillHome />,
         cName: 'nav-text'
     },
     {
-        title: 'Forte',
-        path: '/forte',
+        title: 'Notice',
+        path: '/notice',
         icon: <GiIcons.GiSwordsPower/>,
         cName: 'nav-text'
     },
     {
-        title: 'personality',
-        path: '/personality',
+        title: 'Gallery',
+        path: '/gallery',
         icon: <BsIcons.BsPersonBoundingBox/>,
         cName: 'nav-text'
     },
     {
-        title: 'Family',
-        path: '/family',
+        title: 'Calendar',
+        path: '/calendar',
         icon: <GiIcons.GiFamilyTree/>,
         cName: 'nav-text'
     },
     {
-        title: 'Future',
-        path: '/future',
+        title: 'Cctv',
+        path: '/cctv',
         icon: <FaIcons.FaRobot />,
         cName: 'nav-text'
     },
-    {
-        title: 'Login',
-        path: '/Login',
-        icon: <RiIcons.RiLoginBoxLine />,
-        cName: 'nav-text'
-    },
-    {
-        title: 'Signup',
-        path: '/signup',
-        icon: <AiIcons.AiOutlineUserAdd/>,
-        cName:'nav-text'
-    }
-    
 ]
