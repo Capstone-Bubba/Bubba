@@ -1,6 +1,7 @@
 const noticeDAO = require('../model/noticeDAO');
 
 const readNoticeList = async (req, res) => {
+    console.log(123123)
     const result = await noticeDAO.read_notice_list();
     res.send({"result" : result});
     console.log(result);

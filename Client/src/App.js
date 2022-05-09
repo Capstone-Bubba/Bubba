@@ -11,9 +11,7 @@ function App() {
   // }, [])
   return (
     <>
-      {/* <a href='http://localhost:8000/auth/google'>google</a>
-      <a href='http://localhost:8000/auth/naver'>Naver</a>
-      <a href='http://localhost:8000/auth/kakao'>apple</a> */}
+     
 
       <Router/>
     </>  
