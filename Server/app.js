@@ -34,7 +34,7 @@ app.use(cookieParser());
 app.use(morgan('combined', {stream: logger.stream}));
 
 app.use('/', indexRouter);
-app.use('/news', auth.userCheck, noticeRouter);
+app.use('/notice', auth.userCheck, noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
 app.use('/gallery', auth.userCheck, galleryRouter);
