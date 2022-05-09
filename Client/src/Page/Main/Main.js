@@ -82,7 +82,7 @@ function main() {
         <FontItem fontAni={""}>A</FontItem>
       </Font>
       <Grid container spacing={2}>
-        <Grid itex xs={6}>
+        <Grid item xs={6}>
           <GraphBox>
             <Text>
               아기 상태
