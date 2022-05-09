@@ -27,6 +27,8 @@
     "passport-google-oauth20": "^2.0.0",
     "passport-kakao": "^1.0.1",
     "passport-naver": "^1.0.6",
-    "web-push": "^3.4.5"
+    "web-push": "^3.4.5",
+    "winston": "^3.7.2",
+    "winston-daily-rotate-file": "^4.6.1"
   }
 }

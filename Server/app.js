@@ -4,6 +4,7 @@ const passport = require('passport');
 const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const morgan = require('morgan');
 
 const app = express();
 
@@ -16,8 +17,9 @@ const galleryRouter = require('./routes/gallery');
 const diaryRouter = require('./routes/diary');
 const pushRouter = require('./routes/push');
 const auth = require('./middleware/sessoinCheck');
+const logger = require('./config/winston');
 
-app.use(cors({origin:true}));
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
@@ -29,6 +31,7 @@ passportConfig();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
+app.use(morgan('combined', {stream: logger.stream}));
 
 app.use('/', indexRouter);
 app.use('/notice', auth.userCheck, noticeRouter);
