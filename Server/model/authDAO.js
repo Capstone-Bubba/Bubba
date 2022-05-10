@@ -13,6 +13,19 @@ const checkUserID = (parameters) => {
     })
 }
 
+const UserState = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT * FROM user WHERE user_num=?`;
+        db.query(queryData, [parameters.user_num], (err, db_data) => {
+            if(err){
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 const checkUserNum = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT user_num FROM user WHERE email =? && platform =?`;
@@ -57,5 +70,6 @@ module.exports = {
     insertUser,
     checkUserNum,
     checkAuthority,
+    UserState,
 }
 

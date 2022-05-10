@@ -4,7 +4,7 @@ const passport = require('passport');
 const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const morgan = require('morgan');
+const morgan = require('morgan');           // 통신 log
 
 const app = express();
 
@@ -19,7 +19,7 @@ const pushRouter = require('./routes/push');
 const auth = require('./middleware/sessoinCheck');
 const logger = require('./config/winston');
 
-app.use(cors({ origin: true }));
+app.use(cors({ origin: 'http://localhost:3000' }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
