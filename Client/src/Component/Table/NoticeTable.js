@@ -1,42 +1,83 @@
 import React from 'react'
-import { Table, TableHead, TableBody, TableRow, TableCell } from '@material-ui/core';
+import { Table, TableHead, TableBody, TableRow, TableCell, Typography, TableFooter, TablePagination, } from '@material-ui/core';
 
 function NoticeTable({ data }) {
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
+    const handleChangePage = (event, newPage) => {
+        setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = (event) => {
+        setRowsPerPage(parseInt(event.target.value, 10));
+        setPage(0);
+    };
+
     return (
         <div>
             <div>
-                <Table>
+                <Typography
+                    sx={{ flex: '1 1 100%' }}
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    공지사항
+                </Typography>
+                <Table aria-aria-label='공지사항'>
+
                     <TableHead>
                         <TableRow>
-                            <TableCell align='center' color='red'>번호</TableCell>
-                            <TableCell align='center'>제목</TableCell>
-                            <TableCell align='center'>내용</TableCell>
-                            <TableCell align='center'>글삭제</TableCell>
+                            <TableCell >번호</TableCell>
+                            <TableCell >제목</TableCell>
+                            <TableCell align='center'>작성자</TableCell>
+                            <TableCell align='center'>날짜</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map(element => {
-                            return (
-                                <ul>
-                                    <li>
-                                        {element.number}
-                                    </li>
-                                    <li>
-                                        {element.title}
-                                    </li>
-                                    <li>
-                                        {element.author}
-                                    </li>
-                                    <li>
-                                        {element.day}
-                                    </li>
-                                </ul>
-                            )
+                        {data
+                            .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
+                            .map(element => {
+                                return (
+                                    <TableRow>
+                                        <TableCell>{element.number}</TableCell>
+                                        <TableCell> {element.name}</TableCell>
+                                        <TableCell align='center'>{element.author}</TableCell>
+                                        <TableCell align='center'> {element.day}</TableCell>
+                                    </TableRow>
+                                    // <ul>
+                                    //     <li>
+                                    //         {element.number}
+                                    //     </li>
+                                    //     <li>
+                                    //         {element.title}
+                                    //     </li>
+                                    //     <li>
+                                    //         {element.author}
+                                    //     </li>
+                                    //     <li>
+                                    //         {element.day}
+                                    //     </li>
+                                    // </ul>
+                                )
 
 
-                        })}
+                            })}
 
                     </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                count={data.length}
+                                page={page}
+                                rowsPerPage={rowsPerPage}
+                                onChangePage={handleChangePage}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                            />
+                        </TableRow>
+                    </TableFooter>
                 </Table>
             </div>
         </div>
