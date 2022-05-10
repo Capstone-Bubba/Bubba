@@ -4,7 +4,7 @@ const passport = require('passport');
 const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-const morgan = require('morgan');
+const morgan = require('morgan');           // 통신 log
 
 const app = express();
 
