@@ -187,4 +187,26 @@
 2022-05-10 16:09:22 [INFO] - ::1 - - [10/May/2022:07:09:22 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
 
 2022-05-10 16:09:25 [INFO] - ::1 - - [10/May/2022:07:09:25 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhU5xEAMZZMURHC32FbeQWaBp29ILALAZpQqhx4X83ls_4VaZz6UNz50Z7TzIUexQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+=======
+2022-05-10 13:45:54 [INFO] - ::1 - - [10/May/2022:04:45:54 +0000] "GET /notice HTTP/1.1" 200 120 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:53:02 [INFO] - ::1 - - [10/May/2022:04:53:02 +0000] "GET /notice HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:03:55 [INFO] - ::1 - - [10/May/2022:05:03:55 +0000] "GET /notice HTTP/1.1" 200 541 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:06:14 [INFO] - ::ffff:162.142.125.9 - - [10/May/2022:05:06:14 +0000] "GET / HTTP/1.1" 200 94 "-" "-"
+
+2022-05-10 14:06:14 [INFO] - ::ffff:162.142.125.9 - - [10/May/2022:05:06:14 +0000] "GET / HTTP/1.1" 200 94 "-" "Mozilla/5.0 (compatible; CensysInspect/1.1; +https://about.censys.io/)"
+
+2022-05-10 14:07:35 [INFO] - ::1 - - [10/May/2022:05:07:35 +0000] "GET /notice HTTP/1.1" 200 673 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:17:18 [INFO] - ::1 - - [10/May/2022:05:17:18 +0000] "GET /notice HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:20:01 [INFO] - ::1 - - [10/May/2022:05:20:01 +0000] "GET /notice HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:20:31 [INFO] - ::1 - - [10/May/2022:05:20:31 +0000] "GET /notice HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:20:36 [INFO] - ::1 - - [10/May/2022:05:20:36 +0000] "GET /notice HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:20:58 [INFO] - ::1 - - [10/May/2022:05:20:58 +0000] "GET /notice HTTP/1.1" 304 - "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
 
