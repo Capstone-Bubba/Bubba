@@ -1,0 +1,190 @@
+2022-05-10 11:06:16 [INFO] - ::1 - - [10/May/2022:02:06:16 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:07:35 [INFO] - ::1 - - [10/May/2022:02:07:35 +0000] "GET /auth/kakao HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:09:38 [INFO] - ::1 - - [10/May/2022:02:09:38 +0000] "GET /notice HTTP/1.1" 200 363 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:14:11 [INFO] - ::1 - - [10/May/2022:02:14:11 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:19:27 [INFO] - ::1 - - [10/May/2022:02:19:27 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:19:40 [INFO] - ::1 - - [10/May/2022:02:19:40 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:19:53 [INFO] - ::1 - - [10/May/2022:02:19:53 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:20:12 [INFO] - ::1 - - [10/May/2022:02:20:12 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:20:38 [INFO] - ::1 - - [10/May/2022:02:20:38 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:20:47 [INFO] - ::1 - - [10/May/2022:02:20:47 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:21:11 [INFO] - ::1 - - [10/May/2022:02:21:11 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:21:35 [INFO] - ::1 - - [10/May/2022:02:21:35 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:22:56 [INFO] - ::1 - - [10/May/2022:02:22:56 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:22:57 [INFO] - ::1 - - [10/May/2022:02:22:57 +0000] "GET /auth/naver/callback?code=h9edmoDVkl1M0iHvYR&state= HTTP/1.1" 302 66 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:22:57 [INFO] - ::1 - - [10/May/2022:02:22:57 +0000] "GET /auth/naver HTTP/1.1" 302 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 11:22:57 [INFO] - ::1 - - [10/May/2022:02:22:57 +0000] "GET /auth/naver/callback?code=wociwczTvDlfU6bltW&state= HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:01:22 [INFO] - ::1 - - [10/May/2022:04:01:22 +0000] "GET /auth/naver HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:01:38 [INFO] - ::1 - - [10/May/2022:04:01:38 +0000] "GET /auth/google HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:02:24 [INFO] - ::1 - - [10/May/2022:04:02:24 +0000] "GET /auth/naver HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:03:26 [INFO] - ::1 - - [10/May/2022:04:03:26 +0000] "GET /auth/naver HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:12:43 [INFO] - ::1 - - [10/May/2022:04:12:43 +0000] "GET /auth/google HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:13:02 [INFO] - ::1 - - [10/May/2022:04:13:02 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:13:05 [INFO] - ::1 - - [10/May/2022:04:13:05 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWiXUtGiD16CJmFavaBf_JofiEcP-0aaUDt95jKG37pFPcbAiYFM8iHNPcz_OCbPBg&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:17:36 [INFO] - ::1 - - [10/May/2022:04:17:36 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:17:39 [INFO] - ::1 - - [10/May/2022:04:17:39 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWj1TW3mcg0-mVk3yAoBXGB5q1pOO4f5acosdHQdjtFHvvYBr1eixdbvlVvbOA_WIA&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:18:55 [INFO] - ::1 - - [10/May/2022:04:18:55 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:26:46 [INFO] - ::1 - - [10/May/2022:04:26:46 +0000] "GET /auth/naver HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 13:26:46 [INFO] - ::1 - - [10/May/2022:04:26:46 +0000] "GET /auth/naver/callback?code=mXvqcyumDTJPnpSv71&state= HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:36:29 [INFO] - ::1 - - [10/May/2022:05:36:29 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:36:55 [INFO] - ::1 - - [10/May/2022:05:36:55 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWgQS0VODiwg_22iQaMa928JJP7r2KPnBs8jNjakmR0zACI7SxYC_73MDVNu29QA9Q&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 500 1128 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:36:55 [INFO] - ::1 - - [10/May/2022:05:36:55 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/auth/google/callback?code=4%2F0AX4XfWgQS0VODiwg_22iQaMa928JJP7r2KPnBs8jNjakmR0zACI7SxYC_73MDVNu29QA9Q&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:36:59 [INFO] - ::1 - - [10/May/2022:05:36:59 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:37:02 [INFO] - ::1 - - [10/May/2022:05:37:02 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWiJpQlkNrH6OCbstTDvTxfS-4od3fUt97necg6amoU3DdFH7gxVkoDPoLJvNxn9SQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 200 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:38:04 [INFO] - ::1 - - [10/May/2022:05:38:04 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:38:22 [INFO] - ::1 - - [10/May/2022:05:38:22 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhoxBLcEJxDBxvsyQK57uDiQpt2kAuQkFYsxGnPC8DGl_yXK2jUQwops8LercWbQQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" - - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:38:23 [INFO] - ::1 - - [10/May/2022:05:38:23 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:38:26 [INFO] - ::1 - - [10/May/2022:05:38:26 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWjYg-rj8NUd4rtxK-U6h4n8X58wH7enKiNaD39u1i7iGJG3COF96EkEVvKyXkgsnQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:39:08 [INFO] - ::1 - - [10/May/2022:05:39:08 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:39:46 [INFO] - ::1 - - [10/May/2022:05:39:46 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:40:12 [INFO] - ::1 - - [10/May/2022:05:40:12 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:40:32 [INFO] - ::ffff:127.0.0.1 - - [10/May/2022:05:40:32 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWjrUWq-AvVsVdQgKvCEGP-3_yviQwgoliM29gqeUJrRJbg6TvTPPGniQstSvtT0zw&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 500 1128 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:40:35 [INFO] - ::ffff:127.0.0.1 - - [10/May/2022:05:40:35 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:40:38 [INFO] - ::ffff:127.0.0.1 - - [10/May/2022:05:40:38 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWgHFpjrAMsTdK9kVqj-uXdkQYEBnKtVHQJ1G4_naURxJKNzcCm5t2rjBgxxzy7ZXA&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:41:32 [INFO] - ::1 - - [10/May/2022:05:41:32 +0000] "GET /auth/google HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:42:06 [INFO] - ::1 - - [10/May/2022:05:42:06 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:42:09 [INFO] - ::1 - - [10/May/2022:05:42:09 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWgV819SC_39pwe7iWaQngbRg55BQ2dpk7PORZD8c6sLISS_g3xaFy8SPnNz-6x7qg&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:42:50 [INFO] - ::1 - - [10/May/2022:05:42:50 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:42:53 [INFO] - ::1 - - [10/May/2022:05:42:53 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhxDjRLEnX7F-VYplTwewm0UrPMZFsiDTv868TplMDwRApTxa_8ARukc0kMtBZBDQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:43:28 [INFO] - ::1 - - [10/May/2022:05:43:28 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:43:31 [INFO] - ::1 - - [10/May/2022:05:43:31 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhn5a2DqkwurrtkvXkYKsOJ64JJ_u-Ff2ZATngE4TNchiLq4O08DnF34z91R4jRtQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:44:20 [INFO] - ::1 - - [10/May/2022:05:44:20 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:44:23 [INFO] - ::1 - - [10/May/2022:05:44:23 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWgYoUf5hx279Jy3ZEMCaBU4htRIuaYCOMWDjqA5CAENnszUdvAxvS1lZ6wtTwqfFw&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:44:44 [INFO] - ::1 - - [10/May/2022:05:44:44 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:45:05 [INFO] - ::1 - - [10/May/2022:05:45:05 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:45:08 [INFO] - ::1 - - [10/May/2022:05:45:08 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWg2_MBZwafdfNVgQcTNdl8z5G_iw-iL9XL5wc65SaDxs91nQUOGDBqTYZ1oKK4KJQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:45:21 [INFO] - ::1 - - [10/May/2022:05:45:21 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:45:24 [INFO] - ::1 - - [10/May/2022:05:45:24 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWjBvDkUvGOivgLvpppKHOtfVABmuZ9r1EkBQClFVoGHieQL-zTipV-5iRyTR_SMig&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:45:41 [INFO] - ::1 - - [10/May/2022:05:45:41 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:45:44 [INFO] - ::1 - - [10/May/2022:05:45:44 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhn72k38sCnaEHX2uhb1G8RBCf8GSRsoeKi-oIYgWMlS43r3QOPYUHIjRlitMZ1hw&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:46:09 [INFO] - ::1 - - [10/May/2022:05:46:09 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:46:12 [INFO] - ::1 - - [10/May/2022:05:46:12 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhjq_ElS9qNpCndW236NYoZKgDXmBKuRLTyBEWMrSV0NlCULy9BEiDsPmZYKV4k_Q&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 102 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:54:02 [INFO] - ::1 - - [10/May/2022:05:54:02 +0000] "GET / HTTP/1.1" 200 94 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:55:06 [INFO] - ::1 - - [10/May/2022:05:55:06 +0000] "GET /home HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:57:59 [INFO] - ::1 - - [10/May/2022:05:57:59 +0000] "GET /home HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 14:59:37 [INFO] - ::1 - - [10/May/2022:05:59:37 +0000] "GET /home HTTP/1.1" 404 143 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:00:51 [INFO] - ::1 - - [10/May/2022:06:00:51 +0000] "GET /auth/home HTTP/1.1" 200 130 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:01:02 [INFO] - ::1 - - [10/May/2022:06:01:02 +0000] "GET /auth/home HTTP/1.1" 200 130 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:41:42 [INFO] - ::1 - - [10/May/2022:06:41:42 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:42:40 [INFO] - ::1 - - [10/May/2022:06:42:40 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:44:26 [INFO] - ::1 - - [10/May/2022:06:44:26 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:46:29 [INFO] - ::1 - - [10/May/2022:06:46:29 +0000] "GET /auth/google/callback?code=4/0AX4XfWiODuqoUFFxZUtxNPRBPGqvShv7DnXuw1X2F9GdKrRahHRd3JB6v3Tz6ECbM2Eo9g&scope=email%20https://www.googleapis.com/auth/userinfo.email%20openid&authuser=1&hd=vision.hoseo.edu&prompt=consent HTTP/1.1" 302 102 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:46:30 [INFO] - ::1 - - [10/May/2022:06:46:30 +0000] "GET /auth/google HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:46:32 [INFO] - ::1 - - [10/May/2022:06:46:32 +0000] "GET /auth/google HTTP/1.1" 302 86 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:46:42 [INFO] - ::1 - - [10/May/2022:06:46:42 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:46:44 [INFO] - ::1 - - [10/May/2022:06:46:44 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWh0klEuCQLVABzxmm2l1J_DX_eGrRk6eC_cx8mlrumjfsWy7-0VdjE4r1nX8F5OyQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 102 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:52:04 [INFO] - ::1 - - [10/May/2022:06:52:04 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:52:07 [INFO] - ::1 - - [10/May/2022:06:52:07 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWgZRkM87SXSsGQ5cS2GB9RURYPnPhoKn1vLptBDLo-ZHBfwFPkXtz_06Pe3-h7JUg&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:52:36 [INFO] - ::1 - - [10/May/2022:06:52:36 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:52:38 [INFO] - ::1 - - [10/May/2022:06:52:38 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWiOL2MJa2JZ2_XwInC_Y3HYfki7J_-2X5brhWkS20Rwj45d9rirnhRBUJvsBJakjw&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:53:39 [INFO] - ::1 - - [10/May/2022:06:53:39 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:53:42 [INFO] - ::1 - - [10/May/2022:06:53:42 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhC1xVlY0YvFSqWu7994A_nNSp6VE2salkIaFNRlmDtpRKH2OiujyqhglT8SaT4eA&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:55:45 [INFO] - ::1 - - [10/May/2022:06:55:45 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:57:21 [INFO] - ::1 - - [10/May/2022:06:57:21 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:57:24 [INFO] - ::1 - - [10/May/2022:06:57:24 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWh2fhmekKBe1A_HOtEPBKcco90kO447UNfYCZN-cEqtEImwcWQNktJAniRUVycEcw&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:59:42 [INFO] - ::1 - - [10/May/2022:06:59:42 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 15:59:45 [INFO] - ::1 - - [10/May/2022:06:59:45 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWjVub1rWjj-cDY7jZE00acjCGk1xCV7rZHOv0CKugHDy-TKyVVuE_Bam0SC8s71dQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:00:03 [INFO] - ::1 - - [10/May/2022:07:00:03 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:00:06 [INFO] - ::1 - - [10/May/2022:07:00:06 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWjA-k69251BsH1oUtB8dKvX6nOZa6e5u9_bm7CMyW1Y5jMjFbQU7vp-F5AyNIzgmw&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:06:43 [INFO] - ::1 - - [10/May/2022:07:06:43 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:06:49 [INFO] - ::1 - - [10/May/2022:07:06:49 +0000] "GET /auth HTTP/1.1" 304 - "http://localhost:8000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:06:51 [INFO] - ::1 - - [10/May/2022:07:06:51 +0000] "GET /auth/google HTTP/1.1" 302 86 "http://localhost:8000/auth" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:06:53 [INFO] - ::1 - - [10/May/2022:07:06:53 +0000] "GET /auth/naver HTTP/1.1" 302 86 "http://localhost:8000/auth" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:06:56 [INFO] - ::1 - - [10/May/2022:07:06:56 +0000] "GET / HTTP/1.1" 304 - "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:09:22 [INFO] - ::1 - - [10/May/2022:07:09:22 +0000] "GET /auth/google HTTP/1.1" 302 0 "http://localhost:3000/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
+2022-05-10 16:09:25 [INFO] - ::1 - - [10/May/2022:07:09:25 +0000] "GET /auth/google/callback?code=4%2F0AX4XfWhU5xEAMZZMURHC32FbeQWaBp29ILALAZpQqhx4X83ls_4VaZz6UNz50Z7TzIUexQ&scope=email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+openid&authuser=0&prompt=consent HTTP/1.1" 302 96 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.54 Safari/537.36"
+
