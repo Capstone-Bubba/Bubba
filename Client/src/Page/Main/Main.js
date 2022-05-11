@@ -1,8 +1,11 @@
 import { Container, Grid } from '@mui/material'
-import React from 'react'
+import { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
+import { Cookies } from 'react-cookie'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 const GraphBox = styled.div`
@@ -71,7 +74,24 @@ const MemberBox = styled.div`
 const Item = styled.div`
   border: 1px solid #e8f7f7;
 `
+const Button = styled.button `
+  width:200px;
+  height:50px;
+`
 function main() {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function check(){
+      await axios.get('http://localhost:8000/auth/home').then((res) => {
+        console.log(res.data.result)
+        setData(res.data.result)
+      })
+    }
+
+    check()
+  },[...data])
+
   return (
     <Container maxWidth={false}>
       <Font>
