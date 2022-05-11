@@ -28,11 +28,13 @@ const selectLogin = (req, res) => {
 }
 
 const goHome = async (req, res) => {
+    // console.log(req.session);
     const parameters = {
         "user_num" : req.session.passport.user.user_num
     };
 
     const result = await authDAO.UserState(parameters);
+    console.log(result);
     res.send({"result" : result});
 }
 
