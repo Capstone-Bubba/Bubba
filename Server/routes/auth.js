@@ -13,8 +13,8 @@ router.get('/naver/callback', passport.authenticate('naver', { failureRedirect: 
 
 router.get('/google',auth.sessionCheck, passport.authenticate('google', { scope: ['email'] }));
 router.get('/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:8000/auth/google'}), async (req, res) => {
-    const sess = req.session;
-    res.cookie('connect.sid',sess)
+    // const sess = req.session.passport.user.user_num;
+    // res.cookie('num',sess)
     res.status(200).redirect(`http://localhost:3000/home`);
     // res.status(200).redirect(`http://localhost:3000/home`);
 });

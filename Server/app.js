@@ -19,7 +19,7 @@ const pushRouter = require('./routes/push');
 const auth = require('./middleware/sessoinCheck');
 const logger = require('./config/winston');
 
-app.use(cors({ origin: 'http://localhost:3000' }));
+app.use(cors({ origin: 'http://localhost:3000' , credentials : true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
@@ -38,7 +38,7 @@ app.use('/', indexRouter);
 app.use('/notice', noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
-app.use('/gallery', auth.userCheck, galleryRouter);
+app.use('/gallery', galleryRouter);
 app.use('/diary', auth.userCheck, diaryRouter);
 app.use('/push', auth.authorityCheck, pushRouter);
 
