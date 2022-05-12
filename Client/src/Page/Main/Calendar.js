@@ -26,6 +26,8 @@ function Calendar() {
                             center: 'title',
                             right: ''
                         }}
+                        events={[{ title: 'event 1', date: '2022-05-05' },
+                        { title: 'event 2', date: '2022-05-08' }]}
                         editable={true}
                         selectable={false}
                         selectMirror={true}

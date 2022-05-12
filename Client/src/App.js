@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react'
-import styled from 'styled-components'
+import React from 'react'
 import './App.css';
 import Router from './routes';
 

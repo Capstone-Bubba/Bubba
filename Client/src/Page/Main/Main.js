@@ -1,11 +1,9 @@
 import { Container, Grid } from '@mui/material'
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
-import { Cookies } from 'react-cookie'
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 
 
 const GraphBox = styled.div`
@@ -78,7 +76,7 @@ const Button = styled.button `
   width:200px;
   height:50px;
 `
-function main() {
+function Main() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -90,8 +88,7 @@ function main() {
     }
 
     check()
-  },[...data])
-
+  },[])
   return (
     <Container maxWidth={false}>
       <Font>
@@ -134,7 +131,7 @@ function main() {
         </Grid>
         <Grid item xs={4}>
           <MemberBox>
-            <Profile />
+            <Profile data={data} />
           </MemberBox>
         </Grid>
       </Grid>
@@ -143,4 +140,4 @@ function main() {
   )
 }
 
-export default main
+export default Main
