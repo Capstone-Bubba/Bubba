@@ -40,31 +40,14 @@ function NoticeTable({ data }) {
                             .slice(page * rowsPerPage, (page + 1) * rowsPerPage)
                             .map(element => {
                                 return (
-                                    <TableRow>
+                                    <TableRow key={element}>
                                         <TableCell>{element.number}</TableCell>
                                         <TableCell> {element.name}</TableCell>
                                         <TableCell align='center'>{element.author}</TableCell>
                                         <TableCell align='center'> {element.day}</TableCell>
                                     </TableRow>
-                                    // <ul>
-                                    //     <li>
-                                    //         {element.number}
-                                    //     </li>
-                                    //     <li>
-                                    //         {element.title}
-                                    //     </li>
-                                    //     <li>
-                                    //         {element.author}
-                                    //     </li>
-                                    //     <li>
-                                    //         {element.day}
-                                    //     </li>
-                                    // </ul>
                                 )
-
-
                             })}
-
                     </TableBody>
                     <TableFooter>
                         <TableRow>
@@ -73,8 +56,8 @@ function NoticeTable({ data }) {
                                 count={data.length}
                                 page={page}
                                 rowsPerPage={rowsPerPage}
-                                onChangePage={handleChangePage}
-                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                                onPageChange={handleChangePage}
+                                onRowsPerPageChange={handleChangeRowsPerPage}
                             />
                         </TableRow>
                     </TableFooter>

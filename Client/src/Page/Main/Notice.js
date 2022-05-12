@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container } from '@mui/material'
 import NoticeTable from '../../Component/Table/NoticeTable'
-import { Link } from 'react-router-dom';
 
 axios.defaults.withCredentials = true;
 
@@ -28,7 +27,7 @@ function Notice() {
     }
   }
   check()
-  },[...data])
+  },[])
     // await axios.get('http://localhost:8000/notice')
     //     .then((res) => {
     //         // setData(response.read_notice_list.result);
