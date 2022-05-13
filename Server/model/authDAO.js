@@ -43,7 +43,7 @@ const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `INSERT INTO User (platform, email) VALUES (?, ?)`;
         db.query(queryData, [parameters.platform, parameters.email], (err, db_data) => {
-            if(err) { 
+            if(err) {   
                 reject(err);
             } else {
                 resolve(db_data);
