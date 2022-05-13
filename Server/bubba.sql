@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `baby` (
   PRIMARY KEY (`baby_num`),
   KEY `FK_user_num` (`user_num`),
   CONSTRAINT `FK_user_num` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -36,14 +36,14 @@ CREATE TABLE IF NOT EXISTS `baby` (
 CREATE TABLE IF NOT EXISTS `diary` (
   `diary_num` int NOT NULL AUTO_INCREMENT,
   `baby_num` int NOT NULL DEFAULT '0',
-  `diary_date` datetime NOT NULL,
+  `diary_date` date NOT NULL,
   `diary_title` varchar(50) DEFAULT NULL,
   `diary_content` varchar(50) DEFAULT NULL,
   `diary_picture` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`diary_num`),
   KEY `FK_baby_num2` (`baby_num`),
   CONSTRAINT `FK_baby_num2` FOREIGN KEY (`baby_num`) REFERENCES `baby` (`baby_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -52,13 +52,13 @@ CREATE TABLE IF NOT EXISTS `gallery` (
   `gal_num` int NOT NULL AUTO_INCREMENT,
   `baby_num` int NOT NULL,
   `gal_picture` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
-  `gal_date` datetime DEFAULT NULL,
+  `gal_date` date DEFAULT NULL,
   `gal_title` varchar(50) DEFAULT NULL,
   `gal_content` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`gal_num`),
   KEY `FK_baby_num1` (`baby_num`),
   CONSTRAINT `FK_baby_num1` FOREIGN KEY (`baby_num`) REFERENCES `baby` (`baby_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -71,7 +71,21 @@ CREATE TABLE IF NOT EXISTS `notice` (
   `writer` varchar(50) NOT NULL DEFAULT '',
   `views` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`notice_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 테이블 bubba.push 구조 내보내기
+CREATE TABLE IF NOT EXISTS `push` (
+  `push_num` int NOT NULL AUTO_INCREMENT,
+  `user_num` int NOT NULL DEFAULT '0',
+  `push_title` varchar(50) DEFAULT NULL,
+  `push_content` varchar(200) DEFAULT NULL,
+  `createAt` datetime DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`push_num`),
+  KEY `FK_user_num1` (`user_num`),
+  CONSTRAINT `FK_user_num1` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -93,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `authority` tinyint(1) NOT NULL DEFAULT '0',
   `email` varchar(50) NOT NULL,
   PRIMARY KEY (`user_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
