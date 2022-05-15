@@ -3,7 +3,7 @@ const authDAO = require('../model/authDAO');
 const sessionCheck = (req, res, next) => {
     if(req.isAuthenticated()) {
         console.log('Already Logged In');
-        res.redirect('http://localhost:3001');
+        res.redirect('http://localhost:3000');
     } else {
         console.log('Not Logged In');
         next();
