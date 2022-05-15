@@ -28,12 +28,6 @@ function Notice() {
   }
   check()
   },[])
-    // await axios.get('http://localhost:8000/notice')
-    //     .then((res) => {
-    //         // setData(response.read_notice_list.result);
-    //         console.log(res.data.result)
-    //     })
-// }, []);
 
   return (
     <Container sx={{mt:3}}>
