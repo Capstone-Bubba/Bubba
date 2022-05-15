@@ -1,8 +1,8 @@
 const db = require('../config/dbConn');
 
-const read_diary = (parameters) => {
+const read_calendar = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT * FROM diary WHERE baby_num=?`;
+        let queryData = `SELECT * FROM calendar WHERE baby_num=?`;
         db.query(queryData, [parameters.baby_num], (err, db_data) => {
             if(err) {
                 console.log(err);
@@ -14,9 +14,9 @@ const read_diary = (parameters) => {
     })
 }
 
-const create_diary = (parameters) => {
+const create_calendar = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO diary SET ?`;
+        let queryData = `INSERT INTO calendar SET ?`;
         db.query(queryData, parameters, (err, db_data) => {
             if(err){
                 console.log(err);
@@ -28,11 +28,11 @@ const create_diary = (parameters) => {
     })
 }
 
-const update_diary = (parameters) => {
+const update_calendar = (parameters) => {
     console.log(parameters);
     return new Promise((resolve, reject) => {
-        let queryData = `UPDATE diary SET diary_date =?, diary_title =?, diary_content =?, diary_picture =? WHERE diary_num =?`;
-        db.query(queryData, [parameters.diary_date, parameters.diary_title, parameters.diary_content, parameters.diary_picture, parameters.diary_num], (err, db_data) => {
+        let queryData = `UPDATE calendar SET calendar_date =?, calendar_title =?, calendar_content =?, calendar_picture =? WHERE calendar_num =?`;
+        db.query(queryData, [parameters.calendar_date, parameters.calendar_title, parameters.calendar_content, parameters.calendar_picture, parameters.calendar_num], (err, db_data) => {
             if(err){
                 console.log(err);
                 reject(err);
@@ -43,10 +43,10 @@ const update_diary = (parameters) => {
     }) 
 }
 
-const delete_diary = (parameters) => {
+const delete_calendar = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `DELETE from diary where diary_num =?`;
-        db.query(queryData, parameters.diary_num, (err, db_data) => {
+        let queryData = `DELETE from calendar where calendar_num =?`;
+        db.query(queryData, parameters.calendar_num, (err, db_data) => {
             if(err) {
                 console.log(err);
                 reject(err);
@@ -57,8 +57,8 @@ const delete_diary = (parameters) => {
     })
 }
 module.exports = {
-    read_diary,
-    create_diary,
-    update_diary,
-    delete_diary,
+    read_calendar,
+    create_calendar,
+    update_calendar,
+    delete_calendar,
 }
