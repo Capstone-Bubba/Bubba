@@ -52,8 +52,11 @@ const deleteNotice = async (req, res) => {
 
     try {
         await noticeDAO.delete_notice(parameters);
+        await noticeDAO.reset_noticeNum(parameters);
+        res.send('OK');
     } catch(err) {
         console.log(err);
+        res.send('Error');
     }
 }
 

@@ -6,9 +6,11 @@ const logout = (req, res) => {
     req.session.destroy((err) => {
         if(err) {
             console.log(err);
+            res.send({"error" : err});
         }
         console.log(req.isAuthenticated());
-        res.redirect('/');
+        res.send('Success Logout!');
+        // res.redirect('/');
     })
 }
 

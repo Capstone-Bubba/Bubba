@@ -54,10 +54,21 @@ const update_notice = (parameters) => {
 
 const delete_notice = (parameters) => {
     return new Promise((resolve ,reject) => {
-        db.query(`DELETE FROM notice WHERE notice_num = ?`, parameters, (err, db_data) => {
+        db.query(`DELETE FROM notice WHERE notice_num = ?`, parameters.notice_num, (err, db_data) => {
             if(err) {
                 reject(err);
-                console.log(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const reset_noticeNum = () => {
+    return new Promise((resolve ,reject) => {
+        db.query(`SET @autoid :=0; UPDATE table_name SET id = @autoid:=(@autoid+1);ALTER TABLE table_name AUTO_INCREMENT=1;`, (err, db_data) => {
+            if(err) {
+                reject(err);
             } else {
                 resolve(db_data);
             }
@@ -70,5 +81,6 @@ module.exports = {
     read_notice,
     create_notice,
     update_notice,
-    delete_notice
+    delete_notice,
+    reset_noticeNum,
 }
