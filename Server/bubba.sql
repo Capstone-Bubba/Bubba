@@ -32,18 +32,18 @@ CREATE TABLE IF NOT EXISTS `baby` (
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
--- 테이블 bubba.diary 구조 내보내기
-CREATE TABLE IF NOT EXISTS `diary` (
-  `diary_num` int NOT NULL AUTO_INCREMENT,
+-- 테이블 bubba.calendar 구조 내보내기
+CREATE TABLE IF NOT EXISTS `calendar` (
+  `calendar_num` int NOT NULL AUTO_INCREMENT,
   `baby_num` int NOT NULL DEFAULT '0',
-  `diary_date` date NOT NULL,
-  `diary_title` varchar(50) DEFAULT NULL,
-  `diary_content` varchar(50) DEFAULT NULL,
-  `diary_picture` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`diary_num`),
+  `calendar_date` date NOT NULL,
+  `calendar_title` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `calendar_content` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `calendar_picture` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  PRIMARY KEY (`calendar_num`) USING BTREE,
   KEY `FK_baby_num2` (`baby_num`),
   CONSTRAINT `FK_baby_num2` FOREIGN KEY (`baby_num`) REFERENCES `baby` (`baby_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
