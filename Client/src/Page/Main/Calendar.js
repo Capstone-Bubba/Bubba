@@ -1,9 +1,9 @@
-import React from 'react'
+import React, {useState,useEffect} from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import styled from 'styled-components'
 import { Container, Grid } from '@mui/material'
-
+import axios from 'axios'
 const Box = styled.div` 
   border: 1px solid green;
   margin-top: 15%;
@@ -12,7 +12,30 @@ const Box = styled.div`
   border-radius: 5%;
   background: #f5faf5
 `
-function Calendar() {
+function Calendar(props) {
+    console.log(props.user_num)
+    const [data, setData] = useState([]);
+    useEffect(() => {
+      async function check() {
+      try{
+        const res = await axios.get('http://localhost:8000/calendar')
+        console.log(res)
+        const _data = await res.data.result.map ((rowData) =>(
+          {
+            number: rowData.calendar_num,
+            baby_number: rowData.baby_num,
+            date: rowData.calendar_date,
+            // day: moment(rowData.createAt).format('YYYY년 MM월 DD일'),
+          }
+        ))
+        setData(data.concat(_data))
+        // console.log(data)
+      } catch(e){
+        console.error(e.message)
+      }
+    }
+    check()
+    },[])
     return (
         <Container maxWidth={false} sx={{mt: 3}}>
             <Grid container spacing={2}>

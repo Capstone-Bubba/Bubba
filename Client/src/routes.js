@@ -7,9 +7,9 @@ import Notice from "./Page/Main/Notice";
 import Gallery from "./Page/Main/Gallery";
 import Calendar from "./Page/Main/Calendar";
 import CCTV from "./Page/Main/CCTV";
+import Baby from './Page/Baby/Baby'
 
-
-export default function Router() {
+export default function Router({userData}) {
   let element = useRoutes([
     {
       children: [
@@ -19,10 +19,11 @@ export default function Router() {
     {
       element: <MainLayout />,
       children: [
+        { path: "baby", element: <Baby /> },
         { path: "home", element: <Main /> },
         { path: "notice", element: <Notice /> },
         { path: "gallery", element: <Gallery /> },
-        { path: "calendar", element: <Calendar /> },
+        { path: "calendar", element: <Calendar {...userData}/> },
         { path: "cctv", element: <CCTV /> },
       ],
     },
