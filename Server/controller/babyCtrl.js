@@ -28,10 +28,10 @@ const createBaby = async (req, res) => {
     let baby_picture = req.file.filename;
 
     const parameters = {
-        "baby_name" : req.body.baby_name,
-        "birth" : birth,
-        "gender" : req.body.gender,
-        "baby_picture" : baby_picture,
+        "baby_name" : req.body.baby_name, //이름
+        "birth" : birth, //생년월일
+        "gender" : req.body.gender, //성별
+        "baby_picture" : baby_picture, //아기 사진
         "user_num" : req.session.passport.user.user_num
     };
 

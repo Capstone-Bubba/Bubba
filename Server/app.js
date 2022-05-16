@@ -39,7 +39,8 @@ app.use('/notice', noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
 app.use('/gallery', auth.userCheck, galleryRouter);
-app.use('/calendar', auth.userCheck, CalendarRouter);
+// app.use('/calendar', auth.userCheck, CalendarRouter);
+app.use('/calendar', CalendarRouter);
 app.use('/push', auth.authorityCheck, pushRouter);
 
 module.exports = app;

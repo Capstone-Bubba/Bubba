@@ -81,8 +81,8 @@ function Main() {
 
   useEffect(() => {
     async function check(){
-      await axios.get('http://localhost:8000/auth/home').then((res) => {
-        console.log(res.data.result)
+      await axios.get('http://localhost:8000/baby').then((res) => {
+        // console.log(res.data.result)
         setData(res.data.result)
       })
     }
