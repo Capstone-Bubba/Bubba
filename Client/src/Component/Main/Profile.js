@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
 import Avatar from '@mui/material/Avatar';
 import styled from 'styled-components';
 import ProfileImg from '../../images/defaultImg.png'
+import moment from 'moment';
 
 const Layout = styled.div`
     display: flex;
@@ -22,24 +24,35 @@ const Button = styled.button`
     font-size : 15px;
     background: skyblue;
 `
-function Profile({ data }) {
-    console.log(data)
+function Profile() {
+    const [data, setData] = useState("")
+    useEffect(() => {
+        async function check() {
+            await axios.get('http://localhost:8000/baby').then((res) => {
+                console.log(res.data.result)
+                setData(res.data.result)
+            })
+        }
+        console.log(data)
+        check()
+    }, [])
+    const imgUrl = "/images/baby"+data[0].baby_picture
+    console.log(imgUrl)
     return (
         <Layout>
+            {data ?
+            <>
             <Avatar
-                alt="Remy Sharp"
-                src={ProfileImg}
+                alt="아기 사진"
+                src={imgUrl}
                 sx={{ width: 180, height: 180 }}
             />
-            {data.map(value => {
-                return (
-                    <div key={value}>
-                        <Text >이름 :{value.email}</Text>
-                        <Text>나이 : 19</Text>
-                        <Button>프로필 등록</Button>
-                    </div>)
-            })}
-
+            <Text >이름 : {data[0].baby_name}</Text>
+            <Text>생년월일 : {moment(data[0].birth).format('YYYY-MM-DD')}</Text>
+            <Button>프로필 등록</Button> </>
+            :
+            <>Wait</>}
+            
 
 
         </Layout>

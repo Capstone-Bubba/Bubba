@@ -9,15 +9,19 @@ import ProfileImg from '../../images/defaultImg.png'
 
 
 function BabyForm() {
-    const [name, setName] = React.useState('이름을 입력해주세요.');
+    const [name, setName] = React.useState('');
     const [value, setValue] = React.useState(null);
+    const [gender, setGender] = React.useState(null);
     const handleChange = (event) => {
         setName(event.target.value);
     };
-
+    const genderChange = (event)=> {
+        setGender(event.target.value);
+    }
+   
     const [image, setImage] = useState({
         image_file: "",
-        preview_URL: "../",
+        preview_URL: ProfileImg
     });
     const [loaded, setLoaded] = useState(false);
     let inputRef
@@ -43,24 +47,27 @@ function BabyForm() {
     const deleteImage = () => {
         setImage({
             image_file: "",
-            preview_URL: "../../images/defaultImg.png",
+            preview_URL: ProfileImg,
         });
         setLoaded(false);
     }
     const sendImageToServer = async () => {
-        if (image.image_file) {
+        if (image.image_file, name, value, gender) {
             const formData = new FormData()
             formData.append('file', image.image_file);
+            formData.append('baby_name', name);
+            formData.append('birth', value);
+            formData.append('gender', gender);
             await axios.post('http://localhost:8000/baby/create', formData);
-            alert("서버에 등록이 완료되었습니다!");
+            alert("프로필 설정 완료 !!!!!");
             setImage({
                 image_file: "",
-                preview_URL: "../../images/defaultImg.png",
+                preview_URL: ProfileImg,
             });
             setLoaded(false);
         }
         else {
-            alert("사진을 등록하세요!")
+            alert("전부 입력하세요")
         }
     }
 
@@ -111,12 +118,13 @@ function BabyForm() {
                     renderInput={(params) => <TextField sx={{ mt: 3 }} {...params} />}
                 />
             </LocalizationProvider>
-            <FormControl name="gender" sx={{ mt: 3 }}>
+            <FormControl name="gender" sx={{ mt: 3 }} >
                 <FormLabel id="demo-row-radio-buttons-group-label">성별</FormLabel>
                 <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
+                    onChange={genderChange}
                 >
                     <FormControlLabel value="0" control={<Radio />} label="남자" />
                     <FormControlLabel value="1" control={<Radio />} label="여자" />
