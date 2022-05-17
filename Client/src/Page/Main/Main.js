@@ -77,18 +77,6 @@ const Button = styled.button `
   height:50px;
 `
 function Main() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    async function check(){
-      await axios.get('http://localhost:8000/baby').then((res) => {
-        // console.log(res.data.result)
-        setData(res.data.result)
-      })
-    }
-
-    check()
-  },[])
   return (
     <Container maxWidth={false}>
       <Font>
@@ -131,7 +119,7 @@ function Main() {
         </Grid>
         <Grid item xs={4}>
           <MemberBox>
-            <Profile data={data} />
+            <Profile />
           </MemberBox>
         </Grid>
       </Grid>
