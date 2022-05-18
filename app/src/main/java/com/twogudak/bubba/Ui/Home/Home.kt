@@ -16,6 +16,8 @@ import com.twogudak.bubba.Ui.rootPage.rootActivty
 class Home : Fragment() {
 
     lateinit var rootActivty: rootActivty
+    lateinit var sleepChart: BarChart
+    lateinit var home_notification_recyceler: RecyclerView
 
 
     override fun onCreateView(
@@ -23,16 +25,20 @@ class Home : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        rootActivty = context as rootActivty
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val v = inflater.inflate(R.layout.fragment_home, container, false)
+        sleepChart = v.findViewById<BarChart>(R.id.home_sleep_chart)
+        home_notification_recyceler = v.findViewById<RecyclerView>(R.id.home_notification_recycelview)
+        return v
     }
 
     override fun onStart() {
         super.onStart()
+        rootActivty = context as rootActivty
 
-        val sleepChart = rootActivty.findViewById<BarChart>(R.id.home_sleep_chart)
-        val chartinit = MPAndroidGraph(rootActivty,ArrayList<Int>(),sleepChart)
-        chartinit.sleepgraphinit()
+        sleepChart?.let {
+            val chartinit = MPAndroidGraph(rootActivty, ArrayList<Int>(), sleepChart)
+            chartinit.sleepgraphinit()
+        }
 
         var timedata = ArrayList<String>()
         var titleData = ArrayList<String>()
@@ -43,8 +49,6 @@ class Home : Fragment() {
         titleData.add("아이가 울고 있음 아픔")
         titleData.add("아이가 울고 있음 화장실")
 
-
-        val home_notification_recyceler = rootActivty.findViewById<RecyclerView>(R.id.home_notification_recycelview)
         val recyclerAdapter = Home_notification_recycelView(rootActivty,timedata,titleData)
         home_notification_recyceler.adapter = recyclerAdapter
         home_notification_recyceler.layoutManager = LinearLayoutManager(rootActivty)

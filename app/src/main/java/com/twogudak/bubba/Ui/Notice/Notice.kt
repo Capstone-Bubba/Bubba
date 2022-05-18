@@ -13,8 +13,8 @@ import com.twogudak.bubba.Ui.rootPage.rootActivty
 class Notice : Fragment() {
 
     val data = ArrayList<String>()
-
     lateinit var rootActivty: rootActivty
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,13 +22,14 @@ class Notice : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         rootActivty = context as rootActivty
-        return inflater.inflate(R.layout.fragment_notice, container, false)
+        val v = inflater.inflate(R.layout.fragment_notice, container, false)
+        recyclerView = v.findViewById<RecyclerView>(R.id.notice_recyclerView)
+        return v
     }
 
     override fun onStart() {
         super.onStart()
 
-        val recyclerView = rootActivty.findViewById<RecyclerView>(R.id.notice_recyclerView)
         val recyclerView_Adapter = Notice_recycler_View(rootActivty,data)
         recyclerView.adapter = recyclerView_Adapter
         recyclerView.layoutManager = LinearLayoutManager(rootActivty)
