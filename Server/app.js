@@ -23,6 +23,9 @@ app.use(cors({ origin: 'http://localhost:3000' , credentials : true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
+app.use('/static', express.static(__dirname + '/public'));          // 이미지 정적처리 리엑트에서 참조
+
+app.use(express.static('public'));
 
 app.use(Session);
 
@@ -42,5 +45,4 @@ app.use('/gallery', auth.userCheck, galleryRouter);
 // app.use('/calendar', auth.userCheck, CalendarRouter);
 app.use('/calendar', CalendarRouter);
 app.use('/push', auth.authorityCheck, pushRouter);
-
 module.exports = app;
