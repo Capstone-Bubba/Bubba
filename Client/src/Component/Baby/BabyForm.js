@@ -6,12 +6,15 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ProfileImg from '../../images/defaultImg.png'
+import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 
 function BabyForm() {
     const [name, setName] = React.useState('');
     const [value, setValue] = React.useState(null);
     const [gender, setGender] = React.useState(null);
+    const navigate = useNavigate()
     const handleChange = (event) => {
         setName(event.target.value);
     };
@@ -59,7 +62,9 @@ function BabyForm() {
             formData.append('birth', value);
             formData.append('gender', gender);
             await axios.post('http://localhost:8000/baby/create', formData);
-            alert("프로필 설정 완료 !!!!!");
+            alert("프로필 설정 완료");
+            navigate('/home')
+
             setImage({
                 image_file: "",
                 preview_URL: ProfileImg,
@@ -94,8 +99,6 @@ function BabyForm() {
                 <Button variant="contained" onClick={deleteImage} color="error">
                     이미지 삭제
                 </Button>
-
-
             </div>
             <TextField
                 id="outlined-name"
@@ -131,9 +134,14 @@ function BabyForm() {
 
                 </RadioGroup>
             </FormControl>
-            <Button sx={{ mt: 5 }} variant="contained" onClick={sendImageToServer}>
+            <div className="return-button">
+            <Button variant="contained" onClick={sendImageToServer}>
                 프로필 설정
             </Button>
+            <Button variant="contained" >
+          <Link style={{ textDecoration: 'none', color: '#fff' }} to="/home">홈으로 돌아가기</Link>
+            </Button>
+            </div>
         </div>
 
     )

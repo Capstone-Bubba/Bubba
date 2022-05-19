@@ -13,29 +13,17 @@ const Box = styled.div`
   background: #f5faf5
 `
 function Calendar(props) {
-    console.log(props.user_num)
-    const [data, setData] = useState([]);
-    useEffect(() => {
+  const [data, setData] = useState("")
+  useEffect(() => {
       async function check() {
-      try{
-        const res = await axios.get('http://localhost:8000/calendar')
-        console.log(res)
-        const _data = await res.data.result.map ((rowData) =>(
-          {
-            number: rowData.calendar_num,
-            baby_number: rowData.baby_num,
-            date: rowData.calendar_date,
-            // day: moment(rowData.createAt).format('YYYY년 MM월 DD일'),
-          }
-        ))
-        setData(data.concat(_data))
-        // console.log(data)
-      } catch(e){
-        console.error(e.message)
+          await axios.get('http://localhost:8000/calendar').then((res) => {
+              console.log(res.data.result)
+              setData(res.data.result[0])
+          })
       }
-    }
-    check()
-    },[])
+      console.log(data)
+      check()
+  }, [])
     return (
         <Container maxWidth={false} sx={{mt: 3}}>
             <Grid container spacing={2}>
