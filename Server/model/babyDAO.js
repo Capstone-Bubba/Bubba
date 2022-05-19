@@ -2,7 +2,8 @@ const db = require('../config/dbConn');
 
 const read_babyList = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT baby_name, gender, baby_picture FROM baby WHERE user_num =?`
+        // let queryData = `SELECT baby_name, gender, baby_picture FROM baby WHERE user_num =?`
+        let queryData = `SELECT baby_name, gender, baby_picture, birth FROM baby WHERE user_num =? ORDER BY baby_num DESC LIMIT 1`
         db.query(queryData, [parameters.user_num], (err, db_data) => {
             if(err) {
                 console.log(err);

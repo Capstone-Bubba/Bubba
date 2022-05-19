@@ -9,8 +9,10 @@ router.get('/', noticeCtrl.readNoticeList);
 //query, 
 router.get('/detail', noticeCtrl.readNotice);
 
-router.post('/write', auth.authorityCheck, noticeCtrl.createNotice);
+router.post('/write', noticeCtrl.createNotice);
 
 router.put('/update', auth.authorityCheck, noticeCtrl.updateNotice);
+
+router.post('/delete', noticeCtrl.deleteNotice);
 
 module.exports = router;

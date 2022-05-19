@@ -1,5 +1,3 @@
-// install (please make sure versions match peerDependencies)
-// yarn add @nivo/core @nivo/bar
 import { ResponsiveBar } from '@nivo/bar'
 
 const data = [

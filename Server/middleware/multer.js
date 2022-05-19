@@ -18,9 +18,9 @@ const forGallery = multer.diskStorage({
     }
 });
 
-const forDiary = multer.diskStorage({
+const forCalendar = multer.diskStorage({
     destination(req, file, cb) {
-        cb(null, 'public/images/diary');
+        cb(null, 'public/images/calendar');
     },
     filename(req, file, cb) {
         cb(null, `${file.originalname}`);
@@ -29,10 +29,10 @@ const forDiary = multer.diskStorage({
 
 const uploadBaby = multer({ storage : babyProfile });
 const uploadGallery = multer({ storage : forGallery});
-const uploadDiary = multer({ storage : forDiary});
+const uploadCalendar = multer({ storage : forCalendar});
 
 module.exports = {
     uploadBaby,
     uploadGallery,
-    uploadDiary,
+    uploadCalendar,
 }

@@ -1,7 +1,11 @@
 import React from 'react'
 import imgA from '../../images/main_1.png'
+import googleButton from '../../images/btn_google_signin_light_pressed_web.png'
+import naverButton from '../../images/btn_naver.png'
+import kakaoButton from '../../images/btn_kakao.png'
 import styled from 'styled-components'
 import { useMediaQuery } from '@mui/material';
+import { Container } from '@mui/material';
 
 
 const Layout = styled.div`
@@ -14,7 +18,7 @@ const Layout = styled.div`
   display: block;
   background-image:url(${imgA});
   vertical-align: bottom;
-  pointer-events: none;
+  // pointer-events: none;
   animation-name: big;
   animation-duration: 2s;
   animation-timing-function: linear;
@@ -59,7 +63,8 @@ const Content = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  margin-top:10%;
+  justify-content: space-around;
   font-size: calc(10px + 2vmin);
   color: white;
 `
@@ -71,11 +76,22 @@ const Font = styled.div`
   text-align: center;
   animation: font 1.2s infinite alternate;
 `
-const Button = styled.button`
+const Button = styled.a`
   display:flex;
-  align-items: center;
-  width:400px;
+  justify-items:center;
+  justify-content:center;
+  width:100%;
   height:100px;
+  `
+const LoginBox = styled.div `
+  display:flex;
+  justify-content:center;
+  justify-items:center;
+  flex-direction: column;
+  width:60%;
+  margin-left:30%;
+  margin-right:30%;
+
 `
 const FontItem = styled.span`
   animation-delay: ${props => props.fontAni};
@@ -90,12 +106,19 @@ const FontItem = styled.span`
     }
   }
 `
+const LoginItem = styled.img`
+
+  width:250px;
+  height:60px;
+
+`
 function About() {
   const matches = useMediaQuery('(max-width:600px)');
 
   return (
  <Layout>
     {/* <About_list /> */}
+    <Container>
     <Content>
       <Font>
         <FontItem fontAni={""}>B</FontItem>
@@ -104,8 +127,13 @@ function About() {
         <FontItem fontAni={".8s"}>B</FontItem>
         <FontItem fontAni={""}>A</FontItem>
       </Font>
-      <Button/>
+      <LoginBox>
+      <Button href='http://localhost:8000/auth/google'><LoginItem src={googleButton}/></Button>
+      <Button href='http://localhost:8000/auth/naver'><LoginItem src={naverButton}/></Button>
+      <Button href='http://localhost:8000/auth/kakao'><LoginItem src={kakaoButton}/></Button>
+      </LoginBox>
       </Content>
+      </Container>
     </Layout>
   )
 }

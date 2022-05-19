@@ -1,21 +1,24 @@
-import React, { useCallback } from 'react'
-import styled from 'styled-components'
+import React, {useState, useEffect} from 'react'
 import './App.css';
 import Router from './routes';
+import axios from 'axios';
 
 function App() {
-  // const router = useRouter();
-  // const onClickGoogleLogin = useCallback(() => {
-  //   const page = 'http://localhost:3000/auth/google'
-  //   router.push(`http://localhost:3000/auth/google`);
-  // }, [])
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function check(){
+      await axios.get('http://localhost:8000/auth/home').then((res) => {
+        // console.log(res.data.result)
+        setData(res.data.result)
+      })
+    }
+
+    check()
+  },[])
   return (
     <>
-      {/* <a href='http://localhost:8000/auth/google'>google</a>
-      <a href='http://localhost:8000/auth/naver'>Naver</a>
-      <a href='http://localhost:8000/auth/kakao'>apple</a> */}
-
-      <Router/>
+      <Router userData={data[0]}/>
     </>  
   )
 }

@@ -1,6 +1,7 @@
 const noticeDAO = require('../model/noticeDAO');
 
 const readNoticeList = async (req, res) => {
+    console.log(123123)
     const result = await noticeDAO.read_notice_list();
     res.send({"result" : result});
     console.log(result);
@@ -51,8 +52,11 @@ const deleteNotice = async (req, res) => {
 
     try {
         await noticeDAO.delete_notice(parameters);
+        await noticeDAO.reset_noticeNum(parameters);
+        res.send('OK');
     } catch(err) {
         console.log(err);
+        res.send('Error');
     }
 }
 

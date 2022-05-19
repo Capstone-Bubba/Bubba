@@ -1,8 +1,9 @@
 import { Container, Grid } from '@mui/material'
-import React from 'react'
+import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
+import axios from 'axios';
 
 
 const GraphBox = styled.div`
@@ -71,7 +72,11 @@ const MemberBox = styled.div`
 const Item = styled.div`
   border: 1px solid #e8f7f7;
 `
-function main() {
+const Button = styled.button `
+  width:200px;
+  height:50px;
+`
+function Main() {
   return (
     <Container maxWidth={false}>
       <Font>
@@ -82,7 +87,7 @@ function main() {
         <FontItem fontAni={""}>A</FontItem>
       </Font>
       <Grid container spacing={2}>
-        <Grid itex xs={6}>
+        <Grid item xs={6}>
           <GraphBox>
             <Text>
               아기 상태
@@ -123,4 +128,4 @@ function main() {
   )
 }
 
-export default main
+export default Main
