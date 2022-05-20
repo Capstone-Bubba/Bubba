@@ -12,6 +12,7 @@ function App() {
         // console.log(res.data.result)
         setData(res.data.result)
       })
+      // await axios.get('http://localhost:8000/auth/')
     }
 
     check()
