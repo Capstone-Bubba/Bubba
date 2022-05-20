@@ -54,12 +54,25 @@ const insertUser = (parameters) => {
 
 const checkAuthority = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT authority FROM user WHERE user_num =?`;
+        // let queryData = `SELECT authority FROM user WHERE user_num =?`;
         db.query(queryData, parameters.user_num, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
                 resolve(db_data);
+            }
+        })
+    })
+}
+const checkBabyId = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT baby_num FROM baby WHERE user_num = ?`;
+        db.query(queryData, [parameters.user_num],(err,db_data)=>{
+            if(err){
+                reject(err);
+            } else {
+                console.log(db_data)
+                resolve(db_data[0])
             }
         })
     })
@@ -71,5 +84,6 @@ module.exports = {
     checkUserNum,
     checkAuthority,
     UserState,
+    checkBabyId
 }
 

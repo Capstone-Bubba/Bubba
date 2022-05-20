@@ -10,6 +10,7 @@ import CCTV from "./Page/Main/CCTV";
 import Baby from './Page/Baby/Baby'
 
 export default function Router({userData}) {
+  // console.log(userData)
   let element = useRoutes([
     {
       children: [

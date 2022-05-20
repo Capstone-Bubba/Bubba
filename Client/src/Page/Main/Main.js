@@ -3,7 +3,7 @@ import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
-import axios from 'axios';
+import Notice from './Notice';
 
 
 const GraphBox = styled.div`
@@ -54,7 +54,6 @@ const FlexBox = styled.div`
   margin-right: 10px;
 `
 const PushBox = styled.div`
-  background: rgba(18,20,34, 0.1);
   box-shadow: 10px 5px 5px #C0C0C0;
   border-radius: 3%;
   height: 320px;
@@ -115,6 +114,7 @@ function Main() {
         </Grid>
         <Grid item xs={8}>
           <PushBox>
+            <Notice/>
           </PushBox>
         </Grid>
         <Grid item xs={4}>

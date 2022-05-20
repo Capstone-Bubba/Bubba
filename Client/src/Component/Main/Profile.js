@@ -31,7 +31,7 @@ function Profile() {
     useEffect(() => {
         async function check() {
             await axios.get('http://localhost:8000/baby').then((res) => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 setData(res.data.result[0])
             })
         }

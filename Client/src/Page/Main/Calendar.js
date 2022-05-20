@@ -13,17 +13,18 @@ const Box = styled.div`
   background: #f5faf5
 `
 function Calendar(props) {
-  const [data, setData] = useState("")
-  useEffect(() => {
-      async function check() {
-          await axios.get('http://localhost:8000/calendar').then((res) => {
-              console.log(res.data.result)
-              setData(res.data.result[0])
-          })
-      }
-      console.log(data)
-      check()
-  }, [])
+    console.log(props.user_num)
+    const [data, setData] = useState("")
+    useEffect(() => {
+        async function check() {
+            await axios.get('http://localhost:8000/calendar').then((res) => {
+                console.log(res.data.result)
+                setData(res.data.result)
+            })
+        }
+        console.log(data)
+        check()
+    }, []);
     return (
         <Container maxWidth={false} sx={{mt: 3}}>
             <Grid container spacing={2}>

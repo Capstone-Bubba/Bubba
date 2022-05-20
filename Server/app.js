@@ -34,7 +34,7 @@ passportConfig();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-app.use(morgan('combined', {stream: logger.stream}));
+// app.use(morgan('combined', {stream: logger.stream}));
 
 app.use('/', indexRouter);
 // app.use('/notice', auth.userCheck, noticeRouter);
