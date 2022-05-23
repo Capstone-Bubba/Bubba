@@ -49,6 +49,7 @@ function Profile() {
             <Photo
                photos={photos}
             />
+            
             <Text >이름 : {data.baby_name}</Text>
             <Text>생년월일 : {moment(data.birth).format('YYYY-MM-DD')}</Text>
             <Button ><Link style={{ textDecoration: 'none', color: '#000' }} to="/baby">프로필 등록</Link></Button> </>
