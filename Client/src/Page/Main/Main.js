@@ -8,8 +8,6 @@ import Notice from './Notice';
 
 const GraphBox = styled.div`
   background: white;
-  box-shadow: 10px 5px 5px #C0C0C0;
-  border-radius: 3%;
   height: 400px;
   justify-content: center;
 `
@@ -34,11 +32,8 @@ const FontItem = styled.span`
   }
 `
 const PatternBox = styled.div`
-  border-radius: 3%;
   margin-right: 20px;
   background: white;
-  box-shadow: 5px 5px 5px #C0C0C0;
-  height: 400px;
 `
 const Text = styled.h3`
   text-align: center;
@@ -54,18 +49,12 @@ const FlexBox = styled.div`
   margin-right: 10px;
 `
 const PushBox = styled.div`
-  box-shadow: 10px 5px 5px #C0C0C0;
-  border-radius: 3%;
-  height: 320px;
   padding:1px;
 `
 const MemberBox = styled.div`
   background: white;
-  box-shadow: 10px 5px 5px #C0C0C0;
-  height: 320px;
   margin-right: 20px;
   padding:1px;
-  border-radius: 3%;
   text-align: center;
 `
 const Item = styled.div`
@@ -86,7 +75,7 @@ function Main() {
         <FontItem fontAni={""}>A</FontItem>
       </Font>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={7}>
           <GraphBox>
             <Text>
               아기 상태
@@ -94,7 +83,7 @@ function Main() {
             <Graph />
           </GraphBox>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <PatternBox>
             <FlexBox>
               <Item>
@@ -112,12 +101,12 @@ function Main() {
             </FlexBox>
           </PatternBox>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <PushBox>
             <Notice/>
           </PushBox>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <MemberBox>
             <Profile />
           </MemberBox>
