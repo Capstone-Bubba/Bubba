@@ -65,6 +65,7 @@ const Button = styled.button `
   height:50px;
 `
 function Main() {
+  
   return (
     <Container maxWidth={false}>
       <Font>
@@ -108,7 +109,7 @@ function Main() {
         </Grid>
         <Grid item xs={5}>
           <MemberBox>
-            <Profile />
+            <Profile.Profile  />
           </MemberBox>
         </Grid>
       </Grid>

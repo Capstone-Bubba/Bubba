@@ -6,7 +6,7 @@ import NoticeTable from '../../Component/Table/NoticeTable'
 axios.defaults.withCredentials = true;
 
 function Notice() {
-  // const moment = require('moment');
+  const moment = require('moment');
   
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -18,7 +18,7 @@ function Notice() {
           number: rowData.notice_num,
           name: rowData.notice_title,
           author: rowData.writer,
-          // day: moment(rowData.createAt).format('YYYY년 MM월 DD일'),
+          day: moment(rowData.createAt).format('YYYY년 MM월 DD일'),
         }
       )) 
       setData(data.concat(_data))
