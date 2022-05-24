@@ -5,6 +5,9 @@
     justify-content: start;
     align-items: center;
 }
+p{
+    font-size: large;
+}
 .menu-bar{
     margin-left: 3rem;
     font-size: 2rem;

@@ -7,6 +7,7 @@ import ProfileImg from '../../images/defaultImg.png'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
+const asd = "i";
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
@@ -26,7 +27,7 @@ const Button = styled.button`
     font-size : 15px;
     background: skyblue;
 `
-function Profile() {
+function Profile({  }) {
     const [data, setData] = useState("")
     useEffect(() => {
         async function check() {
@@ -61,5 +62,5 @@ function Profile() {
         </Layout>
     )
 }
-
-export default Profile
+export default {asd, Profile};
+// export default Profile;
