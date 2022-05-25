@@ -7,7 +7,6 @@ import ProfileImg from '../../images/defaultImg.png'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
-const asd = "i";
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
@@ -39,7 +38,7 @@ function Profile({  }) {
         // console.log(data)
         check()
     }, []);
-    // console.log(data)
+    console.log(data)
     const photos = data.baby_picture
 
     console.log(photos);
@@ -62,5 +61,5 @@ function Profile({  }) {
         </Layout>
     )
 }
-export default {asd, Profile};
+export default {Profile};
 // export default Profile;
