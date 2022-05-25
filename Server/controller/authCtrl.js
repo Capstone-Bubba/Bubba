@@ -19,29 +19,44 @@ const selectLogin = (req, res) => {
 }
 
 const goHome = async (req, res,next) => {
-    // console.log(req.session);
-    console.log(req.session.passport)
-    // const session_len = req.session.
     if (req.session.passport != undefined) {
         const parameters = {
             "user_num": req.session.passport.user.user_num
         }
 
-        const result = await authDAO.UserState(parameters);
-        console.log(result);
-        res.send({ "result": result });
+        const user = await authDAO.UserState(parameters);
+        const babyInfo = await authDAO.babyState(parameters);
+        let final = {};
+
+        if(babyInfo.length != 0 && babyInfo.length != 0) {
+            console.log('success');
+            final = Object.assign(user[0], babyInfo[0]);
+            // console.log(final);
+        } else {
+            console.log('no data');
+            final = Object.assign(user[0]);
+        }
+
+        console.log(final);
+        const finalArr = [];
+        finalArr.push(final);
+        res.send({ "result": finalArr });
     } else {
         next()
     }
 }
+
 const checkBaby = async (req, res) => {
     const parameters = {
         "user_num": req.session.passport.user.user_num
     }
     const result = await authDAO.checkBabyId(parameters)
+    console.log("checkBaby", result);
     if (result == undefined) {
+        console.log('baby')
         res.status(200).redirect(`http://localhost:3000/baby`);
     } else {
+        console.log('home')
         res.status(200).redirect(`http://localhost:3000/home`);
     }
 }
