@@ -3,7 +3,8 @@ import { ResponsiveBar } from '@nivo/bar'
 const data = [
   {
     day: "월요일",
-    degress: 59
+    degress: 59,
+    test: 33
   },
   {
     day: "화요일",
@@ -34,12 +35,12 @@ const Graph = () => {
   return (
     <ResponsiveBar
       data={data}
-      keys={["degress"]}
+      keys={["degress", "test", "pic"]}
       indexBy="day"
       margin={{ top: 50, right: 110, bottom: 100, left: 110 }}
-      padding={0.4}
+      padding={0.6}
       valueScale={{ type: "linear" }}
-      colors="#3182CE"
+      colors={["#3182CE","#00FFFF"]}
       animate={true}
       enableLabel={false}
       axisTop={null}

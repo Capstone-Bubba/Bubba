@@ -1,8 +1,9 @@
 const db = require('../config/dbConn');
 
 const read_calendar = (parameters) => {
+    console.log(parameters)
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT * FROM calendar WHERE baby_num=?`;
+        let queryData = `SELECT calendar_num, calendar_date, calendar_title, calendar_content FROM calendar WHERE baby_num=?`;
         db.query(queryData, [parameters.baby_num], (err, db_data) => {
             if(err) {
                 console.log(err);

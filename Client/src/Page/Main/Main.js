@@ -3,13 +3,11 @@ import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
-import axios from 'axios';
+import Notice from './Notice';
 
 
 const GraphBox = styled.div`
   background: white;
-  box-shadow: 10px 5px 5px #C0C0C0;
-  border-radius: 3%;
   height: 400px;
   justify-content: center;
 `
@@ -34,11 +32,8 @@ const FontItem = styled.span`
   }
 `
 const PatternBox = styled.div`
-  border-radius: 3%;
   margin-right: 20px;
   background: white;
-  box-shadow: 5px 5px 5px #C0C0C0;
-  height: 400px;
 `
 const Text = styled.h3`
   text-align: center;
@@ -54,19 +49,12 @@ const FlexBox = styled.div`
   margin-right: 10px;
 `
 const PushBox = styled.div`
-  background: rgba(18,20,34, 0.1);
-  box-shadow: 10px 5px 5px #C0C0C0;
-  border-radius: 3%;
-  height: 320px;
   padding:1px;
 `
 const MemberBox = styled.div`
   background: white;
-  box-shadow: 10px 5px 5px #C0C0C0;
-  height: 320px;
   margin-right: 20px;
   padding:1px;
-  border-radius: 3%;
   text-align: center;
 `
 const Item = styled.div`
@@ -77,6 +65,7 @@ const Button = styled.button `
   height:50px;
 `
 function Main() {
+  
   return (
     <Container maxWidth={false}>
       <Font>
@@ -87,7 +76,7 @@ function Main() {
         <FontItem fontAni={""}>A</FontItem>
       </Font>
       <Grid container spacing={2}>
-        <Grid item xs={6}>
+        <Grid item xs={7}>
           <GraphBox>
             <Text>
               아기 상태
@@ -95,7 +84,7 @@ function Main() {
             <Graph />
           </GraphBox>
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={5}>
           <PatternBox>
             <FlexBox>
               <Item>
@@ -113,13 +102,14 @@ function Main() {
             </FlexBox>
           </PatternBox>
         </Grid>
-        <Grid item xs={8}>
+        <Grid item xs={7}>
           <PushBox>
+            <Notice/>
           </PushBox>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={5}>
           <MemberBox>
-            <Profile />
+            <Profile.Profile  />
           </MemberBox>
         </Grid>
       </Grid>

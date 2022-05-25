@@ -9,25 +9,32 @@ import Calendar from "./Page/Main/Calendar";
 import CCTV from "./Page/Main/CCTV";
 import Baby from './Page/Baby/Baby'
 
-export default function Router({userData}) {
-  let element = useRoutes([
-    {
-      children: [
-        { path: "/", element: <AboutT /> },
-      ]
-    },
-    {
-      element: <MainLayout />,
-      children: [
-        { path: "baby", element: <Baby /> },
-        { path: "home", element: <Main /> },
-        { path: "notice", element: <Notice /> },
-        { path: "gallery", element: <Gallery /> },
-        { path: "calendar", element: <Calendar {...userData}/> },
-        { path: "cctv", element: <CCTV /> },
-      ],
-    },
-  ]);
+export default function Router({ userData }) {
+  // console.log(userData)
+  let element;
+  if (userData) {
+    element = useRoutes  ([
+      {
+        element: <MainLayout />,
+        children: [
+          { path: "baby", element: <Baby /> },
+          { path: "home", element: <Main /> },
+          { path: "notice", element: <Notice /> },
+          { path: "gallery", element: <Gallery /> },
+          { path: "calendar", element: <Calendar {...userData} /> },
+          { path: "cctv", element: <CCTV /> },
+        ],
+      },
+    ])
+  } else {
+    element = useRoutes ([
+      {
+        children: [
+          { path: "/", element: <AboutT /> },
+        ]
+      }
+    ])
+  }
 
   return element;
 }

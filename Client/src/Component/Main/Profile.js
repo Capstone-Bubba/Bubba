@@ -7,6 +7,7 @@ import ProfileImg from '../../images/defaultImg.png'
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 
+const asd = "i";
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
@@ -26,12 +27,12 @@ const Button = styled.button`
     font-size : 15px;
     background: skyblue;
 `
-function Profile() {
+function Profile({  }) {
     const [data, setData] = useState("")
     useEffect(() => {
         async function check() {
             await axios.get('http://localhost:8000/baby').then((res) => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 setData(res.data.result[0])
             })
         }
@@ -49,6 +50,7 @@ function Profile() {
             <Photo
                photos={photos}
             />
+            
             <Text >이름 : {data.baby_name}</Text>
             <Text>생년월일 : {moment(data.birth).format('YYYY-MM-DD')}</Text>
             <Button ><Link style={{ textDecoration: 'none', color: '#000' }} to="/baby">프로필 등록</Link></Button> </>
@@ -60,5 +62,5 @@ function Profile() {
         </Layout>
     )
 }
-
-export default Profile
+export default {asd, Profile};
+// export default Profile;
