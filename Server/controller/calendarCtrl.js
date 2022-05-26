@@ -7,6 +7,7 @@ const readCalendar = async (req, res) => {
     };
     // console.log()
     console.log(req.query.user_num)
+    console.log(req.query.baby_num)
     const result = await calendarDAO.read_calendar(parameters);
     res.send({"result" : result});
     console.log(result);
