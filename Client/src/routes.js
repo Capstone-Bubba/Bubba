@@ -12,7 +12,7 @@ import Baby from './Page/Baby/Baby'
 export default function Router({userData}) {
   const check = userData
   // console.log(userData)
-  console.log(check)
+  // console.log(check)
   const navigate = useNavigate();
   // console.log(userData)
   let element = useRoutes([

@@ -22,13 +22,13 @@ function Notice() {
         }
       )) 
       setData(data.concat(_data))
-      console.log(data)
     } catch(e){
       console.error(e.message)
     }
   }
   check()
   },[])
+  console.log(data)
 
   return (
     <Container sx={{mt:3}}>

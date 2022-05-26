@@ -38,7 +38,7 @@ function Profile({  }) {
         // console.log(data)
         check()
     }, []);
-    console.log(data)
+    // console.log(data)
     const photos = data.baby_picture
 
     console.log(photos);
