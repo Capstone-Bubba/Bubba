@@ -21,11 +21,11 @@ function Calendar(props) {
     useEffect(() => {
         async function check() {
             const params = { baby_num: props.baby_num }
-            await axios.get('http://localhost:8000/calendar', { params }).then((res) => {
+            await axios.get('http://localhost:8000/calendar', { params }).then(async(res) => {
                 // console.log(props.baby_num)
                 console.log(res.data.result)
                 // setData(res.data.result)
-                const _data = res.data.result.map((rowData) => (
+                const _data = await res.data.result.map((rowData) => (
                     {
                         number: rowData.calendar_num,
                         title: rowData.calendar_title,
@@ -40,37 +40,7 @@ function Calendar(props) {
         check()
     }, []);
     console.log(data.length)
-    // useEffect(() => {
-    //     async function check() {
-    //         const params = { baby_num: props.baby_num }
-    //         try {
-    //             const res = await axios.get('http://localhost:8000/calendar', { params })
-    //             const _data = await res.data.result.map((rowData) => (
-    //                 {
-    //                     number: rowData.calendar_num,
-    //                     title: rowData.calendar_title,
-    //                     content: rowData.calendar_content,
-    //                     day: moment(rowData.calendar_date).format('YYYY년 MM월 DD일'),
-    //                 }
-    //             ))
-    //             setData(data.concat(_data))
-    //             console.log(res.data.result)
-
-    //         } catch (e) {
-    //             console.error(e.message)
-    //         }
-    //     }
-    //     check()
-    // }, [])
-    // const DataCheck = (data) => {
-    //     console.log(DataCheck)
-    //     data.map(element=>{
-    //         console.log(element)
-    //         return(
-    //             {title:element.calendar_title, date:element.calendar_date}
-    //         )
-    //     })
-    // }
+  
     return (
         <Container sx={{ mt: 3 }}>
             <Grid container spacing={2}>
