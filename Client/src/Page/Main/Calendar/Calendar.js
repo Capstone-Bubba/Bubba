@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import Dialog from '../../../Component/Modal/Dialog';
+import { Button } from '@mui/material';
 import styled from 'styled-components'
 import { Container, Grid } from '@mui/material'
-import { Modal } from '@mui/material'
 import axios from 'axios'
 const Box = styled.div` 
   border: 1px solid green;
@@ -14,17 +15,25 @@ const Box = styled.div`
   background: #f5faf5
 `
 function Calendar(props) {
+    let selectData;
+
     // console.log(props.user_num)
     // console.log(props.baby_num)
     const moment = require('moment');
     const [data, setData] = useState("")
+    const [open, setOpen] = useState(false);
+    
+    const handleClickOpen = (e) => {
+        setOpen(true);
+    };
+    const handleClose = () => {
+        setOpen(false);
+    };
     useEffect(() => {
         async function check() {
             const params = { baby_num: props.baby_num }
-            await axios.get('http://localhost:8000/calendar', { params }).then(async(res) => {
-                // console.log(props.baby_num)
+            await axios.get('http://localhost:8000/calendar', { params }).then(async (res) => {
                 console.log(res.data.result)
-                // setData(res.data.result)
                 const _data = await res.data.result.map((rowData) => (
                     {
                         number: rowData.calendar_num,
@@ -36,11 +45,10 @@ function Calendar(props) {
                 setData(_data)
             })
         }
-        console.log(data)
         check()
     }, []);
     console.log(data.length)
-  
+
     return (
         <Container sx={{ mt: 3 }}>
             <Grid container spacing={2}>
@@ -55,17 +63,23 @@ function Calendar(props) {
                         }}
                         events={data ?
                             data.map(element => {
-                                console.log(element)
                                 return (
                                     { title: element.title, date: element.day }
                                 )
                             })
                             : <></>}
+                        eventClick={handleClickOpen}
                         editable={true}
                         selectable={false}
                         selectMirror={true}
                         dayMaxEvents={true}
                         unselectAuto={true}
+                    />
+                    <Dialog
+                        data={data}
+                        onClose={handleClose}
+                        aria-labelledby="draggable-dialog-title"
+                        openPopup={open}
                     />
 
                 </Grid>
