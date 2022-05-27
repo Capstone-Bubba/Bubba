@@ -1,11 +1,13 @@
 package com.twogudak.bubba.Ui.Alarm
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.twogudak.bubba.R
+import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class AlarmActivity : AppCompatActivity() {
 
@@ -19,6 +21,7 @@ class AlarmActivity : AppCompatActivity() {
 
         val cancelbt = findViewById<ImageButton>(R.id.alarm_cancelBt)
         cancelbt.setOnClickListener {
+            var intent = Intent(this, rootActivty::class.java)
             finish()
             overridePendingTransition(R.anim.none,R.anim.horizon_exit_right)
         }

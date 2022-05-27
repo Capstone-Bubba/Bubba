@@ -18,6 +18,7 @@ class CheckLogin(context: Context) {
                 if (error == null) {
                     //카카오 통신 갱신, 토큰이 있는것이 확인됨 토큰 정보를 출력함
                     var rootintent = Intent(context, rootActivty::class.java)
+                    rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     context.startActivity(rootintent)
                     Log.e("LoginAccount","카카오톡 로그인 완료")
                     Log.e("LoginAccount","로그인체크 완료")
@@ -37,6 +38,7 @@ class CheckLogin(context: Context) {
         if (account != null) {
             //구글 로그인 완료된 상태
             var rootintent = Intent(context, rootActivty::class.java)
+            rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             context.startActivity(rootintent)
 
         } else{
@@ -55,6 +57,7 @@ class CheckLogin(context: Context) {
         }else if (token != null){
             Log.e("Login Check","Naver Login 되어있음 ${token}")
             var rootintent = Intent(context, rootActivty::class.java)
+            rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             context.startActivity(rootintent)
         }
     } //naver토큰 체크

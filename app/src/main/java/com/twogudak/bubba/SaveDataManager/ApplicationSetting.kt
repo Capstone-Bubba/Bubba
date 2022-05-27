@@ -23,7 +23,15 @@ class ApplicationSetting(context: Context) {
         setting["first"] = appSetting.getString("first", "true").toString()
         setting["fcm"] = appSetting.getString("fcm", "").toString()
         setting["uuid"] = appSetting.getString("uuid", "").toString()
+        setting["babyname"] = appSetting.getString("babyname","").toString()
+        setting["babybirth"] = appSetting.getString("babybirth","").toString()
         return setting
+    }
+
+    fun setBabyInfo(babyname:String, babybirth:String):Boolean {
+        editor.putString("babyname",babyname)
+        editor.putString("babybirth", babybirth)
+        return editor.commit()
     }
 
 }

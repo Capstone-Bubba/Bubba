@@ -20,13 +20,14 @@ import com.twogudak.bubba.Ui.Alarm.AlarmActivity
 import com.twogudak.bubba.Ui.CCTV.CCTV
 import com.twogudak.bubba.Ui.Calendar.Calendar
 import com.twogudak.bubba.Ui.Diary.Diary
-import com.twogudak.bubba.Ui.Gallery.Gallery
 import com.twogudak.bubba.Ui.Home.Home
 import com.twogudak.bubba.Ui.Notice.Notice
 import com.twogudak.bubba.Ui.Setting.Setting
 
 
 class rootActivty : AppCompatActivity() {
+
+    var babyinfo = false
 
     private val appSetting by lazy {
         ApplicationSetting(this)
@@ -36,14 +37,26 @@ class rootActivty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root_activty)
 
+        val setting = appSetting.getSetting()
+        Log.d("AppSetting",setting.toString())
+
+        val homefragment = Home()
+        val babyname = setting["babyname"]
+        val babybirth = setting["babybirth"]
+        val babyInfoBundle = Bundle()
+        babyInfoBundle.putString("babyname",babyname)
+        babyInfoBundle.putString("babybirth",babybirth)
+        homefragment.arguments = babyInfoBundle
+
+
+
         val toolbar: Toolbar? = findViewById(R.id.root_toolbar)
         setSupportActionBar(toolbar)
 
         val viewpager2 = findViewById<ViewPager2>(R.id.root_viewpager2)
-        val pagerAdapter = com.twogudak.bubba.Ui.rootPage.ViewPagerAdapter(this)
-        pagerAdapter.addFragment(Home())
+        val pagerAdapter = ViewPagerAdapter(this)
+        pagerAdapter.addFragment(homefragment)
         pagerAdapter.addFragment(Notice())
-        pagerAdapter.addFragment(Gallery())
         pagerAdapter.addFragment(Calendar())
         pagerAdapter.addFragment(Diary())
         pagerAdapter.addFragment(CCTV())
@@ -71,10 +84,6 @@ class rootActivty : AppCompatActivity() {
                     drawerlayout.closeDrawer(GravityCompat.START)
                     viewpager2.setCurrentItem(1,false)
                     return@setNavigationItemSelectedListener true }
-                R.id.menu_Gallery ->  {
-                    drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(2,false)
-                    return@setNavigationItemSelectedListener true }
                 R.id.menu_Calendar ->  {
                     drawerlayout.closeDrawer(GravityCompat.START)
                     viewpager2.setCurrentItem(3,false)
@@ -96,8 +105,10 @@ class rootActivty : AppCompatActivity() {
         }
 
         val rootalarm = findViewById<ImageButton>(R.id.root_aram)
+
         rootalarm.setOnClickListener {
             var intent = Intent(this, AlarmActivity::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
             overridePendingTransition(R.anim.none,R.anim.horizon_exit)
         }

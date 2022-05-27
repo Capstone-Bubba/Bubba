@@ -12,11 +12,6 @@
             android:title="Notice"
             />
         <item
-            android:id="@+id/menu_Gallery"
-            android:icon="@drawable/menu_photo"
-            android:title="Gallery"
-            />
-        <item
             android:id="@+id/menu_Calendar"
             android:icon="@drawable/menu_calendar"
             android:title="Calendar"

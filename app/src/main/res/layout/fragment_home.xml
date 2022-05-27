@@ -27,32 +27,56 @@
             app:layout_constraintHorizontal_weight="1">
 
             <ImageView
+                android:id="@+id/home_baby_image"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="@drawable/circle"
                 android:src="@drawable/bubba2"
                 android:clipToOutline="true"/>
-            <LinearLayout
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/baby_info_layout"
                 android:layout_marginStart="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
                 <TextView
+                    android:id="@+id/home_baby_name"
+                    app:layout_constraintTop_toTopOf="@+id/baby_info_layout"
+                    app:layout_constraintStart_toStartOf="@+id/baby_info_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="응애 오동협"
                     android:textColor="@color/black"
                     android:layout_gravity="center"
                     android:textSize="10pt"/>
+
                 <TextView
+                    android:id="@+id/home_baby_bith"
+                    app:layout_constraintStart_toStartOf="@+id/baby_info_layout"
+                    app:layout_constraintBottom_toBottomOf="@+id/baby_info_layout"
+                    app:layout_constraintEnd_toEndOf="@+id/home_baby_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="624 개월"
                     android:textSize="10pt"
+                    android:lines="1"
                     android:layout_gravity="center"
                     android:textColor="@color/black"/>
-            </LinearLayout>
+
+
+                <Button
+                    android:id="@+id/home_baby_infobt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="아기 등록"
+                    android:background="@drawable/button_effect"
+                    app:layout_constraintStart_toStartOf="@+id/baby_info_layout"
+                    app:layout_constraintEnd_toEndOf="@+id/baby_info_layout"
+                    app:layout_constraintTop_toTopOf="@id/baby_info_layout"
+                    app:layout_constraintBottom_toBottomOf="@id/baby_info_layout"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
 

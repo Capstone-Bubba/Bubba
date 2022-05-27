@@ -24,9 +24,11 @@
         <entry key="..\:/Users/user/Desktop/coding/And/app/src/main/res/layout/activity_root_activty.xml" value="0.1875" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/alarm_activity_background_class.xml" value="0.1955" />
+        <entry key="app/src/main/res/drawable/button_effect.xml" value="0.2285" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.1955" />
         <entry key="app/src/main/res/drawable/drawer_item.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/home_notification_coner.xml" value="0.1955" />
+        <entry key="app/src/main/res/drawable/home_notification_coner_focused.xml" value="0.2285" />
         <entry key="app/src/main/res/drawable/menu.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/menu_home.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/menu_selecotr.xml" value="0.189" />
@@ -46,6 +48,7 @@
         <entry key="app/src/main/res/layout/home_notification.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/navi_header.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/layout/notice_row.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/register_dialog.xml" value="0.3890625" />
         <entry key="app/src/main/res/menu/navi_menu.xml" value="0.4036458333333333" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1485" />
         <entry key="app/src/main/res/xml/alarm_apear_animation.xml" value="0.4036458333333333" />
