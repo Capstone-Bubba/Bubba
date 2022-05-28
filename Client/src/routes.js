@@ -5,16 +5,13 @@ import MainLayout from "./Component/Nav/MainLayout";
 import Main from "./Page/Main/Main";
 import Notice from "./Page/Main/Notice";
 import Gallery from "./Page/Main/Gallery";
-import Calendar from "./Page/Main/Calendar";
+import Calendar from "./Page/Main/Calendar/Calendar";
 import CCTV from "./Page/Main/CCTV";
 import Baby from './Page/Baby/Baby'
 
 export default function Router({userData}) {
   const check = userData
-  // console.log(userData)
-  console.log(check)
   const navigate = useNavigate();
-  // console.log(userData)
   let element = useRoutes([
     check ? 
     {
