@@ -1127,6 +1127,11 @@
   dependencies:
     postcss-value-parser "^4.2.0"
 
+"@cycjimmy/jsmpeg-player@^6.0.2":
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/@cycjimmy/jsmpeg-player/-/jsmpeg-player-6.0.2.tgz#2530a405102d4fd4d1f5632569bde4029b1ff853"
+  integrity sha512-+j/lpvla5ozehGPOBc1y/zEZ41JX4xiItiw+3PYVKUkl8ryL3lsgaA4MbtuP4FnKRW04qtM+whJ+4eXtptM43w==
+
 "@date-io/core@^2.13.1":
   version "2.13.1"
   resolved "https://registry.yarnpkg.com/@date-io/core/-/core-2.13.1.tgz#f041765aff5c55fbc7e37fdd75fc1792733426d6"
