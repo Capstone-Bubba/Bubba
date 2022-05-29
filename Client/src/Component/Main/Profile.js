@@ -55,9 +55,6 @@ function Profile({  }) {
             <Button ><Link style={{ textDecoration: 'none', color: '#000' }} to="/baby">프로필 등록</Link></Button> </>
             :
             <>Wait</>}
-            
-
-
         </Layout>
     )
 }
