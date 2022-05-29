@@ -5,12 +5,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Paper from '@mui/material/Paper';
-
 
 export default function DraggableDialog(props) {
     const { children, onClose, openPopup, data } = props;
-    console.log(data)
     return (
         <div>
             <Dialog

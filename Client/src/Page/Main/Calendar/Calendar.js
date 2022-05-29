@@ -6,6 +6,7 @@ import { Button } from '@mui/material';
 import styled from 'styled-components'
 import { Container, Grid } from '@mui/material'
 import axios from 'axios'
+import CalendarWrite from './CalendarWrite';
 const Box = styled.div` 
   border: 1px solid green;
   margin-top: 15%;
@@ -15,17 +16,16 @@ const Box = styled.div`
   background: #f5faf5
 `
 function Calendar(props) {
-    let selectData;
-
     // console.log(props.user_num)
     // console.log(props.baby_num)
     const moment = require('moment');
     const [data, setData] = useState("")
     const [open, setOpen] = useState(false);
-    
+
     const handleClickOpen = (e) => {
         setOpen(true);
     };
+ 
     const handleClose = () => {
         setOpen(false);
     };
@@ -33,7 +33,7 @@ function Calendar(props) {
         async function check() {
             const params = { baby_num: props.baby_num }
             await axios.get('http://localhost:8000/calendar', { params }).then(async (res) => {
-                console.log(res.data.result)
+                // console.log(res.data.result)
                 const _data = await res.data.result.map((rowData) => (
                     {
                         number: rowData.calendar_num,
@@ -47,7 +47,7 @@ function Calendar(props) {
         }
         check()
     }, []);
-    console.log(data.length)
+    // console.log(data.length)
 
     return (
         <Container sx={{ mt: 3 }}>
@@ -57,7 +57,16 @@ function Calendar(props) {
                         plugins={[dayGridPlugin]}
                         initialView="dayGridMonth"
                         height={800}
+                        customButtons={{
+                            addButton: {
+                                text: '추가하기',
+                                click: function () {
+                                    setOpen(true)
+                                },
+                            },
+                        }}
                         headerToolbar={{
+                            right: 'addButton',
                             left: 'prev,next today',
                             center: 'title',
                         }}
@@ -80,7 +89,8 @@ function Calendar(props) {
                         onClose={handleClose}
                         aria-labelledby="draggable-dialog-title"
                         openPopup={open}
-                    />
+                    ><CalendarWrite {...props} onClose={handleClose}/>
+                    </Dialog>
 
                 </Grid>
             </Grid>
