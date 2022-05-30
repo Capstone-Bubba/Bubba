@@ -17,6 +17,7 @@ export default function DraggableDialog(props) {
             >
                
                             <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
+                                
                             </DialogTitle>
                             <DialogContent>
                                 <DialogContentText>
