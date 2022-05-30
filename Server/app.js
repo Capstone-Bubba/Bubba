@@ -5,6 +5,7 @@ const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan = require('morgan');           // 통신 log
+
 const app = express();
 
 
@@ -16,11 +17,11 @@ const babyRouter = require('./routes/baby');
 const galleryRouter = require('./routes/gallery');
 const CalendarRouter = require('./routes/calendar');
 const pushRouter = require('./routes/push');
-const cctvRouter = require('./routes/cctv');
+// const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
 const logger = require('./config/winston');
 
-app.use(cors({ origin: 'http://localhost:3000' , credentials : true}));
+app.use(cors({ origin: 'http://localhost:3000', credentials : true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
@@ -32,11 +33,12 @@ app.use(Session);
 
 passportConfig();
 
+// app.use(stream);
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 // app.use(morgan('combined', {stream: logger.stream}));
-
 app.use('/', indexRouter);
 // app.use('/notice', auth.userCheck, noticeRouter);
 app.use('/notice', auth.userCheck, noticeRouter);
