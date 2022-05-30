@@ -17,7 +17,7 @@ const babyRouter = require('./routes/baby');
 const galleryRouter = require('./routes/gallery');
 const CalendarRouter = require('./routes/calendar');
 const pushRouter = require('./routes/push');
-// const cctvRouter = require('./routes/cctv');
+const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
 const logger = require('./config/winston');
 
@@ -49,6 +49,6 @@ app.use('/gallery', auth.userCheck, galleryRouter);
 // app.use('/calendar', auth.userCheck, CalendarRouter);
 app.use('/calendar', CalendarRouter);
 app.use('/push', auth.authorityCheck, pushRouter);
-// app.use('/cctv', cctvRouter);
+app.use('/cctv', cctvRouter);
 
 module.exports = app;
