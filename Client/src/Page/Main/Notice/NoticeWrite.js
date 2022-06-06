@@ -13,33 +13,32 @@ const Layout = styled.div`
     align-items: center;
 `
 
-function CalendarWrite(props) {
+function NoticeWrite(props) {
     const { onClose, openPopup } = props;
     const [name, setName] = React.useState('');
-    const [value, setValue] = React.useState(null);
+    const [writer, setWriter] = React.useState('');
     const [content, setContent] = React.useState('');
-    const [picture, setPicture] = React.useState('');
-    const good = () => {
-        setPicture('')
-    }
+    const [value, setValue] = React.useState(null)
+
     const handleChange = (event) => {
         setName(event.target.value);
+    };
+    const handlewChange = (event) => {
+        setWriter(event.target.value);
     };
     const handleOnChange = (event) => {
         setContent(event.target.value);
     };
 
     const sendImageToServer = async () => {
-        if (name, value, content) {
-            const params = { baby_num: props.baby_num }
-            console.log(params)
+        if (name, writer, content, value) {
             const formData = new FormData()
-            formData.append('calendar_title', name);
-            formData.append('calendar_date', value);
-            formData.append('calendar_content', content);
-            formData.append('calendar_picture', picture)
-            await axios.post('http://localhost:8000/calendar/create', formData, { params });
-            alert("캘린더 추가");
+            formData.append('notice_title', name);
+            formData.append('notice_content', content);
+            formData.append('writer', writer)
+            formData.append('createAt', value);
+            await axios.post('http://localhost:8000/notice/write', formData);
+            alert("노티스 추가!");
             onClose()
             window.location.reload();
 
@@ -57,16 +56,9 @@ function CalendarWrite(props) {
                 aria-labelledby="draggable-dialog-title"
             >
                 <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                    일정 추가
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText 
-                    sx={{
-                        display: 'inline-flex',
-                        m: 1,
-                        p: 1,
-                        flexDirection: 'column'
-                    }}>
+                    <DialogContentText>
                         <TextField
                             id="outlined-name"
                             label="Name"
@@ -74,7 +66,7 @@ function CalendarWrite(props) {
                             defaultValue="Normal"
                             onChange={handleChange}
                             sx={{ mt: 5 }}
-                            name="calendar_title"
+                            name="notice_title"
                         />
                         <TextField
                             id="outlined-name"
@@ -83,9 +75,18 @@ function CalendarWrite(props) {
                             defaultValue="Normal"
                             onChange={handleOnChange}
                             sx={{ mt: 3 }}
-                            name="calendar_content"
+                            name="notice_content"
                         />
-                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                        <TextField
+                            id="outlined-name"
+                            label="Writer"
+                            value={writer}
+                            defaultValue="Normal"
+                            onChange={handlewChange}
+                            sx={{ mt: 3 }}
+                            name="writer"
+                        />
+                          <LocalizationProvider dateAdapter={AdapterDateFns}>
                             <DatePicker
                                 sx={{ mt: 5 }}
                                 label="Date"
@@ -118,4 +119,4 @@ function CalendarWrite(props) {
 }
 
 
-export default CalendarWrite
+export default NoticeWrite

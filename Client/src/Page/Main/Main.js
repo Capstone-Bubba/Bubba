@@ -3,40 +3,35 @@ import React,{ useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
-import Notice from './Notice';
-
+import Notice from './Notice/Notice';
 
 const GraphBox = styled.div`
+  padding:1%;
+  margin-top:3%;
   background: white;
+  border-radius:5px;
   height: 400px;
   justify-content: center;
 `
-const Font = styled.div`
-  color: #008080;
+const Title = styled.div`
+  height:100px;
+  z-index: -1;
+  width:100%;
+  position:absolute;
+  color: #fff;
   font-family: 'Mukta', sans-serif;
   font-size: 4rem;
   text-align: center;
-  animation: font 1.2s infinite alternate;
+  background-color:rgb(49, 130, 206)
 `
-const FontItem = styled.span`
-  animation-delay: ${props => props.fontAni};
-  @keyframes font {
-    0% {
-      filter: blur(0);
-      opacity: 1;
-    }
-    100% {
-      filter: blur(5px);
-      opacity: .2;
-    }
-  }
-`
+
 const PatternBox = styled.div`
-  margin-right: 20px;
-  background: white;
+  margin-top:5%;
+  margin-right: 30px;
 `
 const Text = styled.h3`
   text-align: center;
+  margin-top:3%;
 `
 const FlexBox = styled.div`
   display: grid;
@@ -49,9 +44,13 @@ const FlexBox = styled.div`
   margin-right: 10px;
 `
 const PushBox = styled.div`
+  border-radius:5px;
   padding:1px;
+  background-color:white;
 `
 const MemberBox = styled.div`
+border-radius:5px;
+
   background: white;
   margin-right: 20px;
   padding:1px;
@@ -59,6 +58,9 @@ const MemberBox = styled.div`
 `
 const Item = styled.div`
   border: 1px solid #e8f7f7;
+  background-color: ${props => props.bcolor};
+  border-radius:5px;
+
 `
 const Button = styled.button `
   width:200px;
@@ -66,17 +68,16 @@ const Button = styled.button `
 `
 function Main() {
   
+  
   return (
+    <>
+      <Title>
+        
+      </Title>
     <Container maxWidth={false}>
-      <Font>
-        <FontItem fontAni={""}>B</FontItem>
-        <FontItem fontAni={".4s"}>U</FontItem>
-        <FontItem fontAni={".6s"}>B</FontItem>
-        <FontItem fontAni={".8s"}>B</FontItem>
-        <FontItem fontAni={""}>A</FontItem>
-      </Font>
+
       <Grid container spacing={2}>
-        <Grid item xs={7}>
+        <Grid item xs={7} >
           <GraphBox>
             <Text>
               아기 상태
@@ -87,17 +88,13 @@ function Main() {
         <Grid item xs={5}>
           <PatternBox>
             <FlexBox>
-              <Item>
-                상태 1
+              <Item bcolor={"#9acc5a"}>
               </Item>
-              <Item>
-                상태 2
+              <Item bcolor={"#00b8f6"}>
               </Item>
-              <Item>
-                상태 3
+              <Item bcolor={"#ba62c8"}>
               </Item>
-              <Item>
-                상태 4
+              <Item bcolor={"#ffbe00"}>
               </Item>
             </FlexBox>
           </PatternBox>
@@ -113,8 +110,8 @@ function Main() {
           </MemberBox>
         </Grid>
       </Grid>
-
     </Container>
+    </>
   )
 }
 

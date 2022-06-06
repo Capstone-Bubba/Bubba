@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
-import Dialog from '../../../Component/Modal/Dialog';
-import { Button } from '@mui/material';
 import styled from 'styled-components'
 import { Container, Grid } from '@mui/material'
 import axios from 'axios'
@@ -25,7 +23,7 @@ function Calendar(props) {
     const handleClickOpen = (e) => {
         setOpen(true);
     };
- 
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -84,14 +82,11 @@ function Calendar(props) {
                         dayMaxEvents={true}
                         unselectAuto={true}
                     />
-                    <Dialog
+                    <CalendarWrite {...props} 
                         data={data}
                         onClose={handleClose}
                         aria-labelledby="draggable-dialog-title"
-                        openPopup={open}
-                    ><CalendarWrite {...props} onClose={handleClose}/>
-                    </Dialog>
-
+                        openPopup={open} />
                 </Grid>
             </Grid>
         </Container>

@@ -9,7 +9,7 @@ function photo({photos}) {
             <Avatar
                 alt="아기 사진"
                 src={imgURL}
-                sx={{ width: 180, height: 180 }}
+                sx={{ width: 200, height: 200, mt:5 }}
             />
         </div>
     )
