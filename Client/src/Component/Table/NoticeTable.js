@@ -1,9 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
+import styled from 'styled-components';
 import { Table, TableHead, TableBody, TableRow, TableCell, Typography, TableFooter, TablePagination, } from '@material-ui/core';
+import Button from '../Custom/Button';
+import NoticeWrite from '../../Page/Main/Notice/NoticeWrite';
+
 
 function NoticeTable({ data }) {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = (e) => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -25,8 +38,8 @@ function NoticeTable({ data }) {
                 >
                     공지사항
                 </Typography>
+               <Button onClick={handleClickOpen}>작성하기</Button>
                 <Table aria-aria-label='공지사항'>
-
                     <TableHead>
                         <TableRow>
                             <TableCell >번호</TableCell>
@@ -61,7 +74,12 @@ function NoticeTable({ data }) {
                             />
                         </TableRow>
                     </TableFooter>
+                     <NoticeWrite
+                        onClose={handleClose}
+                        aria-labelledby="draggable-dialog-title"
+                        openPopup={open} />
                 </Table>
+               
             </div>
         </div>
     )

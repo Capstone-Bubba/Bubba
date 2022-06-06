@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import * as BsIcons from "react-icons/bs";
+import * as IoIcons from "react-icons/io";
+import styled from 'styled-components'
 //import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -8,7 +10,24 @@ import './Nav.css';
 import { IconContext } from 'react-icons'
 import { Button, Typography } from '@mui/material';
 import axios from 'axios';
+const Font =  styled.h1`
+  color:#fff;
 
+`
+const FontItem = styled.span`
+  animation-delay: ${props => props.fontAni};
+  animation: font 1.2s infinite alternate;
+  @keyframes font {
+    0% {
+      filter: blur(0);
+      opacity: 1;
+    }
+    100% {
+      filter: blur(5px);
+      opacity: .2;
+    }
+  }
+`
 function MainLayout() {
   const navigate = useNavigate()
   const [sidebar, setSidebar] = useState(false);
@@ -46,9 +65,16 @@ function MainLayout() {
           <Link to="#" className='menu-bar'>
             <BsIcons.BsReverseLayoutTextSidebarReverse onClick={showSidebar} />
           </Link>
-          <Typography style={{ marginRight: "5%" }}>
-            <Button onClick={onRemove}>LOGOUT</Button>
+          <Typography  component="div" sx={{ flexGrow: 1 , textAlign: 'center'  }}>
+            <Font>
+            <FontItem>B</FontItem>
+            <FontItem>U</FontItem>
+            <FontItem>B</FontItem>
+            <FontItem>B</FontItem>
+            <FontItem>A</FontItem>
+            </Font>
           </Typography>
+            <Button style ={{color:"#fff",marginRight:"1%"}}onClick={onRemove}><IoIcons.IoIosLogOut size="40" /></Button>
         </div>
 
         <nav className={sidebar ? 'nav-menu active' : 'nav-menu'}>

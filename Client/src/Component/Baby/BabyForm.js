@@ -8,6 +8,13 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import ProfileImg from '../../images/defaultImg.png'
 import { useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Title = styled.h2`
+font-family: 'Gowun Dodum', sans-serif;
+    text-align:center;
+    color:black
+`
 
 
 function BabyForm() {
@@ -18,10 +25,10 @@ function BabyForm() {
     const handleChange = (event) => {
         setName(event.target.value);
     };
-    const genderChange = (event)=> {
+    const genderChange = (event) => {
         setGender(event.target.value);
     }
-   
+
     const [image, setImage] = useState({
         image_file: "",
         preview_URL: ProfileImg
@@ -78,6 +85,7 @@ function BabyForm() {
 
     return (
         <div className="uploader-wrapper">
+            <Title>프로필 설정</Title>
             <input type="file" accept="image/*"
                 name='baby_picture'
                 onChange={saveImage}
@@ -135,12 +143,12 @@ function BabyForm() {
                 </RadioGroup>
             </FormControl>
             <div className="return-button">
-            <Button variant="contained" onClick={sendImageToServer}>
-                프로필 설정
-            </Button>
-            <Button variant="contained" >
-          <Link style={{ textDecoration: 'none', color: '#fff' }} to="/home">홈으로 돌아가기</Link>
-            </Button>
+                <Button variant="contained" onClick={sendImageToServer}>
+                    프로필 설정
+                </Button>
+                <Button variant="contained" >
+                    <Link style={{ textDecoration: 'none', color: '#fff' }} to="/home">홈으로 돌아가기</Link>
+                </Button>
             </div>
         </div>
 

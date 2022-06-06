@@ -1,40 +1,7 @@
-// import axios from 'axios'
-// import React, {useState, useEffect} from 'react'
-
-// function CCTV() {
-//   const [data, setData] = useState();
-//   useEffect(() => {
-//     async function check() {
-//         await axios.get('http://localhost:8000/cctv').then((res) => {
-//             console.log(res)
-//             setData(res)
-//         })
-//     }
-//     // console.log(data)
-//     check()
-// }, []);
-//     const img = document.getElementById('img'),
-//         socket = io('');
-//     socket.on('data', function(data) {
-//         img.src = 'data:image/j peg;base64,' + data;
-//     });
-//    socket.on('user.count', function(number){
-//       document.getElementById('user-count').innerHTML=number;
-//    });
-//   return (
-//     <div>
-//       <h1>접속자 수 : <span id='user-count'>?</span></h1>
-//       <img id="img"/>
-//     </div>
-//   )
-// }
-
-// export default CCTV
-
 import React, { useEffect } from "react";
-// import "./App.css";
 import JSMpeg from "@cycjimmy/jsmpeg-player";
 import axios from 'axios';
+import { Container } from "@material-ui/core";
 
 const ffmpegIP = "127.0.0.1";
 
@@ -50,6 +17,7 @@ const CCTV = () => {
   }, []);
 
   return (
+    <Container>
     <div id="body">
       <div
         id="title"
@@ -64,10 +32,17 @@ const CCTV = () => {
           color: "blue",
         }}
       >
-        Player stream RTSP
+        아기 실시간 영상
       </div>
-      <div id="video-canvas" style={{ height: "480px", width: "640px" }}></div>
+      <div id="video-canvas"
+        style={{
+          height: "700px",
+          width: "100%",
+          marginTop:'3%',
+
+        }}></div>
     </div>
+    </Container>
   );
 };
 

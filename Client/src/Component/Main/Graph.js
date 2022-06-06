@@ -4,7 +4,6 @@ const data = [
   {
     day: "월요일",
     degress: 59,
-    test: 33
   },
   {
     day: "화요일",
@@ -39,20 +38,9 @@ const Graph = () => {
       indexBy="day"
       margin={{ top: 50, right: 110, bottom: 100, left: 110 }}
       padding={0.6}
-      valueScale={{ type: "linear" }}
-      colors={["#3182CE","#00FFFF"]}
-      animate={true}
+      colors={["#3182CE"]}
       enableLabel={false}
-      axisTop={null}
-      axisRight={null}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "degrees",
-        legendPosition: "middle",
-        legendOffset: -40
-      }}
+    
     />
   );
 };

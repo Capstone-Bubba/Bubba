@@ -1,11 +1,11 @@
 import React,{ useEffect, useState } from 'react';
 import axios from 'axios';
 import { Container } from '@mui/material'
-import NoticeTable from '../../Component/Table/NoticeTable'
+import NoticeTable from '../../../Component/Table/NoticeTable'
 
 axios.defaults.withCredentials = true;
 
-function Notice() {
+function Notice(props) {
   const moment = require('moment');
   
   const [data, setData] = useState([]);
