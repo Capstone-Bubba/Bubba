@@ -11,14 +11,15 @@ const Layout = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 `
 
 function NoticeWrite(props) {
     const { onClose, openPopup } = props;
-    const [name, setName] = React.useState('');
+    const [notice_name, setName] = React.useState('');
     const [writer, setWriter] = React.useState('');
-    const [content, setContent] = React.useState('');
-    const [value, setValue] = React.useState(null)
+    const [notice_content, setContent] = React.useState('');
+    const [day, setDay] = React.useState(null)
 
     const handleChange = (event) => {
         setName(event.target.value);
@@ -30,17 +31,19 @@ function NoticeWrite(props) {
         setContent(event.target.value);
     };
 
-    const sendImageToServer = async () => {
-        if (name, writer, content, value) {
-            const formData = new FormData()
-            formData.append('notice_title', name);
-            formData.append('notice_content', content);
-            formData.append('writer', writer)
-            formData.append('createAt', value);
-            await axios.post('http://localhost:8000/notice/write', formData);
+    const sendOnClickServer = async () => {
+        if (notice_name, writer, notice_content) {
+            // const formData = new FormData()
+            const data = {
+                "notice_title": notice_name,
+                "notice_content": notice_content,
+                "writer": writer
+            }
+            await axios.post('http://localhost:8000/notice/write', data);
             alert("노티스 추가!");
             onClose()
             window.location.reload();
+            // console.log(formData)
 
         }
         else {
@@ -62,7 +65,7 @@ function NoticeWrite(props) {
                         <TextField
                             id="outlined-name"
                             label="Name"
-                            value={name}
+                            value={notice_name}
                             defaultValue="Normal"
                             onChange={handleChange}
                             sx={{ mt: 5 }}
@@ -71,7 +74,7 @@ function NoticeWrite(props) {
                         <TextField
                             id="outlined-name"
                             label="Content"
-                            value={content}
+                            value={notice_content}
                             defaultValue="Normal"
                             onChange={handleOnChange}
                             sx={{ mt: 3 }}
@@ -86,22 +89,10 @@ function NoticeWrite(props) {
                             sx={{ mt: 3 }}
                             name="writer"
                         />
-                          <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <DatePicker
-                                sx={{ mt: 5 }}
-                                label="Date"
-                                name="calendar_date"
-                                value={value}
-                                onChange={(newValue) => {
-                                    setValue(newValue);
-                                }}
-                                renderInput={(params) => <TextField sx={{ mt: 3 }} {...params} />}
-                            />
-                        </LocalizationProvider>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    <Button sx={{ mt: 5 }} variant="contained" onClick={sendImageToServer}>
+                    <Button sx={{ mt: 5 }} variant="contained" onClick={sendOnClickServer}>
                         등록하기
                     </Button>
                 </DialogActions>

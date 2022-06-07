@@ -18,12 +18,9 @@ const readNotice = async (req, res) => {
 
 const createNotice = async (req, res) => {
     const parameters = {
-        "notice_num" : req.query.num,
         "notice_title": req.body.notice_title,
         "notice_content": req.body.notice_content,
         "writer": req.body.writer,
-        "createAt":req.body.createAt
-
     }
     try {
         await noticeDAO.create_notice(parameters);
