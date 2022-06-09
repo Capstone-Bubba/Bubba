@@ -1,59 +1,69 @@
 const Stream = require("node-rtsp-stream");
 
+// const start = () => {
 let rtspList = [
-  {"url":'rtsp://1.228.75.116:8554/stream1',"port":6055, "stream":null,"lastData":null},
+        { "url": 'rtsp://1.228.75.116:8554/stream1', "port": 6055, "stream": null, "lastData": null },
 ];
 
 //let sendSecond = "";
 let rtspListLength = rtspList.length;
-for(let i=0; i<rtspListLength; i++){
-  openStream(rtspList[i]);
 
-  let timer = setInterval(function(obj){
-          let today = new Date();
+for (let i = 0; i < rtspListLength; i++) {
 
-          if(obj.lastData !== undefined){
-                  let stream_date = new Date(obj.lastData);
-                  let gap = (today.getTime() - stream_date.getTime())/1000;
-                  console.log(gap);
-                  if(gap >= 5){//check gap of second
-                          //obj.stream.stop();
-                          //openStream(obj);
+        openStream(rtspList[i]);
 
+        // let timer = setInterval(function (obj) {
+        setInterval(function (obj) {
+                let today = new Date();
+                console.log(i);
+                if (obj.lastData !== undefined) {
+                        let stream_date = new Date(obj.lastData);
+                        let gap = (today.getTime() - stream_date.getTime()) / 1000;
+                        console.log(gap);
+                        // console.log(rtspList[i].port)
 
-                          obj.lastData = today;
-                          obj.stream = obj.stream.restartStream();
-
-                          obj.stream.mpeg1Muxer.on('ffmpegStderr', (data)=>{
-                                  let today = new Date();
-                                  obj.lastData = today;
-                          });
+                        if (gap >= 5) {//check gap of second
+                                //obj.stream.stop();
+                                //openStream(obj);
 
 
-                  }
-          }
+                                obj.lastData = today;
+                                obj.stream = obj.stream.restartStream();
 
-  },1000,rtspList[i]);
+                                obj.stream.mpeg1Muxer.on('ffmpegStderr', (data) => {
+                                        let today = new Date();
+                                        obj.lastData = today;
+                                });
+
+
+                        }
+                }
+
+        }, 1000, rtspList[i]);
 
 }
 
-function openStream(obj){
-  let stream = new Stream({
-          name: 'name',
-          streamUrl : obj.url,
-          wsPort: obj.port,
-          ffmpegOptions: { // options ffmpeg flags
-                  '-stats': '', // an option with no neccessary value uses a blank string
-                  '-r': 30, // options with required values specify the value after the key
-          }
-  });
 
-  obj.stream = stream;
 
-  stream.mpeg1Muxer.on('ffmpegStderr', (data)=>{
-          let today = new Date();
-          obj.lastData = today;
-  });
+// }
+
+function openStream(obj) {
+        let stream = new Stream({
+                name: 'name',
+                streamUrl: obj.url,
+                wsPort: obj.port || 9999,
+                ffmpegOptions: { // options ffmpeg flags
+                        '-stats': '', // an option with no neccessary value uses a blank string
+                        '-r': 30, // options with required values specify the value after the key
+                }
+        });
+
+        obj.stream = stream;
+
+        stream.mpeg1Muxer.on('ffmpegStderr', (data) => {
+                let today = new Date();
+                obj.lastData = today;
+        });
 }
 
 // const Streaming = () => {
@@ -80,5 +90,8 @@ function openStream(obj){
 //     });
 //     console.log(stream.wsPort);
 //   }
-  
-  module.exports = Stream;
+
+module.exports = Stream;
+// module.exports = {
+//         Streaming
+// }

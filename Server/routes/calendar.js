@@ -5,6 +5,8 @@ const calendarCtrl = require('../controller/calendarCtrl');
 
 router.get('/', calendarCtrl.readCalendar);
 
+router.get('/detail', calendarCtrl.readCalendarDetail)
+
 router.post('/create', uploadOriginal.uploadCalendar.array('files'), calendarCtrl.createCalendar);
 
 router.post('/update', uploadOriginal.uploadCalendar.array('files'), calendarCtrl.updateCalendar);
