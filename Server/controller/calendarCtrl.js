@@ -13,6 +13,13 @@ const readCalendar = async (req, res) => {
     res.send({"result" : result});
 }
 
+const readCalendarDetail = async (req, res) => {
+    const parameters = {
+        "baby_num" : req.query.baby_num
+    }
+    const result = await calendarDAO.read_calendar_detail(parameters);
+    res.send({"result" : result});
+}
 const createCalendar = async (req, res) => {
     let date = dayjs(req.body.calendar_date);
     let calendar_date = date.format('YYYY-MM-DD');
@@ -88,4 +95,5 @@ module.exports = {
     createCalendar,
     updateCalendar,
     deleteCalendar,
+    readCalendarDetail
 }

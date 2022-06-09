@@ -15,6 +15,19 @@ const read_calendar = (parameters) => {
     })
 }
 
+const read_calendar_detail = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT * FROM calendar WHERE baby_num = ?`;
+        db.query(queryData, [parameters.baby_num], (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 const create_calendar = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `INSERT INTO calendar SET ?`;
@@ -62,4 +75,5 @@ module.exports = {
     create_calendar,
     update_calendar,
     delete_calendar,
+    read_calendar_detail
 }
