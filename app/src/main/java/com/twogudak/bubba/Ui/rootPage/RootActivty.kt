@@ -58,7 +58,6 @@ class rootActivty : AppCompatActivity() {
         pagerAdapter.addFragment(homefragment)
         pagerAdapter.addFragment(Notice())
         pagerAdapter.addFragment(Calendar())
-        pagerAdapter.addFragment(Diary())
         pagerAdapter.addFragment(CCTV())
         pagerAdapter.addFragment(Setting())
         viewpager2.setUserInputEnabled(false)
@@ -86,15 +85,15 @@ class rootActivty : AppCompatActivity() {
                     return@setNavigationItemSelectedListener true }
                 R.id.menu_Calendar ->  {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(3,false)
+                    viewpager2.setCurrentItem(2,false)
                     return@setNavigationItemSelectedListener true }
                 R.id.menu_CCTV ->  {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(5,false)
+                    viewpager2.setCurrentItem(3,false)
                     return@setNavigationItemSelectedListener true }
                 R.id.menu_setting ->  {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(6,false)
+                    viewpager2.setCurrentItem(4,false)
                     return@setNavigationItemSelectedListener true }
                 else -> return@setNavigationItemSelectedListener false
             }
