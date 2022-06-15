@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { Container, Grid } from '@mui/material'
 import axios from 'axios'
 import CalendarWrite from './CalendarWrite';
+import CalendarDetail from './CalendarDetail'
 const Box = styled.div` 
   border: 1px solid green;
   margin-top: 15%;
@@ -19,19 +20,23 @@ function Calendar(props) {
     const moment = require('moment');
     const [data, setData] = useState("")
     const [open, setOpen] = useState(false);
-
+    const [detail, setDetail] = useState(false);
     const handleClickOpen = (e) => {
         setOpen(true);
     };
-
     const handleClose = () => {
         setOpen(false);
+    };
+    const detailOpen = () => {
+        setDetail(true);
+    };
+    const detailClose = () => {
+        setDetail(false)
     };
     useEffect(() => {
         async function check() {
             const params = { baby_num: props.baby_num }
             await axios.get('http://localhost:8000/calendar', { params }).then(async (res) => {
-                // console.log(res.data.result)
                 const _data = await res.data.result.map((rowData) => (
                     {
                         number: rowData.calendar_num,
@@ -75,18 +80,24 @@ function Calendar(props) {
                                 )
                             })
                             : <></>}
-                        eventClick={handleClickOpen}
+                        eventClick={detailOpen}
                         editable={true}
                         selectable={false}
                         selectMirror={true}
                         dayMaxEvents={true}
                         unselectAuto={true}
                     />
-                    <CalendarWrite {...props} 
+                    <CalendarWrite {...props}
                         data={data}
                         onClose={handleClose}
                         aria-labelledby="draggable-dialog-title"
                         openPopup={open} />
+
+                    {/* <CalendarDetail {...props}
+                        data={data}
+                        onClose={detailClose}
+                        aria-labelledby="draggable-dialog-title"
+                        openPopup={detail} /> */}
                 </Grid>
             </Grid>
         </Container>
