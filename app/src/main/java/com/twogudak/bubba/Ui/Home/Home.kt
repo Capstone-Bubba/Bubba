@@ -18,7 +18,6 @@ import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.MPAndroidGraph
 import com.twogudak.bubba.Ui.dialog.register_dialog
 import com.twogudak.bubba.Ui.rootPage.rootActivty
-import kotlinx.coroutines.awaitAll
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList

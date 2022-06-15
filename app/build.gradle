@@ -10,6 +10,7 @@ def kakao_manifest = properties.getProperty('kakao_manifest') //manifest에 넣�
 
 android {
     compileSdk 32
+    buildFeatures.viewBinding true
 
     defaultConfig {
         applicationId "com.twogudak.bubba"
