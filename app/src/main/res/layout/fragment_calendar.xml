@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/fragment_calendar_view"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,6 +17,7 @@
         android:layout_height="wrap_content"
         android:background="#2196F3"
         android:theme="@style/AppTheme.AppBarOverlay">
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -77,11 +79,32 @@
             app:cv_scrollMode="paged"
             app:cv_outDateStyle="endOfRow" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/calendar_recycler"
+        <ScrollView
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"/>
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1.3dp"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_item_linearLayout"
+                    android:background="@color/black"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/calendar_recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
     </LinearLayout>
 
 
