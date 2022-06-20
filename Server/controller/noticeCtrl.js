@@ -4,7 +4,6 @@ const readNoticeList = async (req, res) => {
     console.log(123123)
     const result = await noticeDAO.read_notice_list();
     res.send({"result" : result});
-    console.log(result);
 }
 
 const readNotice = async (req, res) => {
@@ -13,7 +12,6 @@ const readNotice = async (req, res) => {
     }
     const result = await noticeDAO.read_notice(parameters);
     res.send({"result" : result});
-    console.log(result);
 }
 
 const createNotice = async (req, res) => {

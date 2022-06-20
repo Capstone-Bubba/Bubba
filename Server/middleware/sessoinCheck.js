@@ -3,7 +3,6 @@ const authDAO = require('../model/authDAO');
 const sessionCheck = (req, res, next) => {
     if(req.isAuthenticated()) {
         console.log('Already Logged In');
-        // res.redirect('http://localhost:3000/home');
         res.send({"error" : 'Already Logged In'});
     } else {
         console.log('Not Logged In');
@@ -18,7 +17,6 @@ const userCheck = (req, res, next) => {
     } else {
         console.log('Not Logged In');
         res.redirect('/auth');
-        // res.send({"error" : 'Not Logged In'});
     }
 }
 

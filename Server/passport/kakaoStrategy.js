@@ -16,12 +16,12 @@ module.exports = () => {
             }
             
             const isUser = await authDAO.checkUserID(parameters);
-            const isUserNum = await authDAO.checkUserNum(parameters);
             
             if(isUser[0].exist == 0) {
                 await authDAO.insertUser(parameters);
             }
-
+            
+            const isUserNum = await authDAO.checkUserNum(parameters);
             return done(null, {"email": profile._json.kakao_account.email, "platform": profile.provider, "user_num" : isUserNum[0].user_num});
         } catch (err) {
             console.log(err);

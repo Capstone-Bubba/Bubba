@@ -5,10 +5,6 @@ const readCalendar = async (req, res) => {
     const parameters = {
         "baby_num" : req.query.baby_num
     };
-    // console.log()
-    console.log(req.body)
-    console.log(req.query.user_num)
-    console.log(req.query.baby_num)
     const result = await calendarDAO.read_calendar(parameters);
     res.send({"result" : result});
 }
@@ -27,7 +23,6 @@ const createCalendar = async (req, res) => {
     let str = "";
 
     for(let k in files){
-        console.log(k + " : " + files[k].filename);
         str += files[k].filename + ",";
     };
 
@@ -41,7 +36,6 @@ const createCalendar = async (req, res) => {
         "calendar_picture" : calendar_picture
     };
 
-    console.log(parameters);
     try{
         await calendarDAO.create_calendar(parameters);
         res.sendStatus(200);
@@ -57,7 +51,6 @@ const updateCalendar = async (req, res) => {
     let str = "";
     
     for(let k in files){
-        console.log(k + " : " + files[k].filename);
         str += files[k].filename + ",";
     };
 

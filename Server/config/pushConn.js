@@ -4,4 +4,3 @@ let androidServiceAccount = require('../private/bubba-345616-firebase-adminsdk-a
 adminAndroid.initializeApp({
     credential: admin.credential.cert(androidServiceAccount)
   });
-

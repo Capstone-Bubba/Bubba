@@ -6,7 +6,6 @@ const read_babyList = (parameters) => {
         let queryData = `SELECT baby_num, baby_name, gender, baby_picture, birth FROM baby WHERE user_num =? ORDER BY baby_num DESC LIMIT 1`
         db.query(queryData, [parameters.user_num], (err, db_data) => {
             if(err) {
-                console.log(err);
                 reject(err);
             } else {
                 resolve(db_data);
@@ -20,7 +19,6 @@ const read_baby = (parameters) => {
         let queryData = `SELECT * FROM baby WHERE user_num =?`;
         db.query(queryData, [parameters.user_num], (err, db_data) => {
             if(err){
-                console.log(err);
                 reject(err);
             } else {
                 resolve(db_data);
@@ -34,7 +32,6 @@ const create_baby = (parameters) => {
         let queryData = `INSERT INTO baby SET ?`;
         db.query(queryData, parameters, (err, db_data) => {
             if(err){
-                console.log(err);
                 reject(err);
             } else {
                 resolve(db_data);
@@ -49,7 +46,6 @@ const update_baby = (parameters) => {
         let queryData = `UPDATE baby SET baby_name =?, birth =?, gender=?, baby_picture=? WHERE baby_num =? && user_num=?`;
         db.query(queryData, [parameters.baby_name, parameters.birth, parameters.gender, parameters.baby_picture, parameters.baby_num, parameters.user_num], (err, db_data) => {
             if(err){
-                console.log(err);
                 reject(err);
             } else {
                 resolve(db_data);
@@ -63,7 +59,6 @@ const delete_baby = (parameters) => {
         let queryData = `DELETE from baby where baby_num =?`;
         db.query(queryData, parameters.baby_num, (err, db_data) => {
             if(err) {
-                console.log(err);
                 reject(err);
             } else {
                 resolve(db_data);

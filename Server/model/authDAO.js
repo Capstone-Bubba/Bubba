@@ -15,9 +15,7 @@ const checkUserID = (parameters) => {
 
 const UserState = (parameters) => {
     return new Promise((resolve, reject) => {
-        // let queryData = `SELECT * FROM user, baby WHERE user.user_num=? && baby.user_num = ?`;
         const queryData = `SELECT * FROM user WHERE user_num = ?`
-        // db.query(queryData, [parameters.user_num, parameters.user_num], (err, db_data) => {
         db.query(queryData, [parameters.user_num], (err, db_data) => {
             if (err) {
                 reject(err);
