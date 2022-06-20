@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import Photo from '../Photo/Photo'
 import styled from 'styled-components';
 import ProfileImg from '../../images/defaultImg.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 const Layout = styled.div`
@@ -28,18 +28,27 @@ const Button = styled.button`
 `
 function Profile({  }) {
     const [data, setData] = useState("")
-    useEffect(() => {
-        async function check() {
-            await axios.get('http://localhost:8000/baby').then((res) => {
-                // console.log(res.data.result)
-                setData(res.data.result[0])
-            })
-        }
-        // console.log(data)
-        check()
-    }, []);
+    let photos = ""
+    const navigate = useNavigate()
+    try {
+        useEffect(() => {
+            async function check() {
+                await axios.get('http://localhost:8000/baby').then((res) => {
+                    // console.log(res.data.result)
+                    setData(res.data.result[0])
+                })
+            }
+            // console.log(data)
+            check()
+        }, []);
+        photos = data.baby_picture
+    } catch(err) {
+        console.log(err)
+        navigate('/baby')
+    }
+   
     // console.log(data)
-    const photos = data.baby_picture
+    
 
     console.log(photos);
     return (

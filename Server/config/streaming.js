@@ -48,16 +48,17 @@ for (let i = 0; i < rtspListLength; i++) {
 // }
 
 function openStream(obj) {
-        let stream = new Stream({
-                name: 'name',
-                streamUrl: obj.url,
-                wsPort: obj.port || 9999,
-                ffmpegOptions: { // options ffmpeg flags
-                        '-stats': '', // an option with no neccessary value uses a blank string
-                        '-r': 30, // options with required values specify the value after the key
-                }
-        });
+                let stream = new Stream({
+                        name: 'name',
+                        streamUrl: obj.url,
+                        wsPort: obj.port || 9999,
+                        ffmpegOptions: { // options ffmpeg flags
+                                '-stats': '', // an option with no neccessary value uses a blank string
+                                '-r': 30, // options with required values specify the value after the key
+                        }
+                });
 
+        
         obj.stream = stream;
 
         stream.mpeg1Muxer.on('ffmpegStderr', (data) => {
@@ -92,6 +93,3 @@ function openStream(obj) {
 //   }
 
 module.exports = Stream;
-// module.exports = {
-//         Streaming
-// }
