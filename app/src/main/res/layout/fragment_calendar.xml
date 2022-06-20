@@ -76,6 +76,7 @@
             app:cv_dayViewResource="@layout/calendar_day_layout"
             app:cv_monthHeaderResource="@layout/calendar_day_legend"
             android:orientation="horizontal"
+            app:cv_orientation="horizontal"
             app:cv_scrollMode="paged"
             app:cv_outDateStyle="endOfGrid" />
 

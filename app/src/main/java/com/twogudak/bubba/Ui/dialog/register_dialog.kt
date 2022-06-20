@@ -1,17 +1,26 @@
 package com.twogudak.bubba.Ui.dialog
 
+import android.Manifest.permission.CAMERA
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.content.DialogInterface
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.ImageDecoder
+import android.net.Uri
+import android.nfc.Tag
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.textfield.TextInputEditText
 import com.twogudak.bubba.R
@@ -19,6 +28,7 @@ import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.Home.Home
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 import java.util.*
+import java.util.jar.Manifest
 
 class register_dialog: DialogFragment() {
     lateinit var cancelbt: Button
@@ -28,9 +38,17 @@ class register_dialog: DialogFragment() {
     lateinit var dateString: String
     lateinit var calendarbt: Button
     lateinit var rootActivty: rootActivty
+    lateinit var babyImageView: ImageView
+    lateinit var cameraBt : Button
+    lateinit var galleryButton : Button
+    private val REQUEST_IMAGE_CAPTURE = 2
+    private val PICK_IMAGE = 111
+
+
     val TAG = "register_dialog"
     var birth = ""
     var name: String?  = ""
+    private val Gallery = 3333
 
 
 
@@ -53,6 +71,10 @@ class register_dialog: DialogFragment() {
         babyname = v.findViewById(R.id.register_dialog_babyname_textfield)
         babybirth = v.findViewById(R.id.register_dialog_date)
         calendarbt = v.findViewById(R.id.register_dialog_popcalendar)
+        babyImageView = v.findViewById(R.id.register_dialog_babyImageView)
+        cameraBt = v.findViewById(R.id.register_dialog_camera)
+        galleryButton = v.findViewById(R.id.register_dialog_gallery)
+
 
         return v
     }
@@ -90,6 +112,29 @@ class register_dialog: DialogFragment() {
             }
             DatePickerDialog(rootActivty,dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH)).show()
         }
+
+        cameraBt.setOnClickListener {
+            if (checkPermission()) {
+                Log.d(TAG,"카메라를 실행합니다.")
+                dispatchTakePictureIntent()
+            } else {
+                Log.d(TAG,"권한이 등록되어 있지 않음")
+                requestPermission()
+            }
+        }
+
+        galleryButton.setOnClickListener {
+            if (checkPermission()) {
+                Log.d(TAG,"갤러리를 실행합니다.")
+                openGalerryForImage()
+            } else {
+                Log.d(TAG,"권한이 등록되어 있지 않음")
+                requestPermission()
+            }
+        }
+
+
+
         registerbt.setOnClickListener {
             name = babyname.text?.toString()
             if (name.isNullOrEmpty()){
@@ -99,8 +144,10 @@ class register_dialog: DialogFragment() {
                 Log.e(TAG,"날짜 선택안함")
                 Toast.makeText(requireContext(),"날짜를 선택해주세요.",Toast.LENGTH_SHORT).show()
             } else {
-
                 appSetting.setBabyInfo(name.toString(),birth)
+                if (babyImageView.getDrawable() != null){
+
+                }
                 Log.d(TAG,"아기이름, 아기 생일 셋팅완료 아기이름 : ${name}, 생일: ${birth}")
             }
             dismiss()
@@ -114,5 +161,66 @@ class register_dialog: DialogFragment() {
             (fragment as DialogInterface.OnDismissListener).onDismiss(dialog)
         }
     }
+
+    private fun requestPermission(){
+        ActivityCompat.requestPermissions(rootActivty, arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,CAMERA),1)
+    }
+
+    private fun checkPermission():Boolean{
+        return (ContextCompat.checkSelfPermission(rootActivty,android.Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(rootActivty,
+            android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+    }
+
+    @Override
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+
+        if( requestCode == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+            Toast.makeText(rootActivty, "권한 설정 OK", Toast.LENGTH_SHORT).show()
+        }
+        else
+        {
+            Toast.makeText(rootActivty, "권한 허용 안됨", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun dispatchTakePictureIntent() {
+        Log.d(TAG,"이미지 캡쳐 실행")
+        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
+            takePictureIntent.resolveActivity(rootActivty.packageManager).also {
+                startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+            }
+        }
+    }
+
+    private fun openGalerryForImage() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, Gallery)
+    }
+
+    @Override
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if( resultCode == Activity.RESULT_OK) {
+            if (requestCode == Gallery) {
+                var ImageData: Uri? = data?.data
+                val decode = MediaStore.Images.Media.getBitmap(rootActivty.contentResolver, ImageData)
+                babyImageView.setImageBitmap(decode)
+            }
+            else if( requestCode == REQUEST_IMAGE_CAPTURE)
+            {
+                val imageBitmap : Bitmap? = data?.extras?.get("data") as Bitmap
+                babyImageView.setImageBitmap(imageBitmap)
+            }
+        }
+    }
+
 
 }
