@@ -48,8 +48,6 @@ function Profile({  }) {
     }
    
     // console.log(data)
-    
-
     console.log(photos);
     return (
         <Layout>

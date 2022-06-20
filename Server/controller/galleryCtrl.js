@@ -8,7 +8,6 @@ const readGalleryList = async (req, res) => {
 
     const result = await galleryDAO.read_gallery(parameters);
     res.send({"result" : result});
-    console.log(result);
 }
 
 const readGallery = async (req, res) => {
@@ -18,7 +17,6 @@ const readGallery = async (req, res) => {
     
     const result = await galleryDAO.read_gallery(parameters);
     res.send({"result" : result});
-    console.log(result);
 }
 
 const createGallery = async (req, res) => {
@@ -33,8 +31,6 @@ const createGallery = async (req, res) => {
         "gal_title" : req.body.gal_title,
         "gal_content" : req.body.gal_content
     };
-
-    console.log(parameters);
 
     try {
         await galleryDAO.create_gallery(parameters);
@@ -56,8 +52,6 @@ const updateGallery = async (req, res) => {
         "gal_title" : req.body.gal_title,
         "gal_content" : req.body.gal_content
     };
-
-    console.log(parameters);
 
     try{
         await galleryDAO.update_gallery(parameters);

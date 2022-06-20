@@ -2,7 +2,6 @@ const passport = require('passport');
 const NaverLogin = require('./naverStrategy');
 const GoogleLogin = require('./googleStrategy');
 const KakaoLogin = require('./kakaoStrategy');
-// const FacebookLogin = require('./facebook-login');
 
 module.exports = () => {
     //serialization : 객체를 직렬화 하여 전송가능한 형태로 변형
@@ -23,5 +22,4 @@ module.exports = () => {
     NaverLogin();
     GoogleLogin();
     KakaoLogin();
-    // FacebookLogin();
 }

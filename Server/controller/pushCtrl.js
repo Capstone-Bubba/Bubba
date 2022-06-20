@@ -3,7 +3,6 @@ const pushDAO = require('../model/pushDAO');
 const readPush = async (req, res) => {
     const result = await pushDAO.read_push();
     res.send({"result" : result});
-    console.log(result);
 };
 
 const createPush = async (req, res) => {
@@ -26,7 +25,6 @@ const androidPush = async (req, res) => {
         "push_num" : req.query.push_num
     };
 
-    console.log(parameters);
     try{
         const result = await pushDAO.read_push_num(parameters);
         console.log(result[0].push_title);

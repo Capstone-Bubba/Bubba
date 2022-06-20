@@ -11,14 +11,12 @@ const readBabyList = async (req, res) => {
 }
 
 const readBaby = async (req, res) => {
-    console.log(req);
     const parameters = {
         "user_num" : req.session.passport.user.user_num
     };
     
     const result = await babyDAO.read_baby(parameters);
     res.send({"result" : result});
-    console.log(result);
 }
 
 const createBaby = async (req, res) => {
@@ -33,8 +31,6 @@ const createBaby = async (req, res) => {
         "baby_picture" : baby_picture, //아기 사진
         "user_num" : req.session.passport.user.user_num
     };
-
-    console.log(parameters);
 
     try {
         await babyDAO.create_baby(parameters);
