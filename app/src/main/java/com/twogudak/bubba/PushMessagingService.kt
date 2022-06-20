@@ -19,11 +19,11 @@ class PushMessagingService : FirebaseMessagingService() {
         super.onMessageReceived(message)
         Log.d("FCM","From:${message.from}")
         if(message.data.isNotEmpty()){
-            Log.d("FMC","data: ${message.data}")
+            Log.d("FCM","data: ${message.data}")
         }
 
         message.notification?.let {
-            Log.d("FMC", "Message Notification Body: ${it.body}")
+            Log.d("FCM", "Message Notification Body: ${it.body}")
         }
     }
 
