@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import com.google.android.gms.common.util.Base64Utils
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
@@ -47,12 +48,19 @@ class ApplicationSetting(context: Context) {
         return editor.commit()
     }
 
-    fun getBabyImg():Bitmap{
-        val bitmapImage = appSetting.getString("babyImage","").toString()
-        val b = Base64.decode(bitmapImage, Base64.DEFAULT)
-        val c = ByteArrayInputStream(b)
-        val bitmap = BitmapFactory.decodeStream(c)
-        return bitmap
+    fun getBabyImg(): Bitmap?{
+        val bitmapImage = appSetting.getString("babyImage","non").toString()
+        if (bitmapImage != "non"){
+            val b = Base64.decode(bitmapImage, Base64.DEFAULT)
+            val c = ByteArrayInputStream(b)
+            val bitmap = BitmapFactory.decodeStream(c)
+            Log.d("appsetting","return bitmap")
+
+            return bitmap
+        } else {
+            Log.d("appsetting","return null")
+            return null
+        }
     }
 
     fun endcodeTobase64(image: Bitmap): String {

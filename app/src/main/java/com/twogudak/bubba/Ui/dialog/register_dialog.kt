@@ -43,6 +43,7 @@ class register_dialog: DialogFragment() {
     lateinit var galleryButton : Button
     private val REQUEST_IMAGE_CAPTURE = 2
     private val PICK_IMAGE = 111
+    lateinit var babayimage : Bitmap
 
 
     val TAG = "register_dialog"
@@ -146,7 +147,7 @@ class register_dialog: DialogFragment() {
             } else {
                 appSetting.setBabyInfo(name.toString(),birth)
                 if (babyImageView.getDrawable() != null){
-
+                    appSetting.setBabyImg(babyImage = babayimage)
                 }
                 Log.d(TAG,"아기이름, 아기 생일 셋팅완료 아기이름 : ${name}, 생일: ${birth}")
             }
@@ -212,11 +213,13 @@ class register_dialog: DialogFragment() {
             if (requestCode == Gallery) {
                 var ImageData: Uri? = data?.data
                 val decode = MediaStore.Images.Media.getBitmap(rootActivty.contentResolver, ImageData)
+                babayimage = decode
                 babyImageView.setImageBitmap(decode)
             }
             else if( requestCode == REQUEST_IMAGE_CAPTURE)
             {
                 val imageBitmap : Bitmap? = data?.extras?.get("data") as Bitmap
+                babayimage = imageBitmap!!
                 babyImageView.setImageBitmap(imageBitmap)
             }
         }

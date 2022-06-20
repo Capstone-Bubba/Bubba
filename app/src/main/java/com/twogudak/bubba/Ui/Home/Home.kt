@@ -1,6 +1,7 @@
 package com.twogudak.bubba.Ui.Home
 
 import android.content.DialogInterface
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,6 +34,8 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
     lateinit var babyName: TextView
     lateinit var babybirth: TextView
     lateinit var babyRegistBt: Button
+    var babyimage : Bitmap? = null
+    lateinit var babyThum : ImageButton
 
     var babyinfo = false
     val TAG = "home_fragment"
@@ -49,6 +54,7 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         babyName = v.findViewById(R.id.home_baby_name)
         babybirth = v.findViewById(R.id.home_baby_bith)
         babyRegistBt = v.findViewById(R.id.home_baby_infobt)
+        babyThum = v.findViewById(R.id.home_baby_image)
 
 
         return v
@@ -79,6 +85,8 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         val setting = appSetting.getSetting()
         name = setting["babyname"]
         birthday = setting["babybirth"]
+        babyimage = appSetting.getBabyImg()
+        Log.d(TAG,"return babyimage : ${babyimage}")
 
 
 
@@ -97,6 +105,17 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
             val start = dataformat.parse(birthday).time
             livemounth = (((today - start) / (24 * 60 * 60 * 1000))/30).toInt()
 
+            if (babyimage != null ){
+                babyThum.setImageBitmap(babyimage)
+            } else {
+                babyThum.setOnClickListener {
+                    val manager = childFragmentManager
+                    Log.d(TAG,"아기 정보 등록 dialog Show")
+                    val dialog = register_dialog()
+                    dialog.show(manager, "register_dialog")
+                    manager.executePendingTransactions()
+                }
+            }
         }
 
 
