@@ -28,25 +28,26 @@ const Button = styled.button`
 `
 function Profile({  }) {
     const [data, setData] = useState("")
-    const navigate = useNavigate();
-    let photos = "";
-    try{
-    useEffect(() => {
-        async function check() {
-            await axios.get('http://localhost:8000/baby').then((res) => {
-                // console.log(res.data.result)
-                setData(res.data.result[0])
-            })
-        }
-        // console.log(data)
-        check()
-    }, []);
-    // console.log(data)
-    photos = data.baby_picture
+    let photos = ""
+    const navigate = useNavigate()
+    try {
+        useEffect(() => {
+            async function check() {
+                await axios.get('http://localhost:8000/baby').then((res) => {
+                    // console.log(res.data.result)
+                    setData(res.data.result[0])
+                })
+            }
+            // console.log(data)
+            check()
+        }, []);
+        photos = data.baby_picture
     } catch(err) {
-        console.log(err);
-        navigate('/baby');
+        console.log(err)
+        navigate('/baby')
     }
+   
+    // console.log(data)
     console.log(photos);
     return (
         <Layout>

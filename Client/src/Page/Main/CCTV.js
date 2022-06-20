@@ -36,7 +36,7 @@ const CCTV = () => {
       </div>
       <div id="video-canvas"
         style={{
-          height: "700px",
+          height: "550px",
           width: "100%",
           marginTop:'3%',
 
