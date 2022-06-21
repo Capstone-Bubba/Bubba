@@ -32,9 +32,6 @@ class MainActivity : AppCompatActivity() {
     val kakao_login = Kakao_Login_class(this)
     val naver_login = Naver_login(this)
 
-
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -106,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             }.await()
 
             CheckLogin(this@MainActivity).TotalLoginCheck(refreshToken)
+
         }
     }
 

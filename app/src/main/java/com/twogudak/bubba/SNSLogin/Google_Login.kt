@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.twogudak.bubba.BuildConfig
+import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class Google_Login(context: Context) {
@@ -16,6 +17,10 @@ class Google_Login(context: Context) {
     val context = context
     val tag = "Google Account"
 
+
+    private val setting by lazy {
+        ApplicationSetting(context)
+    }
 
 
     //Google 로그인이 되어 있는지 확인한다.
@@ -54,6 +59,9 @@ class Google_Login(context: Context) {
             Log.e(tag,email)
             Log.e(tag,googletoken)
             Log.e(tag, googletokenAuth)
+
+            setting.setEmail(email)
+
             var rootintent = Intent(context, rootActivty::class.java)
             context.startActivity(rootintent)
         } catch (e: ApiException){

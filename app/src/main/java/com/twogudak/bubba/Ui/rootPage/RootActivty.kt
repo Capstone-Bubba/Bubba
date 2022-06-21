@@ -9,12 +9,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar
+import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.twogudak.bubba.R
+import com.twogudak.bubba.SNSLogin.CheckLogin
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.Alarm.AlarmActivity
 import com.twogudak.bubba.Ui.CCTV.CCTV
@@ -37,15 +39,21 @@ class rootActivty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root_activty)
 
-        val setting = appSetting.getSetting()
-        Log.d("AppSetting",setting.toString())
+        var setting = appSetting.getSetting()
+        Log.d("RootActivty_ Appsetting",setting.toString())
+
 
         val homefragment = Home()
         val babyname = setting["babyname"]
         val babybirth = setting["babybirth"]
+
         val babyInfoBundle = Bundle()
         babyInfoBundle.putString("babyname",babyname)
         babyInfoBundle.putString("babybirth",babybirth)
+
+
+
+
         homefragment.arguments = babyInfoBundle
 
 
@@ -114,6 +122,8 @@ class rootActivty : AppCompatActivity() {
 
         initFirebase()
         setNotificationChannel()
+        setting = appSetting.getSetting()
+        Log.d("RootActivty_ Appsetting",setting.toString())
 
 
     }
@@ -136,6 +146,7 @@ class rootActivty : AppCompatActivity() {
                     .subscribeToTopic("test")
                 Log.d("Firebase", token)
                 appSetting.setFCMToken(token)
+
             }
     }
 

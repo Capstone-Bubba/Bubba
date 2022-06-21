@@ -27,6 +27,12 @@ class ApplicationSetting(context: Context) {
         return editor.commit()
     }
 
+    fun setEmail(email: String):Boolean {
+        Log.d("Email AppSetting",email)
+        editor.putString("email",email)
+        return editor.commit()
+    }
+
     fun getSetting():HashMap<String, String>{
         var setting = HashMap<String, String>()
         setting["first"] = appSetting.getString("first", "true").toString()
@@ -34,6 +40,7 @@ class ApplicationSetting(context: Context) {
         setting["uuid"] = appSetting.getString("uuid", "").toString()
         setting["babyname"] = appSetting.getString("babyname","").toString()
         setting["babybirth"] = appSetting.getString("babybirth","").toString()
+        setting["email"] = appSetting.getString("email","Non").toString()
         return setting
     }
 

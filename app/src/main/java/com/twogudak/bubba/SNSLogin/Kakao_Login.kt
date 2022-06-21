@@ -9,12 +9,16 @@ import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
+import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class Kakao_Login_class(context: Context) {
 
     val context = context //mainactivty context
     val tag = "Kakao Account"
+    private val setting by lazy {
+        ApplicationSetting(context)
+    }
 
 
     //카카오톡 앱이 안깔려있을때 사용되는 callback 함수
@@ -24,6 +28,7 @@ class Kakao_Login_class(context: Context) {
 
         } else if (token != null) {
             Log.i(tag, "카카오계정으로 로그인 성공 ${token.accessToken}")
+            kakaoloaduser()
             var rootintent = Intent(context, rootActivty::class.java)
             context.startActivity(rootintent)
         }
@@ -46,11 +51,12 @@ class Kakao_Login_class(context: Context) {
                     // 카카오톡에 연결된 카카오계정이 없는 경우, 카카오계정으로 로그인 시도
                     UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
                 } else if (token != null) {
+                    kakaoloaduser()
                     Log.i(tag, "카카오톡으로 로그인 성공 ${token.accessToken}")
                 }
             }
         } else {
-            Log.e("test","test")
+            Log.e(tag,"kakaoLogin")
             UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
         }
     }
@@ -157,7 +163,10 @@ class Kakao_Login_class(context: Context) {
             if(error != null){
                 Log.e("Kakao Account", "사용자 정보 요청 실패", error)
             } else if (user != null) {
-                Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.id}")
+                Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
+                if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
+                    setting.setEmail(user.kakaoAccount?.email!!)
+                }
             } else {
                 Log.i("Kakao Account","?")
             }

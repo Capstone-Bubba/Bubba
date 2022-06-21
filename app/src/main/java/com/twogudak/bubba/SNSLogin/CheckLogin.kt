@@ -11,6 +11,7 @@ import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class CheckLogin(context: Context) {
     val context = context
+    var plateform = ""
 
     fun kakaologinCheck() {
         if (AuthApiClient.instance.hasToken()) {
@@ -19,6 +20,7 @@ class CheckLogin(context: Context) {
                     //카카오 통신 갱신, 토큰이 있는것이 확인됨 토큰 정보를 출력함
                     var rootintent = Intent(context, rootActivty::class.java)
                     rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                    plateform = "Kakao"
                     context.startActivity(rootintent)
                     Log.e("LoginAccount","카카오톡 로그인 완료")
                     Log.e("LoginAccount","로그인체크 완료")
@@ -39,6 +41,7 @@ class CheckLogin(context: Context) {
             //구글 로그인 완료된 상태
             var rootintent = Intent(context, rootActivty::class.java)
             rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            plateform = "Google"
             context.startActivity(rootintent)
 
         } else{
@@ -56,6 +59,7 @@ class CheckLogin(context: Context) {
 
         }else if (token != null){
             Log.e("Login Check","Naver Login 되어있음 ${token}")
+            plateform = "Naver"
             var rootintent = Intent(context, rootActivty::class.java)
             rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             context.startActivity(rootintent)
