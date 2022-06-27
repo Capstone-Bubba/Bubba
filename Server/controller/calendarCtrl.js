@@ -11,7 +11,7 @@ const readCalendar = async (req, res) => {
 
 const readCalendarDetail = async (req, res) => {
     const parameters = {
-        "baby_num" : req.query.baby_num
+        "calendar_num" : req.query.num
     }
     const result = await calendarDAO.read_calendar_detail(parameters);
     res.send({"result" : result});

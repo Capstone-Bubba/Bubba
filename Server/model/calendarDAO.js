@@ -15,8 +15,8 @@ const read_calendar = (parameters) => {
 
 const read_calendar_detail = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT * FROM calendar WHERE baby_num = ?`;
-        db.query(queryData, [parameters.baby_num], (err, db_data) => {
+        let queryData = `SELECT * FROM calendar WHERE calendar_num = ?`;
+        db.query(queryData, [parameters.calendar_num], (err, db_data) => {
             if(err) {
                 reject(err);
             } else {

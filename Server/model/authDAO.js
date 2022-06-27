@@ -54,8 +54,8 @@ const checkUserNum = (parameters) => {
 
 const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO User (platform, email) VALUES (?, ?)`;
-        db.query(queryData, [parameters.platform, parameters.email], (err, db_data) => {
+        let queryData = `INSERT INTO User (platform, email, deviceToken, rtsp) VALUES (?, ?, ?, ?)`;
+        db.query(queryData, [parameters.platform, parameters.email, parameters.deviceToken, rtsp], (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -67,7 +67,7 @@ const insertUser = (parameters) => {
 
 const checkAuthority = (parameters) => {
     return new Promise((resolve, reject) => {
-        // let queryData = `SELECT authority FROM user WHERE user_num =?`;
+        let queryData = `SELECT authority FROM user WHERE user_num =?`;
         db.query(queryData, parameters.user_num, (err, db_data) => {
             if (err) {
                 reject(err);
