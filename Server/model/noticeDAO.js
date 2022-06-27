@@ -14,7 +14,7 @@ const read_notice_list = () => {
 
 const read_notice = (parameters) => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT * FROM notice WHERE notice_num = ?`, parameters, (err, db_data) => {
+        db.query(`SELECT * FROM notice WHERE notice_num = ?`, parameters.notice_num, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
@@ -60,17 +60,17 @@ const delete_notice = (parameters) => {
     })
 }
 
-const reset_noticeNum = () => {
-    return new Promise((resolve ,reject) => {
-        db.query(`SET @autoid :=0; UPDATE table_name SET id = @autoid:=(@autoid+1);ALTER TABLE table_name AUTO_INCREMENT=1;`, (err, db_data) => {
-            if(err) {
-                reject(err);
-            } else {
-                resolve(db_data);
-            }
-        })
-    })
-}
+// const reset_noticeNum = () => {
+//     return new Promise((resolve ,reject) => {
+//         db.query(`SET @autoid :=0; UPDATE table_name SET id = @autoid:=(@autoid+1);ALTER TABLE table_name AUTO_INCREMENT=1;`, (err, db_data) => {
+//             if(err) {
+//                 reject(err);
+//             } else {
+//                 resolve(db_data);
+//             }
+//         })
+//     })
+// }
 
 module.exports = {
     read_notice_list,
@@ -78,5 +78,5 @@ module.exports = {
     create_notice,
     update_notice,
     delete_notice,
-    reset_noticeNum,
+    // reset_noticeNum,
 }

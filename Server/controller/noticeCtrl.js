@@ -1,7 +1,7 @@
 const noticeDAO = require('../model/noticeDAO');
+const admin = require('../config/pushConn');
 
 const readNoticeList = async (req, res) => {
-    console.log(123123)
     const result = await noticeDAO.read_notice_list();
     res.send({"result" : result});
 }
@@ -49,7 +49,7 @@ const deleteNotice = async (req, res) => {
 
     try {
         await noticeDAO.delete_notice(parameters);
-        await noticeDAO.reset_noticeNum(parameters);
+        // await noticeDAO.reset_noticeNum(parameters);
         res.send('OK');
     } catch(err) {
         console.log(err);
@@ -57,10 +57,42 @@ const deleteNotice = async (req, res) => {
     }
 }
 
+const pushNotice = async (req, res) => {
+    const parameters = {
+        "notice_num" : req.query.num
+    }
+    const result = await noticeDAO.read_notice(parameters);
+    let message = {
+        token : 'c6Ean20xTLiVbr2WakyLtP:APA91bFkBb_7BTu63V3Zc4sMAu1oDiu-GvyvkoBpv3XZqhn85WpOKVJxliqq03d8n9Wxo3BgkL4lS8xordF0brHr6zp-G0W4sIoMtYJ4Azmpew9Bjz05F8HGm3W2PzD1neVvIUAsh6Xc',
+        notification :{
+            body : "Notice"
+        },
+        data : {
+            title : result[0].notice_title,
+            body : result[0].notice_content
+        },
+        android : {
+            priority : "high",
+        },
+    }
+
+    admin.messaging()
+        .send(message)
+        .then((response) => {
+            console.log('Successfully sent message : ', response);
+            res.send(response);
+        })
+        .catch((err) => {
+            console.log('Error Sending message !! : ', err);
+            res.send(err);
+        })
+}
+
 module.exports = {
     readNoticeList,
     readNotice,
     createNotice,
     updateNotice,
-    deleteNotice
+    deleteNotice,
+    pushNotice,
 }
