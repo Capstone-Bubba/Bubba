@@ -31,12 +31,10 @@ const goHome = async (req, res,next) => {
         if(babyInfo.length != 0 && babyInfo.length != 0) {
             console.log('success');
             final = Object.assign(user[0], babyInfo[0]);
-            // console.log(final);
         } else {
             console.log('no data');
             final = Object.assign(user[0]);
         }
-
         console.log(final);
         const finalArr = [];
         finalArr.push(final);

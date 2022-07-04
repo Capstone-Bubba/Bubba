@@ -9,6 +9,7 @@ function App() {
   useEffect(() => {
     async function check(){
       await axios.get('http://localhost:8000/auth/home').then((res) => {
+        console.log('asd')
         setData(res.data.result)
       })
     }
