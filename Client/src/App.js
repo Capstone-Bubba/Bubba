@@ -13,8 +13,6 @@ function App() {
         setData(res.data.result)
       })
     }
-    console.log(data);
-
     check()
   },[])
   return (

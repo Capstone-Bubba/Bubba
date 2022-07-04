@@ -8,17 +8,16 @@ const morgan = require('morgan');           // 통신 log
 
 const app = express();
 
-
 const Session = require('./config/sessionConn');
-const indexRouter = require('./routes/index');
 const noticeRouter = require('./routes/notice');
 const authRouter = require('./routes/auth');
 const babyRouter = require('./routes/baby');
 const galleryRouter = require('./routes/gallery');
 const CalendarRouter = require('./routes/calendar');
-const pushRouter = require('./routes/push');
-const cctvRouter = require('./routes/cctv');
+// const pushRouter = require('./routes/push');
+// const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
+const cctvRouter = require('./routes/cctv');
 const logger = require('./config/winston');
 
 app.use(cors({ origin: 'http://localhost:3000', credentials : true}));
@@ -39,9 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
 // app.use(morgan('combined', {stream: logger.stream}));
-app.use('/', indexRouter);
-// app.use('/notice', auth.userCheck, noticeRouter);
-app.use('/notice', auth.userCheck, noticeRouter);
 app.use('/notice', noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
@@ -49,7 +45,7 @@ app.use('/baby', auth.userCheck, babyRouter);
 app.use('/gallery', galleryRouter);
 // app.use('/calendar', auth.userCheck, CalendarRouter);
 app.use('/calendar', CalendarRouter);
-app.use('/push', auth.authorityCheck, pushRouter);
+// app.use('/push', auth.authorityCheck, pushRouter);
 app.use('/cctv', cctvRouter);
 
 module.exports = app;

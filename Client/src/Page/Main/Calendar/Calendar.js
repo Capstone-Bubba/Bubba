@@ -21,9 +21,21 @@ function Calendar(props) {
     const [data, setData] = useState("")
     const [open, setOpen] = useState(false);
     const [detail, setDetail] = useState(false);
+    const [read, setRead] = useState(false);
+
+    const [value,setValue] = useState(0)
+
+
     const handleClickOpen = (e) => {
         setOpen(true);
     };
+
+    const onRowClick = (id) => {
+        setValue(id)
+        console.log(value.event.id)
+        setDetail(true);
+    };
+   
     const handleClose = () => {
         setOpen(false);
     };
@@ -36,7 +48,8 @@ function Calendar(props) {
     useEffect(() => {
         async function check() {
             const params = { baby_num: props.baby_num }
-            await axios.get('http://localhost:8000/calendar', { params }).then(async (res) => {
+            await axios.get('http://localhost:8000/calendar', { params }
+            ).then(async (res) => {
                 const _data = await res.data.result.map((rowData) => (
                     {
                         number: rowData.calendar_num,
@@ -76,11 +89,13 @@ function Calendar(props) {
                         events={data ?
                             data.map(element => {
                                 return (
-                                    { title: element.title, date: element.day }
+                                { id:element.number,title: element.title, date: element.day }
+                                    
                                 )
                             })
                             : <></>}
-                        eventClick={detailOpen}
+                        id={data.number}
+                        eventClick={onRowClick}
                         editable={true}
                         selectable={false}
                         selectMirror={true}
@@ -92,12 +107,14 @@ function Calendar(props) {
                         onClose={handleClose}
                         aria-labelledby="draggable-dialog-title"
                         openPopup={open} />
-
-                    {/* <CalendarDetail {...props}
+                {value?
+                  <CalendarDetail
                         data={data}
                         onClose={detailClose}
                         aria-labelledby="draggable-dialog-title"
-                        openPopup={detail} /> */}
+                        openPopup={detail}
+                        value = {value.event.id} />
+                        :<></>}
                 </Grid>
             </Grid>
         </Container>

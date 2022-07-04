@@ -1,9 +1,17 @@
 const pushDAO = require('../model/pushDAO');
+const adminAndroid = require('firebase-admin');
+let androidServiceAccount = require('../private/bubba-345616-firebase-adminsdk-araq3-1e943a59b1.json');
+
+adminAndroid.initializeApp({
+    credential: admin.credential.cert(androidServiceAccount)
+  });
+
+  let target_token = req.body.token;
+  
 
 const readPush = async (req, res) => {
     const result = await pushDAO.read_push();
     res.send({"result" : result});
-    console.log(result);
 };
 
 const createPush = async (req, res) => {
@@ -26,7 +34,6 @@ const androidPush = async (req, res) => {
         "push_num" : req.query.push_num
     };
 
-    console.log(parameters);
     try{
         const result = await pushDAO.read_push_num(parameters);
         console.log(result[0].push_title);

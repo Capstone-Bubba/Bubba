@@ -46,6 +46,8 @@ function Profile({}) {
         navigate('/baby')
     }
 
+   
+    // console.log(data)
     console.log(photos);
     return (
         <Layout>

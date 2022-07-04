@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pushCtrl = require('../controller/pushCtrl');
 const auth = require('../middleware/sessoinCheck');
+const adminAndroid = require('firebase-admin');
 
 router.get('/', pushCtrl.readPush);
 

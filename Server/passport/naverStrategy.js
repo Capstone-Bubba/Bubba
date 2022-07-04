@@ -17,13 +17,12 @@ module.exports = () => {
             }
             
             const isUser = await authDAO.checkUserID(parameters);
-            const isUserNum = await authDAO.checkUserNum(parameters);
             
             
             if(isUser[0].exist == 0) {
                 await authDAO.insertUser(parameters);
             }
-            console.log(isUserNum[0]);
+            const isUserNum = await authDAO.checkUserNum(parameters);
             return done(null, {"email": profile.emails[0].value, "platform": profile.provider, "user_num" : await isUserNum[0].user_num});
         } catch (err) {
             console.log(err);
