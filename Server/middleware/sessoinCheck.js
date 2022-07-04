@@ -11,7 +11,6 @@ const sessionCheck = (req, res, next) => {
 }
 
 const userCheck = (req, res, next) => {
-    console.log('userCheck');
     if(req.isAuthenticated()) {
         next();
     } else {

@@ -26,7 +26,7 @@ const Button = styled.button`
     font-size : 15px;
     background: skyblue;
 `
-function Profile({  }) {
+function Profile({}) {
     const [data, setData] = useState("")
     let photos = ""
     const navigate = useNavigate()
@@ -34,11 +34,10 @@ function Profile({  }) {
         useEffect(() => {
             async function check() {
                 await axios.get('http://localhost:8000/baby').then((res) => {
-                    // console.log(res.data.result)
+                    console.log('Profile')
                     setData(res.data.result[0])
                 })
             }
-            // console.log(data)
             check()
         }, []);
         photos = data.baby_picture
@@ -46,6 +45,7 @@ function Profile({  }) {
         console.log(err)
         navigate('/baby')
     }
+
    
     // console.log(data)
     console.log(photos);

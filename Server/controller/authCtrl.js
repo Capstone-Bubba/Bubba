@@ -30,7 +30,6 @@ const goHome = async (req, res,next) => {
             console.log('no data');
             final = Object.assign(user[0]);
         }
-
         const finalArr = [];
         finalArr.push(final);
         res.send({ "result": finalArr });

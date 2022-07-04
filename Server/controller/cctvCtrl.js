@@ -1,7 +1,8 @@
 const streaming = require('../config/streaming');
 
 const cctvStreaming = (req, res) => {
-    streaming;
+    streaming.start()
+
     res.sendStatus(200);
 }
 

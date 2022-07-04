@@ -17,6 +17,7 @@ const CalendarRouter = require('./routes/calendar');
 // const pushRouter = require('./routes/push');
 // const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
+const cctvRouter = require('./routes/cctv');
 const logger = require('./config/winston');
 
 app.use(cors({ origin: 'http://localhost:3000', credentials : true}));
@@ -40,10 +41,11 @@ app.use(cookieParser());
 app.use('/notice', noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
-app.use('/gallery', auth.userCheck, galleryRouter);
+// app.use('/gallery', auth.userCheck, galleryRouter);
+app.use('/gallery', galleryRouter);
 // app.use('/calendar', auth.userCheck, CalendarRouter);
 app.use('/calendar', CalendarRouter);
 // app.use('/push', auth.authorityCheck, pushRouter);
-// app.use('/cctv', cctvRouter);
+app.use('/cctv', cctvRouter);
 
 module.exports = app;
