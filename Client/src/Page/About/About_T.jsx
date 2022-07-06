@@ -130,7 +130,8 @@ function About() {
       <LoginBox>
       <Button href='http://localhost:8000/auth/google'><LoginItem src={googleButton}/></Button>
       <Button href='http://localhost:8000/auth/naver'><LoginItem src={naverButton}/></Button>
-      <Button href='http://localhost:8000/auth/kakao'><LoginItem src={kakaoButton}/></Button>
+      {/* <Button href='http://localhost:8000/auth/kakao'><LoginItem src={kakaoButton}/></Button> */}
+      <Button href='http://oceanit.synology.me:8000/auth/kakao'><LoginItem src={kakaoButton}/></Button>
       </LoginBox>
       </Content>
       </Container>
