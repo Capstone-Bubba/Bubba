@@ -18,30 +18,33 @@ const CCTV = () => {
 
   return (
     <Container>
-    <div id="body">
-      <div
-        id="title"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          fontSize: "28px",
-          fontWeight: "bold",
-          marginTop: "10px",
-          marginBottom: "10px",
-          color: "blue",
-        }}
-      >
-        아기 실시간 영상
-      </div>
-      <div id="video-canvas"
-        style={{
-          height: "550px",
-          width: "100%",
-          marginTop:'3%',
+      <div id="body">
+        <div
+          id="title"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            fontSize: "28px",
+            fontWeight: "bold",
+            marginTop: "10px",
+            marginBottom: "10px",
+            color: "blue",
+          }}
+        >
+          아기 실시간 영상
+        </div>
+        <div id="video-canvas"
+          style={{
+            height: "550px",
+            width: "100%",
+            marginTop: '3%',
 
-        }}></div>
-    </div>
+          }}></div>
+          <div>
+            
+          </div>
+      </div>
     </Container>
   );
 };

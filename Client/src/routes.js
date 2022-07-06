@@ -16,7 +16,7 @@ export default function Router({userData}) {
     check ? 
     {
       element: <MainLayout />,
-      children: [  
+      children: [
         { path: "/", element: <Main /> },
         { path: "baby", element: <Baby />},
         { path: "home", element: <Main /> },
