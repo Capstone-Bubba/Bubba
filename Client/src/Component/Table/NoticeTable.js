@@ -21,6 +21,7 @@ function NoticeTable({ data }) {
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
     };
+    //fdsafdasfdas
 
     const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(parseInt(event.target.value, 10));
