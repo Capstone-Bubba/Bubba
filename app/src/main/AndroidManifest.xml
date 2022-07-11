@@ -14,6 +14,7 @@
 
 
     <application
+        android:usesCleartextTraffic="true"
         android:name=".SNSLogin.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

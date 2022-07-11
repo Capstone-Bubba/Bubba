@@ -28,8 +28,10 @@ class Kakao_Login_class(context: Context) {
 
         } else if (token != null) {
             Log.i(tag, "카카오계정으로 로그인 성공 ${token.accessToken}")
+
             kakaoloaduser()
             var rootintent = Intent(context, rootActivty::class.java)
+            rootintent.putExtra("Token",token.accessToken)
             context.startActivity(rootintent)
         }
     }
@@ -52,6 +54,8 @@ class Kakao_Login_class(context: Context) {
                     UserApiClient.instance.loginWithKakaoAccount(context, callback = callback)
                 } else if (token != null) {
                     kakaoloaduser()
+                    var rootintent = Intent(context, rootActivty::class.java)
+                    rootintent.putExtra("Token",token.accessToken)
                     Log.i(tag, "카카오톡으로 로그인 성공 ${token.accessToken}")
                 }
             }
@@ -131,7 +135,7 @@ class Kakao_Login_class(context: Context) {
             else if (tokenInfo != null) {
                 Log.i(
                     tag, "토큰 정보 보기 성공" +
-                        "\n회원번호: ${tokenInfo.id}" +
+                        "\n회원번호: ${tokenInfo.appId}" +
                         "\n만료시간: ${tokenInfo.expiresIn} 초")
             }
         }

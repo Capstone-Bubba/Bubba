@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import android.widget.VideoView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -21,6 +22,7 @@ class CCTV : Fragment() {
     lateinit var mMediaPlayer: MediaPlayer
     lateinit var mLibVLC : LibVLC
     lateinit var mVideoLayout : VLCVideoLayout
+    lateinit var videiview : VideoView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,6 +43,7 @@ class CCTV : Fragment() {
         mLibVLC = LibVLC(rootActivty,args)
         mMediaPlayer = MediaPlayer(mLibVLC)
         mVideoLayout = v.findViewById(R.id.fragment_Cctv_VideoView)
+        videiview = v.findViewById(R.id.testcctv)
 
         if (savedInstanceState == null) {
             if (ContextCompat.checkSelfPermission(rootActivty, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -71,6 +74,10 @@ class CCTV : Fragment() {
             mMediaPlayer?.media = this
         }.release()
         mMediaPlayer.play()
+
+        videiview.setVideoURI(uri)
+        videiview.requestFocus()
+        videiview.start()
 
     }
 

@@ -12,9 +12,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
+import com.twogudak.bubba.HttpData.RespositoryManager.SendToken
 import com.twogudak.bubba.R
 import com.twogudak.bubba.SNSLogin.CheckLogin
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
@@ -30,14 +33,31 @@ import com.twogudak.bubba.Ui.Setting.Setting
 class rootActivty : AppCompatActivity() {
 
     var babyinfo = false
+    private lateinit var rootViewModel : rootViewModel
 
     private val appSetting by lazy {
         ApplicationSetting(this)
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root_activty)
+
+
+
+        try {
+            val rootintent = intent
+            val accessToken = rootintent.getStringExtra("Token")
+            Log.d("rootActiviy", "accessToken : "+accessToken.toString())
+            rootViewModel = ViewModelProvider(this).get(com.twogudak.bubba.Ui.rootPage.rootViewModel::class.java)
+            rootViewModel.sendToken(accessToken!!).observe(this){
+                Log.d("rootActivty","response Data "+ it.toString())
+            }
+        } catch(e: NullPointerException) {
+            Log.e("RootActivty","null AccessToken Data")
+        }
+
 
         var setting = appSetting.getSetting()
         Log.d("RootActivty_ Appsetting",setting.toString())
@@ -122,8 +142,6 @@ class rootActivty : AppCompatActivity() {
 
         initFirebase()
         setNotificationChannel()
-        setting = appSetting.getSetting()
-        Log.d("RootActivty_ Appsetting",setting.toString())
 
 
     }
@@ -147,6 +165,7 @@ class rootActivty : AppCompatActivity() {
                 Log.d("Firebase", token)
                 appSetting.setFCMToken(token)
 
+
             }
     }
 
@@ -168,6 +187,7 @@ class rootActivty : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
+
 
 
 }
