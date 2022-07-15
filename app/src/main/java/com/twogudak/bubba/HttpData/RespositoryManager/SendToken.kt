@@ -38,12 +38,13 @@ class SendToken {
         return result
     }
 
-    fun sendFireBaseToken(token: String): MutableLiveData<String>{
+    fun sendFireBaseToken(token: String, appId: String): MutableLiveData<String>{
         val call = loadRetrofit.OPEN_SERVICE
         val result = MutableLiveData<String>()
 
         var token = hashMapOf(
-            "Token" to token
+            "Token" to token,
+            "appId" to appId
         )
 
         call.SendFireBaseToken(token).enqueue(object : Callback<String>{

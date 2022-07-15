@@ -156,6 +156,12 @@ class rootActivty : AppCompatActivity() {
             var num = 0
             if(Appid != "" && firebasetoken != ""){
                 Log.d("rootActivty","Send \nAppid: ${Appid}\nfcm: $firebasetoken")
+                    rootViewModel.sendFireBaseToken(firebasetoken!!,Appid!!).observe(this){
+                        if (it == "asd") {
+                            Log.d("rrotActivty","Send Complete")
+                        }
+
+                    }
                 break
             } else {
                 Log.d("rootActivty","Appid, fcm Loding $num")

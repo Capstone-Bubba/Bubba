@@ -8,6 +8,6 @@ interface RetrofitInterface {
     @POST("/auth/app/kakao/callback")
     fun SendToken(@Body Token : HashMap<String,String>): Call<String>
 
-    @POST("")
+    @POST("/push/testing")
     fun SendFireBaseToken(@Body Token : HashMap<String,String>) : Call<String>
 }
