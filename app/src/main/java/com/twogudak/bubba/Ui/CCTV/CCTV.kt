@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.Toast
 import android.widget.VideoView
@@ -19,9 +20,6 @@ import org.videolan.libvlc.util.VLCVideoLayout
 
 class CCTV : Fragment() {
     lateinit var rootActivty: rootActivty
-    lateinit var mMediaPlayer: MediaPlayer
-    lateinit var mLibVLC : LibVLC
-    lateinit var mVideoLayout : VLCVideoLayout
     lateinit var videiview : VideoView
 
     override fun onCreateView(
@@ -33,16 +31,6 @@ class CCTV : Fragment() {
         val v = inflater.inflate(R.layout.fragment_c_c_t_v, container, false)
         // Inflate the layout for this fragment
 
-        var args = ArrayList<String>();
-        args.add("-vvv")
-        args.add("--rtsp-tcp")
-        args.add("--avcodec-codec=h264")
-        args.add("--aout=opensles")
-        args.add("--audio-time-stretch")
-
-        mLibVLC = LibVLC(rootActivty,args)
-        mMediaPlayer = MediaPlayer(mLibVLC)
-        mVideoLayout = v.findViewById(R.id.fragment_Cctv_VideoView)
         videiview = v.findViewById(R.id.testcctv)
 
         if (savedInstanceState == null) {
@@ -60,20 +48,8 @@ class CCTV : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val uri = Uri.parse("rtsp://1.228.75.116:8554/unicast")
 
-        val uri = Uri.parse("rtsp://1.228.75.116:8554/stream1")
-        val USE_TEXTURE_VIEW = false
-        val ENABLE_SUBTITLES = true
-
-        mMediaPlayer.attachViews(mVideoLayout,null,ENABLE_SUBTITLES,USE_TEXTURE_VIEW)
-        Media(mLibVLC,uri).apply {
-            setHWDecoderEnabled(true,false)
-            addOption(":network-caching=150")
-            addOption("clock-jitter=0")
-            addOption(":clock-synchro=0")
-            mMediaPlayer?.media = this
-        }.release()
-        mMediaPlayer.play()
 
         videiview.setVideoURI(uri)
         videiview.requestFocus()
@@ -101,18 +77,21 @@ class CCTV : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        videiview.start()
+    }
+
     override fun onDestroy() {
         super.onDestroy()
-
-        mMediaPlayer.release()
-        mLibVLC.release()
+        videiview.pause()
+        videiview.stopPlayback()
     }
 
     override fun onStop() {
         super.onStop()
-
-        mMediaPlayer.stop()
-        mMediaPlayer.detachViews()
+        videiview.pause()
+        videiview.stopPlayback()
     }
 
 }

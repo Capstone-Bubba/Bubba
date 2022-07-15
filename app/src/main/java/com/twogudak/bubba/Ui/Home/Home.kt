@@ -1,6 +1,6 @@
 package com.twogudak.bubba.Ui.Home
 
-import android.content.DialogInterface
+import android.content.*
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +13,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.mikephil.charting.charts.BarChart
@@ -42,6 +43,13 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
     var name:String? = ""
     var birthday:String? = ""
 
+    val BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            Log.d(TAG,"Update recycelView")
+        }
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +72,10 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         super.onStart()
         Log.d(TAG,"home fragment onStart")
         rootActivty = context as rootActivty
+
+        LocalBroadcastManager.getInstance(rootActivty).registerReceiver(BroadcastReceiver,
+            IntentFilter("notification Message")
+        )
 
         babyRegistBt.setOnClickListener {
             val manager = childFragmentManager
@@ -144,6 +156,11 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         home_notification_recyceler.adapter = recyclerAdapter
         home_notification_recyceler.layoutManager = LinearLayoutManager(rootActivty)
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        LocalBroadcastManager.getInstance(rootActivty).unregisterReceiver(BroadcastReceiver)
     }
 
 

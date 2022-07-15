@@ -1,7 +1,9 @@
 package com.twogudak.bubba
 
 
+import android.content.Intent
 import android.util.Log
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 
@@ -15,6 +17,10 @@ class PushMessagingService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         Log.d("FCM","From:${message.from}")
+
+        val intent = Intent("notification Message")
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent)
+
         if(message.data.isNotEmpty()){
             Log.d("FCM","data: ${message.data}")
         }

@@ -20,6 +20,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.twogudak.bubba.HttpData.RespositoryManager.SendToken
 import com.twogudak.bubba.R
 import com.twogudak.bubba.SNSLogin.CheckLogin
+import com.twogudak.bubba.SNSLogin.Kakao_Login_class
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.Alarm.AlarmActivity
 import com.twogudak.bubba.Ui.CCTV.CCTV
@@ -34,6 +35,7 @@ class rootActivty : AppCompatActivity() {
 
     var babyinfo = false
     private lateinit var rootViewModel : rootViewModel
+
 
     private val appSetting by lazy {
         ApplicationSetting(this)
@@ -58,18 +60,25 @@ class rootActivty : AppCompatActivity() {
             Log.e("RootActivty","null AccessToken Data")
         }
 
+        val kakaologin = Kakao_Login_class(this)
+        kakaologin.kakaoTokeninfo()
 
-        var setting = appSetting.getSetting()
+
+        val setting = appSetting.getSetting()
         Log.d("RootActivty_ Appsetting",setting.toString())
-
 
         val homefragment = Home()
         val babyname = setting["babyname"]
         val babybirth = setting["babybirth"]
+        val Appid = setting["appId"]
+        val firebasetoken = setting["fcm"]
 
         val babyInfoBundle = Bundle()
         babyInfoBundle.putString("babyname",babyname)
         babyInfoBundle.putString("babybirth",babybirth)
+
+
+
 
 
 
@@ -143,8 +152,20 @@ class rootActivty : AppCompatActivity() {
         initFirebase()
         setNotificationChannel()
 
+        while (true){
+            var num = 0
+            if(Appid != "" && firebasetoken != ""){
+                Log.d("rootActivty","Send \nAppid: ${Appid}\nfcm: $firebasetoken")
+                break
+            } else {
+                Log.d("rootActivty","Appid, fcm Loding $num")
+                num += 1
+            }
+        }
+
 
     }
+
 
     override fun onBackPressed() {
         //super.onBackPressed() 뒤로가기 버튼 막음

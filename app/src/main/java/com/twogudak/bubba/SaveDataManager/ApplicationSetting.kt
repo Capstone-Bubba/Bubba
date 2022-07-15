@@ -22,6 +22,12 @@ class ApplicationSetting(context: Context) {
         return editor.commit()
     }
 
+    fun setAppid(Appid: String):Boolean{
+        editor.putString("Appid",Appid)
+        Log.d("ApplicationSetting","앱 Appid 셋팅 완료")
+        return editor.commit()
+    }
+
     fun setFCMToken(fcm:String):Boolean {
         editor.putString("fcm",fcm)
         return editor.commit()
@@ -41,6 +47,7 @@ class ApplicationSetting(context: Context) {
         setting["babyname"] = appSetting.getString("babyname","").toString()
         setting["babybirth"] = appSetting.getString("babybirth","").toString()
         setting["email"] = appSetting.getString("email","Non").toString()
+        setting["appId"] = appSetting.getString("Appid","").toString()
         return setting
     }
 

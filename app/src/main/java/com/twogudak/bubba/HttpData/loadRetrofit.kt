@@ -11,7 +11,6 @@ object loadRetrofit {
             .baseUrl(DOMAIN.DOMAIN)
             .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
-
     }
 
     val OPEN_SERVICE: RetrofitInterface by lazy {

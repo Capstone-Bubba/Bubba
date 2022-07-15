@@ -7,30 +7,15 @@
     android:keepScreenOn="true"
     tools:context=".Ui.CCTV.CCTV">
 
-    <FrameLayout
-        android:id="@+id/cctv_frameLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_percent="0.5"
-        >
-
-        <org.videolan.libvlc.util.VLCVideoLayout
-            android:id="@+id/fragment_Cctv_VideoView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="false"/>
-    </FrameLayout>
 
     <VideoView
         android:id="@+id/testcctv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cctv_frameLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHeight_percent="0.5"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="0dp"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
