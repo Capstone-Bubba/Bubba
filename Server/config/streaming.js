@@ -1,6 +1,6 @@
 const Stream = require("node-rtsp-stream");
 
-let rtspList = { "url": 'rtsp://1.228.75.150:8554/stream1', "port": 6055, "stream": null, "lastData": null }
+let rtspList = { "url": 'rtsp://1.228.75.116:8554/unicast', "port": 6055, "stream": null, "lastData": null }
 
 const start = () => {
         openStream(rtspList);
