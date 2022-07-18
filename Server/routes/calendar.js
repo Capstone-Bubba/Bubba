@@ -13,4 +13,6 @@ router.post('/update', uploadOriginal.uploadCalendar.array('files'), calendarCtr
 
 router.post('/delete', calendarCtrl.deleteCalendar);
 
+router.get('/app', calendarCtrl.readApp);
+
 module.exports = router;

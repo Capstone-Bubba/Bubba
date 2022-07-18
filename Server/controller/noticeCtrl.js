@@ -63,7 +63,7 @@ const pushNotice = async (req, res) => {
     }
     const result = await noticeDAO.read_notice(parameters);
     let message = {
-        token : 'c6Ean20xTLiVbr2WakyLtP:APA91bFkBb_7BTu63V3Zc4sMAu1oDiu-GvyvkoBpv3XZqhn85WpOKVJxliqq03d8n9Wxo3BgkL4lS8xordF0brHr6zp-G0W4sIoMtYJ4Azmpew9Bjz05F8HGm3W2PzD1neVvIUAsh6Xc',
+        token : 'ec10cmveT3emvqrO_-yBSy:APA91bES7Bbq11cmROsF1RrNzQ1WnVlGVgDIvhQNUviPO7gJ483E9YOHDr3172V0pSksIQ1haMAzx79o-69sXPyTDO3jp6YijzDC9upLepysWypXcz5CQBi8pR4b2hJr2P0tAiHiMhqD',
         notification :{
             body : "Notice"
         },

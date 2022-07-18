@@ -83,10 +83,41 @@ const deleteCalendar = async (req, res) => {
     }
 };
 
+const readApp = async (req, res) => {
+    let obj = new Object();
+    const parameters = {
+        "baby_num" : req.query.baby_num
+    };
+    const results = await calendarDAO.read_calendar(parameters);
+    const raw_keys = results.map((data) => {
+        return data.calendar_date = dayjs(data.calendar_date).format('YYYY-MM-DD');
+    })
+
+    const keys = [...new Set(raw_keys)];
+    console.log(keys);
+    const result = {}
+
+    keys.forEach(dateEl => {
+        let raw = [];
+        results.forEach(el => {
+            console.log(dateEl + " " + el.calendar_date);
+            if(dateEl === el.calendar_date) {
+                raw.push(el);
+                result[dateEl] = raw;
+            }
+        })
+    })
+
+    // console.log(result);
+    res.send({"result":result});
+}
+
+
 module.exports = {
     readCalendar,
     createCalendar,
     updateCalendar,
     deleteCalendar,
-    readCalendarDetail
+    readCalendarDetail,
+    readApp
 }
