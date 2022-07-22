@@ -69,10 +69,6 @@ class MainActivity : AppCompatActivity() {
                 kakao_login.hasKakaoToken()
         }
 
-
-
-
-
         //구글 로그인 버튼
         google_login_button.setOnClickListener {
             val mGoogleSignInClient = GoogleSignIn.getClient(this,google_login.gso)

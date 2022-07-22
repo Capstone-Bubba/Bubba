@@ -1,8 +1,8 @@
 package com.twogudak.bubba.HttpData
 
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.POST
+import retrofit2.http.*
+
 
 interface RetrofitInterface {
     @POST("/auth/app/kakao/callback")
@@ -10,4 +10,7 @@ interface RetrofitInterface {
 
     @POST("/push/testing")
     fun SendFireBaseToken(@Body Token : HashMap<String,String>) : Call<String>
+
+    @POST("/calendar/update")
+    fun CalendarUpdate(@Query("baby_num") baby_num : Int, @Body calendarimfo : HashMap<String,String>)
 }

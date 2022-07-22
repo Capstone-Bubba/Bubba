@@ -29,12 +29,13 @@ import com.twogudak.bubba.Ui.Diary.Diary
 import com.twogudak.bubba.Ui.Home.Home
 import com.twogudak.bubba.Ui.Notice.Notice
 import com.twogudak.bubba.Ui.Setting.Setting
+import kotlin.concurrent.thread
 
 
 class rootActivty : AppCompatActivity() {
 
     var babyinfo = false
-    private lateinit var rootViewModel : rootViewModel
+    private lateinit var rootViewModel: rootViewModel
 
 
     private val appSetting by lazy {
@@ -51,13 +52,14 @@ class rootActivty : AppCompatActivity() {
         try {
             val rootintent = intent
             val accessToken = rootintent.getStringExtra("Token")
-            Log.d("rootActiviy", "accessToken : "+accessToken.toString())
-            rootViewModel = ViewModelProvider(this).get(com.twogudak.bubba.Ui.rootPage.rootViewModel::class.java)
-            rootViewModel.sendToken(accessToken!!).observe(this){
-                Log.d("rootActivty","response Data "+ it.toString())
+            Log.d("rootActiviy", "accessToken : " + accessToken.toString())
+            rootViewModel =
+                ViewModelProvider(this).get(com.twogudak.bubba.Ui.rootPage.rootViewModel::class.java)
+            rootViewModel.sendToken(accessToken!!).observe(this) {
+                Log.d("rootActivty", "response Data " + it.toString())
             }
-        } catch(e: NullPointerException) {
-            Log.e("RootActivty","null AccessToken Data")
+        } catch (e: NullPointerException) {
+            Log.e("RootActivty", "null AccessToken Data")
         }
 
         val kakaologin = Kakao_Login_class(this)
@@ -65,7 +67,7 @@ class rootActivty : AppCompatActivity() {
 
 
         val setting = appSetting.getSetting()
-        Log.d("RootActivty_ Appsetting",setting.toString())
+        Log.d("RootActivty_ Appsetting", setting.toString())
 
         val homefragment = Home()
         val babyname = setting["babyname"]
@@ -74,17 +76,10 @@ class rootActivty : AppCompatActivity() {
         val firebasetoken = setting["fcm"]
 
         val babyInfoBundle = Bundle()
-        babyInfoBundle.putString("babyname",babyname)
-        babyInfoBundle.putString("babybirth",babybirth)
-
-
-
-
-
-
+        babyInfoBundle.putString("babyname", babyname)
+        babyInfoBundle.putString("babybirth", babybirth)
 
         homefragment.arguments = babyInfoBundle
-
 
 
         val toolbar: Toolbar? = findViewById(R.id.root_toolbar)
@@ -100,10 +95,10 @@ class rootActivty : AppCompatActivity() {
         viewpager2.setUserInputEnabled(false)
         viewpager2.adapter = pagerAdapter
 
-        viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
+        viewpager2.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                Log.d("Page Change","Page ${position + 1}")
+                Log.d("Page Change", "Page ${position + 1}")
             }
         })
 
@@ -111,30 +106,35 @@ class rootActivty : AppCompatActivity() {
         val rootmenu = findViewById<ImageButton>(R.id.root_menu)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
         navigationView.setNavigationItemSelectedListener { item ->
-            when(item.itemId){
-                R.id.menu_Home ->  {
+            when (item.itemId) {
+                R.id.menu_Home -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(0,false)
-                    return@setNavigationItemSelectedListener true }
-                R.id.menu_notice ->  {
+                    viewpager2.setCurrentItem(0, false)
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.menu_notice -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(1,false)
-                    return@setNavigationItemSelectedListener true }
-                R.id.menu_Calendar ->  {
+                    viewpager2.setCurrentItem(1, false)
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.menu_Calendar -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(2,false)
-                    return@setNavigationItemSelectedListener true }
-                R.id.menu_CCTV ->  {
+                    viewpager2.setCurrentItem(2, false)
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.menu_CCTV -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(3,false)
-                    return@setNavigationItemSelectedListener true }
-                R.id.menu_setting ->  {
+                    viewpager2.setCurrentItem(3, false)
+                    return@setNavigationItemSelectedListener true
+                }
+                R.id.menu_setting -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(4,false)
-                    return@setNavigationItemSelectedListener true }
+                    viewpager2.setCurrentItem(4, false)
+                    return@setNavigationItemSelectedListener true
+                }
                 else -> return@setNavigationItemSelectedListener false
             }
-         }
+        }
 
         rootmenu.setOnClickListener {
             drawerlayout.openDrawer(GravityCompat.START)
@@ -146,28 +146,32 @@ class rootActivty : AppCompatActivity() {
             var intent = Intent(this, AlarmActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             startActivity(intent)
-            overridePendingTransition(R.anim.none,R.anim.horizon_exit)
+            overridePendingTransition(R.anim.none, R.anim.horizon_exit)
+        }
+
+        val sendTokenThread = Thread {
+            while (true) {
+                if (Appid != "" && firebasetoken != "") {
+                    Log.d("rootActivty", "Send \nAppid: ${Appid}\nfcm: $firebasetoken")
+                    runOnUiThread {
+                        rootViewModel.sendFireBaseToken(firebasetoken!!, Appid!!)
+                            .observe(this@rootActivty) {
+                                if (it == "asd") {
+                                    Log.d("rootActivty", "Send Complete")
+                                }
+                            }
+                    }
+                    break
+                } else {
+                    Log.d("rootActivty", "Thread OFF")
+                }
+            }
         }
 
         initFirebase()
         setNotificationChannel()
 
-        while (true){
-            var num = 0
-            if(Appid != "" && firebasetoken != ""){
-                Log.d("rootActivty","Send \nAppid: ${Appid}\nfcm: $firebasetoken")
-                    rootViewModel.sendFireBaseToken(firebasetoken!!,Appid!!).observe(this){
-                        if (it == "asd") {
-                            Log.d("rrotActivty","Send Complete")
-                        }
-
-                    }
-                break
-            } else {
-                Log.d("rootActivty","Appid, fcm Loding $num")
-                num += 1
-            }
-        }
+        sendTokenThread.start()
 
 
     }
@@ -180,8 +184,8 @@ class rootActivty : AppCompatActivity() {
     private fun initFirebase() {
         FirebaseMessaging.getInstance().token
             .addOnCompleteListener { task ->
-                if(!task.isSuccessful) {
-                    Log.d("Firebase","getInstanceId failed", task.exception)
+                if (!task.isSuccessful) {
+                    Log.d("Firebase", "getInstanceId failed", task.exception)
                     return@addOnCompleteListener
                 }
 
@@ -214,7 +218,6 @@ class rootActivty : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
 
 
 }

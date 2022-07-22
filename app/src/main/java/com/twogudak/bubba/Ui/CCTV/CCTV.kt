@@ -13,10 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.twogudak.bubba.R
 import com.twogudak.bubba.Ui.rootPage.rootActivty
-import org.videolan.libvlc.LibVLC
-import org.videolan.libvlc.Media
-import org.videolan.libvlc.MediaPlayer
-import org.videolan.libvlc.util.VLCVideoLayout
 
 class CCTV : Fragment() {
     lateinit var rootActivty: rootActivty
