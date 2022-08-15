@@ -3,15 +3,17 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "connect-flash": "^0.1.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "cross-port-killer": "^1.4.0",
     "date-utils": "^1.2.21",
-    "dayjs": "^1.11.0",
+    "dayjs": "^1.11.5",
     "debug": "~2.6.9",
     "dotenv": "^16.0.0",
     "ejs": "^3.1.7",
@@ -36,7 +38,9 @@
     "passport-kakao": "^1.0.1",
     "passport-naver": "^1.0.6",
     "rtsp-ffmpeg": "^0.0.16",
+    "socket-io": "^1.0.0",
     "socket.io": "^4.5.1",
+    "socket.io-client": "^4.5.1",
     "web-push": "^3.4.5",
     "winston": "^3.7.2",
     "winston-daily-rotate-file": "^4.6.1",
