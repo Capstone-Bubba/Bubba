@@ -64,6 +64,7 @@ const delete_calendar = (parameters) => {
         })
     })
 }
+
 module.exports = {
     read_calendar,
     create_calendar,

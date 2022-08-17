@@ -5,6 +5,7 @@ const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan = require('morgan');           // 통신 log
+const socket = require('./middleware/socket');
 
 const app = express();
 
@@ -20,7 +21,7 @@ const auth = require('./middleware/sessoinCheck');
 const cctvRouter = require('./routes/cctv');
 const logger = require('./config/winston');
 
-app.use(cors({ origin: 'http://localhost:3000', credentials : true}));
+app.use(cors({ origin: "http://localhost:3000", credentials : true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));
@@ -31,6 +32,7 @@ app.use(express.static('public'));
 app.use(Session);
 
 passportConfig();
+socket();
 
 // app.use(stream);
 

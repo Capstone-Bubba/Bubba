@@ -1,6 +1,6 @@
 const Stream = require("node-rtsp-stream");
 
-let rtspList = { "url": 'rtsp://1.228.75.150:8554/stream1', "port": 6055, "stream": null, "lastData": null }
+let rtspList = { "url": 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4', "port": 6055, "stream": null, "lastData": null }
 
 const start = () => {
         openStream(rtspList);

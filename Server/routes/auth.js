@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const authCtrl = require('../controller/authCtrl');
 const auth = require('../middleware/sessoinCheck');
+const axios = require('axios');
 
 router.get('/naver', auth.sessionCheck, passport.authenticate('naver'));
 router.get('/naver/callback', passport.authenticate('naver', { failureRedirect: "/auth/naver" }), authCtrl.checkBaby);

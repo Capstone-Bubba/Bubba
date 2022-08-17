@@ -1,6 +1,8 @@
 import React from 'react'
-import { Button, TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from '@mui/material'
+import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,TextareaAutosize } from '@mui/material'
+import Button from '@mui/material/Button';
 import axios from 'axios'
+import { makeStyles } from '@mui/styles';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -11,8 +13,15 @@ const Layout = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
 `
+const useStyles = makeStyles({
+    dialogPaper: {
+        minWidth: '30vw',
+        minHeight: '50vh',
+    },
+
+});
+
 
 function NoticeWrite(props) {
     const { onClose, openPopup } = props;
@@ -52,59 +61,72 @@ function NoticeWrite(props) {
     }
 
     return (
-        <Layout>
-            <Dialog
-                open={openPopup}
-                onClose={onClose}
-                aria-labelledby="draggable-dialog-title"
+        <Dialog
+            open={openPopup}
+            onClose={onClose}
+            aria-labelledby="draggable-dialog-title"
+        >
+            <DialogTitle sx={{
+                textAlign: 'center',
+                fontSize: '1.5rem',
+                display: 'flex',
+                flexDirection: 'column'
+            }} style={{ cursor: 'move' }} id="draggable-dialog-title">
+                작성하기
+            </DialogTitle>
+            <DialogContent
+
             >
-                <DialogTitle style={{ cursor: 'move' }} id="draggable-dialog-title">
-                </DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        <TextField
-                            id="outlined-name"
-                            label="Name"
-                            value={notice_name}
-                            defaultValue="Normal"
-                            onChange={handleChange}
-                            sx={{ mt: 5 }}
-                            name="notice_title"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="Content"
-                            value={notice_content}
-                            defaultValue="Normal"
-                            onChange={handleOnChange}
-                            sx={{ mt: 3 }}
-                            name="notice_content"
-                        />
-                        <TextField
-                            id="outlined-name"
-                            label="Writer"
-                            value={writer}
-                            defaultValue="Normal"
-                            onChange={handlewChange}
-                            sx={{ mt: 3 }}
-                            name="writer"
-                        />
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button sx={{ mt: 5 }} variant="contained" onClick={sendOnClickServer}>
-                        등록하기
-                    </Button>
-                </DialogActions>
+                <DialogContentText
+                    sx={{
+                        p: 5,
+                        m: 5,
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: "center",
+                        flexDirection: 'column',
+                    }}>
+                    <TextField
+                    sx={{width: 400,}}
+                        variant="outlined"
+                        id="outlined-name"
+                        label="Name"
+                        value={notice_name}
+                        onChange={handleChange}
+                        name="notice_title"
+                    />
+                    <TextField
+                        sx={{ mt: 5, width: 400 ,}}
+                        variant="outlined"
+                        id="outlined-name"
+                        label="Writer"
+                        value={writer}
+                        onChange={handlewChange}
+                        name="writer"
+                    />
+                    <TextField
+                       variant="outlined"
+                       id="outlined-name"
+                       multiline
+                       label="Content"
+                       value={notice_content}
+                       onChange={handleOnChange}
+                        minRows={5}
+                        placeholder="Content"
+                        sx={{ mt: 5, width: 400 ,}}
+                    />
+                
+                </DialogContentText>
+            </DialogContent>
+            <DialogActions
+                sx={{ display: "flex", alignItems: "center", justifyContent: 'center' }}
 
-
-            </Dialog>
-
-            <div>
-
-
-            </div>
-        </Layout>
+            >
+                <Button variant="outlined" onClick={sendOnClickServer}>
+                    등록하기 //test
+                </Button>
+            </DialogActions>
+        </Dialog>
 
     )
 }

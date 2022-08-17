@@ -59,6 +59,22 @@
 
 #### 제작 기간 : `2022.03.02 ~
 
+#### 2022.08.17 변경사항
+- 프로시저
+DELIMITER $$
+CREATE PROCEDURE autoDel()
+BEGIN
+DELETE FROM facelog WHERE OccurTime < DATE_ADD(NOW(), INTERVAL -1 Day);
+END $$
+DELIMITER ;
+
+- 이벤트
+CREATE EVENT autoDelEvent
+ON SCHEDULE    
+ EVERY 1 MINUTE
+ STARTS NOW()  
+ DO    
+ CALL autoDel();
 
 #### 2022.05.29 진행 사항
 - RTSP 통신 완료 (React-Node)
