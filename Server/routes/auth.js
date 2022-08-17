@@ -18,24 +18,4 @@ router.get('/home', authCtrl.goHome);
 
 router.get('/logout', authCtrl.logout);
 
-router.get('/test', async (req, res) => {
-    try{
-        // const response_get = await axios.get('http://localhost:5000/test');
-        // console.log(response_get.data);
-
-    
-        const response_post = await axios({
-            method : 'post',
-            url : 'http://localhost:5000/test',
-            headers : {},
-            data: {
-                "rtsp" : "rtsp://1.228.75.116:8554/unicast"
-            }
-        });
-        console.log(response_post.data);
-        } catch (err){
-            console.log(err);
-        }
-})
-
 module.exports = router;

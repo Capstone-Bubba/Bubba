@@ -16,7 +16,8 @@ def connect():
 def login(data):
     model = torch.hub.load('ultralytics/yolov5', 'custom', path='./best.pt')
     domain = data['rtsp']
-    user = data['data']['user_num']
+    user = data['data']
+    
     cam = cv2.VideoCapture(domain)
 
     while True:

@@ -1,5 +1,6 @@
 const winston = require("winston");
 const authDAO = require("../model/authDAO");
+const socket = require('../middleware/socket');
 
 const logout = (req, res) => {
     req.logout();
@@ -53,5 +54,5 @@ const checkBaby = async (req, res) => {
 module.exports = {
     logout,
     goHome,
-    checkBaby
+    checkBaby,
 }
