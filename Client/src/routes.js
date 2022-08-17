@@ -21,7 +21,6 @@ export default function Router({userData}) {
         { path: "baby", element: <Baby />},
         { path: "home", element: <Main /> },
         { path: "notice", element: <Notice {...userData} /> },
-        { path: "gallery", element: <Gallery /> },
         { path: "calendar", element: <Calendar {...userData}/> },
         { path: "cctv", element: <CCTV /> }
       
