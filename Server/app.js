@@ -5,6 +5,7 @@ const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan = require('morgan');           // 통신 log
+const socket = require('./middleware/socket');
 
 const app = express();
 
@@ -31,6 +32,7 @@ app.use(express.static('public'));
 app.use(Session);
 
 passportConfig();
+socket();
 
 // app.use(stream);
 

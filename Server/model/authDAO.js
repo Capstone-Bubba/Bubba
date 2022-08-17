@@ -55,7 +55,7 @@ const checkUserNum = (parameters) => {
 const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `INSERT INTO User (platform, email, deviceToken, rtsp) VALUES (?, ?, ?, ?)`;
-        db.query(queryData, [parameters.platform, parameters.email, parameters.deviceToken, rtsp], (err, db_data) => {
+        db.query(queryData, [parameters.platform, parameters.email, parameters.deviceToken, parameters.rtsp], (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -84,8 +84,20 @@ const checkBabyId = (parameters) => {
             if (err) {
                 reject(err);
             } else {
-                console.log(db_data)
                 resolve(db_data[0])
+            }
+        })
+    })
+}
+
+const checkAllUser = () => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT * FROM user`;
+        db.query(queryData, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
             }
         })
     })
@@ -98,6 +110,7 @@ module.exports = {
     checkAuthority,
     UserState,
     checkBabyId,
-    babyState
+    babyState,
+    checkAllUser,
 }
 
