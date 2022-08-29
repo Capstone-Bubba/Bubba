@@ -1,5 +1,6 @@
 const noticeDAO = require('../model/noticeDAO');
 const admin = require('../config/pushConn');
+const authDAO = require('../model/authDAO');
 
 const readNoticeList = async (req, res) => {
     const result = await noticeDAO.read_notice_list();
@@ -22,7 +23,34 @@ const createNotice = async (req, res) => {
     }
     try {
         await noticeDAO.create_notice(parameters);
-        res.sendStatus(200);
+        const tokenData = await authDAO.ReadDeviceToken();
+        console.log(tokenData);
+        let message = {
+            token : tokenData,
+            notification :{
+                body : "Notice"
+            },
+            data : {
+                title : parameters.notice_title,
+                content : parameters.notice_content,
+                writer : parameters.writer
+            },
+            android : {
+                priority : "high",
+            },
+        }
+        console.log(message.token);
+    
+        admin.messaging()
+            .send(message)
+            .then((response) => {
+                console.log('Successfully sent message : ', response);
+                res.send(response);
+            })
+            .catch((err) => {
+                console.log('Error Sending message !! : ', err);
+                res.send(err);
+            })
     } catch(err) {
         console.log(err);
     }
@@ -49,43 +77,11 @@ const deleteNotice = async (req, res) => {
 
     try {
         await noticeDAO.delete_notice(parameters);
-        // await noticeDAO.reset_noticeNum(parameters);
         res.send('OK');
     } catch(err) {
         console.log(err);
         res.send('Error');
     }
-}
-
-const pushNotice = async (req, res) => {
-    const parameters = {
-        "notice_num" : req.query.num
-    }
-    const result = await noticeDAO.read_notice(parameters);
-    let message = {
-        token : 'ec10cmveT3emvqrO_-yBSy:APA91bES7Bbq11cmROsF1RrNzQ1WnVlGVgDIvhQNUviPO7gJ483E9YOHDr3172V0pSksIQ1haMAzx79o-69sXPyTDO3jp6YijzDC9upLepysWypXcz5CQBi8pR4b2hJr2P0tAiHiMhqD',
-        notification :{
-            body : "Notice"
-        },
-        data : {
-            title : result[0].notice_title,
-            body : result[0].notice_content
-        },
-        android : {
-            priority : "high",
-        },
-    }
-
-    admin.messaging()
-        .send(message)
-        .then((response) => {
-            console.log('Successfully sent message : ', response);
-            res.send(response);
-        })
-        .catch((err) => {
-            console.log('Error Sending message !! : ', err);
-            res.send(err);
-        })
 }
 
 module.exports = {
@@ -94,5 +90,4 @@ module.exports = {
     createNotice,
     updateNotice,
     deleteNotice,
-    pushNotice,
 }
