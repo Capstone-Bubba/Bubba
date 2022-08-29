@@ -103,6 +103,20 @@ const checkAllUser = () => {
     })
 }
 
+const ReadDeviceToken = () => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT deviceToken FROM user where deviceToken is NOT NULL`;
+        // let queryData = `SELECT deviceToken FROM user`;
+        db.query(queryData, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data[0].deviceToken);
+            }
+        })
+    })
+}
+
 module.exports = {
     checkUserID,
     insertUser,
@@ -112,5 +126,6 @@ module.exports = {
     checkBabyId,
     babyState,
     checkAllUser,
+    ReadDeviceToken,
 }
 

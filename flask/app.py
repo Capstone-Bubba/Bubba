@@ -14,7 +14,7 @@ def connect():
 
 @socketio.on('login')
 def login(data):
-    model = torch.hub.load('ultralytics/yolov5', 'custom', path='./best.pt')
+    model = torch.load('custom', path='./flask/best.pt')
     domain = data['rtsp']
     user = data['data']
     
@@ -22,6 +22,7 @@ def login(data):
 
     while True:
         _, img = cam.read()
+        print(img)
         result = model(img)
         name = result.pandas().xyxy[0]['name']
         if name.empty:

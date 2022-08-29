@@ -15,6 +15,4 @@ router.put('/update', auth.authorityCheck, noticeCtrl.updateNotice);
 
 router.post('/delete', auth.authorityCheck, noticeCtrl.deleteNotice);
 
-router.get('/send', noticeCtrl.pushNotice);
-
 module.exports = router;
