@@ -11,6 +11,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +25,8 @@ import com.kizitonwose.calendarview.ui.MonthHeaderFooterBinder
 import com.kizitonwose.calendarview.ui.ViewContainer
 import com.kizitonwose.calendarview.utils.next
 import com.kizitonwose.calendarview.utils.previous
+import com.twogudak.bubba.HttpData.DTO.CalendarDTO
+import com.twogudak.bubba.HttpData.DTO.CalendarDetail
 import com.twogudak.bubba.R
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 import java.time.DayOfWeek
@@ -42,8 +46,13 @@ class Calendar : Fragment() {
     lateinit var calendarMonthYearText: TextView
     lateinit var CalendarPreviousMounthImage : ImageView
     lateinit var CalendarNextMonthImage: ImageView
+    private lateinit var calendar_ViewModel : CalendarViewModel
+
+
     var selectedDate: LocalDate? = null
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
+    lateinit var CalendarData : Map<String,List<CalendarDetail> >
+
 
 
     override fun onCreateView(
@@ -61,16 +70,29 @@ class Calendar : Fragment() {
         calendarMonthYearText = v.findViewById(R.id.CalendarMonthYearText)
         CalendarPreviousMounthImage = v.findViewById(R.id.CalendarPreviousMounthImage)
         CalendarNextMonthImage = v.findViewById(R.id.CalendarNextMonthImage)
+
+        calendar_ViewModel = ViewModelProvider(rootActivty).get(CalendarViewModel::class.java)
+
         return v
     }
 
     override fun onStart() {
         super.onStart()
 
+
         calendarRecyclerView.adapter = calendarAdapter
         calendarRecyclerView.layoutManager = LinearLayoutManager(rootActivty,RecyclerView.VERTICAL,false)
         calendarRecyclerView.addItemDecoration(DividerItemDecoration(rootActivty, RecyclerView.VERTICAL))
-        calendarAdapter.notifyDataSetChanged()
+
+        calendar_ViewModel.callCalendar(4).observe(viewLifecycleOwner){
+            CalendarData = it.CalendarList.groupBy { it.calendar_date }
+            Log.d("Call Calendar",CalendarData.toString())
+            calendarAdapter.notifyDataSetChanged()
+        }
+
+        calendar_ViewModel.getmessage().observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
 
         class DayViewContainer(view:View) : ViewContainer(view) {
 
@@ -90,6 +112,7 @@ class Calendar : Fragment() {
                             val calendar = binding.findViewById<com.kizitonwose.calendarview.CalendarView>(R.id.calendarView)
                             calendar.notifyDateChanged(day.date)
                             oldDate?.let { calendar.notifyDateChanged(it) }
+                            updateAdapterForDate(day.date)
 
                             //DataLoad
                         }
@@ -174,6 +197,12 @@ class Calendar : Fragment() {
             return rhs + lhs
         }
         return daysOfWeek
+    }
+
+    private fun updateAdapterForDate(date: LocalDate?) {
+//        calendarAdapter.flights.clear()
+//        calendarAdapter.flights.addAll(flights[date].orEmpty())
+//        calendarAdapter.notifyDataSetChanged()
     }
 
 

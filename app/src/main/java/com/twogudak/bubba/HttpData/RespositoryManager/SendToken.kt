@@ -31,7 +31,7 @@ class SendToken {
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("Send Token",t.toString())
+                Log.e("Send Token Error",t.toString())
                 message.postValue("서버와의 오류가 발생했습니다.")
             }
         })
