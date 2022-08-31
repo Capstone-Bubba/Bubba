@@ -51,7 +51,7 @@ class Calendar : Fragment() {
 
     var selectedDate: LocalDate? = null
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
-    lateinit var CalendarData : Map<String,List<CalendarDetail> >
+    lateinit var CalendarData : Map<LocalDate,List<CalendarDetail>>
 
 
 
@@ -85,7 +85,7 @@ class Calendar : Fragment() {
         calendarRecyclerView.addItemDecoration(DividerItemDecoration(rootActivty, RecyclerView.VERTICAL))
 
         calendar_ViewModel.callCalendar(4).observe(viewLifecycleOwner){
-            CalendarData = it.CalendarList.groupBy { it.calendar_date }
+            CalendarData = it.CalendarList.groupBy { LocalDate.parse(it.calendar_date, DateTimeFormatter.ISO_DATE) }
             Log.d("Call Calendar",CalendarData.toString())
             calendarAdapter.notifyDataSetChanged()
         }
@@ -112,8 +112,9 @@ class Calendar : Fragment() {
                             val calendar = binding.findViewById<com.kizitonwose.calendarview.CalendarView>(R.id.calendarView)
                             calendar.notifyDateChanged(day.date)
                             oldDate?.let { calendar.notifyDateChanged(it) }
-                            updateAdapterForDate(day.date)
-
+                            if (CalendarData.isNotEmpty()){
+                                updateAdapterForDate(day.date)
+                            }
                             //DataLoad
                         }
                     }
@@ -200,9 +201,9 @@ class Calendar : Fragment() {
     }
 
     private fun updateAdapterForDate(date: LocalDate?) {
-//        calendarAdapter.flights.clear()
-//        calendarAdapter.flights.addAll(flights[date].orEmpty())
-//        calendarAdapter.notifyDataSetChanged()
+        calendarAdapter.calendarData.clear()
+        calendarAdapter.calendarData.addAll(CalendarData[date].orEmpty())
+        calendarAdapter.notifyDataSetChanged()
     }
 
 

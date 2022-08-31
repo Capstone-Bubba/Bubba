@@ -1,6 +1,8 @@
 package com.twogudak.bubba.HttpData.DTO
 
 import com.google.gson.annotations.SerializedName
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 data class CalendarDTO(
     @SerializedName("result")

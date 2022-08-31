@@ -6,14 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.recyclerview.widget.RecyclerView
+import com.twogudak.bubba.HttpData.DTO.CalendarDTO
+import com.twogudak.bubba.HttpData.DTO.CalendarDetail
 import com.twogudak.bubba.R
+import java.time.LocalDateTime
+
 
 
 class CalendarAdapter(var context: Context) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
 
+    val calendarData = mutableListOf<CalendarDetail>()
+
     override fun getItemCount(): Int {
-        return  2
+        return  calendarData.size
     }
 
 
@@ -26,6 +33,9 @@ class CalendarAdapter(var context: Context) : RecyclerView.Adapter<CalendarAdapt
     }
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
+
+        holder.dataText.text = "${calendarData[position].calendar_title}"
+        holder.eventText.text = "${calendarData[position].calendar_content}"
 
     }
 
