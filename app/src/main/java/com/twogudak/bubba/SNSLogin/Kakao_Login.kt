@@ -59,6 +59,7 @@ class Kakao_Login_class(context: Context) {
                     rootintent.putExtra("Token",token.accessToken)
                     kakaoTokeninfo()
                     Log.i(tag, "카카오톡으로 로그인 성공 ${token.accessToken}")
+                    context.startActivity(rootintent)
                 }
             }
         } else {

@@ -34,8 +34,9 @@ class CalendarAdapter(var context: Context) : RecyclerView.Adapter<CalendarAdapt
 
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
 
-        holder.dataText.text = "${calendarData[position].calendar_title}"
+        holder.dataText.text = "${calendarData[position].calendar_date}"
         holder.eventText.text = "${calendarData[position].calendar_content}"
+        holder.contentText.text = "${calendarData[position].calendar_title}"
 
     }
 
@@ -44,6 +45,7 @@ class CalendarAdapter(var context: Context) : RecyclerView.Adapter<CalendarAdapt
     inner class CalendarViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
         val dataText = itemView.findViewById<TextView>(R.id.calendar_item_time)
         val eventText = itemView.findViewById<TextView>(R.id.calendar_item_EventText)
+        val contentText = itemView.findViewById<TextView>(R.id.calendar_item_Event)
 
         override fun onClick(p0: View?) {
             Log.d("CalendarAdapterView", "Click Calendar Item")

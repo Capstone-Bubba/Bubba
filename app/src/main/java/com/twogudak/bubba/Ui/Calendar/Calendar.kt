@@ -175,12 +175,14 @@ class Calendar : Fragment() {
         CalendarNextMonthImage.setOnClickListener {
             calendarview.findFirstVisibleMonth()?.let {
                 calendarview.smoothScrollToMonth(it.yearMonth.next)
+                calendarAdapter.calendarData.clear()
             }
         }
 
         CalendarPreviousMounthImage.setOnClickListener {
             calendarview.findFirstVisibleMonth()?.let {
                 calendarview.smoothScrollToMonth(it.yearMonth.previous)
+                calendarAdapter.calendarData.clear()
             }
         }
 

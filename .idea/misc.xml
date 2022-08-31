@@ -30,13 +30,18 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/alarm_activity_background_class.xml" value="0.1955" />
         <entry key="app/src/main/res/drawable/button_effect.xml" value="0.2285" />
+        <entry key="app/src/main/res/drawable/calebdar_bg.xml" value="0.215" />
+        <entry key="app/src/main/res/drawable/calendar_selected_bg.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.1955" />
         <entry key="app/src/main/res/drawable/drawer_item.xml" value="0.153" />
         <entry key="app/src/main/res/drawable/home_notification_coner.xml" value="0.1955" />
         <entry key="app/src/main/res/drawable/home_notification_coner_focused.xml" value="0.2285" />
         <entry key="app/src/main/res/drawable/menu.xml" value="0.189" />
         <entry key="app/src/main/res/drawable/menu_home.xml" value="0.153" />
+        <entry key="app/src/main/res/drawable/menu_notice.xml" value="0.215" />
+        <entry key="app/src/main/res/drawable/menu_photo.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/menu_selecotr.xml" value="0.189" />
+        <entry key="app/src/main/res/drawable/menu_setting.xml" value="0.215" />
         <entry key="app/src/main/res/drawable/naver_login_icon.xml" value="0.2285" />
         <entry key="app/src/main/res/drawable/outline.xml" value="0.209" />
         <entry key="app/src/main/res/layout/activity_alarm.xml" value="0.4036458333333333" />

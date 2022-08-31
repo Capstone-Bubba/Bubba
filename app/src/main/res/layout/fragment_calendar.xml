@@ -10,6 +10,7 @@
     android:orientation="vertical"
     tools:context=".Ui.Calendar.Calendar">
 
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_marginTop="10dp"
         android:id="@+id/calendarAppBarLayout"
@@ -64,8 +65,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <LinearLayout
-        android:orientation="vertical"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -75,12 +75,18 @@
             android:layout_height="wrap_content"
             app:cv_dayViewResource="@layout/calendar_day_layout"
             app:cv_monthHeaderResource="@layout/calendar_day_legend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:orientation="horizontal"
             app:cv_orientation="horizontal"
             app:cv_scrollMode="paged"
             app:cv_outDateStyle="endOfGrid" />
 
         <ScrollView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calendarView"
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -106,9 +112,18 @@
 
         </ScrollView>
 
-    </LinearLayout>
+        <Button
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.95"
+            app:layout_constraintHorizontal_bias="0.95"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/main"
+            android:text="+"/>
 
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
