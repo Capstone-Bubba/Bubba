@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import Avatar from '@mui/material/Avatar';
 import Photo from '../Photo/Photo'
 import styled from 'styled-components';
-import ProfileImg from '../../images/defaultImg.png'
+import Button from '@mui/material/Button';
 import { Link, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import { Typography } from '@mui/material';
 
 const Layout = styled.div`
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
     justify-content:center;
@@ -17,14 +18,6 @@ const Layout = styled.div`
 const Text = styled.div`
     margin-top:2%;
     font-size: 13px;
-`
-const Button = styled.button`
-    margin:15px;
-    font-weight: bold;
-    width: 150px;
-    height: 50px;
-    font-size : 15px;
-    background: skyblue;
 `
 function Profile({}) {
     const [data, setData] = useState("")
@@ -53,12 +46,20 @@ function Profile({}) {
         <Layout>
             {data ?
             <>
+            <Typography
+                    align='center'
+                    variant="h6"
+                    id="tableTitle"
+                    component="div"
+                >
+                    프로필 등록
+                </Typography>
             <Photo
                photos={photos}
             />
-            <Text >이름 : {data.baby_name}</Text>
-            <Text>생년월일 : {moment(data.birth).format('YYYY-MM-DD')}</Text>
-            <Button style={{marginBottom:"10%",marginTop:"5%"}}><Link style={{ textDecoration: 'none', color: '#000', }} to="/baby">프로필 등록</Link></Button> </>
+            <Typography style={{marginTop: '3%'}} variant="body1" >이름 : {data.baby_name}</Typography>
+            <Typography style={{marginTop: '3%'}} variant="body1" >생년월일 : {moment(data.birth).format('YYYY-MM-DD')}</Typography>
+            <Button variant="contained" style={{marginTop:'5%', width:'150px',height:'40px',backgroundColor:'#3182ce'}}><Link style={{ textDecoration: 'none', color:'white',}} to="/baby">프로필 등록</Link></Button></>
             :
             <>Wait</>}
         </Layout>

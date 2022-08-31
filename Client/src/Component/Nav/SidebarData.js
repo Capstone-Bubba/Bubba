@@ -17,12 +17,7 @@ export const SidebarData= [
         icon: <FaIcons.FaClipboardList/>,
         cName: 'nav-text'
     },
-    {
-        title: 'Gallery',
-        path: '/gallery',
-        icon: <RiIcons.RiGalleryFill/>,
-        cName: 'nav-text'
-    },
+   
     {
         title: 'Calendar',
         path: '/calendar',

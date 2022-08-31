@@ -2,7 +2,7 @@ const db = require('../config/dbConn');
 
 const read_notice_list = () => {
     return new Promise((resolve, reject) => {
-        db.query(`SELECT notice_num, notice_title, createAt, writer, views FROM notice`, (err ,db_data) => {
+        db.query(`SELECT notice_num, notice_title, createAt, writer, views FROM notice ORDER BY createAt DESC`, (err ,db_data) => {
             if(err) {
                 reject(err);
             } else {

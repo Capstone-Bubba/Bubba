@@ -1,13 +1,26 @@
 import React from 'react'
-import { TextField, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,TextareaAutosize } from '@mui/material'
-import Button from '@mui/material/Button';
+import {  Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle,TextareaAutosize } from '@mui/material'
 import axios from 'axios'
 import { makeStyles } from '@mui/styles';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import Button from '../../../Component/Custom/Button';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import styled from 'styled-components';
 
+const InputBox = styled.input`
+    display: inline-block;
+    width: 300px;
+    padding: 10px 0 10px 15px;
+    color: #377D6A;
+    border-color: #efdwqe    
+`
+const ContentBox = styled.textarea`
+    display: inline-block;
+    width: 300px;
+    padding: 10px 0 10px 15px;
+    color: #377D6A;
+    border-color: #efdwqe    
+`
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
@@ -19,7 +32,6 @@ const useStyles = makeStyles({
         minWidth: '30vw',
         minHeight: '50vh',
     },
-
 });
 
 
@@ -61,6 +73,7 @@ function NoticeWrite(props) {
     }
 
     return (
+        <Layout>
         <Dialog
             open={openPopup}
             onClose={onClose}
@@ -86,47 +99,36 @@ function NoticeWrite(props) {
                         alignItems: "center",
                         flexDirection: 'column',
                     }}>
-                    <TextField
-                    sx={{width: 400,}}
-                        variant="outlined"
-                        id="outlined-name"
-                        label="Name"
+                    <InputBox
+                        placeholder={'제목'}
                         value={notice_name}
                         onChange={handleChange}
-                        name="notice_title"
                     />
-                    <TextField
-                        sx={{ mt: 5, width: 400 ,}}
-                        variant="outlined"
-                        id="outlined-name"
-                        label="Writer"
+                    <InputBox
+                        style={{marginTop:'5%'}}
+                        placeholder={'작성자'}
                         value={writer}
                         onChange={handlewChange}
-                        name="writer"
                     />
-                    <TextField
-                       variant="outlined"
-                       id="outlined-name"
-                       multiline
-                       label="Content"
+                    <ContentBox
+                        style={{marginTop:'5%'}}
                        value={notice_content}
                        onChange={handleOnChange}
-                        minRows={5}
-                        placeholder="Content"
-                        sx={{ mt: 5, width: 400 ,}}
+                       placeholder={'내용'}
+                       rows="5" 
                     />
                 
                 </DialogContentText>
             </DialogContent>
             <DialogActions
                 sx={{ display: "flex", alignItems: "center", justifyContent: 'center' }}
-
             >
-                <Button variant="outlined" onClick={sendOnClickServer}>
-                    등록하기 //test
+                <Button onClick={sendOnClickServer}>
+                    등록하기
                 </Button>
             </DialogActions>
         </Dialog>
+        </Layout>
 
     )
 }
