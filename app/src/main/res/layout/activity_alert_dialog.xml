@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Ui.dialog.AlertDialogActivity"
+    app:layout_constraintWidth_percent="0.8">
+
+    <TextView
+        android:id="@+id/AlertDialog_Title_Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="알림"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.1"
+        android:textSize="15pt"
+        android:textColor="@color/black"
+        />
+
+    <TextView
+        android:id="@+id/AlertDialog_context_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AlertDialog_Title_Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="알림의 이유가 적힌다."
+        app:layout_constraintVertical_bias="0.3"
+        android:textColor="@color/black"
+        android:textSize="10pt"/>
+
+    <Button
+        android:id="@+id/AlertDialog_Check_Button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AlertDialog_context_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/circlebuttonselector"
+        android:text="확인"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintDimensionRatio="1:1"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

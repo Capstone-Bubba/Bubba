@@ -22,7 +22,7 @@ class CalendarRespositroy {
             override fun onResponse(call: Call<CalendarDTO>, response: Response<CalendarDTO>) {
                 if(response.code() == 200){
                     result.value = response.body()
-                    Log.e("Call Calendar","${response}")
+                    Log.d("Call Calendar","${response}")
                 }else{
                     message.postValue("서버와의 오류가 발생했습니다.")
                 }

@@ -29,6 +29,7 @@ import com.twogudak.bubba.Ui.Diary.Diary
 import com.twogudak.bubba.Ui.Home.Home
 import com.twogudak.bubba.Ui.Notice.Notice
 import com.twogudak.bubba.Ui.Setting.Setting
+import java.lang.Thread.sleep
 import kotlin.concurrent.thread
 
 
@@ -150,6 +151,7 @@ class rootActivty : AppCompatActivity() {
         }
 
         val sendTokenThread = Thread {
+            var count = 0
             while (true) {
                 if (Appid != "" && firebasetoken != "") {
                     Log.d("rootActivty", "Send \nAppid: ${Appid}\nfcm: $firebasetoken")
@@ -163,14 +165,19 @@ class rootActivty : AppCompatActivity() {
                     }
                     break
                 } else {
-                    Log.d("rootActivty", "Thread OFF")
+                    Log.d("rootActivty", "Is Null")
+                    sleep(100)
+                    if (count == 10){
+                        break
+                    } else {
+                        count++
+                    }
                 }
             }
         }
 
         initFirebase()
         setNotificationChannel()
-
         sendTokenThread.start()
 
 
