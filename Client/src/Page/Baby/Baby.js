@@ -1,8 +1,12 @@
 import { Grid } from '@mui/material'
-import React from 'react'
+import { useEffect } from "react";
 import BabyForm from '../../Component/Baby/BabyForm'
 
 function SignUp() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div>
       <Grid
