@@ -3,7 +3,7 @@ const router = express.Router();
 const uploadOriginal = require('../middleware/multer');
 const babyCtrl = require('../controller/babyCtrl');
 
-// 아기 상태 표시 
+// 아기 상태 표시 WEB
 router.get('/', babyCtrl.readBabyList);
 
 router.post('/create', uploadOriginal.uploadBaby.single('file'), babyCtrl.createBaby);

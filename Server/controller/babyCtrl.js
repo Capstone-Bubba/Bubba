@@ -14,6 +14,7 @@ const readBaby = async (req, res) => {
     const parameters = {
         "user_num" : req.session.passport.user.user_num
     };
+    console.log(parameters);
     
     const result = await babyDAO.read_baby(parameters);
     res.send({"result" : result});

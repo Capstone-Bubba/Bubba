@@ -1,7 +1,9 @@
 const netstats = require('netstats');
-const Stream = require('../config/streaming')
+const authDAO = require('../model/authDAO');
+const Stream = require('../config/streaming');
 
 const check = (req, res, next) => {
+    
     netstats(6055).then((result) => {
         if (result[1].search('6055')) {
             Stream.rtspList.stream.stop();

@@ -1,8 +1,15 @@
 const Stream = require("node-rtsp-stream");
+const authDAO = require('../model/authDAO');
 
-let rtspList = { "url": 'rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4', "port": 6055, "stream": null, "lastData": null }
+let rtspList = { "url": '', "port": 6055, "stream": null, "lastData": null };
 
-const start = () => {
+const start = async (user_num) => {
+        const parameters = {
+                user_num
+        }
+        
+        const result = await authDAO.RtspInfo(parameters);
+        rtspList.url = result.rtsp;
         openStream(rtspList);
         setInterval(function (obj) {
                 let today = new Date();

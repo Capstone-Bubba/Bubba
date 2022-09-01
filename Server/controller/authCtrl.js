@@ -33,6 +33,7 @@ const goHome = async (req, res,next) => {
         }
         const finalArr = [];
         finalArr.push(final);
+        console.log(finalArr);
         res.send({ "result": finalArr });
     } else {
         next()
@@ -51,8 +52,62 @@ const checkBaby = async (req, res) => {
     }
 }
 
+// app Controller
+
+const checkAppBaby = async (req, res) => {
+    const parameters = {
+        "user_num" : req.session.passport.user.user_num
+    }
+
+    const result = await authDAO.checkBabyId(parameters);
+    if(result == undefined) {
+        res.sendStatus(400);
+    } else {
+        res.sendStatus(200);
+    }
+}
+
+const FCMDeviceToken = async (req, res) => {
+    const parameters = {
+        email : req.body.email,
+        deviceToken : req.body.deviceToken,
+    }
+    const result = await authDAO.UpdateUser(parameters);
+    // console.log(result);
+    res.sendStatus(200);
+}
+
+const AppLogin = async (req, res) => {
+    try{
+        const parameters = {
+            email : req.body.email,
+            platform : req.body.platform
+        }
+
+        const isUser = await authDAO.checkUserID(parameters);
+        if(isUser[0].exist == 0) {
+            await authDAO.insertUser(parameters);
+        }
+
+        const isUserNum = await authDAO.checkUserNum(parameters);
+        console.log(isUserNum);
+        req.session.passport = {};
+        req.session.passport.user = {};
+        req.session.passport.user.email = parameters.email;
+        req.session.passport.user.platform = parameters.platform;
+        req.session.passport.user.user_num = isUserNum[0].user_num;
+        res.sendStatus(200);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+}
+
 module.exports = {
     logout,
     goHome,
     checkBaby,
+    FCMDeviceToken,
+    AppLogin,
+    checkAppBaby,
 }
