@@ -6,15 +6,19 @@ import retrofit2.http.*
 
 
 interface RetrofitInterface {
+
     @POST("/auth/app/kakao/callback")
     fun SendToken(@Body Token : HashMap<String,String>): Call<String>
 
-    @POST("/push/testing")
+    @POST("/auth/app/token")
     fun SendFireBaseToken(@Body Token : HashMap<String,String>) : Call<String>
 
     @POST("/calendar/update")
     fun CalendarUpdate(@Query("baby_num") baby_num : HashMap<String,Int>, @Body calendarimfo : HashMap<String,String>) : Call<String>
 
-    @GET("/calendar/")
-    fun CalendarCall(@Query("baby_num") baby_num : String,) : Call<CalendarDTO>
+    @POST("/calendar/")
+    fun CalendarCall(@Query("baby_num") baby_num : String,@Body Email : HashMap<String,String>) : Call<CalendarDTO>
+
+    @POST("/auth/app/login")
+    fun RegisterUserData(@Body userData : HashMap<String,String>) : Call<String>
 }

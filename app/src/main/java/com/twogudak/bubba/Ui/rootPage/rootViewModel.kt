@@ -21,4 +21,8 @@ class rootViewModel(application: Application) : AndroidViewModel(application) {
     fun sendFireBaseToken(Token: String, appId: String): MutableLiveData<String>{
         return rootViewModelRepository.sendFireBaseToken(Token,appId)
     }
+
+    fun sendUserData(plateform: String, Email: String) : MutableLiveData<String>{
+        return rootViewModelRepository.sendUserData(plateform,Email)
+    }
 }

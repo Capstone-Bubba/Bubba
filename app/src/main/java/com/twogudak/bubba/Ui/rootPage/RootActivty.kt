@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
+import com.kakao.sdk.user.UserApiClient
 import com.twogudak.bubba.HttpData.RespositoryManager.SendToken
 import com.twogudak.bubba.R
 import com.twogudak.bubba.SNSLogin.CheckLogin
@@ -35,7 +36,6 @@ import kotlin.concurrent.thread
 
 class rootActivty : AppCompatActivity() {
 
-    var babyinfo = false
     private lateinit var rootViewModel: rootViewModel
 
 
@@ -48,39 +48,31 @@ class rootActivty : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_root_activty)
 
-
-
-        try {
-            val rootintent = intent
-            val accessToken = rootintent.getStringExtra("Token")
-            Log.d("rootActiviy", "accessToken : " + accessToken.toString())
-            rootViewModel =
-                ViewModelProvider(this).get(com.twogudak.bubba.Ui.rootPage.rootViewModel::class.java)
-            rootViewModel.sendToken(accessToken!!).observe(this) {
-                Log.d("rootActivty", "response Data " + it.toString())
-            }
-        } catch (e: NullPointerException) {
-            Log.e("RootActivty", "null AccessToken Data")
-        }
+        rootViewModel = ViewModelProvider(this).get(com.twogudak.bubba.Ui.rootPage.rootViewModel::class.java)
 
         val kakaologin = Kakao_Login_class(this)
         kakaologin.kakaoTokeninfo()
-
 
         val setting = appSetting.getSetting()
         Log.d("RootActivty_ Appsetting", setting.toString())
 
         val homefragment = Home()
+        val calendarfragment = Calendar()
+
+
         val babyname = setting["babyname"]
         val babybirth = setting["babybirth"]
-        val Appid = setting["appId"]
         val firebasetoken = setting["fcm"]
+        val UserEmail = setting["email"]
 
         val babyInfoBundle = Bundle()
         babyInfoBundle.putString("babyname", babyname)
         babyInfoBundle.putString("babybirth", babybirth)
-
         homefragment.arguments = babyInfoBundle
+
+        val emailBundle = Bundle()
+        emailBundle.putString("email",UserEmail)
+        calendarfragment.arguments = emailBundle
 
 
         val toolbar: Toolbar? = findViewById(R.id.root_toolbar)
@@ -90,7 +82,7 @@ class rootActivty : AppCompatActivity() {
         val pagerAdapter = ViewPagerAdapter(this)
         pagerAdapter.addFragment(homefragment)
         pagerAdapter.addFragment(Notice())
-        pagerAdapter.addFragment(Calendar())
+        pagerAdapter.addFragment(calendarfragment)
         pagerAdapter.addFragment(CCTV())
         pagerAdapter.addFragment(Setting())
         viewpager2.setUserInputEnabled(false)
@@ -153,13 +145,13 @@ class rootActivty : AppCompatActivity() {
         val sendTokenThread = Thread {
             var count = 0
             while (true) {
-                if (Appid != "" && firebasetoken != "") {
-                    Log.d("rootActivty", "Send \nAppid: ${Appid}\nfcm: $firebasetoken")
+                if (UserEmail != "" && firebasetoken != "") {
+                    Log.d("rootActivty", "Send \nEmail: ${UserEmail}\nfcm: $firebasetoken")
                     runOnUiThread {
-                        rootViewModel.sendFireBaseToken(firebasetoken!!, Appid!!)
+                        rootViewModel.sendFireBaseToken(firebasetoken!!, UserEmail!!)
                             .observe(this@rootActivty) {
-                                if (it == "asd") {
-                                    Log.d("rootActivty", "Send Complete")
+                                if (it == "OK") {
+                                    Log.d("rootActivty Send Token", "Send Complete")
                                 }
                             }
                     }
@@ -179,6 +171,7 @@ class rootActivty : AppCompatActivity() {
         initFirebase()
         setNotificationChannel()
         sendTokenThread.start()
+        LoadKaKaoInfo()
 
 
     }
@@ -223,6 +216,21 @@ class rootActivty : AppCompatActivity() {
                 NotificationManager::class.java
             )
             notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+    private fun LoadKaKaoInfo(){
+        UserApiClient.instance.me { user, error ->
+            if(error != null){
+                Log.e("Kakao Account", "사용자 정보 요청 실패", error)
+            } else if (user != null) {
+                Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
+                if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
+                    Log.d("rootActivty",user.kakaoAccount?.email.toString())
+                }
+            } else {
+                Log.i("Kakao Account","No Email Data")
+            }
         }
     }
 

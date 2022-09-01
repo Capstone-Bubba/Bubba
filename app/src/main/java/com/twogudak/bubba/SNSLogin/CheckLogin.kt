@@ -21,9 +21,9 @@ class CheckLogin(context: Context) {
                     var rootintent = Intent(context, rootActivty::class.java)
                     rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                     plateform = "Kakao"
+                    rootintent.putExtra("plateform",plateform)
                     context.startActivity(rootintent)
                     Log.e("LoginAccount","카카오톡 로그인 완료")
-                    Log.e("LoginAccount","로그인체크 완료")
                 } else {
                     Log.e("LoginAccount","카카오톡 로그인 안되있음.")
                 }
@@ -42,6 +42,7 @@ class CheckLogin(context: Context) {
             var rootintent = Intent(context, rootActivty::class.java)
             rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
             plateform = "Google"
+            rootintent.putExtra("plateform",plateform)
             context.startActivity(rootintent)
 
         } else{
@@ -52,7 +53,7 @@ class CheckLogin(context: Context) {
     }//google Account
 
 
-    suspend fun TotalLoginCheck(token:String?){
+    fun TotalLoginCheck(token:String?){
         if(token == null){
             Log.e("Login Check","Naver Login 안되있음")
             googleAccount()
@@ -62,6 +63,7 @@ class CheckLogin(context: Context) {
             plateform = "Naver"
             var rootintent = Intent(context, rootActivty::class.java)
             rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            rootintent.putExtra("plateform",plateform)
             context.startActivity(rootintent)
         }
     } //naver토큰 체크

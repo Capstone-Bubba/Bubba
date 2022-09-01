@@ -9,6 +9,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
 import com.twogudak.bubba.BuildConfig
+import com.twogudak.bubba.HttpData.RespositoryManager.SendToken
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 
@@ -16,6 +17,7 @@ class Google_Login(context: Context) {
 
     val context = context
     val tag = "Google Account"
+    private lateinit var sendToken : SendToken
 
 
     private val setting by lazy {
@@ -59,8 +61,11 @@ class Google_Login(context: Context) {
             Log.e(tag,email)
             Log.e(tag,googletoken)
             Log.e(tag, googletokenAuth)
+            sendToken.sendUserData("google",email)
 
             setting.setEmail(email)
+
+
 
             var rootintent = Intent(context, rootActivty::class.java)
             context.startActivity(rootintent)

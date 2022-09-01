@@ -3,19 +3,27 @@ package com.twogudak.bubba.SNSLogin
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
+import com.twogudak.bubba.HttpData.RespositoryManager.SendToken
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.rootPage.rootActivty
+import com.twogudak.bubba.Ui.rootPage.rootViewModel
 
 class Kakao_Login_class(context: Context) {
 
-    val context = context //mainactivty context
+    val context : Context = context //mainactivty context
     val tag = "Kakao Account"
+
+    private lateinit var sendToken : SendToken
+
     private val setting by lazy {
         ApplicationSetting(context)
     }
@@ -33,7 +41,21 @@ class Kakao_Login_class(context: Context) {
             kakaoTokeninfo()
 
             var rootintent = Intent(context, rootActivty::class.java)
-            rootintent.putExtra("Token",token.accessToken)
+            rootintent.putExtra("plateform","Kakao")
+
+            UserApiClient.instance.me { user, error ->
+                if(error != null){
+                    Log.e("Kakao Account", "사용자 정보 요청 실패", error)
+                } else if (user != null) {
+                    Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
+                    if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
+                        sendToken = SendToken()
+                        sendToken.sendUserData("kakao",user.kakaoAccount?.email!!)
+                    }
+                } else {
+                    Log.i("Kakao Account","?")
+                }
+            }
             context.startActivity(rootintent)
         }
     }
@@ -57,7 +79,7 @@ class Kakao_Login_class(context: Context) {
                 } else if (token != null) {
                     kakaoloaduser()
                     var rootintent = Intent(context, rootActivty::class.java)
-                    rootintent.putExtra("Token",token.accessToken)
+                    rootintent.putExtra("plateform","Kakao")
                     kakaoTokeninfo()
                     Log.i(tag, "카카오톡으로 로그인 성공 ${token.accessToken}")
                     context.startActivity(rootintent)
@@ -87,7 +109,6 @@ class Kakao_Login_class(context: Context) {
                 else {
                     //토큰이 있는것이 확인됨 토큰 정보를 출력함
                     Log.e(tag, "카카오톡 토큰이 이미 있음.", error)
-
                     kakaoTokeninfo()
                 }
             }
@@ -98,51 +119,17 @@ class Kakao_Login_class(context: Context) {
         }
     }
 
-    suspend fun kakaoTokenCheck(){
-
-        if(AuthApiClient.instance.hasToken()){
-            Log.e(tag,"검사시작")
-            UserApiClient.instance.accessTokenInfo{ _, error ->
-                if(error != null) {
-                    if(error is KakaoSdkError && error.isInvalidTokenError() == true){
-
-                        Log.e(tag, "토큰이 없음", error)
-                    }
-                    else {
-                        //토큰 정보 불러오는대 오류가 발생함
-                        Log.e(tag, "토큰 불러오기 오류", error)
-
-                    }
-                }
-                else {
-                    //토큰이 있는것이 확인됨 토큰 정보를 출력함
-                    Log.e(tag, "토큰이 있음.", error)
-
-                    kakaoTokeninfo()
-                }
-            }
-
-        }
-        else {
-            Log.e(tag, "토큰 없음 로그인 필요 ")
-
-
-        }
-    }
-
     //kakao 토큰 정보 보기
     fun kakaoTokeninfo()  {
         UserApiClient.instance.accessTokenInfo{ tokenInfo, error ->
             if(error != null){
                 Log.e(tag, "토큰 정보 보기 실패", error)
-
             }
             else if (tokenInfo != null) {
                 Log.i(
                     tag, "토큰 정보 보기 성공" +
                         "\n회원번호: ${tokenInfo.appId}" +
                         "\n만료시간: ${tokenInfo.expiresIn} 초")
-                setting.setAppid(tokenInfo.appId.toString())
             }
         }
     }

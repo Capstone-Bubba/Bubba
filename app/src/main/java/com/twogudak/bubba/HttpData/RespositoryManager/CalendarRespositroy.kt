@@ -12,13 +12,17 @@ class CalendarRespositroy {
 
     val message = MutableLiveData<String>()
 
-    fun callCalendar(baby_num: Int): MutableLiveData<CalendarDTO> {
+    fun callCalendar(baby_num: Int,email : String): MutableLiveData<CalendarDTO> {
         val call = loadRetrofit.OPEN_SERVICE
         val result = MutableLiveData<CalendarDTO>()
 
+        var email = hashMapOf(
+            "email" to email
+        )
 
 
-        call.CalendarCall(baby_num.toString()).enqueue(object : Callback<CalendarDTO> {
+
+        call.CalendarCall(baby_num.toString(),email).enqueue(object : Callback<CalendarDTO> {
             override fun onResponse(call: Call<CalendarDTO>, response: Response<CalendarDTO>) {
                 if(response.code() == 200){
                     result.value = response.body()

@@ -36,10 +36,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-
         //Android Hash값 얻어오기 Kakao api 사용
         var keyHash = Utility.getKeyHash(this)
-        Log.e("Hash",keyHash)
+        Log.e("Android Hash",keyHash)
 
         //네아로 객체 초기화
         NaverIdLoginSDK.initialize(this,BuildConfig.naver_ClientID,BuildConfig.naver_Client_Secret,"bubba")

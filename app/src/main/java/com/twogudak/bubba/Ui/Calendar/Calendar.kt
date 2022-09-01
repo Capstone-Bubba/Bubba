@@ -8,14 +8,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.kakao.sdk.user.UserApiClient
 import com.kizitonwose.calendarview.CalendarView
 import com.kizitonwose.calendarview.model.CalendarDay
 import com.kizitonwose.calendarview.model.CalendarMonth
@@ -46,6 +44,7 @@ class Calendar : Fragment() {
     lateinit var calendarMonthYearText: TextView
     lateinit var CalendarPreviousMounthImage : ImageView
     lateinit var CalendarNextMonthImage: ImageView
+    lateinit var calendarPlusBt : Button
     private lateinit var calendar_ViewModel : CalendarViewModel
 
 
@@ -70,6 +69,7 @@ class Calendar : Fragment() {
         calendarMonthYearText = v.findViewById(R.id.CalendarMonthYearText)
         CalendarPreviousMounthImage = v.findViewById(R.id.CalendarPreviousMounthImage)
         CalendarNextMonthImage = v.findViewById(R.id.CalendarNextMonthImage)
+        calendarPlusBt = v.findViewById(R.id.calendar_plus)
 
         calendar_ViewModel = ViewModelProvider(rootActivty).get(CalendarViewModel::class.java)
 
@@ -79,12 +79,16 @@ class Calendar : Fragment() {
     override fun onStart() {
         super.onStart()
 
+        val bundle = arguments
+        val email = bundle?.getString("email")
+        Log.d("calendar",email.toString())
+
 
         calendarRecyclerView.adapter = calendarAdapter
         calendarRecyclerView.layoutManager = LinearLayoutManager(rootActivty,RecyclerView.VERTICAL,false)
         calendarRecyclerView.addItemDecoration(DividerItemDecoration(rootActivty, RecyclerView.VERTICAL))
 
-        calendar_ViewModel.callCalendar(4).observe(viewLifecycleOwner){
+        calendar_ViewModel.callCalendar(4,bundle?.getString("email")!!).observe(viewLifecycleOwner){
             CalendarData = it.CalendarList.groupBy { LocalDate.parse(it.calendar_date, DateTimeFormatter.ISO_DATE) }
             Log.d("Call Calendar",CalendarData.toString())
             calendarAdapter.notifyDataSetChanged()
@@ -183,6 +187,16 @@ class Calendar : Fragment() {
             calendarview.findFirstVisibleMonth()?.let {
                 calendarview.smoothScrollToMonth(it.yearMonth.previous)
                 calendarAdapter.calendarData.clear()
+            }
+        }
+        calendarPlusBt.setOnClickListener {
+            UserApiClient.instance.unlink { error ->
+                if (error != null) {
+                    Log.e("unLink Kakao", "연결 끊기 실패", error)
+                }
+                else {
+                    Log.i("unLink Kakao", "연결 끊기 성공. SDK에서 토큰 삭제 됨")
+                }
             }
         }
 

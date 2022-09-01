@@ -43,8 +43,8 @@ class SendToken {
         val result = MutableLiveData<String>()
 
         var token = hashMapOf(
-            "Token" to token,
-            "appId" to appId
+            "deviceToken" to token,
+            "email" to appId
         )
 
         call.SendFireBaseToken(token).enqueue(object : Callback<String>{
@@ -53,6 +53,37 @@ class SendToken {
                 if(response.code() == 200){
                     result.postValue(response.body())
                     Log.e("Send Token","${response}")
+                }else{
+                    message.postValue("서버와의 오류가 발생했습니다.")
+                }
+            }
+
+            override fun onFailure(call: Call<String>, t: Throwable) {
+                Log.e("Send Token",t.toString())
+                message.postValue("서버와의 오류가 발생했습니다.")
+            }
+        })
+        return result
+    }
+
+    fun sendUserData(plateform: String, Email: String): MutableLiveData<String>{
+        val call = loadRetrofit.OPEN_SERVICE
+        val result = MutableLiveData<String>()
+
+
+        var token = hashMapOf(
+            "platform" to plateform,
+            "email" to Email
+        )
+
+        Log.d("Send User Data","UserData :${token}")
+
+        call.RegisterUserData(token).enqueue(object : Callback<String>{
+
+            override fun onResponse(call: Call<String>, response: Response<String>) {
+                if(response.code() == 200){
+                    result.postValue(response.body())
+                    Log.d("Send User Data","${response}")
                 }else{
                     message.postValue("서버와의 오류가 발생했습니다.")
                 }

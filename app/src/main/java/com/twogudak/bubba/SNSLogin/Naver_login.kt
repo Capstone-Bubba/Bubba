@@ -43,6 +43,7 @@ class Naver_login(context: Context) {
             })
 
             val rootintent = Intent(context, rootActivty::class.java)
+            rootintent.putExtra("plateform","Naver")
             context.startActivity(rootintent)
         }
 
