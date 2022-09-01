@@ -26,7 +26,7 @@ const createNotice = async (req, res) => {
         const tokenData = await authDAO.ReadDeviceToken();
         console.log(tokenData);
         let message = {
-            token : tokenData,
+            tokens : tokenData,
             notification :{
                 body : "Notice"
             },
@@ -42,15 +42,17 @@ const createNotice = async (req, res) => {
         console.log(message.token);
     
         admin.messaging()
-            .send(message)
+            .sendMulticast(message)
             .then((response) => {
-                console.log('Successfully sent message : ', response);
-                res.send(response);
+                const failedTokens = [];
+                response.responses.forEach((resp, idx) => {
+                    if(!resp.success) {
+                        failedTokens.push(tokenData[idx]);
+                    }
+                });
+                console.log('List of toknes that caused failures: ' + failedTokens);
             })
-            .catch((err) => {
-                console.log('Error Sending message !! : ', err);
-                res.send(err);
-            })
+            return res.status(200).json({success:true});
     } catch(err) {
         console.log(err);
     }

@@ -25,6 +25,7 @@ def login(data):
         print(img)
         result = model(img)
         name = result.pandas().xyxy[0]['name']
+        
         if name.empty:
             print('empty dataframe')
         else:
