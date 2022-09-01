@@ -45,7 +45,8 @@ class PushMessagingService : FirebaseMessagingService() {
         vibrator.vibrate(pattern, 0)
         var handler = Handler(Looper.getMainLooper()).post {
             var AlertDialogIntent = Intent(applicationContext, AlertDialogActivity::class.java)
-            var pendingIntent = PendingIntent.getActivity(applicationContext,0,AlertDialogIntent,0)
+            AlertDialogIntent.putExtra("Content",message.data["content"])
+            var pendingIntent = PendingIntent.getActivity(applicationContext,0,AlertDialogIntent,PendingIntent.FLAG_IMMUTABLE)
             try {
                 pendingIntent.send()
             } catch (e: PendingIntent.CanceledException) {

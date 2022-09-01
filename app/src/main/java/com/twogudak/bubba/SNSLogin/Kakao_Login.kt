@@ -34,6 +34,7 @@ class Kakao_Login_class(context: Context) {
 
             var rootintent = Intent(context, rootActivty::class.java)
             rootintent.putExtra("Token",token.accessToken)
+            context.startActivity(rootintent)
         }
     }
 

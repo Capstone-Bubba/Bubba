@@ -19,11 +19,13 @@ class AlertDialogActivity() : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert_dialog)
 
+        var contentText = intent.getStringExtra("Content")
+
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         AlertDialogContent = findViewById(R.id.AlertDialog_context_text)
         AlertDialogCheckButton = findViewById(R.id.AlertDialog_Check_Button)
 
-        AlertDialogContent.text = "contentText"
+        AlertDialogContent.text = contentText
 
         AlertDialogCheckButton.setOnClickListener {
             vibrator.cancel()
