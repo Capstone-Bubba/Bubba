@@ -72,9 +72,15 @@ const FCMDeviceToken = async (req, res) => {
         email : req.body.email,
         deviceToken : req.body.deviceToken,
     }
-    const result = await authDAO.UpdateUser(parameters);
-    // console.log(result);
-    res.sendStatus(200);
+    console.log(parameters);
+    try{
+        await authDAO.UpdateUser(parameters);
+        // console.log(result);
+        res.sendStatus(200);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
 }
 
 const AppLogin = async (req, res) => {
@@ -103,6 +109,23 @@ const AppLogin = async (req, res) => {
     }
 }
 
+const UpdateRtsp = async (req, res) => {
+        const parameters = {
+            // "user_num": req.session.passport.user.user_num,
+            "user_num" : req.query.num,
+            "rtsp" : req.body.rtsp
+        };
+    try{
+        await authDAO.RtspInfo(parameters);
+        await authDAO.update_rtsp(parameters);
+        socket(parameters);
+        res.sendStatus(200);
+    } catch(err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+}
+
 module.exports = {
     logout,
     goHome,
@@ -110,4 +133,5 @@ module.exports = {
     FCMDeviceToken,
     AppLogin,
     checkAppBaby,
+    UpdateRtsp,
 }

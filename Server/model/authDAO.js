@@ -13,19 +13,6 @@ const checkUserID = (parameters) => {
     })
 }
 
-const RtspInfo = (parameters) => {
-    return new Promise((resolve, reject) => {
-        let queryData = `SELECT rtsp FROM user WHERE user_num =?`;
-        db.query(queryData, [parameters.user_num], (err, db_data) => {
-            if(err) {
-                reject(err);
-            } else {
-                resolve(db_data[0]);
-            }
-        })
-    })
-}
-
 const UserState = (parameters) => {
     return new Promise((resolve, reject) => {
         const queryData = `SELECT * FROM user WHERE user_num = ?`
@@ -82,10 +69,10 @@ const UpdateUser = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `UPDATE User SET deviceToken = ? where email=?`;
         db.query(queryData, [parameters.deviceToken, parameters.email], (err, db_data) => {
-            if (err) {
-                reject(err);
-            } else {
+            if (db_data.email && db_data.deviceToken) {
                 resolve(db_data);
+            } else {
+                reject(err);
             }
         })
     })
@@ -146,6 +133,33 @@ const ReadDeviceToken = () => {
     })
 }
 
+const update_rtsp = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `UPDATE User SET rtsp = ? where user_num=?`;
+        db.query(queryData, [parameters.rtsp, parameters.user_num], (err, db_data) => {
+            if(db_data.length != 0) {
+                resolve(db_data);
+            } else {
+                reject(err);
+            }
+        })
+    })
+}
+
+const RtspInfo = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT rtsp FROM user WHERE user_num =?`;
+        db.query(queryData, [parameters.user_num], (err, db_data) => {
+            if(db_data.length != 0) {
+                resolve(db_data)
+            } else {
+                reject(err);
+            }
+        })
+    })
+}
+
+
 module.exports = {
     checkUserID,
     insertUser,
@@ -158,5 +172,6 @@ module.exports = {
     ReadDeviceToken,
     UpdateUser,
     RtspInfo,
+    update_rtsp,
 }
 

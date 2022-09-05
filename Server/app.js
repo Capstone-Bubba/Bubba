@@ -32,7 +32,6 @@ app.use(express.static('public'));
 app.use(Session);
 
 passportConfig();
-socket();
 
 // app.use(stream);
 

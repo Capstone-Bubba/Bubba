@@ -20,6 +20,8 @@ router.get('/home', authCtrl.goHome);
 
 router.get('/logout', authCtrl.logout);
 
+router.post('/rtsp', authCtrl.UpdateRtsp);
+
 // andorid auth router
 
 router.post('/app/token', authCtrl.FCMDeviceToken);
