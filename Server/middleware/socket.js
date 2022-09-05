@@ -1,25 +1,24 @@
+const e = require("connect-flash");
 const socket = require("socket.io-client");
 const authDAO = require("../model/authDAO");
 const flDAO = require("../model/flDAO");
 
-module.exports = async () => {
+const socketClient = socket("http://localhost:5000");
+
+let a = []
+let b = []
+
+module.exports = (user) => {
   // flask 서버와의 socket 연동
-  const socketClient = socket("http://localhost:5000");
-
-  const result = await authDAO.checkAllUser();
-
-  socketClient.on("connect", async () => {
-    console.log("connection Flask server");
-  });
-
-  result.forEach((item) => {
-    socketClient.emit('login', {
-        data : item.user_num,
-        rtsp : item.rtsp
-    })
+  socket.id = user.user_num;
+  socket.rtsp = user.rtsp;
+    
+  socketClient.emit('login', {
+    user : socket.id,
+    rtsp : socket.rtsp
   })
 
-  socketClient.on("rtsp", async (data) => {
+  socketClient.on('rtsp', async (data) => {
     // 이 안에서 DB에 넣는 과정
     const FaceData = JSON.parse(data);
     const parameters = {
@@ -27,8 +26,29 @@ module.exports = async () => {
         "location" : FaceData['0'],
         "OccurTime" : FaceData.time
     };
-    const result = await flDAO.create_log(parameters);
-    console.log(parameters);
-    // console.log(result);
-  });
+
+    if(!a.includes(FaceData)){
+      a.push(FaceData);
+      await flDAO.create_log(parameters);
+      console.log(parameters);
+    }
+  })
+
+  socketClient.on('accuracy', async (data) => {
+    const AccurData = JSON.parse(data);
+    const parameters = {
+      "user_num" : AccurData.user,
+      "side" : AccurData.side,
+      "back" : AccurData.back,
+      "none" : AccurData.none,
+      "front" : AccurData.front,
+    };
+
+    if(!b.includes(AccurData)){
+      b.push(AccurData);
+      console.log(b);
+      await flDAO.accur_log(parameters);
+      console.log("This is Accuracy for 30s", AccurData);
+    }
+  })
 }
