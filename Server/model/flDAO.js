@@ -1,3 +1,4 @@
+const e = require('connect-flash');
 const db = require('../config/dbConn');
 
 const UserState = (parameters) => {
@@ -40,7 +41,21 @@ const accur_log = (parameters) => {
     })
 }
 
+const user_accur = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT * FROM accuracy WHERE user_num=? ORDER BY accur_time DESC`;
+        db.query(queryData, parameters, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
 module.exports = {
     create_log,
     accur_log,
+    user_accur,
 }
