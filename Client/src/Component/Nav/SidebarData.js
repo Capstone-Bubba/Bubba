@@ -4,6 +4,7 @@ import * as GiIcons from "react-icons/gi";
 import * as BsIcons from "react-icons/bs";
 import * as AiIcons from "react-icons/ai";
 import * as RiIcons from 'react-icons/ri';
+
 export const SidebarData= [
     {
         title: 'Home',
@@ -28,6 +29,12 @@ export const SidebarData= [
         title: 'Cctv',
         path: '/cctv',
         icon: <GiIcons.GiCctvCamera />,
+        cName: 'nav-text'
+    },
+    {
+        title: 'Rtsp',
+        path: '/rtsp',
+        icon: <FaIcons.FaRegAddressCard />,
         cName: 'nav-text'
     },
 ]
