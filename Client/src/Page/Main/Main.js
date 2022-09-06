@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
 import Notice from './Notice/Notice';
+import axios from 'axios'
+
 
 const GraphBox = styled.div`
   padding:1%;
@@ -62,7 +64,26 @@ const Item = styled.div`
 
 
 `
-function Main() {
+
+function Main(props) {
+  const [data, setData] = useState("")
+  const params = { user_num: props.user_num }
+  useEffect(() => {
+    async function check() {
+        await axios.get('http://localhost:8000/auth/face', { params }
+        ).then(async (res) => {
+            const _data = await res.data.result.map((rowData) => (
+                {
+                    result: rowData.result,
+                }
+            ))
+            setData(_data)
+            console.log(data)
+            console.log(params)
+        })
+    }
+    check()
+}, []);
 
 
   return (

@@ -20,7 +20,7 @@ export default function Router({userData}) {
       children: [
         { path: "/", element: <Main /> },
         { path: "baby", element: <Baby />},
-        { path: "home", element: <Main /> },
+        { path: "home", element: <Main {...userData}/> },
         { path: "notice", element: <Notice {...userData} /> },
         { path: "calendar", element: <Calendar {...userData}/> },
         { path: "cctv", element: <CCTV /> },
