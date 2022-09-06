@@ -8,6 +8,7 @@ import Gallery from "./Page/Main/Gallery";
 import Calendar from "./Page/Main/Calendar/Calendar";
 import CCTV from "./Page/Main/CCTV";
 import Baby from './Page/Baby/Baby'
+import Rtsp from "./Page/Main/Rtsp";
 
 export default function Router({userData}) {
   const check = userData
@@ -22,7 +23,8 @@ export default function Router({userData}) {
         { path: "home", element: <Main /> },
         { path: "notice", element: <Notice {...userData} /> },
         { path: "calendar", element: <Calendar {...userData}/> },
-        { path: "cctv", element: <CCTV /> }
+        { path: "cctv", element: <CCTV /> },
+        { path: "rtsp", element: <Rtsp {...userData} /> }
       
       ],
     }
