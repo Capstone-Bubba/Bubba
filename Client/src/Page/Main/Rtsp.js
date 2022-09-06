@@ -30,9 +30,9 @@ function Rtsp(props) {
         e.preventDefault();
        
         let body = {
-          adress: Adress,
+          rtsp: Adress,
         };
-    const params = {user_num: props.user_num}
+    const params = {num: props.user_num}
         axios
           .post("http://localhost:8000/auth/rtsp", body , {params} )
           .then((res) => console.log(res));

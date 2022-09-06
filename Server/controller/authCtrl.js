@@ -1,6 +1,7 @@
 const winston = require("winston");
 const authDAO = require("../model/authDAO");
 const socket = require('../middleware/socket');
+const flDAO = require('../model/flDAO');
 
 const logout = (req, res) => {
     req.logout();
@@ -126,6 +127,15 @@ const UpdateRtsp = async (req, res) => {
     }
 }
 
+const faceInfo = async (req, res) => {
+    const parameters = {
+        // "user_num" : req.session.passport.user.user_num
+        "user_num" : req.query.user_num
+    }
+    const result = await flDAO.user_accur(parameters);
+    res.send({"result": result});
+}
+
 module.exports = {
     logout,
     goHome,
@@ -134,4 +144,5 @@ module.exports = {
     AppLogin,
     checkAppBaby,
     UpdateRtsp,
+    faceInfo,
 }

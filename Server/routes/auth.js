@@ -16,10 +16,14 @@ router.get('/google/callback', passport.authenticate('google', { failureRedirect
 router.get('/kakao', auth.sessionCheck, passport.authenticate('kakao'));
 router.get('/kakao/callback', passport.authenticate('kakao', { failureRedirect: "/auth/kakao" }), authCtrl.checkBaby);
 
+// Baby 이후 Main Page
 router.get('/home', authCtrl.goHome);
 
 router.get('/logout', authCtrl.logout);
 
+router.get('/face', authCtrl.faceInfo);
+
+// Update Rtsp Info
 router.post('/rtsp', authCtrl.UpdateRtsp);
 
 // andorid auth router
