@@ -82,8 +82,8 @@ function Main(props) {
         })
     }
     check()
-}, []);
-
+  }, [])
+  console.log(data)
 
   return (
     <>
@@ -113,7 +113,7 @@ function Main(props) {
                   </div>
                 </Item>
                 <Item bcolor={"#fff"}>
-                
+                  
                 </Item>
               </FlexBox>
           </Grid>

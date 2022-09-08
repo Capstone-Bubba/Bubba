@@ -2,6 +2,7 @@ const winston = require("winston");
 const authDAO = require("../model/authDAO");
 const socket = require('../middleware/socket');
 const flDAO = require('../model/flDAO');
+const dayjs = require('dayjs');
 
 const logout = (req, res) => {
     req.logout();
@@ -133,7 +134,12 @@ const faceInfo = async (req, res) => {
         "user_num" : req.query.user_num
     }
     const result = await flDAO.user_accur(parameters);
-    res.send({"result": result});
+    result.map(val => {
+        console.log(val.accur_time);
+        val.accur_time = dayjs(val.accur_time).format('YYYY.MM.DD HH:mm:ss');
+    })
+
+    res.send({"result" : result});
 }
 
 module.exports = {
