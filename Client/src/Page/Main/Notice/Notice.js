@@ -28,7 +28,7 @@ function Notice(props) {
   }
   check()
   },[])
-  console.log(data)
+  // console.log(data)
 
   return (
     <Container sx={{mt:3}}>

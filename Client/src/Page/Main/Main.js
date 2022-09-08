@@ -5,6 +5,7 @@ import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
 import Notice from './Notice/Notice';
 import axios from 'axios'
+import { width } from '@mui/system';
 
 
 const GraphBox = styled.div`
@@ -52,6 +53,8 @@ const MemberBox = styled.div`
 
 `
 const Item = styled.div`
+  display:flex;
+  flex-direction: row;
   height:100%;
   margin-top:4%;
   border: 1px solid #e8f7f7;
@@ -59,8 +62,6 @@ const Item = styled.div`
   border-radius:5px;
   height:183px;
   padding-left:3%;
-  padding-top:2%;
-
 
 
 `
@@ -78,8 +79,6 @@ function Main(props) {
                 }
             ))
             setData(_data)
-            console.log(data)
-            console.log(params)
         })
     }
     check()
@@ -104,12 +103,17 @@ function Main(props) {
           </Grid>
           <Grid item xs={5}>
               <FlexBox>
-                <Item bcolor={"#9acc5a"}>
-                  알림 1
+                <Item bcolor={"#fff"}>
+                  <div style={{width:'200px',border:'1px solid black',margin:'5px', borderRadius:'50%' }}>
+                  </div>
+                  <div style= {{display:'flex', flexDirection:'column' ,width:'60%', height:'100%'}}>
+                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}></div>
+                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}></div>
+                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}></div>
+                  </div>
                 </Item>
-                <Item bcolor={"#00b8f6"}>
-                알림 2
-
+                <Item bcolor={"#fff"}>
+                
                 </Item>
               </FlexBox>
           </Grid>
