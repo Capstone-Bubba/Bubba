@@ -5,8 +5,8 @@ const flDAO = require("../model/flDAO");
 
 const socketClient = socket("http://localhost:5000");
 
-let a = []
-let b = []
+let a = new Set();
+let b = new Set();
 
 module.exports = (user) => {
   // flask 서버와의 socket 연동
@@ -27,8 +27,8 @@ module.exports = (user) => {
         "OccurTime" : FaceData.time
     };
 
-    if(!a.includes(FaceData)){
-      a.push(FaceData);
+    if(!a.has(FaceData)){
+      a.add(FaceData);
       await flDAO.create_log(parameters);
       console.log(parameters);
     }
@@ -36,6 +36,7 @@ module.exports = (user) => {
 
   socketClient.on('accuracy', async (data) => {
     const AccurData = JSON.parse(data);
+    console.log(AccurData);
     const parameters = {
       "user_num" : AccurData.user,
       "side" : AccurData.side,
@@ -44,8 +45,8 @@ module.exports = (user) => {
       "front" : AccurData.front,
     };
 
-    if(!b.includes(AccurData)){
-      b.push(AccurData);
+    if(!b.has(AccurData)){
+      b.add(AccurData);
       console.log(b);
       await flDAO.accur_log(parameters);
       console.log("This is Accuracy for 30s", AccurData);

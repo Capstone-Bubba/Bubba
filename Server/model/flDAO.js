@@ -44,7 +44,7 @@ const accur_log = (parameters) => {
 const user_accur = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `SELECT * FROM accuracy WHERE user_num=? ORDER BY accur_time DESC`;
-        db.query(queryData, parameters, (err, db_data) => {
+        db.query(queryData, parameters.user_num, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {

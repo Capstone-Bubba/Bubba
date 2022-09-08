@@ -66,25 +66,31 @@ const Item = styled.div`
 `
 
 function Main(props) {
-  const [data, setData] = useState("")
+  const [data, setData] = useState([])
   const params = { user_num: props.user_num }
   useEffect(() => {
     async function check() {
-        await axios.get('http://localhost:8000/auth/face', { params }
-        ).then(async (res) => {
-            const _data = await res.data.result.map((rowData) => (
-                {
-                    result: rowData.result,
-                }
-            ))
-            setData(_data)
-            console.log(data)
-            console.log(params)
-        })
+      try{
+        const res = await axios.get('http://localhost:8000/auth/face', { params })
+        console.log(res.data.result)
+        const _data = await res.data.result.map ((rowData) => (
+          {
+            side : rowData.side,
+            back : rowData.back,
+            front : rowData.front,
+            none : rowData.none,
+            accur_time : rowData.accur_time
+          }
+        ))
+        console.log(_data)
+        setData(_data)
+      } catch(e) {
+        console.error(e.message)
+      }
     }
     check()
-}, []);
-
+  }, [])
+  console.log(data)
 
   return (
     <>
@@ -108,8 +114,7 @@ function Main(props) {
                   알림 1
                 </Item>
                 <Item bcolor={"#00b8f6"}>
-                알림 2
-
+                  알림 2
                 </Item>
               </FlexBox>
           </Grid>
