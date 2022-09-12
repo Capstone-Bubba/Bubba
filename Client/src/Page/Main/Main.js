@@ -6,6 +6,7 @@ import Profile from '../../Component/Main/Profile'
 import Notice from './Notice/Notice';
 import axios from 'axios'
 import { width } from '@mui/system';
+import { disconnectSocket, initSocketConnection } from '../../socket';
 
 
 const GraphBox = styled.div`
@@ -67,23 +68,39 @@ const Item = styled.div`
 `
 
 function Main(props) {
-  const [data, setData] = useState("")
-  const params = { user_num: props.user_num }
+  const [data, setData] = useState([])
+  // const params = { user_num: props.user_num }
+
+  
+  // useEffect(() => {
+  //   async function check() {
+  //     try{
+  //       const res = await axios.get('http://localhost:8000/auth/face', { params })
+  //       console.log(res.data.result)
+  //       const _data = await res.data.result.map ((rowData) => (
+  //         {
+  //           side : rowData.side,
+  //           back : rowData.back,
+  //           front : rowData.front,
+  //           none : rowData.none,
+  //           accur_time : rowData.accur_time
+  //         }
+  //       ))
+  //       console.log(_data)
+  //       setData(_data)
+  //     } catch(e) {
+  //       console.error(e.message)
+  //     }
+  //   }
+  //   check()
+  // }, [])
+  // console.log(data)
   useEffect(() => {
-    async function check() {
-        await axios.get('http://localhost:8000/auth/face', { params }
-        ).then(async (res) => {
-            const _data = await res.data.result.map((rowData) => (
-                {
-                    result: rowData.result,
-                }
-            ))
-            setData(_data)
-        })
+    initSocketConnection();
+    return () =>{
+      disconnectSocket();
     }
-    check()
-  }, [])
-  console.log(data)
+  })
 
   return (
     <>
@@ -91,7 +108,6 @@ function Main(props) {
 
       </Title>
       <Container maxWidth={false}>
-
         <Grid container spacing={2}>
           <Grid item xs={7} >
             <GraphBox>
@@ -107,9 +123,13 @@ function Main(props) {
                   <div style={{width:'200px',border:'1px solid black',margin:'5px', borderRadius:'50%' }}>
                   </div>
                   <div style= {{display:'flex', flexDirection:'column' ,width:'60%', height:'100%'}}>
-                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}></div>
-                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}></div>
-                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}></div>
+                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}>
+    {data.map(element => {
+      return (
+        <p>{element.accur_time}</p>
+      )
+    })}
+                  </div>
                   </div>
                 </Item>
                 <Item bcolor={"#fff"}>
