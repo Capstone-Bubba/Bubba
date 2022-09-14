@@ -1,6 +1,5 @@
 const winston = require("winston");
 const authDAO = require("../model/authDAO");
-const socket = require('../middleware/socket');
 const flDAO = require('../model/flDAO');
 const dayjs = require('dayjs');
 
@@ -120,7 +119,6 @@ const UpdateRtsp = async (req, res) => {
     try{
         await authDAO.RtspInfo(parameters);
         await authDAO.update_rtsp(parameters);
-        socket(parameters);
         res.sendStatus(200);
     } catch(err) {
         console.log(err);
@@ -142,6 +140,30 @@ const faceInfo = async (req, res) => {
     res.send({"result" : result});
 }
 
+const test_face = async(req, res) => {
+    console.log(req);
+    // const parameters = {
+    //     "user_num" : req.body.user,
+    //     "location" : req.body['0'],
+    //     "OccurTime" : req.body.time
+    // };
+    // console.log(parameters);
+    res.send('test');
+}
+
+const test_acc = async(req, res) => {
+    console.log(req);
+    // const parameters = {
+    //   "user_num" : req.body.user,
+    //   "side" : req.body.side,
+    //   "back" : req.body.back,
+    //   "none" : req.body.none,
+    //   "front" : req.body.front,
+    // };
+    // console.log(parameters);
+    res.send('test');
+}
+
 module.exports = {
     logout,
     goHome,
@@ -151,4 +173,6 @@ module.exports = {
     checkAppBaby,
     UpdateRtsp,
     faceInfo,
+    test_face,
+    test_acc
 }

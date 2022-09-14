@@ -6,7 +6,7 @@ import Profile from '../../Component/Main/Profile'
 import Notice from './Notice/Notice';
 import axios from 'axios'
 import { width } from '@mui/system';
-import { disconnectSocket, initSocketConnection } from '../../socket';
+// import { disconnectSocket, initSocketConnection } from '../../socket';
 
 
 const GraphBox = styled.div`
@@ -70,8 +70,6 @@ const Item = styled.div`
 function Main(props) {
   const [data, setData] = useState([])
   const params = { user_num: props.user_num }
-
-
   useEffect(() => {
     async function check() {
       try{

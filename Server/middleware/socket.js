@@ -3,7 +3,7 @@ const socket = require("socket.io-client");
 const authDAO = require("../model/authDAO");
 const flDAO = require("../model/flDAO");
 
-const socketClient = socket("http://localhost:5000");
+// const socketClient = socket("http://localhost:5000");
 
 let a = new Set();
 let b = new Set();
