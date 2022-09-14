@@ -6,7 +6,7 @@ import Profile from '../../Component/Main/Profile'
 import Notice from './Notice/Notice';
 import axios from 'axios'
 import { width } from '@mui/system';
-import { disconnectSocket, initSocketConnection } from '../../socket';
+// import { disconnectSocket, initSocketConnection } from '../../socket';
 
 
 const GraphBox = styled.div`
@@ -95,12 +95,13 @@ function Main(props) {
   //   check()
   // }, [])
   // console.log(data)
-  useEffect(() => {
-    initSocketConnection();
-    return () =>{
-      disconnectSocket();
-    }
-  })
+  // useEffect(() => {
+  //   initSocketConnection();
+  //   console.log(initSocketConnection());
+  //   return () =>{
+  //     disconnectSocket();
+  //   }
+  // })
 
   return (
     <>
