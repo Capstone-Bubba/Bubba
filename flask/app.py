@@ -8,6 +8,7 @@ import json
 import datetime
 import time
 
+
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": "*"}})
 
@@ -166,3 +167,10 @@ if __name__ == '__main__':
 #         print('count_len', count_len)
 # if __name__ == '__main__':
 #     socketio.run(app, debug=True)
+=======
+@socketio.on('message')
+def message(data):
+    print('test', data)
+
+if __name__ == '__main__':
+    socketio.run(app)

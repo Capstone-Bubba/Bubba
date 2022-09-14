@@ -6,11 +6,12 @@ export const initSocketConnection = () => {
   socket.connect();
 };
 
+
 export const sendSocketMessage = (cmd, body = null) => {
   if (socket == null || socket.connected === false) {
-    initiateSocketConnection();
+    initSocketConnection();
   }
-  socket.emit("message", {
+  socket.emit('test', {
     cmd: cmd,
     body: body,
   });

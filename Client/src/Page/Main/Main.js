@@ -69,40 +69,50 @@ const Item = styled.div`
 
 function Main(props) {
   const [data, setData] = useState([])
-  // const params = { user_num: props.user_num }
-
-  
-  // useEffect(() => {
-  //   async function check() {
-  //     try{
-  //       const res = await axios.get('http://localhost:8000/auth/face', { params })
-  //       console.log(res.data.result)
-  //       const _data = await res.data.result.map ((rowData) => (
-  //         {
-  //           side : rowData.side,
-  //           back : rowData.back,
-  //           front : rowData.front,
-  //           none : rowData.none,
-  //           accur_time : rowData.accur_time
-  //         }
-  //       ))
-  //       console.log(_data)
-  //       setData(_data)
-  //     } catch(e) {
-  //       console.error(e.message)
-  //     }
-  //   }
-  //   check()
-  // }, [])
-  // console.log(data)
+  const params = { user_num: props.user_num }
+  useEffect(() => {
+    async function check() {
+      try{
+        const res = await axios.get('http://localhost:8000/auth/face', { params })
+        console.log(res.data.result)
+        const _data = await res.data.result.map ((rowData) => (
+          {
+            side : rowData.side,
+            back : rowData.back,
+            front : rowData.front,
+            none : rowData.none,
+            accur_time : rowData.accur_time
+          }
+        ))
+        console.log(_data)
+        setData(_data)
+      } catch(e) {
+        console.error(e.message)
+      }
+    }
+    check()
+  }, [])
+  console.log(data)
   // useEffect(() => {
   //   initSocketConnection();
-  //   console.log(initSocketConnection());
-  //   return () =>{
+  //   console.log(initSocketConnection())
+  //   return () => {
   //     disconnectSocket();
   //   }
   // })
-
+  const states = [
+		{nowState : "배고픔"}, 
+		{nowState : "트림"},
+		{nowState : "복통"},
+		{nowState : "불편"},
+		{nowState : "피곤"}
+	]
+  function Random(array){
+    const random = Math.floor(Math.random() * array.length);
+    return array[random];
+  }
+  let nowData = Random(states);
+  console.log(nowData)
   return (
     <>
       <Title>
@@ -119,24 +129,30 @@ function Main(props) {
             </GraphBox>
           </Grid>
           <Grid item xs={5}>
-              <FlexBox>
-                <Item bcolor={"#fff"}>
-                  <div style={{width:'200px',border:'1px solid black',margin:'5px', borderRadius:'50%' }}>
-                  </div>
-                  <div style= {{display:'flex', flexDirection:'column' ,width:'60%', height:'100%'}}>
-                  <div style={{width:'100%',border:'1px solid black', marginTop:'3%', height:'40px',marginLeft:'2%' }}>
-    {data.map(element => {
-      return (
-        <p>{element.accur_time}</p>
-      )
-    })}
-                  </div>
-                  </div>
-                </Item>
-                <Item bcolor={"#fff"}>
-                  
-                </Item>
-              </FlexBox>
+            <FlexBox>
+              <Item bcolor={"#f0ffff"}>
+                <div style={{ display: 'flex', flexDirection: 'column', width: '90%' }}>
+                  {data
+                    .slice(0, 3)
+                    .map(element => {
+                      return (
+                        <div style={{ width: '100%', border: '1px solid black', marginTop: '1%', height: '50px', marginLeft: '4%',paddingLeft:'3px' }}>
+                          <p>{element.accur_time}</p>
+                        </div>
+                      )
+                    })}
+                </div>
+              </Item>
+              <Item bcolor={"#f1fdee"}>
+                <div style={{display:'flex', flexDirection:'row', width:'100%',alignItems:'center',justifyContent:'center'}}>
+                    <p style={{width:'30%'}}>현재 아이의 상태는</p>
+                    <div style={{border:'2px solid black',borderRadius:'50%',width:'180px',height:'180px',display:'flex',alignItems:'center',justifyContent:'center'}}>
+                      <p style={{fontSize:'3rem',fontWeight:'2'}}>{nowData.nowState}</p>
+                    </div>
+                </div>
+
+              </Item>
+            </FlexBox>
           </Grid>
           <Grid item xs={7}>
             <PushBox>

@@ -3,31 +3,36 @@ import { ResponsiveBar } from '@nivo/bar'
 const data = [
   {
     day: "월요일",
-    degress: 59,
+    degress: 36,
   },
   {
     day: "화요일",
-    degress: 61
+    degress: 35
   },
   {
     day: "수요일",
-    degress: 55
+    degress: 36,
+
   },
   {
     day: "목요일",
-    degress: 78
+    degress: 35,
+
   },
   {
     day: "금요일",
-    degress: 71
+    degress: 37,
+
   },
   {
     day: "토요일",
-    degress: 56
+    degress: 38,
+
   },
   {
     day: "일요일",
-    degress: 67
+    degress: 33,
+
   }
 ];
 const Graph = () => {
