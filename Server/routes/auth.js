@@ -26,9 +26,9 @@ router.get('/face', authCtrl.faceInfo);
 // Update Rtsp Info
 router.post('/rtsp', authCtrl.UpdateRtsp);
 
-router.post('/test_face', authCtrl.test_face);
+// router.post('/test_face', authCtrl.test_face);
 
-router.post('/test_acc', authCtrl.test_acc);
+// router.post('/test_acc', authCtrl.test_acc);
 
 // andorid auth router
 
