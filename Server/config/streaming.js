@@ -9,7 +9,7 @@ const start = async (user_num) => {
         }
         
         const result = await authDAO.RtspInfo(parameters);
-        rtspList.url = result.rtsp;
+        rtspList.url = result[0].rtsp;
         openStream(rtspList);
         setInterval(function (obj) {
                 let today = new Date();
