@@ -52,7 +52,7 @@ def background_task(user, rtsp):
 
             sql1 = "INSERT INTO bubba.facelog(user_num, location, OccurTime) \
                 VALUES(%s, %s, %s)"
-            row = db_class.execute(sql1, [dic['user'], dic['0'], dic['time']])
+            db_class.execute(sql1, [dic['user'], dic['0'], dic['time']])
             db_class.commit()
 
             print('FaceLog for 1s', json.dumps(dic))
@@ -65,7 +65,7 @@ def background_task(user, rtsp):
             count_len += 1
             sql2 = "INSERT INTO bubba.accuracy(user_num, side, back, front, none, accur_time) \
                 VALUES(%s, %s, %s, %s, %s, %s)"
-            row = db_class.execute(sql2, [count['user'], count['side'], count['back'], count['front'], count['none'], now.strftime('%Y-%m-%d %H:%m:%S')])
+            db_class.execute(sql2, [count['user'], count['side'], count['back'], count['front'], count['none'], now.strftime('%Y-%m-%d %H:%m:%S')])
             db_class.commit()
             print('Accuracy for 30s', json.dumps(count))
             count['back'], count['side'], count['front'], count['none'] = 0, 0, 0, 0

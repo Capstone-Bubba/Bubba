@@ -5,7 +5,6 @@ const passportConfig = require('./passport/passportConfig');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const morgan = require('morgan');           // 통신 log
-const socket = require('./middleware/socket');
 
 const app = express();
 
@@ -38,15 +37,11 @@ passportConfig();
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(cookieParser());
-// app.use(morgan('combined', {stream: logger.stream}));
 app.use('/notice', noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
-// app.use('/gallery', auth.userCheck, galleryRouter);
 app.use('/gallery', galleryRouter);
-// app.use('/calendar', auth.userCheck, CalendarRouter);
 app.use('/calendar', CalendarRouter);
-// app.use('/push', auth.authorityCheck, pushRouter);
 app.use('/cctv', cctvRouter);
 
 module.exports = app;
