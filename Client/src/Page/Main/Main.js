@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components'
 import Graph from '../../Component/Main/Graph'
 import Profile from '../../Component/Main/Profile'
+import ReactInterval from 'react-interval';
 import Notice from './Notice/Notice';
 import axios from 'axios'
 import { width } from '@mui/system';
@@ -73,7 +74,8 @@ function Main(props) {
   useEffect(() => {
     async function check() {
       try{
-        const res = await axios.get('http://localhost:8000/auth/face', { params })
+        setInterval(async () => {
+          const res = await axios.get('http://localhost:8000/auth/face', { params })
         console.log(res.data.result)
         const _data = await res.data.result.map ((rowData) => (
           {
@@ -86,6 +88,7 @@ function Main(props) {
         ))
         console.log(_data)
         setData(_data)
+        }, 1000);
       } catch(e) {
         console.error(e.message)
       }
@@ -93,13 +96,7 @@ function Main(props) {
     check()
   }, [])
   console.log(data)
-  // useEffect(() => {
-  //   initSocketConnection();
-  //   console.log(initSocketConnection())
-  //   return () => {
-  //     disconnectSocket();
-  //   }
-  // })
+
   const states = [
 		{nowState : "배고픔"}, 
 		{nowState : "트림"},
@@ -131,6 +128,7 @@ function Main(props) {
           <Grid item xs={5}>
             <FlexBox>
               <Item bcolor={"#f0ffff"}>
+         
                 <div style={{ display: 'flex', flexDirection: 'column', width: '90%' }}>
                   {data
                     .slice(0, 3)

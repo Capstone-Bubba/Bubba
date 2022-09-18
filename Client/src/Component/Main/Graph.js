@@ -45,7 +45,6 @@ const Graph = () => {
       padding={0.6}
       colors={["#3182CE"]}
       enableLabel={false}
-    
     />
   );
 };
