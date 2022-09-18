@@ -6,12 +6,12 @@ export const initSocketConnection = () => {
   socket.connect();
 };
 
-
+// 이벤트 명을 지정하고 데이터를 보냄
 export const sendSocketMessage = (cmd, body = null) => {
   if (socket == null || socket.connected === false) {
-    initSocketConnection();
+    initiateSocketConnection();
   }
-  socket.emit('test', {
+  socket.emit("message", {
     cmd: cmd,
     body: body,
   });
@@ -20,6 +20,7 @@ export const sendSocketMessage = (cmd, body = null) => {
 
 let cbMap = new Map();
 
+// 해당 이벤트를 받고 콜백 함수를 실행함
 export const socketInfoReceived = (cbType, cb) => {
   cbMap.set(cbType, cb);
   
