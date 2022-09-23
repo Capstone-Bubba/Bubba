@@ -7,6 +7,7 @@ import ReactInterval from 'react-interval';
 import Notice from './Notice/Notice';
 import axios from 'axios'
 import { width } from '@mui/system';
+import { blue } from '@mui/material/colors';
 // import { disconnectSocket, initSocketConnection } from '../../socket';
 
 
@@ -88,7 +89,7 @@ function Main(props) {
         ))
         console.log(_data)
         setData(_data)
-        }, 1000);
+        }, 31000);
       } catch(e) {
         console.error(e.message)
       }
@@ -104,6 +105,7 @@ function Main(props) {
 		{nowState : "불편"},
 		{nowState : "피곤"}
 	]
+  
   function Random(array){
     const random = Math.floor(Math.random() * array.length);
     return array[random];
@@ -134,8 +136,8 @@ function Main(props) {
                     .slice(0, 3)
                     .map(element => {
                       return (
-                        <div style={{ width: '100%', border: '1px solid black', marginTop: '1%', height: '50px', marginLeft: '4%',paddingLeft:'3px' }}>
-                          <p>{element.accur_time}</p>
+                        <div style={{ width: '100%',fontSize:'1rem', border: '1px solid skyblue',borderRadius:'10px', marginTop: '4px',paddingBottom:'3px', height: '50px', marginLeft: '4%',paddingLeft:'3px',backgroundColor:'#a9cae8', }}>
+                          <p>{element.accur_time}기준 아이의 얼굴 위치 변동 횟수는 옆면:{element.side},뒷면:{element.back}앞면:{element.front}</p>
                         </div>
                       )
                     })}
