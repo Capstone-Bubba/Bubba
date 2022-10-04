@@ -23,7 +23,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_weight="1">
+            app:layout_constraintWidth_percent="0.5"
+            >
 
             <androidx.cardview.widget.CardView
                 android:layout_width="60dp"
@@ -45,7 +46,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/baby_info_layout"
                 android:layout_marginStart="10dp"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_gravity="center">
 
@@ -53,11 +54,14 @@
                     android:id="@+id/home_baby_name"
                     app:layout_constraintTop_toTopOf="@+id/baby_info_layout"
                     app:layout_constraintStart_toStartOf="@+id/baby_info_layout"
+                    app:layout_constraintEnd_toEndOf="@+id/baby_info_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="응애 오동협"
+                    android:text="응애"
                     android:textColor="@color/black"
-                    android:layout_gravity="center"
+                    android:lines="1"
+                    app:layout_constraintHorizontal_bias="0"
+                    app:layout_constraintWidth_percent="1"
                     android:textSize="10pt"/>
 
                 <TextView
@@ -69,8 +73,11 @@
                     android:layout_height="wrap_content"
                     android:text="624 개월"
                     android:textSize="10pt"
+                    app:layout_constraintHorizontal_bias="0"
                     android:lines="1"
-                    android:layout_gravity="center"
+                    android:gravity="left"
+                    android:layout_gravity="left"
+                    app:layout_constraintWidth_percent="1"
                     android:textColor="@color/black"/>
 
 

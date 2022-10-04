@@ -50,7 +50,7 @@ class Calendar : Fragment() {
 
     var selectedDate: LocalDate? = null
     private val monthTitleFormatter = DateTimeFormatter.ofPattern("MMMM")
-    lateinit var CalendarData : Map<LocalDate,List<CalendarDetail>>
+    var CalendarData : Map<LocalDate,List<CalendarDetail>>? = null
 
 
 
@@ -72,6 +72,7 @@ class Calendar : Fragment() {
         calendarPlusBt = v.findViewById(R.id.calendar_plus)
 
         calendar_ViewModel = ViewModelProvider(rootActivty).get(CalendarViewModel::class.java)
+
 
         return v
     }
@@ -116,7 +117,7 @@ class Calendar : Fragment() {
                             val calendar = binding.findViewById<com.kizitonwose.calendarview.CalendarView>(R.id.calendarView)
                             calendar.notifyDateChanged(day.date)
                             oldDate?.let { calendar.notifyDateChanged(it) }
-                            if (CalendarData.isNotEmpty()){
+                            if (CalendarData?.isNotEmpty() == true){
                                 updateAdapterForDate(day.date)
                             }
                             //DataLoad
@@ -218,7 +219,7 @@ class Calendar : Fragment() {
 
     private fun updateAdapterForDate(date: LocalDate?) {
         calendarAdapter.calendarData.clear()
-        calendarAdapter.calendarData.addAll(CalendarData[date].orEmpty())
+        calendarAdapter.calendarData.addAll(CalendarData?.get(date).orEmpty())
         calendarAdapter.notifyDataSetChanged()
     }
 
