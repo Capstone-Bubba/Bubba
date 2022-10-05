@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
             val mGoogleSignInClient = GoogleSignIn.getClient(this,google_login.gso)
             var signIntent: Intent = mGoogleSignInClient.getSignInIntent()
             GoogleSignResultLauncher.launch(signIntent)
-            onStart()
+            CheckLogin(this@MainActivity).TotalLoginCheck()
         }
 
 
@@ -86,21 +86,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.e("Login","onStart")
-
-        CoroutineScope(Dispatchers.IO).launch {
-            val refreshToken = CoroutineScope(Dispatchers.IO).async {
-                val token:String? = NaverIdLoginSDK.getRefreshToken()
-                Log.e("test",token.toString())
-                token
-            }.await()
-
-            CheckLogin(this@MainActivity).TotalLoginCheck(refreshToken)
-
-        }
+    override fun onBackPressed() {
+        //super.onBackPressed() 뒤로가기 버튼 막음
     }
+
+
 
 
 }

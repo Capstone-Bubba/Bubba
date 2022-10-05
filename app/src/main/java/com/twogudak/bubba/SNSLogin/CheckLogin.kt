@@ -6,6 +6,8 @@ import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.user.UserApiClient
+import com.navercorp.nid.NaverIdLoginSDK
+import com.twogudak.bubba.MainActivity
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 
@@ -26,10 +28,14 @@ class CheckLogin(context: Context) {
                     Log.e("LoginAccount","카카오톡 로그인 완료")
                 } else {
                     Log.e("LoginAccount","카카오톡 로그인 안되있음.")
+                    val mainIntent = Intent(context, MainActivity::class.java)
+                    context.startActivity(mainIntent)
                 }
             }
         } else {
             Log.e("LoginAccount","카카오 로그인 안되있음.")
+            val mainIntent = Intent(context, MainActivity::class.java)
+            context.startActivity(mainIntent)
         }
 
 
@@ -53,7 +59,11 @@ class CheckLogin(context: Context) {
     }//google Account
 
 
-    fun TotalLoginCheck(token:String?){
+    fun TotalLoginCheck(){
+
+
+        val token = NaverIdLoginSDK.getRefreshToken()
+
         if(token == null){
             Log.e("Login Check","Naver Login 안되있음")
             googleAccount()

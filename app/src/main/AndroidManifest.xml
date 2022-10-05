@@ -50,11 +50,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
@@ -69,6 +65,15 @@
                 <data
                     android:host="oauth"
                     android:scheme="kakao${Kakao_Native_key}" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Ui.SplashActivity"
+            android:exported="true"
+            android:theme="@style/SplashTheme">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
     </application>
