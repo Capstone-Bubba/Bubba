@@ -154,6 +154,9 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         titleData.add("아이가 울고 있음 불편함")
         titleData.add("아이가 울고 있음 아픔")
         titleData.add("아이가 울고 있음 화장실")
+        timedata.add("3월 11일 오후 10시 30분")
+        titleData.add("아이가 울고 있음 불편함")
+
 
         val recyclerAdapter = Home_notification_recycelView(rootActivty,timedata,titleData)
         home_notification_recyceler.adapter = recyclerAdapter

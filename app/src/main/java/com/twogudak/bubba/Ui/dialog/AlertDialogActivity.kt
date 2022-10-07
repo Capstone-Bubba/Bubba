@@ -7,6 +7,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.twogudak.bubba.R
@@ -28,6 +29,7 @@ class AlertDialogActivity() : AppCompatActivity() {
         setContentView(R.layout.activity_alert_dialog)
 
         var contentText = intent.getStringExtra("Content")
+        Log.d("receiveIntent",contentText.toString())
 
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
