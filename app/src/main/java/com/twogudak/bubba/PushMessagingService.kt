@@ -19,8 +19,7 @@ import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class PushMessagingService : FirebaseMessagingService() {
 
-    private lateinit var vibrator: Vibrator
-    private val pattern = longArrayOf(100, 200, 100, 200, 100, 200)
+
 
     override fun onNewToken(token: String) {
         super.onNewToken(token)
@@ -41,8 +40,7 @@ class PushMessagingService : FirebaseMessagingService() {
         message.notification?.let {
             Log.d("FCM", "Message Notification Body: ${it.body}")
         }
-        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrator.vibrate(pattern, 0)
+
         var handler = Handler(Looper.getMainLooper()).post {
             var AlertDialogIntent = Intent(applicationContext, AlertDialogActivity::class.java)
             AlertDialogIntent.putExtra("Content",message.data["content"])
