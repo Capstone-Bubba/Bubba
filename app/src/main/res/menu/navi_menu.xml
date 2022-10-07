@@ -7,11 +7,6 @@
             android:title="Home"
             />
         <item
-            android:id="@+id/menu_notice"
-            android:icon="@drawable/menu_notice"
-            android:title="Notice"
-            />
-        <item
             android:id="@+id/menu_Calendar"
             android:icon="@drawable/menu_calendar"
             android:title="Calendar"

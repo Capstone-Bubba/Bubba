@@ -9,29 +9,22 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import androidx.appcompat.widget.Toolbar
-import androidx.core.os.bundleOf
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.messaging.FirebaseMessaging
 import com.kakao.sdk.user.UserApiClient
-import com.twogudak.bubba.HttpData.RespositoryManager.SendToken
 import com.twogudak.bubba.R
-import com.twogudak.bubba.SNSLogin.CheckLogin
 import com.twogudak.bubba.SNSLogin.Kakao_Login_class
 import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.Alarm.AlarmActivity
 import com.twogudak.bubba.Ui.CCTV.CCTV
 import com.twogudak.bubba.Ui.Calendar.Calendar
-import com.twogudak.bubba.Ui.Diary.Diary
 import com.twogudak.bubba.Ui.Home.Home
-import com.twogudak.bubba.Ui.Notice.Notice
 import com.twogudak.bubba.Ui.Setting.Setting
 import java.lang.Thread.sleep
-import kotlin.concurrent.thread
 
 
 class rootActivty : AppCompatActivity() {
@@ -59,7 +52,6 @@ class rootActivty : AppCompatActivity() {
         val homefragment = Home()
         val calendarfragment = Calendar()
 
-
         val babyname = setting["babyname"]
         val babybirth = setting["babybirth"]
         val firebasetoken = setting["fcm"]
@@ -81,7 +73,6 @@ class rootActivty : AppCompatActivity() {
         val viewpager2 = findViewById<ViewPager2>(R.id.root_viewpager2)
         val pagerAdapter = ViewPagerAdapter(this)
         pagerAdapter.addFragment(homefragment)
-        pagerAdapter.addFragment(Notice())
         pagerAdapter.addFragment(calendarfragment)
         pagerAdapter.addFragment(CCTV())
         pagerAdapter.addFragment(Setting())
@@ -105,24 +96,19 @@ class rootActivty : AppCompatActivity() {
                     viewpager2.setCurrentItem(0, false)
                     return@setNavigationItemSelectedListener true
                 }
-                R.id.menu_notice -> {
+                R.id.menu_Calendar -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
                     viewpager2.setCurrentItem(1, false)
                     return@setNavigationItemSelectedListener true
                 }
-                R.id.menu_Calendar -> {
+                R.id.menu_CCTV -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
                     viewpager2.setCurrentItem(2, false)
                     return@setNavigationItemSelectedListener true
                 }
-                R.id.menu_CCTV -> {
-                    drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(3, false)
-                    return@setNavigationItemSelectedListener true
-                }
                 R.id.menu_setting -> {
                     drawerlayout.closeDrawer(GravityCompat.START)
-                    viewpager2.setCurrentItem(4, false)
+                    viewpager2.setCurrentItem(3, false)
                     return@setNavigationItemSelectedListener true
                 }
                 else -> return@setNavigationItemSelectedListener false

@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Ui.dialog.AlertDialogActivity"
+    android:background="#FDF9D3"
     app:layout_constraintWidth_percent="0.8">
 
     <TextView
         android:id="@+id/AlertDialog_Title_Text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="알림"
+        android:text="아이가 울고 있습니다!"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,6 +21,21 @@
         android:textSize="15pt"
         android:textColor="@color/black"
         />
+
+    <ImageView
+        android:id="@+id/AlertDialog_CryImage"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/AlertDialog_Title_Text"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/crybaby"
+        app:layout_constraintBottom_toTopOf="@+id/AlertDialog_context_text"
+        android:layout_marginVertical="50dp"
+
+
+        />
+
 
     <TextView
         android:id="@+id/AlertDialog_context_text"
@@ -30,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/AlertDialog_Title_Text"
         app:layout_constraintBottom_toBottomOf="parent"
         android:text="알림의 이유가 적힌다."
-        app:layout_constraintVertical_bias="0.3"
+        app:layout_constraintVertical_bias="0.6"
         android:textColor="@color/black"
         android:textSize="10pt"/>
 
@@ -43,8 +59,11 @@
         app:layout_constraintTop_toBottomOf="@+id/AlertDialog_context_text"
         app:layout_constraintBottom_toBottomOf="parent"
         android:background="@drawable/circlebuttonselector"
+        app:layout_constraintVertical_bias="0.2"
         android:text="확인"
-        app:layout_constraintWidth_percent="0.2"
+        android:textColor="@color/white"
+        android:textSize="8pt"
+        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintDimensionRatio="1:1"/>
 
 

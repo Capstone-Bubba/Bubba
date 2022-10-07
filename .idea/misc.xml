@@ -53,6 +53,7 @@
         <entry key="app/src/main/res/drawable/naver_login_icon.xml" value="0.2285" />
         <entry key="app/src/main/res/drawable/outline.xml" value="0.209" />
         <entry key="app/src/main/res/layout/activity_alarm.xml" value="0.4036458333333333" />
+        <entry key="app/src/main/res/layout/activity_alert_dialog.xml" value="0.29375" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2700037036745352" />
         <entry key="app/src/main/res/layout/activity_notice.xml" value="0.20833333333333334" />
         <entry key="app/src/main/res/layout/activity_root_activty.xml" value="0.24259259259259258" />

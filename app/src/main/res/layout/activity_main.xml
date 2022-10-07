@@ -7,11 +7,6 @@
     android:background="#F9F7CA"
     tools:context=".MainActivity">
 
-
-
-
-
-
     <ImageView
         android:id="@+id/Login_title_Image"
         app:layout_constraintStart_toStartOf="parent"

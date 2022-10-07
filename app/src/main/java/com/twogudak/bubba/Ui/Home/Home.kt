@@ -46,6 +46,9 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
     val BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.d(TAG,"Update recycelView")
+
+
+            
         }
     }
 
