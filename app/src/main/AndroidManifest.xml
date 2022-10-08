@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.twogudak.bubba" >
+    package="com.twogudak.bubba">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
@@ -24,7 +24,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Bubba"
-        android:usesCleartextTraffic="true" >
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".Ui.CCTV.FullScreenCCTV"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:exported="false" />
         <activity
             android:name=".Ui.dialog.AlertDialogActivity"
             android:exported="false" />
@@ -38,7 +43,7 @@
 
         <service
             android:name=".PushMessagingService"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -49,12 +54,10 @@
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true" >
-
-        </activity>
+            android:exported="false"/>
         <activity
             android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -67,13 +70,14 @@
                     android:scheme="kakao${Kakao_Native_key}" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ui.SplashActivity"
+        <activity
+            android:name=".Ui.SplashActivity"
             android:exported="true"
             android:theme="@style/SplashTheme">
-
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>

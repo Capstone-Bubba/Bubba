@@ -1,11 +1,13 @@
 package com.twogudak.bubba.Ui.CCTV
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.ImageButton
 import android.widget.Toast
 import android.widget.VideoView
 import androidx.core.app.ActivityCompat
@@ -17,6 +19,7 @@ import com.twogudak.bubba.Ui.rootPage.rootActivty
 class CCTV : Fragment() {
     lateinit var rootActivty: rootActivty
     lateinit var videiview : VideoView
+    lateinit var fullScreenBt: ImageButton
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +31,7 @@ class CCTV : Fragment() {
         // Inflate the layout for this fragment
 
         videiview = v.findViewById(R.id.testcctv)
+        fullScreenBt = v.findViewById(R.id.cctvFullScreenBT)
 
         if (savedInstanceState == null) {
             if (ContextCompat.checkSelfPermission(rootActivty, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
@@ -44,12 +48,18 @@ class CCTV : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val uri = Uri.parse("rtsp://1.228.75.116:8554/unicast")
+        //val uri = Uri.parse("rtsp://1.228.75.116:8554/unicast")
+        val uri = Uri.parse("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4")
 
 
         videiview.setVideoURI(uri)
         videiview.requestFocus()
         videiview.start()
+
+        fullScreenBt.setOnClickListener {
+            val fullScreenIntent = Intent(rootActivty,FullScreenCCTV::class.java)
+            startActivity(fullScreenIntent)
+        }
 
     }
 

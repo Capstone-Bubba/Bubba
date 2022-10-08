@@ -69,6 +69,7 @@ class rootActivty : AppCompatActivity() {
 
         val toolbar: Toolbar? = findViewById(R.id.root_toolbar)
         setSupportActionBar(toolbar)
+        supportActionBar?.title = ""
 
         val viewpager2 = findViewById<ViewPager2>(R.id.root_viewpager2)
         val pagerAdapter = ViewPagerAdapter(this)
