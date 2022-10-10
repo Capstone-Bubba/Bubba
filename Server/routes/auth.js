@@ -34,6 +34,8 @@ router.post('/rtsp', authCtrl.UpdateRtsp);
 
 router.post('/app/token', authCtrl.FCMDeviceToken);
 
-router.post('/app/login', auth.sessionCheck, authCtrl.AppLogin);
+router.post('/app/login', authCtrl.AppLogin);
+
+router.get('/app/mfcc', authCtrl.app_mfcc);
 
 module.exports = router;

@@ -74,10 +74,77 @@ const deleteBaby = async (req, res) => {
     }
 };
 
+// Baby app
+
+const createAppBaby = async (req, res) => {
+    let date = dayjs(req.body.birth);
+    let birth = date.format('YYYY-MM-DD');
+    let baby_picture = req.file.filename;
+
+    const parameters = {
+        "baby_name" : req.body.baby_name, //이름
+        "birth" : birth, //생년월일
+        "gender" : req.body.gender, //성별
+        "baby_picture" : baby_picture, //아기 사진
+        "user_num" : req.query.user_num
+    };
+
+    try {
+        await babyDAO.create_baby(parameters);
+        res.sendStatus(200);
+    } catch (err) {
+        console.log(err);
+    }    
+}
+
+const readAppBabyList = async (req, res) => {
+    const parameters = {
+        "user_num" : req.query.user_num
+    };
+    
+    const result = await babyDAO.read_babyList(parameters);
+    res.send({"result" : result});
+}
+
+const readAppBaby = async (req, res) => {
+    const parameters = {
+        "user_num" : req.query.user_num
+    };
+    console.log(parameters);
+    
+    const result = await babyDAO.read_baby(parameters);
+    res.send({"result" : result});
+}
+
+// const updateAppBaby = async (req, res) => {
+//     let date = dayjs(req.body.birth);
+//     let birth = date.format('YYYY-MM-DD');
+//     let baby_picture = req.file.filename;
+
+//     const parameters = {
+//         "baby_name" : req.body.baby_name,
+//         "birth" : birth,
+//         "gender" : req.body.gender,
+//         "baby_picture" : baby_picture,
+//         "user_num" : req.session.passport.user.user_num,
+//         "baby_num" : req.query.baby_num
+//     };
+//     try {
+//         await babyDAO.update_baby(parameters);
+//         res.sendStatus(200);
+//     } catch (err){
+//         console.log(err);
+//     }
+// };
+
 module.exports = {
     readBabyList,
     readBaby,
     createBaby,
     updateBaby,
-    deleteBaby
+    deleteBaby,
+    // createAppBaby,
+    readAppBabyList,
+    readAppBaby,
+    // updateAppBaby,
 }

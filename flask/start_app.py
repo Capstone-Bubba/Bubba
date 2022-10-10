@@ -19,12 +19,12 @@ class Network(nn.Module):
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 cry_detect_model = Network()
-cry_detect_model = torch.load("/home/twogudack/Bubba/flask/app/static/cry_classifi_model.pt", map_location=device)
+cry_detect_model = torch.load("C:/Users/UIT_421/Desktop/Bubba/flask/app/static/cry_classifi_model.pt", map_location=device)
 
 
 # yolov5 얼굴 인식 custom 모델
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='/home/twogudack/Bubba/flask/app/static/best.pt')
-crypath = "/home/twogudack/Bubba/flask/app/static/test.wav"
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='C:/Users/UIT_421/Desktop/Bubba/flask/app/static/best.pt')
+crypath = "C:/Users/UIT_421/Desktop/Bubba/flask/app/static/test.wav"
 
 app = Flask(__name__)
 data = {}
@@ -54,8 +54,10 @@ def rtsp():
     data[user] = rtsp
     print(data)
 
-    daemon = Thread(target=task.background_task, args=(user, rtsp, model), daemon=True, name="Face")
+
+    daemon = Thread(target=task.detect_face, args=(user, rtsp, model))
     daemon.start()
+
     return data
 
 @app.route('/mfcc', methods=['GET'])
@@ -66,7 +68,5 @@ def mfcc():
 
     return "ok"
 
-
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0',debug= True) # 127.0.0.1
+    app.run(host='0.0.0.0', debug=True, threaded=True) # 127.0.0.1
