@@ -1,8 +1,10 @@
 const winston = require("winston");
 const authDAO = require("../model/authDAO");
-const flDAO = require('../model/flDAO');
+const AIDAO = require('../model/AIDAO');
 const dayjs = require('dayjs');
 const { default: axios } = require("axios");
+const admin = require('../config/pushConn');
+const babyDAO = require('../model/babyDAO');
 
 const logout = (req, res) => {
     req.logout();
@@ -58,14 +60,14 @@ const checkBaby = async (req, res) => {
 
 const checkAppBaby = async (req, res) => {
     const parameters = {
-        "user_num" : req.session.passport.user.user_num
+        "user_num" : req.query.user_num
     }
 
     const result = await authDAO.checkBabyId(parameters);
     if(result == undefined) {
         res.sendStatus(400);
     } else {
-        res.sendStatus(200);
+        next();
     }
 }
 
@@ -86,11 +88,13 @@ const FCMDeviceToken = async (req, res) => {
 }
 
 const AppLogin = async (req, res) => {
+    console.log(req.body);
     try{
         const parameters = {
             email : req.body.email,
             platform : req.body.platform
         }
+        console.log(parameters);
 
         const isUser = await authDAO.checkUserID(parameters);
         if(isUser[0].exist == 0) {
@@ -98,13 +102,9 @@ const AppLogin = async (req, res) => {
         }
 
         const isUserNum = await authDAO.checkUserNum(parameters);
+        
         console.log(isUserNum);
-        req.session.passport = {};
-        req.session.passport.user = {};
-        req.session.passport.user.email = parameters.email;
-        req.session.passport.user.platform = parameters.platform;
-        req.session.passport.user.user_num = isUserNum[0].user_num;
-        res.sendStatus(200);
+        res.send(`${isUserNum[0].user_num}`);
     } catch(err) {
         console.log(err);
         res.sendStatus(400);
@@ -113,8 +113,8 @@ const AppLogin = async (req, res) => {
 
 const UpdateRtsp = async (req, res) => {
         const parameters = {
-            // "user_num": req.session.passport.user.user_num,
-            "user_num" : req.query.num,
+            // "email": req.body.email,
+            "user_num" : req.query.user_num,
             "rtsp" : req.body.rtsp
         };
     try{
@@ -132,42 +132,69 @@ const UpdateRtsp = async (req, res) => {
 }
 
 const faceInfo = async (req, res) => {
+    try{
     const parameters = {
-        // "user_num" : req.session.passport.user.user_num
-        "user_num" : req.query.user_num
+        "user_num" : req.session.passport.user.user_num
+        // "user_num" : req.query.user_num
     }
-    const result = await flDAO.user_accur(parameters);
-    result.map(val => {
-        console.log(val.accur_time);
-        val.accur_time = dayjs(val.accur_time).format('YYYY.MM.DD HH:mm:ss');
-    })
-
-    res.send({"result" : result});
+        const result = await AIDAO.user_accur(parameters);
+        const obj = result.map(val => {
+            val.accur_time = dayjs(val.accur_time).format('YYYY.MM.DD HH:mm:ss');
+            if(Math.max(val.side, val.back, val.front) == val.side){
+                return val = {"result" : "옆면", "accur_time" : val.accur_time}
+            } else if (Math.max(val.side, val.back, val.front) == val.back){
+                return val = {"result" : "뒷면", "accur_time" : val.accur_time}
+            } else {
+                return val = {"result" : "앞면", "accur_time" : val.accur_time}
+            }
+        })
+        if(obj[0].result == '뒷면'){
+            const tokenData = await authDAO.userToken(parameters);
+            let message = {
+                token : tokenData,
+                notification :{
+                    body : "FaceAI"
+                },
+                data : {
+                    content : "뒷면",
+                },
+                android : {
+                    priority : "high",
+                },
+            }
+            console.log(message.token);
+        
+            admin.messaging()
+                .send(message)
+                .then((response) => {
+                    console.log("Succesfully sent message : ", response);
+                })
+                .catch((err) => {
+                    console.log("Error Sending message !!! :", err);
+                })
+        } else {
+            console.log(obj[0].result);
+        }
+        res.send({"result" : obj});
+    } catch(err) {
+        console.log("rtsp 정보 없음");
+        // res.send({"error" : "rtsp 정보 없음" })
+    }
 }
 
-// const test_face = async(req, res) => {
-//     console.log(req);
-//     // const parameters = {
-//     //     "user_num" : req.body.user,
-//     //     "location" : req.body['0'],
-//     //     "OccurTime" : req.body.time
-//     // };
-//     // console.log(parameters);
-//     res.send('test');
-// }
+const app_mfcc = async (req, res) => {
+    try{
+    const parameters = {
+        "user_num" : req.query.user_num
+    }
 
-// const test_acc = async(req, res) => {
-//     console.log(req);
-//     // const parameters = {
-//     //   "user_num" : req.body.user,
-//     //   "side" : req.body.side,
-//     //   "back" : req.body.back,
-//     //   "none" : req.body.none,
-//     //   "front" : req.body.front,
-//     // };
-//     // console.log(parameters);
-//     res.send('test');
-// }
+    const app_mfcc = await AIDAO.ReadMFCC(parameters);
+    console.log(app_mfcc);
+    res.send({"result" : app_mfcc})
+    } catch(e) {
+        console.log(e);
+    }
+}
 
 module.exports = {
     logout,
@@ -178,6 +205,5 @@ module.exports = {
     checkAppBaby,
     UpdateRtsp,
     faceInfo,
-    // test_face,
-    // test_acc
+    app_mfcc,
 }

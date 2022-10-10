@@ -79,11 +79,15 @@ function Main(props) {
           const res = await axios.get('http://localhost:8000/auth/face', { params })
         console.log(res.data.result)
         const _data = await res.data.result.map ((rowData) => (
+          // {
+          //   side : rowData.side,
+          //   back : rowData.back,
+          //   front : rowData.front,
+          //   none : rowData.none,
+          //   accur_time : rowData.accur_time
+          // }
           {
-            side : rowData.side,
-            back : rowData.back,
-            front : rowData.front,
-            none : rowData.none,
+            result : rowData.result,
             accur_time : rowData.accur_time
           }
         ))
@@ -136,8 +140,8 @@ function Main(props) {
                     .slice(0, 3)
                     .map(element => {
                       return (
-                        <div style={{ width: '100%',fontSize:'1rem', border: '1px solid skyblue',borderRadius:'10px', marginTop: '4px',paddingBottom:'3px', height: '50px', marginLeft: '4%',paddingLeft:'3px',backgroundColor:'#a9cae8', }}>
-                          <p>{element.accur_time}기준 아이의 얼굴 위치 변동 횟수는 옆면:{element.side},뒷면:{element.back}앞면:{element.front}</p>
+                        <div style={{ width: '100%',fontSize:'1rem', border: '1px solid skyblue',borderRadius:'10px', marginTop: '4px',paddingBottom:'3px', height: '50px', marginLeft: '4%',paddingLeft:'22px',backgroundColor:'#a9cae8' }}>
+                          <p>{element.accur_time}기준 아이의 얼굴 위치 변동 횟수는 {element.result}</p>
                         </div>
                       )
                     })}

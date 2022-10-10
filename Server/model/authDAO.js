@@ -133,6 +133,20 @@ const ReadDeviceToken = () => {
     })
 }
 
+const userToken = (parameters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT deviceToken FROM user where deviceToken is NOT NULL AND user_num=?`;
+        db.query(queryData, parameters.user_num, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                console.log(db_data[0].deviceToken);
+                resolve(db_data[0].deviceToken);
+            }
+        })
+    })
+}
+
 const update_rtsp = (parameters) => {
     return new Promise((resolve, reject) => {
         let queryData = `UPDATE User SET rtsp = ? where user_num=?`;
@@ -159,7 +173,6 @@ const RtspInfo = (parameters) => {
     })
 }
 
-
 module.exports = {
     checkUserID,
     insertUser,
@@ -173,5 +186,6 @@ module.exports = {
     UpdateUser,
     RtspInfo,
     update_rtsp,
+    userToken,
 }
 

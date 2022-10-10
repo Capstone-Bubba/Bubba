@@ -1,9 +1,9 @@
 import database
 import cv2, json, time, datetime
 
-def background_task(user, rtsp, model):
+def detect_face(user, rtsp, model):
 
-    #db_class = database.Database()
+    db_class = database.Database()
 
     # cv2 camera 캡쳐 할 도메인
     cam = cv2.VideoCapture(rtsp)
@@ -17,12 +17,15 @@ def background_task(user, rtsp, model):
     start = time.time()
 
     while True:
-        time.sleep(1)
         status, img = cam.read()
         if status:
-            result = model(img)
+            result = model(img[..., ::-1])
             name = result.pandas().xyxy[0]['name']
+            print(name)
             
+            # cv2.imshow("video", img)
+            # cv2.waitKey(1)
+
             if name.empty:
                 count['none'] += 1
                 print('empty')
@@ -42,10 +45,10 @@ def background_task(user, rtsp, model):
                 dic['user'] = user
                 dic['time'] = now.strftime('%Y-%m-%d %H:%m:%S')
 
-                # sql1 = "INSERT INTO bubba.facelog(user_num, location, OccurTime) \
-                #     VALUES(%s, %s, %s)"
-                # db_class.execute(sql1, [dic['user'], dic['0'], dic['time']])
-                # db_class.commit()
+                sql1 = "INSERT INTO bubba.facelog(user_num, location, OccurTime) \
+                    VALUES(%s, %s, %s)"
+                db_class.execute(sql1, [dic['user'], dic['0'], dic['time']])
+                db_class.commit()
 
                 print('FaceLog for 1s', json.dumps(dic))
 
@@ -55,10 +58,12 @@ def background_task(user, rtsp, model):
             if( end - start > 30 * count_len ):
                 now = datetime.datetime.now()
                 count_len += 1
-                # sql2 = "INSERT INTO bubba.accuracy(user_num, side, back, front, none, accur_time) \
-                #     VALUES(%s, %s, %s, %s, %s, %s)"
-                # db_class.execute(sql2, [count['user'], count['side'], count['back'], count['front'], count['none'], now.strftime('%Y-%m-%d %H:%m:%S')])
-                # db_class.commit()
+                sql2 = "INSERT INTO bubba.accuracy(user_num, side, back, front, none, accur_time) \
+                    VALUES(%s, %s, %s, %s, %s, %s)"
+                db_class.execute(sql2, [count['user'], count['side'], count['back'], count['front'], count['none'], now.strftime('%Y-%m-%d %H:%m:%S')])
+                db_class.commit()
                 print('Accuracy for 30s', json.dumps(count))
                 count['back'], count['side'], count['front'], count['none'] = 0, 0, 0, 0
             print('count_len', count_len)
+        else:
+            print(status)
