@@ -28,7 +28,6 @@ class Kakao_Login_class(context: Context) {
         ApplicationSetting(context)
     }
 
-
     //카카오톡 앱이 안깔려있을때 사용되는 callback 함수
     val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
         if (error != null) {

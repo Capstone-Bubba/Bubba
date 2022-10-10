@@ -80,6 +80,10 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
             IntentFilter("notification Message")
         )
 
+        val bundle = arguments
+        val email = bundle?.getString("email")
+        Log.d("Home_email",email.toString())
+
         babyRegistBt.setOnClickListener {
             val manager = childFragmentManager
             Log.d(TAG,"아기 정보 등록 dialog Show")
@@ -102,6 +106,8 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         birthday = setting["babybirth"]
         babyimage = appSetting.getBabyImg()
         Log.d(TAG,"return babyimage : ${babyimage}")
+
+
 
 
 

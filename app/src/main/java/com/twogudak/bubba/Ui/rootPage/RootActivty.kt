@@ -57,13 +57,17 @@ class rootActivty : AppCompatActivity() {
         val firebasetoken = setting["fcm"]
         val UserEmail = setting["email"]
 
-        val babyInfoBundle = Bundle()
-        babyInfoBundle.putString("babyname", babyname)
-        babyInfoBundle.putString("babybirth", babybirth)
-        homefragment.arguments = babyInfoBundle
 
         val emailBundle = Bundle()
         emailBundle.putString("email",UserEmail)
+
+
+        val babyInfoBundle = Bundle()
+        babyInfoBundle.putString("babyname", babyname)
+        babyInfoBundle.putString("babybirth", babybirth)
+        babyInfoBundle.putString("email",UserEmail)
+
+        homefragment.arguments = babyInfoBundle
         calendarfragment.arguments = emailBundle
 
 
@@ -129,37 +133,34 @@ class rootActivty : AppCompatActivity() {
             overridePendingTransition(R.anim.none, R.anim.horizon_exit)
         }
 
-        val sendTokenThread = Thread {
-            var count = 0
-            while (true) {
-                if (UserEmail != "" && firebasetoken != "") {
-                    Log.d("rootActivty", "Send \nEmail: ${UserEmail}\nfcm: $firebasetoken")
-                    runOnUiThread {
-                        rootViewModel.sendFireBaseToken(firebasetoken!!, UserEmail!!)
-                            .observe(this@rootActivty) {
-                                if (it == "OK") {
-                                    Log.d("rootActivty Send Token", "Send Complete")
-                                }
-                            }
-                    }
-                    break
-                } else {
-                    Log.d("rootActivty", "Is Null")
-                    sleep(100)
-                    if (count == 10){
-                        break
-                    } else {
-                        count++
-                    }
-                }
-            }
-        }
-
         initFirebase()
         setNotificationChannel()
-        sendTokenThread.start()
-        LoadKaKaoInfo()
 
+
+        UserApiClient.instance.me { user, error ->
+            if(error != null){
+                Log.e("Kakao Account", "사용자 정보 요청 실패", error)
+            } else if (user != null) {
+                Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
+                if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
+                    Log.d("rootActivty",user.kakaoAccount?.email.toString())
+                    val email = user.kakaoAccount?.email.toString()
+                    rootViewModel.sendUserData("kakao",email).observe(this){
+                        Log.d("appid",it)
+                        if (it.isNotEmpty()){
+                            appSetting.setAppid(it)
+                            Log.d("appid",it)
+                            rootViewModel.sendFireBaseToken(firebasetoken!!, email)
+                                .observe(this@rootActivty) {
+                                    Log.d("rootActivty Send Token", "Send Complete${it.toString()}")
+                                }
+                        }
+                    }
+                }
+            } else {
+                Log.i("Kakao Account","No Email Data")
+            }
+        }
 
     }
 
@@ -205,21 +206,5 @@ class rootActivty : AppCompatActivity() {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
-    private fun LoadKaKaoInfo(){
-        UserApiClient.instance.me { user, error ->
-            if(error != null){
-                Log.e("Kakao Account", "사용자 정보 요청 실패", error)
-            } else if (user != null) {
-                Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
-                if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
-                    Log.d("rootActivty",user.kakaoAccount?.email.toString())
-                }
-            } else {
-                Log.i("Kakao Account","No Email Data")
-            }
-        }
-    }
-
 
 }
