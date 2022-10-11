@@ -133,34 +133,7 @@ class rootActivty : AppCompatActivity() {
             overridePendingTransition(R.anim.none, R.anim.horizon_exit)
         }
 
-        initFirebase()
         setNotificationChannel()
-
-
-        UserApiClient.instance.me { user, error ->
-            if(error != null){
-                Log.e("Kakao Account", "사용자 정보 요청 실패", error)
-            } else if (user != null) {
-                Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
-                if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
-                    Log.d("rootActivty",user.kakaoAccount?.email.toString())
-                    val email = user.kakaoAccount?.email.toString()
-                    rootViewModel.sendUserData("kakao",email).observe(this){
-                        Log.d("appid",it)
-                        if (it.isNotEmpty()){
-                            appSetting.setAppid(it)
-                            Log.d("appid",it)
-                            rootViewModel.sendFireBaseToken(firebasetoken!!, email)
-                                .observe(this@rootActivty) {
-                                    Log.d("rootActivty Send Token", "Send Complete${it.toString()}")
-                                }
-                        }
-                    }
-                }
-            } else {
-                Log.i("Kakao Account","No Email Data")
-            }
-        }
 
     }
 
@@ -169,24 +142,6 @@ class rootActivty : AppCompatActivity() {
         //super.onBackPressed() 뒤로가기 버튼 막음
     }
 
-    private fun initFirebase() {
-        FirebaseMessaging.getInstance().token
-            .addOnCompleteListener { task ->
-                if (!task.isSuccessful) {
-                    Log.d("Firebase", "getInstanceId failed", task.exception)
-                    return@addOnCompleteListener
-                }
-
-                //Get new Instance ID token
-                val token = task.result!!
-                FirebaseMessaging.getInstance()
-                    .subscribeToTopic("test")
-                Log.d("Firebase", token)
-                appSetting.setFCMToken(token)
-
-
-            }
-    }
 
     private fun setNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
