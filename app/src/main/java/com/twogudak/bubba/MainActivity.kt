@@ -191,7 +191,8 @@ class MainActivity : AppCompatActivity() {
                                         Log.d("Firebase", token)
                                         appSetting.setFCMToken(token)
 
-                                        mainViewModel.sendFireBaseToken(token,it).observe(this){
+                                        mainViewModel.sendFireBaseToken(token,email).observe(this){
+                                            Log.d("firbase",it)
                                             var rootintent = Intent(this, rootActivty::class.java)
                                             rootintent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
                                             this.startActivity(rootintent)

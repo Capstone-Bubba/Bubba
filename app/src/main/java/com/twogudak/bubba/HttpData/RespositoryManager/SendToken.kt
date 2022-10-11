@@ -52,14 +52,14 @@ class SendToken {
             override fun onResponse(call: Call<String>, response: Response<String>) {
                 if(response.code() == 200){
                     result.postValue(response.body())
-                    Log.e("Send Token","${response}")
+                    Log.d("Send firebase Token","${response}")
                 }else{
                     message.postValue("서버와의 오류가 발생했습니다.")
                 }
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("Send Token",t.toString())
+                Log.e("Send fire base Token",t.toString())
                 message.postValue("서버와의 오류가 발생했습니다.")
             }
         })
@@ -90,7 +90,7 @@ class SendToken {
             }
 
             override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.e("Send Token",t.toString())
+                Log.e("Send User Token",t.toString())
                 message.postValue("서버와의 오류가 발생했습니다.")
             }
         })
