@@ -22,14 +22,9 @@ class AlertDialogActivity() : AppCompatActivity() {
     private lateinit var Ring: Ringtone
 
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert_dialog)
-
-        var contentText = intent.getStringExtra("Content")
-        Log.d("receiveIntent",contentText.toString())
 
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -43,13 +38,26 @@ class AlertDialogActivity() : AppCompatActivity() {
         AlertDialogContent = findViewById(R.id.AlertDialog_context_text)
         AlertDialogCheckButton = findViewById(R.id.AlertDialog_Check_Button)
 
+        var contentText = intent.getStringExtra("Content")
+        intent.removeExtra("Content")
+        var clear = intent.getStringExtra("Content")
+        Log.d("receiveIntent content",contentText.toString())
+        Log.d("receiveIntent content",clear.toString())
         AlertDialogContent.text = contentText
+
 
         AlertDialogCheckButton.setOnClickListener {
             vibrator.cancel()
             Ring.stop()
             finish()
         }
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+
 
     }
 

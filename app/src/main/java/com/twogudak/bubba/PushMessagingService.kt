@@ -19,6 +19,10 @@ import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 class PushMessagingService : FirebaseMessagingService() {
 
+    var a = 0
+
+
+
 
 
     override fun onNewToken(token: String) {
@@ -38,21 +42,31 @@ class PushMessagingService : FirebaseMessagingService() {
         }
 
         message.notification?.let {
+
             Log.d("FCM", "Message Notification Body: ${it.body}")
-        }
+            if (it.body.toString() != "Notice"){
+                Log.d("FCM","Notice")
 
-        var handler = Handler(Looper.getMainLooper()).post {
-            var AlertDialogIntent = Intent(applicationContext, AlertDialogActivity::class.java)
-            AlertDialogIntent.putExtra("Content",message.data["content"])
-            var pendingIntent = PendingIntent.getActivity(applicationContext,0,AlertDialogIntent,PendingIntent.FLAG_IMMUTABLE)
-            try {
-                pendingIntent.send()
-            } catch (e: PendingIntent.CanceledException) {
-                Log.e("PushMessagingService",e.toString())
+                var AlertDialogIntent = Intent(applicationContext, AlertDialogActivity::class.java)
+                AlertDialogIntent.removeExtra("Content")
+                AlertDialogIntent.putExtra("Content",message.data["content"].toString())
+                Log.d("Content",AlertDialogIntent.getStringExtra("Content").toString())
+                var pendingIntent = PendingIntent.getActivity(applicationContext,0,AlertDialogIntent,PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+                Log.d("Content",message.data["content"].toString())
+                var handler = Handler(Looper.getMainLooper()).post {
+                    try {
+                        pendingIntent.send()
+                    } catch (e: PendingIntent.CanceledException) {
+                        Log.e("PushMessagingService",e.toString())
+                    }
+                }
+                handler
             }
-        }
-        handler
 
+
+
+
+        }
     }
 
     override fun onDeletedMessages() {
