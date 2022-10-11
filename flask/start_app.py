@@ -64,7 +64,7 @@ def mfcc():
     result = task.baby_cry_detect(crypath,cry_detect_model,device)
     print(result)
 
-    return str(result[0])
+    return "ok"
 
 
 
