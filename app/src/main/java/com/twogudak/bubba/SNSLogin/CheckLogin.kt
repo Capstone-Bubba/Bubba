@@ -8,12 +8,19 @@ import com.kakao.sdk.auth.AuthApiClient
 import com.kakao.sdk.user.UserApiClient
 import com.navercorp.nid.NaverIdLoginSDK
 import com.twogudak.bubba.MainActivity
+import com.twogudak.bubba.SaveDataManager.ApplicationSetting
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 
 
 class CheckLogin(context: Context) {
     val context = context
     var plateform = ""
+    private val appSetting by lazy {
+        ApplicationSetting(context)
+    }
+    val setting = appSetting.getSetting()
+
+
 
     fun kakaologinCheck() {
         if (AuthApiClient.instance.hasToken()) {
@@ -38,7 +45,6 @@ class CheckLogin(context: Context) {
             context.startActivity(mainIntent)
         }
 
-
     }//loginCheck
 
     fun googleAccount() {
@@ -61,7 +67,6 @@ class CheckLogin(context: Context) {
 
     fun TotalLoginCheck(){
 
-
         val token = NaverIdLoginSDK.getRefreshToken()
 
         if(token == null){
@@ -77,6 +82,7 @@ class CheckLogin(context: Context) {
             context.startActivity(rootintent)
         }
     } //naver토큰 체크
+
 
 
 }
