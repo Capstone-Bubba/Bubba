@@ -16,8 +16,8 @@ interface RetrofitInterface {
     @POST("/calendar/update")
     fun CalendarUpdate(@Query("baby_num") baby_num : HashMap<String,Int>, @Body calendarimfo : HashMap<String,String>) : Call<String>
 
-    @POST("/calendar/")
-    fun CalendarCall(@Query("baby_num") baby_num : String,@Body Email : HashMap<String,String>) : Call<CalendarDTO>
+    @GET("/calendar")
+    fun CalendarCall(@Query("baby_num") baby_num : String) : Call<CalendarDTO>
 
     @POST("/auth/app/login")
     fun RegisterUserData(@Body userData : HashMap<String,String>) : Call<String>

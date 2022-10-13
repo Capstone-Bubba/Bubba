@@ -89,8 +89,8 @@ class Calendar : Fragment() {
         calendarRecyclerView.layoutManager = LinearLayoutManager(rootActivty,RecyclerView.VERTICAL,false)
         calendarRecyclerView.addItemDecoration(DividerItemDecoration(rootActivty, RecyclerView.VERTICAL))
 
-        calendar_ViewModel.callCalendar(4,bundle?.getString("email")!!).observe(viewLifecycleOwner){
-            CalendarData = it.CalendarList.groupBy { LocalDate.parse(it.calendar_date, DateTimeFormatter.ISO_DATE) }
+        calendar_ViewModel.callCalendar(4).observe(viewLifecycleOwner){
+            CalendarData = it.CalendarList.groupBy { LocalDate.parse(it.calendar_date,DateTimeFormatter.ISO_DATE_TIME) }
             Log.d("Call Calendar",CalendarData.toString())
             calendarAdapter.notifyDataSetChanged()
         }

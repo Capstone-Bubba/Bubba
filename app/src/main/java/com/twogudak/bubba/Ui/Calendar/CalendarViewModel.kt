@@ -11,8 +11,8 @@ class CalendarViewModel(application: Application) : AndroidViewModel(application
 
     var calendarViewRespositroy = CalendarRespositroy()
 
-    fun callCalendar(baby_num: Int,email: String): MutableLiveData<CalendarDTO> {
-        return calendarViewRespositroy.callCalendar(baby_num,email)
+    fun callCalendar(baby_num: Int): MutableLiveData<CalendarDTO> {
+        return calendarViewRespositroy.callCalendar(baby_num)
     }
 
     fun getmessage(): LiveData<String> {
