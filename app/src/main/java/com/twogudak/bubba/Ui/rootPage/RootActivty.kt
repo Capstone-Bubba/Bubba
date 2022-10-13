@@ -51,24 +51,23 @@ class rootActivty : AppCompatActivity() {
 
         val homefragment = Home()
         val calendarfragment = Calendar()
+        val cctvfragment = CCTV()
+        val settingfragment = Setting()
 
-        val babyname = setting["babyname"]
-        val babybirth = setting["babybirth"]
-        val firebasetoken = setting["fcm"]
         val UserEmail = setting["email"]
+        val appid = setting["appId"]
 
 
-        val emailBundle = Bundle()
-        emailBundle.putString("email",UserEmail)
+        val settingBundle = Bundle()
+        settingBundle.putString("email",UserEmail)
+        settingBundle.putString("appid",appid)
+        Log.d("rootfragment",appid.toString())
 
 
-        val babyInfoBundle = Bundle()
-        babyInfoBundle.putString("babyname", babyname)
-        babyInfoBundle.putString("babybirth", babybirth)
-        babyInfoBundle.putString("email",UserEmail)
-
-        homefragment.arguments = babyInfoBundle
-        calendarfragment.arguments = emailBundle
+        homefragment.arguments = settingBundle
+        calendarfragment.arguments = settingBundle
+        cctvfragment.arguments = settingBundle
+        settingfragment.arguments = settingBundle
 
 
         val toolbar: Toolbar? = findViewById(R.id.root_toolbar)
@@ -79,8 +78,8 @@ class rootActivty : AppCompatActivity() {
         val pagerAdapter = ViewPagerAdapter(this)
         pagerAdapter.addFragment(homefragment)
         pagerAdapter.addFragment(calendarfragment)
-        pagerAdapter.addFragment(CCTV())
-        pagerAdapter.addFragment(Setting())
+        pagerAdapter.addFragment(cctvfragment)
+        pagerAdapter.addFragment(settingfragment)
         viewpager2.setUserInputEnabled(false)
         viewpager2.adapter = pagerAdapter
 

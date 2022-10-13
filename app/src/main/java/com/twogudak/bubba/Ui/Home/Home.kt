@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProvider
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +21,8 @@ import com.twogudak.bubba.Ui.MPAndroidGraph
 import com.twogudak.bubba.Ui.dialog.register_dialog
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,14 +34,12 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
     lateinit var home_notification_recyceler: RecyclerView
     lateinit var babyName: TextView
     lateinit var babybirth: TextView
-    lateinit var babyRegistBt: Button
-    var babyimage : Bitmap? = null
     lateinit var babyThum : ImageButton
-
-    var babyinfo = false
+    private lateinit var  homeviewModel: HomeViewModel
     val TAG = "home_fragment"
-    var name:String? = ""
-    var birthday:String? = ""
+
+
+
 
     val BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -58,14 +56,15 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        rootActivty = context as rootActivty
         // Inflate the layout for this fragment
         val v = inflater.inflate(R.layout.fragment_home, container, false)
         sleepChart = v.findViewById<BarChart>(R.id.home_sleep_chart)
         home_notification_recyceler = v.findViewById<RecyclerView>(R.id.home_notification_recycelview)
         babyName = v.findViewById(R.id.home_baby_name)
         babybirth = v.findViewById(R.id.home_baby_bith)
-        babyRegistBt = v.findViewById(R.id.home_baby_infobt)
         babyThum = v.findViewById(R.id.home_baby_image)
+        homeviewModel = ViewModelProvider(rootActivty).get(HomeViewModel::class.java)
 
 
         return v
@@ -74,7 +73,7 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
     override fun onStart() {
         super.onStart()
         Log.d(TAG,"home fragment onStart")
-        rootActivty = context as rootActivty
+
 
         LocalBroadcastManager.getInstance(rootActivty).registerReceiver(BroadcastReceiver,
             IntentFilter("notification Message")
@@ -82,15 +81,8 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
 
         val bundle = arguments
         val email = bundle?.getString("email")
-        Log.d("Home_email",email.toString())
+        val appid = bundle?.getString("appid")
 
-        babyRegistBt.setOnClickListener {
-            val manager = childFragmentManager
-            Log.d(TAG,"아기 정보 등록 dialog Show")
-            val dialog = register_dialog()
-            dialog.show(manager, "register_dialog")
-            manager.executePendingTransactions()
-        }
 
         sleepChart?.let {
             val chartinit = MPAndroidGraph(rootActivty, ArrayList<Int>(), sleepChart)
@@ -100,57 +92,26 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         val appSetting by lazy {
             ApplicationSetting(rootActivty)
         }
+        Log.d(TAG,appid.toString())
+        homeviewModel.BabyInfoCall(appid!!.toInt()).observe(viewLifecycleOwner){
+            babyName.text = it.BabyInfoDTO[0].baby_name
+            val start = LocalDateTime.parse(it.BabyInfoDTO[0].birth.toString(), DateTimeFormatter.ISO_DATE_TIME)
+            val startDate = start.format(DateTimeFormatter.ofPattern("MM월dd일"))
+            babybirth.text = startDate
+        }
+        homeviewModel.getmessage().observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+        }
 
-        val setting = appSetting.getSetting()
-        name = setting["babyname"]
-        birthday = setting["babybirth"]
-        babyimage = appSetting.getBabyImg()
-        Log.d(TAG,"return babyimage : ${babyimage}")
+        homeviewModel.AlarminfoCall(appid!!.toInt()).observe(viewLifecycleOwner){
+            Log.d(TAG,it.toString())
+        }
 
-
-
-
-
-        if (name.isNullOrEmpty() and birthday.isNullOrEmpty()){
-            babyinfo = false
-        } else {
-            babyinfo = true
-            Log.d(TAG,"${name} ${birthday}")
-            val dataformat = SimpleDateFormat("yyyyMMdd")
-            val today = Calendar.getInstance().apply {
-                set(Calendar.HOUR_OF_DAY, 0)
-                set(Calendar.MINUTE, 0)
-                set(Calendar.SECOND, 0)
-                set(Calendar.MILLISECOND, 0)
-            }.time.time
-            val start = dataformat.parse(birthday).time
-            livemounth = (((today - start) / (24 * 60 * 60 * 1000))/30).toInt()
-
-            if (babyimage != null ){
-                babyThum.setImageBitmap(babyimage)
-            } else {
-                babyThum.setOnClickListener {
-                    val manager = childFragmentManager
-                    Log.d(TAG,"아기 정보 등록 dialog Show")
-                    val dialog = register_dialog()
-                    dialog.show(manager, "register_dialog")
-                    manager.executePendingTransactions()
-                }
-            }
+        homeviewModel.getmessageAlarmInfo().observe(viewLifecycleOwner){
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
 
 
-        if (babyinfo) {
-            babyName.text = name
-            babybirth.text = "${livemounth} 개월"
-            babyName.isVisible = true
-            babybirth.isVisible = true
-            babyRegistBt.isVisible = false
-        } else {
-            babyName.isVisible = false
-            babybirth.isVisible = false
-            babyRegistBt.isVisible = true
-        }
 
         var timedata = ArrayList<String>()
         var titleData = ArrayList<String>()

@@ -81,16 +81,6 @@
                     android:textColor="@color/black"/>
 
 
-                <Button
-                    android:id="@+id/home_baby_infobt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="아기 등록"
-                    android:background="@drawable/button_effect"
-                    app:layout_constraintStart_toStartOf="@+id/baby_info_layout"
-                    app:layout_constraintEnd_toEndOf="@+id/baby_info_layout"
-                    app:layout_constraintTop_toTopOf="@id/baby_info_layout"
-                    app:layout_constraintBottom_toBottomOf="@id/baby_info_layout"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
