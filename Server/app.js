@@ -12,10 +12,7 @@ const Session = require('./config/sessionConn');
 const noticeRouter = require('./routes/notice');
 const authRouter = require('./routes/auth');
 const babyRouter = require('./routes/baby');
-const galleryRouter = require('./routes/gallery');
 const CalendarRouter = require('./routes/calendar');
-// const pushRouter = require('./routes/push');
-// const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
 const cctvRouter = require('./routes/cctv');
 const logger = require('./config/winston');
@@ -40,7 +37,6 @@ app.use(cookieParser());
 app.use('/notice', noticeRouter);
 app.use('/auth', authRouter);
 app.use('/baby', auth.userCheck, babyRouter);
-app.use('/gallery', galleryRouter);
 app.use('/calendar', CalendarRouter);
 app.use('/cctv', cctvRouter);
 
