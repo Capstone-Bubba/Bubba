@@ -4,6 +4,7 @@ const authDAO = require('../model/authDAO');
 
 const readNoticeList = async (req, res) => {
     const result = await noticeDAO.read_notice_list();
+    console.log(result);
     res.send({"result" : result});
 }
 
@@ -39,7 +40,7 @@ const createNotice = async (req, res) => {
                 priority : "high",
             },
         }
-        console.log(message.token);
+        console.log(message.tokens);
     
         admin.messaging()
             .sendMulticast(message)
