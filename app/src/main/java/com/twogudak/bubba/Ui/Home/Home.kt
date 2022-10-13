@@ -92,7 +92,6 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         val appSetting by lazy {
             ApplicationSetting(rootActivty)
         }
-        Log.d(TAG,appid.toString())
         homeviewModel.BabyInfoCall(appid!!.toInt()).observe(viewLifecycleOwner){
             babyName.text = it.BabyInfoDTO[0].baby_name
             val start = LocalDateTime.parse(it.BabyInfoDTO[0].birth.toString(), DateTimeFormatter.ISO_DATE_TIME)
@@ -105,29 +104,14 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
 
         homeviewModel.AlarminfoCall(appid!!.toInt()).observe(viewLifecycleOwner){
             Log.d(TAG,it.toString())
+            val recyclerAdapter = Home_notification_recycelView(rootActivty,it)
+            home_notification_recyceler.adapter = recyclerAdapter
+            home_notification_recyceler.layoutManager = LinearLayoutManager(rootActivty)
         }
 
         homeviewModel.getmessageAlarmInfo().observe(viewLifecycleOwner){
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         }
-
-
-
-        var timedata = ArrayList<String>()
-        var titleData = ArrayList<String>()
-        timedata.add("3월 11일 오후 10시 30분")
-        timedata.add("3월 11일 오후 10시 31분")
-        timedata.add("3월 11일 오후 10시 32분")
-        titleData.add("아이가 울고 있음 불편함")
-        titleData.add("아이가 울고 있음 아픔")
-        titleData.add("아이가 울고 있음 화장실")
-        timedata.add("3월 11일 오후 10시 30분")
-        titleData.add("아이가 울고 있음 불편함")
-
-
-        val recyclerAdapter = Home_notification_recycelView(rootActivty,timedata,titleData)
-        home_notification_recyceler.adapter = recyclerAdapter
-        home_notification_recyceler.layoutManager = LinearLayoutManager(rootActivty)
 
     }
 

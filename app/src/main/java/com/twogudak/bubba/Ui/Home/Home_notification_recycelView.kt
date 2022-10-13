@@ -7,12 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.twogudak.bubba.HttpData.DTO.AlarmInfoDTO
 import com.twogudak.bubba.R
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
-class Home_notification_recycelView(var context: Context, var timedata: ArrayList<String>, var titledata: ArrayList<String>):RecyclerView.Adapter<Home_notification_recycelView.ViewHolderClass>() {
+class Home_notification_recycelView(var context: Context, var AlarmList: AlarmInfoDTO):RecyclerView.Adapter<Home_notification_recycelView.ViewHolderClass>() {
 
     override fun getItemCount(): Int {
-        return timedata.size
+        return AlarmList.AlarmInfoDTO!!.size
     }
 
     override fun onCreateViewHolder( parent: ViewGroup, viewType: Int): Home_notification_recycelView.ViewHolderClass {
@@ -24,8 +27,8 @@ class Home_notification_recycelView(var context: Context, var timedata: ArrayLis
     }
 
     override fun onBindViewHolder(holder: Home_notification_recycelView.ViewHolderClass,  position: Int) {
-        holder.row_noti_times.text = timedata[position]
-        holder.row_noti_title.text = titledata[position]
+        holder.row_noti_times.text = "${LocalDateTime.parse(AlarmList.AlarmInfoDTO[position].accur_time, DateTimeFormatter.ISO_DATE_TIME).format(DateTimeFormatter.ofPattern("MM월dd일 HH:mm:ss"))}"
+        holder.row_noti_title.text = "${AlarmList.AlarmInfoDTO[position].mfcc_result}"
     }
 
 
