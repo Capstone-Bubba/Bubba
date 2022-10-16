@@ -56,8 +56,21 @@ const user_accur = (parameters) => {
 
 const ReadMFCC = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT mfcc_result FROM mfccinfo WHERE user_num=? ORDER BY accur_time DESC LIMIT 20`;
-        db.query(queryData, parameters.email, (err, db_data) => {
+        let queryData = `SELECT mfcc_result, accur_time FROM mfccinfo WHERE user_num=? ORDER BY accur_time DESC LIMIT 20`;
+        db.query(queryData, parameters.user_num, (err, db_data) => {
+            if(err) {
+                reject(err);
+            } else {
+                resolve(db_data);
+            }
+        })
+    })
+}
+
+const OnceMfcc = (paramters) => {
+    return new Promise((resolve, reject) => {
+        let queryData = `SELECT mfcc_result, accur_time FROM mfccinfo WHERE user_num=? ORDER BY accur_time DESC LIMIT 20`;
+        db.query(queryData, paramters.user_num, (err, db_data) => {
             if(err) {
                 reject(err);
             } else {
@@ -72,4 +85,5 @@ module.exports = {
     accur_log,
     user_accur,
     ReadMFCC,
+    OnceMfcc,
 }

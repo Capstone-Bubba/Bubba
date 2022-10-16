@@ -1,12 +1,9 @@
 const pushDAO = require('../model/pushDAO');
 const adminAndroid = require('firebase-admin');
-let androidServiceAccount = require('../private/bubba-345616-firebase-adminsdk-araq3-1e943a59b1.json');
+const admin = require('../config/pushConn');
 
-adminAndroid.initializeApp({
-    credential: admin.credential.cert(androidServiceAccount)
-  });
 
-  let target_token = req.body.token;
+//   let target_token = req.body.token;
   
 
 const readPush = async (req, res) => {

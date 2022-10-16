@@ -3,6 +3,12 @@ from threading import Thread
 import cv2, torch, json, time, datetime
 import torch.nn as nn
 import timm
+import pyaudio, wave
+import base64
+import numpy
+import scipy.io.wavfile
+import requests
+
 
 import database
 import task
@@ -16,35 +22,36 @@ class Network(nn.Module):
         x = self.model(x)
         return x
 
+CHUNK = 1024
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
 cry_detect_model = Network()
-cry_detect_model = torch.load("C:/Users/UIT_421/Desktop/Bubba/flask/app/static/cry_classifi_model.pt", map_location=device)
+cry_detect_model = torch.load("./app/static/cry_classifi_model.pt", map_location=device)
 
 
 # yolov5 얼굴 인식 custom 모델
-model = torch.hub.load('ultralytics/yolov5', 'custom', path='C:/Users/UIT_421/Desktop/Bubba/flask/app/static/best.pt')
-crypath = "C:/Users/UIT_421/Desktop/Bubba/flask/app/static/test.wav"
+model = torch.hub.load('ultralytics/yolov5', 'custom', path='./app/static/best.pt')
+# crypath = "./app/static/test.wav"
 
 app = Flask(__name__)
 data = {}
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return "test"
 
 # db 연동 test
-@app.route('/db')
-def select():
-    db_class = database.Database()
+# @app.route('/db')
+# def select():
+#     db_class = database.Database()
 
-    sql = "SELECT email, platform \
-                FROM Bubba.user"
-    row = db_class.executeAll(sql)
+#     sql = "SELECT email, platform \
+#                 FROM Bubba.user"
+#     row = db_class.executeAll(sql)
 
-    print(row)
+#     print(row)
 
-    return render_template('db.html', resultData=row[0])
+#     return render_template('db.html', resultData=row[0])
 
 @app.route('/rtsp', methods=['POST'])
 def rtsp():
@@ -60,10 +67,21 @@ def rtsp():
 
     return data
 
-@app.route('/mfcc', methods=['GET'])
+@app.route('/mfcc', methods=['POST'])
 def mfcc():
+    # user check
+    params = request.args
+    user = params['user']
 
-    result = task.baby_cry_detect(crypath,cry_detect_model,device)
+    # .wav file save
+    response = request.data
+    now = datetime.datetime.now()
+    format = now.strftime("%Y-%m-%d-%H-%M-%S")
+    file_path = './app/static/audio/' + user + '/' + format + '.wav'
+    with open(file_path, mode='bx') as f:
+        f.write(response)
+
+    result = task.baby_cry_detect(file_path, cry_detect_model, device, user)
     print(result)
 
     return "ok"
