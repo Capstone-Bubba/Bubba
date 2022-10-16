@@ -23,7 +23,10 @@ router.get('/logout', authCtrl.logout);
 
 router.get('/face', authCtrl.faceInfo);
 
-// Update Rtsp Info
+// router.post('/mfcc', authCtrl.mfccInfo);
+
+
+// Update Rtsp Info (Flask)
 router.post('/rtsp', authCtrl.UpdateRtsp);
 
 // router.post('/test_face', authCtrl.test_face);

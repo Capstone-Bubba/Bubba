@@ -16,6 +16,7 @@ const readNotice = async (req, res) => {
 }
 
 const createNotice = async (req, res) => {
+    console.log(req.body);
     const parameters = {
         "notice_title": req.body.notice_title,
         "notice_content": req.body.notice_content,

@@ -48,7 +48,7 @@ const checkBaby = async (req, res) => {
     const parameters = {
         "user_num": req.session.passport.user.user_num
     }
-    const result = await authDAO.checkBabyId(parameters)
+    const result = await authDAO.checkBabyId(parameters);
     if (result == undefined) {
         res.status(200).redirect(`http://localhost:3000/baby`);
     } else {
@@ -56,20 +56,20 @@ const checkBaby = async (req, res) => {
     }
 }
 
-// app Controller
-
-const checkAppBaby = async (req, res) => {
+const mfccInfo = async (req, res) => {
+    try {
     const parameters = {
-        "user_num" : req.query.user_num
+        "user_num" : req.session.passport.user.user_num
     }
-
-    const result = await authDAO.checkBabyId(parameters);
-    if(result == undefined) {
+    const result = await AIDAO.OnceMfcc(paramters);
+    res.send({"result" : result});
+    } catch(err) {
+        console.log(err);
         res.sendStatus(400);
-    } else {
-        next();
     }
 }
+
+// app Controller
 
 const FCMDeviceToken = async (req, res) => {
     const parameters = {
@@ -80,21 +80,19 @@ const FCMDeviceToken = async (req, res) => {
     try{
         await authDAO.UpdateUser(parameters);
         // console.log(result);
-        res.sendStatus(200);
+        res.send('OK');
     } catch(err) {
         console.log(err);
-        res.sendStatus(400);
+        res.send('Fail');
     }
 }
 
 const AppLogin = async (req, res) => {
-    console.log(req.body);
     try{
         const parameters = {
             email : req.body.email,
             platform : req.body.platform
         }
-        console.log(parameters);
 
         const isUser = await authDAO.checkUserID(parameters);
         if(isUser[0].exist == 0) {
@@ -196,14 +194,30 @@ const app_mfcc = async (req, res) => {
     }
 }
 
+const checkAppBaby = async (req, res, next) => {
+    const parameters = {
+        "user_num" : req.query.user_num
+    }
+
+    const result = await authDAO.checkBabyId(parameters);
+    if(result == undefined) {
+        console.log('baby_fail')
+        res.sendStatus(400);
+    } else {
+        console.log('success_baby');
+        next();
+    }
+}
+
 module.exports = {
     logout,
     goHome,
     checkBaby,
     FCMDeviceToken,
     AppLogin,
-    checkAppBaby,
     UpdateRtsp,
+    checkAppBaby,
     faceInfo,
     app_mfcc,
+    mfccInfo,
 }

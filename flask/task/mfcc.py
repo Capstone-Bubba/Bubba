@@ -1,3 +1,4 @@
+from datetime import datetime
 import librosa
 import timm
 import torch
@@ -7,8 +8,10 @@ import pandas as pd
 import numpy as np
 import sklearn.preprocessing
 import torchvision.transforms as transforms
+import database
 
 pad2d = lambda a, i: a[:, 0:i] if a.shape[1] > i else np.hstack((a, np.zeros((a.shape[0], i-a.shape[1]))))
+db_class = database.Database()
 
 def trans_mfcc(data,sr):
   mfcc = librosa.feature.mfcc(data, sr=sr, n_mfcc = 128, n_fft=400, hop_length=160)
@@ -39,7 +42,7 @@ def trans_spec(data,sr):
 
 
 
-def baby_cry_detect(cry_path,cry_detect_model,device):
+def baby_cry_detect(cry_path,cry_detect_model,device, user_num):
     tmp_list = []
     cry_data = []
     data, sr = librosa.load(cry_path, sr=16000)
@@ -48,25 +51,38 @@ def baby_cry_detect(cry_path,cry_detect_model,device):
     tmp_list.append(trans_spec(data, sr))
     cry_data.append(tmp_list)
     with torch.no_grad():
-       cry_detect_model.eval()
-       b= np.array(cry_data)
-       inputs = torch.FloatTensor(b).permute(0, 1, 3,2).to(device)
-       outputs = cry_detect_model(inputs)
-    return outputs.argmax().item()
-
-# 0 불편함
-# 1 배아픔
-# 2 배고픔
-# 3 트림
-# 4 피곤함
-# test = baby_cry_detect("./static/69BDA5D6-0276-4462-9BF7-951799563728-1436936185-1.1-m-26-bp.wav")
-# if(test == 0):
-#     print("불편함")
-# elif(test == 1):
-#     print("배아픔")
-# elif(test == 2):
-#     print("배고픔")
-# elif(test == 3):
-#     print("트림")
-# elif(test == 4):
-#     print("피곤함")
+      cry_detect_model.eval()
+      b=np.array(cry_data)
+      inputs = torch.FloatTensor(b).permute(0, 1, 3,2).to(device)
+      outputs = cry_detect_model(inputs)
+      result = outputs.argmax().item()
+    if(result == 0):
+      sql1 = "INSERT INTO bubba.mfccinfo(user_num, mfcc_result, accur_time) \
+                    VALUES(%s, %s, %s)"
+      db_class.execute(sql1, [user_num, '불편함', datetime.now()])
+      db_class.commit()
+      return "불편함"
+    elif(result == 1):
+      sql1 = "INSERT INTO bubba.mfccinfo(user_num, mfcc_result, accur_time) \
+                    VALUES(%s, %s, %s)"
+      db_class.execute(sql1, [user_num, '배아픔', datetime.now()])
+      db_class.commit()
+      return "배아픔"
+    elif(result == 2):
+      sql1 = "INSERT INTO bubba.mfccinfo(user_num, mfcc_result, accur_time) \
+                    VALUES(%s, %s, %s)"
+      db_class.execute(sql1, [user_num, '배고픔', datetime.now()])
+      db_class.commit()
+      return "배고픔"
+    elif(result == 3):
+      sql1 = "INSERT INTO bubba.mfccinfo(user_num, mfcc_result, accur_time) \
+                    VALUES(%s, %s, %s)"
+      db_class.execute(sql1, [user_num, '트림', datetime.now()])
+      db_class.commit()
+      return "트림"
+    elif(result == 4):
+      sql1 = "INSERT INTO bubba.mfccinfo(user_num, mfcc_result, accur_time) \
+                    VALUES(%s, %s, %s)"
+      db_class.execute(sql1, [user_num, '피곤함', datetime.now()])
+      db_class.commit()
+      return "피곤함"

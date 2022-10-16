@@ -19,6 +19,35 @@
 CREATE DATABASE IF NOT EXISTS `bubba` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `bubba`;
 
+-- 테이블 bubba.accuracy 구조 내보내기
+CREATE TABLE IF NOT EXISTS `accuracy` (
+  `ac_num` int NOT NULL AUTO_INCREMENT,
+  `user_num` int NOT NULL,
+  `side` int NOT NULL DEFAULT '0',
+  `back` int NOT NULL DEFAULT '0',
+  `front` int NOT NULL DEFAULT '0',
+  `none` int NOT NULL DEFAULT '0',
+  `accur_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`ac_num`),
+  KEY `FK_user_num_ac` (`user_num`),
+  CONSTRAINT `FK_user_num_ac` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=319 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
+-- 프로시저 bubba.autoDel 구조 내보내기
+DELIMITER //
+CREATE PROCEDURE `autoDel`()
+BEGIN
+DELETE FROM facelog WHERE OccurTime < DATE_ADD(NOW(), INTERVAL -1 Day);
+END//
+DELIMITER ;
+
+-- 이벤트 bubba.autoDelEvent 구조 내보내기
+DELIMITER //
+CREATE EVENT `autoDelEvent` ON SCHEDULE EVERY 1 MINUTE STARTS '2022-08-17 15:52:13' ON COMPLETION NOT PRESERVE ENABLE DO CALL autoDel()//
+DELIMITER ;
+
 -- 테이블 bubba.baby 구조 내보내기
 CREATE TABLE IF NOT EXISTS `baby` (
   `baby_num` int NOT NULL AUTO_INCREMENT,
@@ -30,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `baby` (
   PRIMARY KEY (`baby_num`),
   KEY `FK_user_num` (`user_num`),
   CONSTRAINT `FK_user_num` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -45,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `calendar` (
   PRIMARY KEY (`calendar_num`) USING BTREE,
   KEY `FK_baby_num2` (`baby_num`),
   CONSTRAINT `FK_baby_num2` FOREIGN KEY (`baby_num`) REFERENCES `baby` (`baby_num`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -58,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `facelog` (
   PRIMARY KEY (`fl_num`) USING BTREE,
   KEY `FK__user` (`user_num`),
   CONSTRAINT `FK__user` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=2990 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16388 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -77,6 +106,19 @@ CREATE TABLE IF NOT EXISTS `gallery` (
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
+-- 테이블 bubba.mfccinfo 구조 내보내기
+CREATE TABLE IF NOT EXISTS `mfccinfo` (
+  `mfcc_num` int NOT NULL AUTO_INCREMENT,
+  `user_num` int NOT NULL,
+  `mfcc_result` varchar(255) NOT NULL,
+  `accur_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`mfcc_num`),
+  KEY `FK user_num` (`user_num`),
+  CONSTRAINT `FK user_num` FOREIGN KEY (`user_num`) REFERENCES `user` (`user_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- 내보낼 데이터가 선택되어 있지 않습니다.
+
 -- 테이블 bubba.notice 구조 내보내기
 CREATE TABLE IF NOT EXISTS `notice` (
   `notice_num` int NOT NULL AUTO_INCREMENT,
@@ -86,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `notice` (
   `writer` varchar(50) NOT NULL DEFAULT '',
   `views` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`notice_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb3;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -124,7 +166,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `deviceToken` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `rtsp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   PRIMARY KEY (`user_num`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
