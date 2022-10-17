@@ -146,33 +146,33 @@ const faceInfo = async (req, res) => {
                 return val = {"result" : "앞면", "accur_time" : val.accur_time}
             }
         })
-        if(obj[0].result == '뒷면'){
-            const tokenData = await authDAO.userToken(parameters);
-            let message = {
-                token : tokenData,
-                notification :{
-                    body : "FaceAI"
-                },
-                data : {
-                    content : "뒷면",
-                },
-                android : {
-                    priority : "high",
-                },
-            }
-            console.log(message.token);
+        // if(obj[0].result == '뒷면'){
+        //     const tokenData = await authDAO.userToken(parameters);
+        //     let message = {
+        //         token : tokenData,
+        //         notification :{
+        //             body : "FaceAI"
+        //         },
+        //         data : {
+        //             content : "뒷면",
+        //         },
+        //         android : {
+        //             priority : "high",
+        //         },
+        //     }
+        //     console.log(message.token);
         
-            admin.messaging()
-                .send(message)
-                .then((response) => {
-                    console.log("Succesfully sent message : ", response);
-                })
-                .catch((err) => {
-                    console.log("Error Sending message !!! :", err);
-                })
-        } else {
-            console.log(obj[0].result);
-        }
+        //     admin.messaging()
+        //         .send(message)
+        //         .then((response) => {
+        //             console.log("Succesfully sent message : ", response);
+        //         })
+        //         .catch((err) => {
+        //             console.log("Error Sending message !!! :", err);
+        //         })
+        // } else {
+        //     console.log(obj[0].result);
+        // }
         res.send({"result" : obj});
     } catch(err) {
         console.log("rtsp 정보 없음");

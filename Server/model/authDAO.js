@@ -140,7 +140,6 @@ const userToken = (parameters) => {
             if(err) {
                 reject(err);
             } else {
-                console.log(db_data[0].deviceToken);
                 resolve(db_data[0].deviceToken);
             }
         })

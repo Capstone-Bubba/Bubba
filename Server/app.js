@@ -16,7 +16,6 @@ const CalendarRouter = require('./routes/calendar');
 const pushRouter = require('./routes/push');
 const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
-const cctvRouter = require('./routes/cctv');
 const logger = require('./config/winston');
 
 app.use(cors({ origin: "http://localhost:3000", credentials : true}));

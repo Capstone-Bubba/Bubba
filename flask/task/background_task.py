@@ -1,8 +1,10 @@
 import database
+import requests
 import cv2, json, time, datetime
 
 def detect_face(user, rtsp, model):
-
+    headers = {'content-type' : 'application/json'}
+    
     db_class = database.Database()
 
     # cv2 camera 캡쳐 할 도메인
@@ -63,6 +65,8 @@ def detect_face(user, rtsp, model):
                 db_class.execute(sql2, [count['user'], count['side'], count['back'], count['front'], count['none'], now.strftime('%Y-%m-%d %H:%m:%S')])
                 db_class.commit()
                 print('Accuracy for 30s', json.dumps(count))
+                data = json.dumps(count)
+                r = requests.post('http://localhost:8000/push/face', data=data, headers=headers)
                 count['back'], count['side'], count['front'], count['none'] = 0, 0, 0, 0
             print('count_len', count_len)
         else:
