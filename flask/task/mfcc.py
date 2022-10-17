@@ -42,14 +42,7 @@ def trans_spec(data,sr):
 
 
 
-def baby_cry_detect(cry_path,cry_detect_model,device, user_num):
-    tmp_list = []
-    cry_data = []
-    data, sr = librosa.load(cry_path, sr=16000)
-    tmp_list.append(trans_mfcc(data, sr))
-    tmp_list.append(trans_mel(data, sr))
-    tmp_list.append(trans_spec(data, sr))
-    cry_data.append(tmp_list)
+def baby_cry_classifi(cry_data,cry_classifi_model,device, user_num):
     with torch.no_grad():
       cry_detect_model.eval()
       b=np.array(cry_data)
@@ -86,3 +79,22 @@ def baby_cry_detect(cry_path,cry_detect_model,device, user_num):
       db_class.execute(sql1, [user_num, '피곤함', datetime.now()])
       db_class.commit()
       return "피곤함"
+
+
+def baby_cry_detect(cry_path,cry_detect_model,device, user_num,cry_classifi_model):
+    tmp_list = []
+    cry_data = []
+    data, sr = librosa.load(cry_path, sr=16000)
+    tmp_list.append(trans_mfcc(data, sr))
+    tmp_list.append(trans_mel(data, sr))
+    tmp_list.append(trans_spec(data, sr))
+    cry_data.append(tmp_list)
+    with torch.no_grad():
+       cry_detect_model.eval()
+       b= np.array(cry_data)
+       inputs = torch.FloatTensor(b).permute(0, 1, 3,2).to(device)
+       outputs = cry_detect_model(inputs)
+       if (ouputs.argmax().item() == 12): #값이 12면 울음소리이므로 baby_cry_classifi 실행
+          return baby_cry_classifi(cry_data,cry_classifi_model,device, user_num)
+       else:
+          return False
