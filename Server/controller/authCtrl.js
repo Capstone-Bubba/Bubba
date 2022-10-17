@@ -61,7 +61,8 @@ const mfccInfo = async (req, res) => {
     const parameters = {
         "user_num" : req.session.passport.user.user_num
     }
-    const result = await AIDAO.OnceMfcc(paramters);
+    const result = await AIDAO.OnceMfcc(parameters);
+    console.log(result);
     res.send({"result" : result});
     } catch(err) {
         console.log(err);
