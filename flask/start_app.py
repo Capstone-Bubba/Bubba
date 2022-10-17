@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request
 from threading import Thread
-import cv2, torch, json, time, datetime
+import requests
+import cv2, torch, json, time
+from datetime import datetime
 import torch.nn as nn
 import timm
 import pyaudio, wave
@@ -25,8 +27,9 @@ class Network(nn.Module):
 CHUNK = 1024
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
+
+cry_detect_model = Network()
 cry_classifi_model = Network()
-# cry_detect_model = Network()
 cry_classifi_model = torch.load("./app/static/cry_classifi_model.pt", map_location=device)
 cry_detect_model = torch.load("./app/static/cry_detect_model.pt", map_location=device)
 
@@ -38,9 +41,20 @@ model = torch.hub.load('ultralytics/yolov5', 'custom', path='./app/static/best.p
 app = Flask(__name__)
 data = {}
 
-@app.route('/')
-def home():
-    return "test"
+# @app.route('/')
+# def home():
+#     user = 1
+#     file_path = './app/static/audio/1/bu.wav'
+#     result = task.baby_cry_detect(file_path, cry_detect_model, device)
+#     if(result != False):
+#         detect = task.baby_cry_classifi(result, device, user, cry_classifi_model)
+#         headers = {'content-type' : 'application/json'}
+#         json_data = {"user_num" : user, "mfcc_result" : detect}
+#         data = json.dumps(json_data)
+#         r = requests.post('http://localhost:8000/push/mfcc', data=data, headers=headers)
+#         print(r.text)
+#     else:
+#         return False
 
 # db 연동 test
 # @app.route('/db')
@@ -83,10 +97,17 @@ def mfcc():
     with open(file_path, mode='bx') as f:
         f.write(response)
 
-    result = task.baby_cry_detect(file_path, cry_detect_model, device, user, cry_classifi_model)
-    print(result)
+    result = task.baby_cry_detect(file_path, cry_detect_model, device)
+    if(result != False):
+        detect = task.baby_cry_classifi(result, device, user, cry_classifi_model)
+        headers = {'content-type' : 'application/json'}
+        json_data = {"user_num" : user, "mfcc_result" : detect}
+        data = json.dumps(json_data)
+        r = requests.post('http://localhost:8000/push/mfcc', data=data, headers=headers)
+        print(r.text)
+    else:
+        return False
 
-    return "ok"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True, threaded=True) # 127.0.0.1

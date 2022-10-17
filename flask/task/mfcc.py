@@ -13,6 +13,7 @@ import database
 pad2d = lambda a, i: a[:, 0:i] if a.shape[1] > i else np.hstack((a, np.zeros((a.shape[0], i-a.shape[1]))))
 db_class = database.Database()
 
+
 def trans_mfcc(data,sr):
   mfcc = librosa.feature.mfcc(data, sr=sr, n_mfcc = 128, n_fft=400, hop_length=160)
   mfcc = sklearn.preprocessing.scale(mfcc, axis=1)
@@ -38,8 +39,6 @@ def trans_spec(data,sr):
   DB = (DB - local_min)/(local_max - local_min)
   padded_DB = pad2d(DB, 700)
   return padded_DB
-
-
 
 
 def baby_cry_classifi(cry_data,device, user_num, cry_classifi_model):
@@ -81,7 +80,7 @@ def baby_cry_classifi(cry_data,device, user_num, cry_classifi_model):
       return "피곤함"
 
 
-def baby_cry_detect(cry_path,cry_detect_model,device, user_num,cry_classifi_model):
+def baby_cry_detect(cry_path,cry_detect_model,device):
     tmp_list = []
     cry_data = []
     data, sr = librosa.load(cry_path, sr=16000)
@@ -94,7 +93,8 @@ def baby_cry_detect(cry_path,cry_detect_model,device, user_num,cry_classifi_mode
        b= np.array(cry_data)
        inputs = torch.FloatTensor(b).permute(0, 1, 3,2).to(device)
        outputs = cry_detect_model(inputs)
+       print(outputs.argmax().item())
        if (outputs.argmax().item() == 12): #값이 12면 울음소리이므로 baby_cry_classifi 실행
-          return baby_cry_classifi(cry_data,cry_classifi_model,device, user_num)
+          return cry_data
        else:
           return False
