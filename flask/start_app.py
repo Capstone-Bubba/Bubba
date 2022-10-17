@@ -25,8 +25,10 @@ class Network(nn.Module):
 CHUNK = 1024
 device = "cuda" if torch.cuda.is_available() else "cpu"
 
-cry_detect_model = Network()
-cry_detect_model = torch.load("./app/static/cry_classifi_model.pt", map_location=device)
+cry_classifi_model = Network()
+# cry_detect_model = Network()
+cry_classifi_model = torch.load("./app/static/cry_classifi_model.pt", map_location=device)
+cry_detect_model = torch.load("./app/static/cry_detect_model.pt", map_location=device)
 
 
 # yolov5 얼굴 인식 custom 모델
@@ -81,7 +83,7 @@ def mfcc():
     with open(file_path, mode='bx') as f:
         f.write(response)
 
-    result = task.baby_cry_detect(file_path, cry_detect_model, device, user)
+    result = task.baby_cry_detect(file_path, cry_detect_model, device, user, cry_classifi_model)
     print(result)
 
     return "ok"

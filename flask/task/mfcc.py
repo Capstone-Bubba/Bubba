@@ -42,12 +42,12 @@ def trans_spec(data,sr):
 
 
 
-def baby_cry_classifi(cry_data,cry_classifi_model,device, user_num):
+def baby_cry_classifi(cry_data,device, user_num, cry_classifi_model):
     with torch.no_grad():
-      cry_detect_model.eval()
+      cry_classifi_model.eval()
       b=np.array(cry_data)
       inputs = torch.FloatTensor(b).permute(0, 1, 3,2).to(device)
-      outputs = cry_detect_model(inputs)
+      outputs = cry_classifi_model(inputs)
       result = outputs.argmax().item()
     if(result == 0):
       sql1 = "INSERT INTO bubba.mfccinfo(user_num, mfcc_result, accur_time) \
@@ -94,7 +94,7 @@ def baby_cry_detect(cry_path,cry_detect_model,device, user_num,cry_classifi_mode
        b= np.array(cry_data)
        inputs = torch.FloatTensor(b).permute(0, 1, 3,2).to(device)
        outputs = cry_detect_model(inputs)
-       if (ouputs.argmax().item() == 12): #값이 12면 울음소리이므로 baby_cry_classifi 실행
+       if (outputs.argmax().item() == 12): #값이 12면 울음소리이므로 baby_cry_classifi 실행
           return baby_cry_classifi(cry_data,cry_classifi_model,device, user_num)
        else:
           return False
