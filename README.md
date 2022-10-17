@@ -79,3 +79,6 @@ ON SCHEDULE    
 #### 2022.05.29 진행 사항
 - RTSP 통신 완료 (React-Node)
 - TestMessage
+
+#### 2022.10.17 웹, AI, 알림 연동 완료
+- pt 파일이 자꾸 안올라가서 그냥 Git main에 올려놓겠습니다.

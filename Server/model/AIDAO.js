@@ -69,7 +69,7 @@ const ReadMFCC = (parameters) => {
 
 const OnceMfcc = (paramters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT mfcc_result, accur_time FROM mfccinfo WHERE user_num=? ORDER BY accur_time DESC LIMIT 20`;
+        let queryData = `SELECT mfcc_result, accur_time FROM mfccinfo WHERE user_num=? ORDER BY accur_time DESC LIMIT 1`;
         db.query(queryData, paramters.user_num, (err, db_data) => {
             if(err) {
                 reject(err);

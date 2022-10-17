@@ -71,51 +71,56 @@ const Item = styled.div`
 
 function Main(props) {
   const [data, setData] = useState([])
+  const [mfcc, setMfcc] = useState([])
   const params = { user_num: props.user_num }
   useEffect(() => {
     async function check() {
       try{
         setInterval(async () => {
           const res = await axios.get('http://localhost:8000/auth/face', { params })
+          const face = await axios.get('http://localhost:8000/auth/mfcc', { params })
         console.log(res.data.result)
+        console.log(face.data.result)
         const _data = await res.data.result.map ((rowData) => (
-          // {
-          //   side : rowData.side,
-          //   back : rowData.back,
-          //   front : rowData.front,
-          //   none : rowData.none,
-          //   accur_time : rowData.accur_time
-          // }
           {
             result : rowData.result,
             accur_time : rowData.accur_time
           }
         ))
+
+        const _mfcc = await face.data.result.map ((rowData) => (
+          {
+            result : rowData.mfcc_result,
+            accur_time : rowData.accur_time
+          }
+        ))
         console.log(_data)
+        console.log(_mfcc)
         setData(_data)
-        }, 31000);
+        setMfcc(_mfcc)
+        }, 7000);
       } catch(e) {
         console.error(e.message)
       }
     }
     check()
   }, [])
-  console.log(data)
 
-  const states = [
-		{nowState : "배고픔"}, 
-		{nowState : "트림"},
-		{nowState : "복통"},
-		{nowState : "불편"},
-		{nowState : "피곤"}
-	]
+  // const states = [
+	// 	{nowState : "배고픔"}, 
+	// 	{nowState : "트림"},
+	// 	{nowState : "복통"},
+	// 	{nowState : "불편"},
+	// 	{nowState : "피곤"}
+	// ]
   
-  function Random(array){
-    const random = Math.floor(Math.random() * array.length);
-    return array[random];
-  }
-  let nowData = Random(states);
-  console.log(nowData)
+  // function Random(array){
+  //   const random = Math.floor(Math.random() * array.length);
+  //   return array[random];
+  // }
+  // let nowData = Random(states);
+  // console.log(nowData)
+  console.log(mfcc.result)
   return (
     <>
       <Title>
@@ -140,7 +145,7 @@ function Main(props) {
                     .slice(0, 3)
                     .map(element => {
                       return (
-                        <div style={{ width: '100%',fontSize:'1rem', border: '1px solid skyblue',borderRadius:'10px', marginTop: '4px',paddingBottom:'3px', height: '50px', marginLeft: '4%',paddingLeft:'22px',backgroundColor:'#a9cae8' }}>
+                        <div style={{ width: '100%',fontSize:'1rem', border: '1px solid skyblue',borderRadius:'10px', marginTop: '4px',paddingBottom:'3px', height: '50px', marginLeft: '4%',paddingLeft:'3px',backgroundColor:'#a9cae8', textAlign:'center'}}>
                           <p>{element.accur_time}기준 아이의 얼굴 위치 변동 횟수는 {element.result}</p>
                         </div>
                       )
@@ -148,12 +153,15 @@ function Main(props) {
                 </div>
               </Item>
               <Item bcolor={"#f1fdee"}>
+                {mfcc.map(element => {
+                  return (
                 <div style={{display:'flex', flexDirection:'row', width:'100%',alignItems:'center',justifyContent:'center'}}>
                     <p style={{width:'30%'}}>현재 아이의 상태는</p>
                     <div style={{border:'2px solid black',borderRadius:'50%',width:'180px',height:'180px',display:'flex',alignItems:'center',justifyContent:'center'}}>
-                      <p style={{fontSize:'3rem',fontWeight:'2'}}>{nowData.nowState}</p>
+                      <p style={{fontSize:'3rem',fontWeight:'2'}}>{element.result}</p>
                     </div>
                 </div>
+                  )})}
 
               </Item>
             </FlexBox>
