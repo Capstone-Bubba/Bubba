@@ -7,52 +7,158 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Vibrator
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Button
+import android.widget.Switch
 import android.widget.TextView
+import android.widget.Toast
 import com.twogudak.bubba.R
+import kotlinx.coroutines.delay
+import org.w3c.dom.Text
 import java.net.URI
+import java.util.*
 
-class AlertDialogActivity() : AppCompatActivity() {
+class AlertDialogActivity() : AppCompatActivity(), TextToSpeech.OnInitListener {
 
-    lateinit var AlertDialogContent : TextView
-    lateinit var AlertDialogCheckButton : Button
+    lateinit var AlertDialogContent: TextView
+    lateinit var AlertDialogCheckButton: Button
     private lateinit var vibrator: Vibrator
-    private val pattern = longArrayOf(100, 200, 100, 200, 100, 200)
+    private val pattern1 = longArrayOf(100, 200, 100, 200, 100, 200)
+    private val pattern2 = longArrayOf(100, 100, 200, 100, 100, 200)
+    private val pattern3 = longArrayOf(300, 100, 100, 100, 300, 100)
+    private val pattern4 = longArrayOf(400, 100, 100, 100, 400, 100)
+    private val pattern5 = longArrayOf(100, 100, 300, 100, 100, 300)
+    private val pattern6 = longArrayOf(200, 100, 100, 100, 100, 100)
     private lateinit var Ring: Ringtone
+    private var tts : TextToSpeech? = null
+
+    override fun onInit(p0: Int) {
+        tts = TextToSpeech(this, TextToSpeech.OnInitListener {
+            if (it == TextToSpeech.SUCCESS) {
+                val result = tts!!.setLanguage(Locale.KOREAN)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(this, "TTS Not Suppoerted", Toast.LENGTH_SHORT).show()
+                    return@OnInitListener
+                }
+            } else {
+                Toast.makeText(this, "TTS Init failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_alert_dialog)
 
-        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-        vibrator.vibrate(pattern, 0)
 
-        val RingURL = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-        Ring = RingtoneManager.getRingtone(applicationContext,RingURL)
+        var contentText = intent.getStringExtra("Content")
+        intent.removeExtra("Content")
+        Log.d("AlertDialogActivity", contentText.toString())
 
-        Ring.play()
+
+//        val RingURL = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
+//        Ring = RingtoneManager.getRingtone(applicationContext,RingURL)
+//        Ring.play()
 
         AlertDialogContent = findViewById(R.id.AlertDialog_context_text)
         AlertDialogCheckButton = findViewById(R.id.AlertDialog_Check_Button)
 
-        var contentText = intent.getStringExtra("Content")
-        intent.removeExtra("Content")
-        var clear = intent.getStringExtra("Content")
-        Log.d("receiveIntent content",contentText.toString())
-        Log.d("receiveIntent content",clear.toString())
-        AlertDialogContent.text = contentText
+        if (contentText != "null") {
+            VibratorSetting(contentText!!)
+            //initTextToSpech()
+            SpeackTTS(contentText)
+            AlertDialogContent.text = contentText
+        } else {
+            AlertDialogContent.text = ""
+        }
+
+
 
 
         AlertDialogCheckButton.setOnClickListener {
-            vibrator.cancel()
-            Ring.stop()
+            if (contentText != "null") {
+                vibrator.cancel()
+                tts?.stop()
+            }
             finish()
         }
 
     }
+
+
+    private fun VibratorSetting(Content: String): Vibrator {
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+
+        when (Content) {
+            "뒷면" -> {
+                vibrator.vibrate(pattern1, 0)
+            }
+            "불편함" -> {
+                vibrator.vibrate(pattern2, 0)
+            }
+            "배아픔" -> {
+                vibrator.vibrate(pattern3, 0)
+            }
+            "배고픔" -> {
+                vibrator.vibrate(pattern4, 0)
+            }
+            "트름" -> {
+                vibrator.vibrate(pattern5, 0)
+            }
+            "피곤함" -> {
+                vibrator.vibrate(pattern6, 0)
+            }
+        }
+        return vibrator
+    }
+
+    private fun initTextToSpech() {
+        tts = TextToSpeech(this, TextToSpeech.OnInitListener {
+            if (it == TextToSpeech.SUCCESS) {
+                val result = tts!!.setLanguage(Locale.KOREAN)
+                if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                    Toast.makeText(this, "TTS Not Suppoerted", Toast.LENGTH_SHORT).show()
+                    return@OnInitListener
+                }
+            } else {
+                Toast.makeText(this, "TTS Init failed", Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+
+    private fun SpeackTTS(Content: String) {
+        when (Content) {
+            "뒷면" -> {
+                tts?.speak("아이가 엎드려 있습니다", TextToSpeech.QUEUE_FLUSH, null,null)
+                tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
+                tts?.engines
+            }
+            "불편함" -> {
+                tts?.speak("아이가 불편하여 울고있습니다.", TextToSpeech.QUEUE_ADD, null, null)
+                tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
+            }
+            "배아픔" -> {
+                tts?.speak("아이가 배가 아파 울고있습니다.", TextToSpeech.QUEUE_ADD, null, null)
+                tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
+            }
+            "배고픔" -> {
+                tts?.speak("아이가 배고파 울고 있습니다", TextToSpeech.QUEUE_ADD, null, null)
+                tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
+            }
+            "트름" -> {
+                tts?.speak("아이가 트름을 하고 싶어 울고있습니다.", TextToSpeech.QUEUE_ADD, null, null)
+                tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
+            }
+            "피곤함" -> {
+                tts?.speak("아이가 피곤하여 울고있습니다.", TextToSpeech.QUEUE_ADD, null, null)
+                tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
+            }
+        }
+    }
+
+
 
     override fun onStart() {
         super.onStart()
@@ -60,5 +166,6 @@ class AlertDialogActivity() : AppCompatActivity() {
 
 
     }
+
 
 }

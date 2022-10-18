@@ -21,10 +21,6 @@ class PushMessagingService : FirebaseMessagingService() {
 
     var a = 0
 
-
-
-
-
     override fun onNewToken(token: String) {
         super.onNewToken(token)
         Log.d("Refresh Token push notification",token)
