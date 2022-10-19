@@ -100,6 +100,7 @@ class MainActivity : AppCompatActivity() {
                                 Log.e("Kakao Account", "사용자 정보 요청 실패", error)
                             } else if (user != null) {
                                 Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
+                                Log.i("Kakao Account", "123123")
                                 if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
                                     Log.d("rootActivty",user.kakaoAccount?.email.toString())
                                     val email = user.kakaoAccount?.email.toString()
@@ -170,6 +171,7 @@ class MainActivity : AppCompatActivity() {
                     Log.e("Kakao Account", "사용자 정보 요청 실패", error)
                 } else if (user != null) {
                     Log.i("Kakao Account", "사용자 정보 요청 성공+ ${user.kakaoAccount?.email}")
+                    Log.i("Kakao Account", "444444")
                     if (user.kakaoAccount?.email.isNullOrEmpty()){}else{
                         Log.d("rootActivty",user.kakaoAccount?.email.toString())
                         val email = user.kakaoAccount?.email.toString()

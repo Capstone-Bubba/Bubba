@@ -22,13 +22,13 @@ class MPAndroidGraph(context: Context, data: ArrayList<Int>, barchart: BarChart)
     fun sleepgraphinit(){
         barchart.setTouchEnabled(false)
 
-        data.add(10)
-        data.add(5)
-        data.add(3)
-        data.add(7)
-        data.add(9)
-        data.add(21)
-        data.add(23)
+        data.add(37)
+        data.add(36)
+        data.add(37)
+        data.add(35)
+        data.add(36)
+        data.add(37)
+        data.add(36)
 
         val entries = ArrayList<BarEntry>()
         var x = 0.0f
@@ -45,8 +45,8 @@ class MPAndroidGraph(context: Context, data: ArrayList<Int>, barchart: BarChart)
             setDrawGridBackground(false)
             axisRight.isEnabled = false
             axisLeft.run {
-                axisMaximum = 24f
-                axisMinimum = 0f
+                axisMaximum = 40f
+                axisMinimum = 30f
                 granularity = 4f
                 setDrawLabels(true)
                 setDrawAxisLine(true)

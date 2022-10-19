@@ -44,7 +44,7 @@ class SendToken {
 
         var token = hashMapOf(
             "deviceToken" to token,
-            "email" to appId
+            "user_num" to appId
         )
 
         call.SendFireBaseToken(token).enqueue(object : Callback<String>{

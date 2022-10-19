@@ -37,7 +37,7 @@
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:background="@color/white"
-                    android:src="@drawable/bubba2"
+                    android:src="@drawable/bubba_profile"
                     android:adjustViewBounds="true"
                     android:scaleType="centerCrop" />
 

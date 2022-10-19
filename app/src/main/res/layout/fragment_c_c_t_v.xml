@@ -25,6 +25,7 @@
         app:layout_constraintWidth_percent="0.1"
         app:layout_constraintDimensionRatio="1:1"
         android:background="@drawable/fullscreen_icon"
+        android:backgroundTint="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/testcctv"/>
 

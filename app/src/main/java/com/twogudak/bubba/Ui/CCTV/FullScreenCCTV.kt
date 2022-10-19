@@ -26,7 +26,7 @@ class FullScreenCCTV : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        val uri = Uri.parse("rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mp4")
+        val uri = Uri.parse("rtsp://1.228.75.116:8554/unicast")
 
 
         videiview.setVideoURI(uri)
