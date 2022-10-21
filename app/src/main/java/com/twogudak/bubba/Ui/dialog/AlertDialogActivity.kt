@@ -24,12 +24,12 @@ class AlertDialogActivity() : AppCompatActivity() {
     lateinit var AlertDialogContent: TextView
     lateinit var AlertDialogCheckButton: Button
     private lateinit var vibrator: Vibrator
-    private val pattern1 = longArrayOf(100, 200, 100, 200, 100, 200)
-    private val pattern2 = longArrayOf(100, 100, 200, 100, 100, 200)
-    private val pattern3 = longArrayOf(300, 100, 100, 100, 300, 100)
-    private val pattern4 = longArrayOf(400, 100, 100, 100, 400, 100)
-    private val pattern5 = longArrayOf(100, 100, 300, 100, 100, 300)
-    private val pattern6 = longArrayOf(200, 100, 100, 100, 100, 100)
+    private val pattern1 = longArrayOf(100, 100, 100, 100)
+    private val pattern2 = longArrayOf(200, 100, 200, 100)
+    private val pattern3 = longArrayOf(100, 100, 200, 100)
+    private val pattern4 = longArrayOf(100, 100, 100, 100, 200, 100,200)
+    private val pattern5 = longArrayOf(100, 20)
+    private val pattern6 = longArrayOf(100, 100, 200, 100, 300, 100,400)
     private lateinit var Ring: Ringtone
     private var tts : TextToSpeech? = null
 
@@ -128,35 +128,36 @@ class AlertDialogActivity() : AppCompatActivity() {
                 tts?.speak("아이가 엎드려 있습니다", TextToSpeech.QUEUE_FLUSH, null,null)
                 tts?.playSilentUtterance(500, TextToSpeech.QUEUE_ADD, null)
                 tts?.speak("아이가 엎드려 있습니다", TextToSpeech.QUEUE_FLUSH, null,null)
-                callback.invoke()
+
             }
             "불편함" -> {
                 tts?.speak("아이가 불편하여 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
                 tts?.playSilentUtterance(500, TextToSpeech.QUEUE_ADD, null)
                 tts?.speak("아이가 불편하여 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
-                callback.invoke()
+
             }
             "배아픔" -> {
                 tts?.speak("아이가 배가 아파 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
                 tts?.playSilentUtterance(500, TextToSpeech.QUEUE_ADD, null)
-                callback.invoke()
+
             }
             "배고픔" -> {
                 tts?.speak("아이가 배고파 울고 있습니다", TextToSpeech.QUEUE_FLUSH, null, null)
                 tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
-                callback.invoke()
+
             }
             "트림" -> {
                 tts?.speak("아이가 트림을 하고 싶어 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
                 tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
-                callback.invoke()
+
             }
             "피곤함" -> {
                 tts?.speak("아이가 피곤하여 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
                 tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
-                callback.invoke()
+
             }
         }
+        callback.invoke()
     }
 
 

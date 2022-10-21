@@ -93,6 +93,7 @@ class Calendar : Fragment() {
             CalendarData = it.CalendarList.groupBy { LocalDate.parse(it.calendar_date,DateTimeFormatter.ISO_DATE_TIME) }
             Log.d("Call Calendar",CalendarData.toString())
             calendarAdapter.notifyDataSetChanged()
+            calendarview.notifyCalendarChanged()
         }
 
         calendar_ViewModel.getmessage().observe(viewLifecycleOwner){
@@ -136,15 +137,19 @@ class Calendar : Fragment() {
                 container.textView.text = day.date.dayOfMonth.toString()
                 container.calendarLine.background = null
                 val layout = container.binding
+
                 if (day.owner == DayOwner.THIS_MONTH){
                     container.textView.setTextColor(Color.BLACK)
-                    Log.d("test",selectedDate.toString())
-                    Log.d("day date", day.date.toString())
-                    var Calendardate = CalendarData?.get(day.date)
-                    layout.setBackgroundColor(if (selectedDate == day.date) R.drawable.calendar_selected_bg else 0)
-                    if (Calendardate !=null){
-                        container.calendarLine.setBackgroundColor(view!!.context.getColor(0))
+                    if (CalendarData != null){
+                        var Calendardate = CalendarData!![day.date]
+                        Log.d("Calendar_daydata2",Calendardate.toString())
+                        if (Calendardate !=null){
+                            Log.d("Calendar_daydata2",Calendardate.toString())
+                            container.calendarLine.setBackgroundColor(Color.BLUE)
+                        }
                     }
+                    layout.setBackgroundColor(if (selectedDate == day.date) R.drawable.calendar_selected_bg else 0)
+
                 } else {
                     container.textView.setTextColor(Color.GRAY)
                     layout.background = null
