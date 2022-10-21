@@ -1,6 +1,7 @@
 package com.twogudak.bubba.Ui.Calendar
 
 import android.content.Context
+import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +28,7 @@ import com.kizitonwose.calendarview.utils.previous
 import com.twogudak.bubba.HttpData.DTO.CalendarDTO
 import com.twogudak.bubba.HttpData.DTO.CalendarDetail
 import com.twogudak.bubba.R
+import com.twogudak.bubba.Ui.dialog.CalendarUpdateDialog
 import com.twogudak.bubba.Ui.rootPage.rootActivty
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -35,7 +38,7 @@ import java.time.format.DateTimeFormatter
 import java.time.temporal.WeekFields
 import java.util.*
 
-class Calendar : Fragment() {
+class Calendar : Fragment(), DialogInterface.OnDismissListener {
     lateinit var calendarview: CalendarView
     lateinit var calendarAdapter: CalendarAdapter
     lateinit var calendarRecyclerView: RecyclerView
@@ -70,7 +73,6 @@ class Calendar : Fragment() {
         CalendarPreviousMounthImage = v.findViewById(R.id.CalendarPreviousMounthImage)
         CalendarNextMonthImage = v.findViewById(R.id.CalendarNextMonthImage)
         calendarPlusBt = v.findViewById(R.id.calendar_plus)
-
         calendar_ViewModel = ViewModelProvider(rootActivty).get(CalendarViewModel::class.java)
 
 
@@ -200,16 +202,8 @@ class Calendar : Fragment() {
             }
         }
         calendarPlusBt.setOnClickListener {
-            UserApiClient.instance.unlink { error ->
-                if (error != null) {
-                    Log.e("unLink Kakao", "연결 끊기 실패", error)
-                }
-                else {
-                    Log.i("unLink Kakao", "연결 끊기 성공. SDK에서 토큰 삭제 됨")
-                }
-            }
+            CalendarUpdateDialog().show(childFragmentManager,"Dialog")
         }
-
 
     }
 
@@ -232,6 +226,9 @@ class Calendar : Fragment() {
         calendarAdapter.notifyDataSetChanged()
     }
 
+    override fun onDismiss(dialog: DialogInterface?) {
+        onStart()
+    }
 
 
 }

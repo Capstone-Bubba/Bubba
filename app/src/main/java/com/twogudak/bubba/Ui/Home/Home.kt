@@ -45,8 +45,6 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         override fun onReceive(context: Context?, intent: Intent?) {
             Log.d(TAG,"Update recycelView")
 
-
-            
         }
     }
 
