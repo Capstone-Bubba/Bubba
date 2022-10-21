@@ -140,7 +140,11 @@ class Calendar : Fragment() {
                     container.textView.setTextColor(Color.BLACK)
                     Log.d("test",selectedDate.toString())
                     Log.d("day date", day.date.toString())
+                    var Calendardate = CalendarData?.get(day.date)
                     layout.setBackgroundColor(if (selectedDate == day.date) R.drawable.calendar_selected_bg else 0)
+                    if (Calendardate !=null){
+                        container.calendarLine.setBackgroundColor(view!!.context.getColor(0))
+                    }
                 } else {
                     container.textView.setTextColor(Color.GRAY)
                     layout.background = null

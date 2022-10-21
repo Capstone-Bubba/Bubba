@@ -12,7 +12,7 @@ import com.twogudak.bubba.HttpData.DTO.CalendarDTO
 import com.twogudak.bubba.HttpData.DTO.CalendarDetail
 import com.twogudak.bubba.R
 import java.time.LocalDateTime
-
+import java.time.format.DateTimeFormatter
 
 
 class CalendarAdapter(var context: Context) : RecyclerView.Adapter<CalendarAdapter.CalendarViewHolder>() {
@@ -35,6 +35,7 @@ class CalendarAdapter(var context: Context) : RecyclerView.Adapter<CalendarAdapt
     override fun onBindViewHolder(holder: CalendarViewHolder, position: Int) {
 
         holder.dataText.text = "${calendarData[position].calendar_date}"
+        holder.dataText.text = "${LocalDateTime.parse(calendarData[position].calendar_date, DateTimeFormatter.ISO_DATE_TIME).format(DateTimeFormatter.ofPattern("MM월dd일\nh:mm a"))}"
         holder.eventText.text = "${calendarData[position].calendar_content}"
         holder.contentText.text = "${calendarData[position].calendar_title}"
 

@@ -82,6 +82,7 @@ class Home : Fragment(),DialogInterface.OnDismissListener {
         val bundle = arguments
         val email = bundle?.getString("email")
         val appid = bundle?.getString("appid")
+        Log.d(TAG+ "appID",appid.toString())
 
 
         sleepChart?.let {

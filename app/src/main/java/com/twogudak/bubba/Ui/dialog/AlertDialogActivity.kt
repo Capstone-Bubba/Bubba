@@ -146,8 +146,8 @@ class AlertDialogActivity() : AppCompatActivity() {
                 tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
                 callback.invoke()
             }
-            "트름" -> {
-                tts?.speak("아이가 트름을 하고 싶어 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
+            "트림" -> {
+                tts?.speak("아이가 트림을 하고 싶어 울고있습니다.", TextToSpeech.QUEUE_FLUSH, null, null)
                 tts?.playSilentUtterance(1000, TextToSpeech.QUEUE_ADD, null)
                 callback.invoke()
             }
