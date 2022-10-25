@@ -21,7 +21,7 @@ def detect_face(user, rtsp, model):
 
     while True:
         status, img = cam.read()
-        if temp % 5 == 0:
+        if temp % 10 == 0:
             if not status: continue
             result = model(img[..., ::-1])
             name = result.pandas().xyxy[0]['name']
@@ -53,7 +53,7 @@ def detect_face(user, rtsp, model):
                 if(dic['0'] == 'back'):
                     count['back'] += 1
                     # print(dic['0'])
-                elif(dic['0'] ==' front'):
+                elif(dic['0'] =='front'):
                     count['front'] += 1
                     # print(dic['0'])
                 elif(dic['0'] == 'side'):
@@ -67,12 +67,12 @@ def detect_face(user, rtsp, model):
                 db_class.execute(sql1, [dic['user'], dic['0'], dic['time']])
                 db_class.commit()
 
-                print('FaceLog for 1s', json.dumps(dic))
+            # print('FaceLog for 1s', json.dumps(dic))
                 
             # start - end = 30 으로 해서 30s 마다 메시지 전송
             end = time.time()
 
-            if( end - start > 30 * count_len ):
+            if( end - start > 10 * count_len ):
                 now = datetime.datetime.now()
                 count_len += 1
                 sql2 = "INSERT INTO bubba.accuracy(user_num, side, back, front, none, accur_time) \

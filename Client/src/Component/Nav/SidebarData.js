@@ -37,4 +37,9 @@ export const SidebarData= [
         icon: <FaIcons.FaRegAddressCard />,
         cName: 'nav-text'
     },
+    {
+        title: 'TestData',
+        path: '/test',
+        cName: 'nav-text'
+    }
 ]

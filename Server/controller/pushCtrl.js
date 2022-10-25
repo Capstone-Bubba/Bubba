@@ -7,7 +7,7 @@ const pushMfcc = async (req, res) => {
     const parameters = {
         "user_num" : req.body.user_num,
         "calendar_content" : req.body.mfcc_result,
-        "calendar_date" : dayjs().format(),
+        "calendar_date" : dayjs().format('YYYY-MM-DD HH:mm:ss'),
         "calendar_title" : "MFCC",
         "color" : "#FF0000"
     }

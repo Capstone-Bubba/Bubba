@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 
 
 function Rtsp(props) {
+    const navigate = useNavigate()
     const [Adress, setAdress] = useState("");
     console.log(props.user_num)
     // useEffect(() => {
@@ -26,16 +28,19 @@ function Rtsp(props) {
         setAdress(e.target.value);
       };
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
        
         let body = {
           rtsp: Adress,
         };
     const params = {user_num: props.user_num}
-        axios
+        await axios
           .post("http://localhost:8000/auth/rtsp", body , {params} )
           .then((res) => console.log(res));
+        alert('rtsp 추가!');
+        navigate('/cctv');
+        window.location.reload();
       };
 
     return (

@@ -3,7 +3,7 @@ import JSMpeg from "@cycjimmy/jsmpeg-player";
 import axios from 'axios';
 import { Container } from "@material-ui/core";
 
-const ffmpegIP = "127.0.0.1";
+const ffmpegIP = "localhost";
 
 const CCTV = () => {
   useEffect(() => {

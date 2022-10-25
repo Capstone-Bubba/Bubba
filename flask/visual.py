@@ -5,7 +5,7 @@ import torch
 model = torch.hub.load('ultralytics/yolov5', 'custom', path='./app/static/best.pt')
 import time
 # cv2 camera 캡쳐 할 도메인
-rtsp = "rtsp://admin:vlsi2141@192.168.35.43:554/Streaming/Channels/101"
+rtsp = "rtsp://admin:vlsi2141@192.168.0.7:554/Streaming/Channels/101"
 
 
 # FaceLog로 사용할 count dictinoary

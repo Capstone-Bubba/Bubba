@@ -9,32 +9,33 @@ import Calendar from "./Page/Main/Calendar/Calendar";
 import CCTV from "./Page/Main/CCTV";
 import Baby from './Page/Baby/Baby'
 import Rtsp from "./Page/Main/Rtsp";
+import Test from "./Page/Main/Test";
 
-export default function Router({userData}) {
+export default function Router({ userData }) {
   const check = userData
   const navigate = useNavigate();
   let element = useRoutes([
-    check ? 
-    {
-      element: <MainLayout />,
-      children: [
-        { path: "/", element: <Main /> },
-        { path: "baby", element: <Baby />},
-        { path: "home", element: <Main {...userData}/> },
-        { path: "notice", element: <Notice {...userData} /> },
-        { path: "calendar", element: <Calendar {...userData}/> },
-        { path: "cctv", element: <CCTV /> },
-        { path: "rtsp", element: <Rtsp {...userData} /> }
-      
-      ],
-    }
-   :
-   {
-    children: [
-      { path: "/",  element: <AboutT /> },
-    ]
-  }
-   
+    check ?
+      {
+        element: <MainLayout />,
+        children: [
+          { path: "/", element: <Main /> },
+          { path: "baby", element: <Baby /> },
+          { path: "home", element: <Main {...userData} /> },
+          { path: "notice", element: <Notice {...userData} /> },
+          { path: "calendar", element: <Calendar {...userData} /> },
+          { path: "cctv", element: <CCTV /> },
+          { path: "rtsp", element: <Rtsp {...userData} /> },
+          { path: 'test', element: <Test {...userData}/> }
+        ],
+      }
+      :
+      {
+        children: [
+          { path: "/", element: <AboutT /> },
+        ]
+      }
+
   ]);
 
   return element;

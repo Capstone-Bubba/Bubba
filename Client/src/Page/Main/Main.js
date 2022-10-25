@@ -98,7 +98,7 @@ function Main(props) {
         console.log(_mfcc)
         setData(_data)
         setMfcc(_mfcc)
-        }, 31000);
+        }, 6000);
       } catch(e) {
         console.error(e.message)
       }

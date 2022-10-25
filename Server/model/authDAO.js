@@ -54,8 +54,8 @@ const checkUserNum = (parameters) => {
 
 const insertUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO User (platform, email, deviceToken, rtsp) VALUES (?, ?, ?, ?)`;
-        db.query(queryData, [parameters.platform, parameters.email, parameters.deviceToken, parameters.rtsp], (err, db_data) => {
+        let queryData = `INSERT INTO User (platform, email, deviceToken, rtsp) VALUES (?, ?, 'string', ?)`;
+        db.query(queryData, [parameters.platform, parameters.email, parameters.rtsp], (err, db_data) => {
             if (err) {
                 reject(err);
             } else {
@@ -67,7 +67,7 @@ const insertUser = (parameters) => {
 
 const UpdateUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `UPDATE User SET deviceToken = ? where user_num=?`;
+        let queryData = `UPDATE User SET deviceToken = ? where email=?`;
         db.query(queryData, [parameters.deviceToken, parameters.user_num], (err, db_data) => {
             if (err) {
                 reject(err);

@@ -9,8 +9,10 @@ import pyaudio, wave
 import base64
 import numpy
 import scipy.io.wavfile
-import requests
 import os
+from flask_cors import CORS
+
+
 
 
 import database
@@ -42,6 +44,8 @@ model = torch.hub.load('ultralytics/yolov5', 'custom', path='./app/static/best.p
 app = Flask(__name__)
 data = {}
 
+CORS(app, resources={r'*': {'origins': '*'}})
+
 @app.route('/rtsp', methods=['POST'])
 def rtsp():
     params = request.get_json()
@@ -58,30 +62,31 @@ def rtsp():
 
 @app.route('/mfcc', methods=['POST'])
 def mfcc():
-    # user check
-    params = request.args
+    params = request.get_json()
     user = params['user']
-    print('dong', user)
+    data = params['data']
+    # # .wav file save
+    # response = request.data
+    # now = datetime.now()
+    # format = now.strftime("%Y-%m-%d-%H-%M-%S")
 
-    # .wav file save
-    response = request.data
-    now = datetime.now()
-    format = now.strftime("%Y-%m-%d-%H-%M-%S")
-    
-    file_path = './app/static/audio/' + user + '/' + format + '.wav'
-    with open(file_path, mode='bx') as f:
-        f.write(response)
+    file_path = './app/static/sound/' + data + '/' + data + '.wav'
+    print(file_path)
 
-    result = task.baby_cry_detect(file_path, cry_detect_model, device)
-    if(result != False):
-        detect = task.baby_cry_classifi(result, device, user, cry_classifi_model)
-        headers = {'content-type' : 'application/json'}
-        json_data = {"user_num" : user, "mfcc_result" : detect}
-        data = json.dumps(json_data)
-        r = requests.post('http://localhost:8000/push/mfcc', data=data, headers=headers)
-        return "OK"
-    else:
-        return "FAIL"
+    # with open(file_path, mode='bx') as f:
+    #     f.write(response)
+
+    # result = task.baby_cry_detect(file_path, cry_detect_model, device)
+    # if(result != False):
+    detect = task.baby_cry_classifi(file_path, device, user, cry_classifi_model)
+    headers = {'content-type' : 'application/json'}
+    json_data = {"user_num" : user, "mfcc_result" : detect}
+    data = json.dumps(json_data)
+    print(detect)
+    r = requests.post('http://localhost:8000/push/mfcc', data=data, headers=headers)
+    return "OK"
+    # else:
+    #     return "FAIL"
 
 
 if __name__ == '__main__':

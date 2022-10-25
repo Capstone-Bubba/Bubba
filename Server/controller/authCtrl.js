@@ -18,7 +18,7 @@ const logout = (req, res) => {
     })
 }
 
-const goHome = async (req, res,next) => {
+const goHome = async (req, res, next) => {
     if (req.session.passport != undefined) {
         const parameters = {
             "user_num": req.session.passport.user.user_num
@@ -28,7 +28,7 @@ const goHome = async (req, res,next) => {
         const babyInfo = await authDAO.babyState(parameters);
         let final = {};
 
-        if(babyInfo.length != 0) {
+        if (babyInfo.length != 0) {
             console.log('success');
             final = Object.assign(user[0], babyInfo[0]);
         } else {
@@ -58,13 +58,13 @@ const checkBaby = async (req, res) => {
 
 const mfccInfo = async (req, res) => {
     try {
-    const parameters = {
-        "user_num" : req.session.passport.user.user_num
-    }
-    const result = await AIDAO.OnceMfcc(parameters);
-    // console.log(result);
-    res.send({"result" : result});
-    } catch(err) {
+        const parameters = {
+            "user_num": req.session.passport.user.user_num
+        }
+        const result = await AIDAO.OnceMfcc(parameters);
+        // console.log(result);
+        res.send({ "result": result });
+    } catch (err) {
         console.log(err);
         res.sendStatus(400);
     }
@@ -74,79 +74,97 @@ const mfccInfo = async (req, res) => {
 
 const FCMDeviceToken = async (req, res) => {
     const parameters = {
-        user_num : req.body.user_num,
-        deviceToken : req.body.deviceToken,
+        user_num: req.body.user_num,
+        deviceToken: req.body.deviceToken,
     }
     console.log(parameters);
-    try{
+    try {
         await authDAO.UpdateUser(parameters);
         // console.log(result);
         res.send('OK');
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.send('Fail');
     }
 }
 
 const AppLogin = async (req, res) => {
-    try{
+    try {
         const parameters = {
-            email : req.body.email,
-            platform : req.body.platform
+            email: req.body.email,
+            platform: req.body.platform
         }
         console.log(parameters);
 
         const isUser = await authDAO.checkUserID(parameters);
         console.log(isUser);
-        if(isUser[0].exist == 0) {
+        if (isUser[0].exist == 0) {
             await authDAO.insertUser(parameters);
         }
         const isUserNum = await authDAO.checkUserNum(parameters);
-        
+
         console.log(isUserNum);
         res.send(`${isUserNum[0].user_num}`);
-    } catch(err) {
+    } catch (err) {
         console.log(err);
         res.sendStatus(400);
     }
 }
 
 const UpdateRtsp = async (req, res) => {
-        const parameters = {
-            // "email": req.body.email,
-            "user_num" : req.query.user_num,
-            "rtsp" : req.body.rtsp
-        };
-        console.log(parameters);
-    try{
+    const parameters = {
+        // "email": req.body.email,
+        "user_num": req.query.user_num,
+        "rtsp": req.body.rtsp
+    };
+    console.log(parameters);
+    try {
         await authDAO.RtspInfo(parameters);
         await authDAO.update_rtsp(parameters);
         axios.post('http://localhost:5000/rtsp', {
-            user : parameters.user_num,
-            rtsp : parameters.rtsp
+            user: parameters.user_num,
+            rtsp: parameters.rtsp
         })
         res.sendStatus(200);
-    } catch(err) {
+    } catch (err) {
+        console.log(err);
+        res.sendStatus(400);
+    }
+}
+
+const mfcc = async (req, res) => {
+    const parameters = {
+        "user_num": req.query.user_num,
+        "data": req.body.data
+    };
+    console.log(parameters);
+    try {
+        axios.post('http://localhost:5000/mfcc', {
+            user: parameters.user_num,
+            data: parameters.data
+        })
+        res.sendStatus(200);
+    } catch (err) {
         console.log(err);
         res.sendStatus(400);
     }
 }
 
 const faceInfo = async (req, res) => {
-    try{
-    const parameters = {
-        "user_num" : req.session.passport.user.user_num
-        // "user_num" : req.query.user_num
-    }
+    try {
+        const parameters = {
+            "user_num": req.session.passport.user.user_num
+            // "user_num" : req.query.user_num
+        }
         const result = await AIDAO.user_accur(parameters);
         const obj = result.map(val => {
             val.accur_time = dayjs(val.accur_time).format('YYYY.MM.DD HH:mm:ss');
-            if(Math.max(val.side, val.back, val.front) == val.side){
-                return val = {"result" : "옆면", "accur_time" : val.accur_time}
-            } else if (Math.max(val.side, val.back, val.front) == val.back){
-                return val = {"result" : "뒷면", "accur_time" : val.accur_time}
+            if (Math.max(val.side, val.back, val.front) == val.side) {
+                return val = { "result": "옆면", "accur_time": val.accur_time }
+            } else if (Math.max(val.side, val.back, val.front) == val.back) {
+                return val = { "result": "뒷면", "accur_time": val.accur_time }
             } else {
-                return val = {"result" : "앞면", "accur_time" : val.accur_time}
+                return val = { "result": "앞면", "accur_time": val.accur_time }
             }
         })
         // if(obj[0].result == '뒷면'){
@@ -164,7 +182,7 @@ const faceInfo = async (req, res) => {
         //         },
         //     }
         //     console.log(message.token);
-        
+
         //     admin.messaging()
         //         .send(message)
         //         .then((response) => {
@@ -176,35 +194,35 @@ const faceInfo = async (req, res) => {
         // } else {
         //     console.log(obj[0].result);
         // }
-        res.send({"result" : obj});
-    } catch(err) {
+        res.send({ "result": obj });
+    } catch (err) {
         console.log("rtsp 정보 없음");
         // res.send({"error" : "rtsp 정보 없음" })
     }
 }
 
 const app_mfcc = async (req, res) => {
-    try{
+    try {
         const parameters = {
-            "user_num" : req.query.user_num
+            "user_num": req.query.user_num
         }
         console.log(parameters)
 
         const app_mfcc = await AIDAO.ReadMFCC(parameters);
         console.log(app_mfcc);
-        res.send({"result" : app_mfcc})
-    } catch(e) {
+        res.send({ "result": app_mfcc })
+    } catch (e) {
         console.log(e);
     }
 }
 
 const checkAppBaby = async (req, res, next) => {
     const parameters = {
-        "user_num" : req.query.user_num
+        "user_num": req.query.user_num
     }
 
     const result = await authDAO.checkBabyId(parameters);
-    if(result == undefined) {
+    if (result == undefined) {
         console.log('baby_fail')
         res.sendStatus(400);
     } else {
@@ -224,4 +242,5 @@ module.exports = {
     faceInfo,
     app_mfcc,
     mfccInfo,
+    mfcc
 }

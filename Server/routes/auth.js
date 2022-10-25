@@ -29,6 +29,8 @@ router.get('/mfcc', authCtrl.mfccInfo);
 // Update Rtsp Info (Flask)
 router.post('/rtsp', authCtrl.UpdateRtsp);
 
+router.post('/mfccTest', authCtrl.mfcc );
+
 // router.post('/test_face', authCtrl.test_face);
 
 // router.post('/test_acc', authCtrl.test_acc);
