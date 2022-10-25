@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Dialog, Table, DialogContent, DialogContentText, DialogTitle, TableHead, TableRow, TableCell, TableBody } from '@mui/material'
 import styled from 'styled-components';
+import moment from 'moment';
 const Layout = styled.div`
     display: flex;
     flex-direction: column;
@@ -20,12 +21,12 @@ function CalendarDetail(props) {
         console.log(value)
         async function check() {
             await axios.get('http://localhost:8000/calendar/detail', {
-                params: { num: value }
+                params: { baby_num: value }
             })
                 .then((res) => {
                     setDetail(true);
                     setTitle(res.data.result[0].calendar_title)
-                    setDate(res.data.result[0].calendar_date)
+                    setDate(moment(res.data.result[0].calendar_date).format("YYYY-MM-DD HH:mm:ss"))
                     setContent(res.data.result[0].calendar_content)
                 })
         }

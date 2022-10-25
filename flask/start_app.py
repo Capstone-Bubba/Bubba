@@ -10,6 +10,7 @@ import base64
 import numpy
 import scipy.io.wavfile
 import requests
+import os
 
 
 import database
@@ -41,34 +42,6 @@ model = torch.hub.load('ultralytics/yolov5', 'custom', path='./app/static/best.p
 app = Flask(__name__)
 data = {}
 
-# @app.route('/')
-# def home():
-#     user = 1
-#     file_path = './app/static/audio/1/bu.wav'
-#     result = task.baby_cry_detect(file_path, cry_detect_model, device)
-#     if(result != False):
-#         detect = task.baby_cry_classifi(result, device, user, cry_classifi_model)
-#         headers = {'content-type' : 'application/json'}
-#         json_data = {"user_num" : user, "mfcc_result" : detect}
-#         data = json.dumps(json_data)
-#         r = requests.post('http://localhost:8000/push/mfcc', data=data, headers=headers)
-#         print(r.text)
-#     else:
-#         return False
-
-# db 연동 test
-# @app.route('/db')
-# def select():
-#     db_class = database.Database()
-
-#     sql = "SELECT email, platform \
-#                 FROM Bubba.user"
-#     row = db_class.executeAll(sql)
-
-#     print(row)
-
-#     return render_template('db.html', resultData=row[0])
-
 @app.route('/rtsp', methods=['POST'])
 def rtsp():
     params = request.get_json()
@@ -88,11 +61,13 @@ def mfcc():
     # user check
     params = request.args
     user = params['user']
+    print('dong', user)
 
     # .wav file save
     response = request.data
-    now = datetime.datetime.now()
+    now = datetime.now()
     format = now.strftime("%Y-%m-%d-%H-%M-%S")
+    
     file_path = './app/static/audio/' + user + '/' + format + '.wav'
     with open(file_path, mode='bx') as f:
         f.write(response)
@@ -104,9 +79,9 @@ def mfcc():
         json_data = {"user_num" : user, "mfcc_result" : detect}
         data = json.dumps(json_data)
         r = requests.post('http://localhost:8000/push/mfcc', data=data, headers=headers)
-        print(r.text)
+        return "OK"
     else:
-        return False
+        return "FAIL"
 
 
 if __name__ == '__main__':

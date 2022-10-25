@@ -55,9 +55,11 @@ function Calendar(props) {
                         number: rowData.calendar_num,
                         title: rowData.calendar_title,
                         content: rowData.calendar_content,
-                        day: moment(rowData.calendar_date).format('YYYY-MM-DD'),
+                        day: moment(rowData.calendar_date).format('YYYY-MM-DD HH:mm:ss'),
+                        color : rowData.color
                     }
                 ))
+                console.log(_data)
                 setData(_data)
             })
         }
@@ -89,7 +91,7 @@ function Calendar(props) {
                         events={data ?
                             data.map(element => {
                                 return (
-                                { id:element.number,title: element.title, date: element.day }
+                                { id:element.number,title: element.title, date: element.day, color:element.color }
                                     
                                 )
                             })

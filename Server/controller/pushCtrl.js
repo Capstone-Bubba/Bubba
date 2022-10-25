@@ -1,22 +1,30 @@
 const admin = require('../config/pushConn');
 const authDAO = require('../model/authDAO');
+const calendarDAO = require('../model/calendarDAO');
 const dayjs = require('dayjs');
 
 const pushMfcc = async (req, res) => {
     const parameters = {
         "user_num" : req.body.user_num,
-        "mfcc_result" : req.body.mfcc_result,
+        "calendar_content" : req.body.mfcc_result,
+        "calendar_date" : dayjs().format(),
+        "calendar_title" : "MFCC",
+        "color" : "#FF0000"
     }
-    console.log(parameters);
+    console.log("pushMFCC", parameters);
     try{
+        const isUser = await authDAO.babyState(parameters);
+        parameters.baby_num = isUser[0].baby_num;
+        console.log(parameters);
+        await calendarDAO.create_calendar(parameters);
         const tokenData = await authDAO.userToken(parameters);
         let message = {
             token : tokenData,
             notification :{
-                body : "MFCC"
+                body : parameters.calendar_content
             },
             data : {
-                content : parameters.mfcc_result
+                content : parameters.calendar_content
             },
             android : {
                 priority : "high",
@@ -34,9 +42,10 @@ const pushMfcc = async (req, res) => {
                 console.log("Error Sending message !!! :", err);
                 // return res.status(400).json({success:false});
             })
-        res.send("OK")
+        res.send("OK");
     } catch (err) {
         console.log(err);
+        res.send("error");
     }
 }
 

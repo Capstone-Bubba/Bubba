@@ -62,7 +62,7 @@ const mfccInfo = async (req, res) => {
         "user_num" : req.session.passport.user.user_num
     }
     const result = await AIDAO.OnceMfcc(parameters);
-    console.log(result);
+    // console.log(result);
     res.send({"result" : result});
     } catch(err) {
         console.log(err);
@@ -74,7 +74,7 @@ const mfccInfo = async (req, res) => {
 
 const FCMDeviceToken = async (req, res) => {
     const parameters = {
-        email : req.body.email,
+        user_num : req.body.user_num,
         deviceToken : req.body.deviceToken,
     }
     console.log(parameters);
@@ -94,12 +94,13 @@ const AppLogin = async (req, res) => {
             email : req.body.email,
             platform : req.body.platform
         }
+        console.log(parameters);
 
         const isUser = await authDAO.checkUserID(parameters);
+        console.log(isUser);
         if(isUser[0].exist == 0) {
             await authDAO.insertUser(parameters);
         }
-
         const isUserNum = await authDAO.checkUserNum(parameters);
         
         console.log(isUserNum);
@@ -116,6 +117,7 @@ const UpdateRtsp = async (req, res) => {
             "user_num" : req.query.user_num,
             "rtsp" : req.body.rtsp
         };
+        console.log(parameters);
     try{
         await authDAO.RtspInfo(parameters);
         await authDAO.update_rtsp(parameters);
@@ -183,13 +185,14 @@ const faceInfo = async (req, res) => {
 
 const app_mfcc = async (req, res) => {
     try{
-    const parameters = {
-        "user_num" : req.query.user_num
-    }
+        const parameters = {
+            "user_num" : req.query.user_num
+        }
+        console.log(parameters)
 
-    const app_mfcc = await AIDAO.ReadMFCC(parameters);
-    console.log(app_mfcc);
-    res.send({"result" : app_mfcc})
+        const app_mfcc = await AIDAO.ReadMFCC(parameters);
+        console.log(app_mfcc);
+        res.send({"result" : app_mfcc})
     } catch(e) {
         console.log(e);
     }
