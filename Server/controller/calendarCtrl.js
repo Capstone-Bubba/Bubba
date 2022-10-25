@@ -1,4 +1,7 @@
 const calendarDAO = require('../model/calendarDAO');
+const babyDAO = require('../model/babyDAO');
+const AIDAO = require('../model/AIDAO');
+
 let dayjs = require('dayjs');
 
 const readCalendar = async (req, res) => {
@@ -6,13 +9,15 @@ const readCalendar = async (req, res) => {
         "baby_num" : req.query.baby_num
     };
     const result = await calendarDAO.read_calendar(parameters);
-    console.log(typeof(result));
+    // const isNum = await babyDAO.userNum(parameters);
+    // const mfcc = await AIDAO.ReadMFCC(isNum[0]);
+    // console.log(mfcc);
     res.send({"result" : result});
 }
 
 const readCalendarDetail = async (req, res) => {
     const parameters = {
-        "calendar_num" : req.query.num
+        "calendar_num" : req.query.baby_num
     }
     const result = await calendarDAO.read_calendar_detail(parameters);
     res.send({"result" : result});
@@ -34,7 +39,8 @@ const createCalendar = async (req, res) => {
         "calendar_date" : calendar_date,
         "calendar_title" : req.body.calendar_title,
         "calendar_content" : req.body.calendar_content,
-        "calendar_picture" : calendar_picture
+        "calendar_picture" : calendar_picture,
+        "color" : null
     };
 
     try{
@@ -65,6 +71,7 @@ const updateCalendar = async (req, res) => {
         "calendar_picture" : calendar_picture
     };
     try {
+        console.log(parameters)
         await calendarDAO.update_calendar(parameters);
         res.sendStatus(200);
     } catch (err){

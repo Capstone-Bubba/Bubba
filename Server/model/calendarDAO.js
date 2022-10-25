@@ -2,7 +2,7 @@ const db = require('../config/dbConn');
 
 const read_calendar = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `SELECT calendar_num, calendar_date, calendar_title, calendar_content FROM calendar WHERE baby_num=?`;
+        let queryData = `SELECT calendar_num, calendar_date, calendar_title, calendar_content, color FROM calendar WHERE baby_num=?`;
         db.query(queryData, [parameters.baby_num], (err, db_data) => {
             if(err) {
                 reject(err);
@@ -28,8 +28,8 @@ const read_calendar_detail = (parameters) => {
 
 const create_calendar = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `INSERT INTO calendar SET ?`;
-        db.query(queryData, parameters, (err, db_data) => {
+        let queryData = `INSERT INTO calendar (baby_num, calendar_date, calendar_title, calendar_content, color) VALUES (?, ?, ?, ?, ?)`;
+        db.query(queryData, [parameters.baby_num, parameters.calendar_date, parameters.calendar_title, parameters.calendar_content, parameters.color], (err, db_data) => {
             if(err){
                 reject(err);
             } else {

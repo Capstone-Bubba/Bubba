@@ -101,6 +101,7 @@ const readAppBabyList = async (req, res) => {
     const parameters = {
         "user_num" : req.query.user_num
     };
+    console.log(parameters)
     
     const result = await babyDAO.read_babyList(parameters);
     res.send({"result" : result});

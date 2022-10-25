@@ -67,12 +67,12 @@ const insertUser = (parameters) => {
 
 const UpdateUser = (parameters) => {
     return new Promise((resolve, reject) => {
-        let queryData = `UPDATE User SET deviceToken = ? where email=?`;
-        db.query(queryData, [parameters.deviceToken, parameters.email], (err, db_data) => {
-            if (db_data.email && db_data.deviceToken) {
-                resolve(db_data);
-            } else {
+        let queryData = `UPDATE User SET deviceToken = ? where user_num=?`;
+        db.query(queryData, [parameters.deviceToken, parameters.user_num], (err, db_data) => {
+            if (err) {
                 reject(err);
+            } else {
+                resolve(db_data);
             }
         })
     })

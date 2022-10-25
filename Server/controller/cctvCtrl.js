@@ -1,8 +1,8 @@
 const streaming = require('../config/streaming');
 
 const cctvStreaming = (req, res) => {
-    
-    streaming.start(req.session.passport.user.user_num)
+    console.log('test', req.session.passport.user.user_num);
+    streaming.start(req.session.passport.user.user_num);
     // streaming.start()
     res.sendStatus(200);
 }

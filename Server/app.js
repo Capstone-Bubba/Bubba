@@ -18,7 +18,7 @@ const cctvRouter = require('./routes/cctv');
 const auth = require('./middleware/sessoinCheck');
 const logger = require('./config/winston');
 
-app.use(cors({ origin: "http://localhost:3000", credentials : true}));
+app.use(cors({ origin: true, credentials : true}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false, limit: "5mb" }));
 app.use(express.static(path.join(__dirname)));

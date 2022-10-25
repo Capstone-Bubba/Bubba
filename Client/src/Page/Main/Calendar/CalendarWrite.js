@@ -38,7 +38,7 @@ function CalendarWrite(props) {
             formData.append('calendar_date', value);
             formData.append('calendar_content', content);
             formData.append('calendar_picture', picture)
-            await axios.post('http://localhost:8000/calendar/create', formData, { params });
+            await axios.post(`http://localhost:8000/calendar/create`, formData, { params : params });
             alert("캘린더 추가");
             onClose()
             window.location.reload();
