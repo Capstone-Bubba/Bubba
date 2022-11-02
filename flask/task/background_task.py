@@ -27,20 +27,20 @@ def detect_face(user, rtsp, model):
             name = result.pandas().xyxy[0]['name']
             result = model(img)
             name = result.pandas().xyxy[0]['name']
-            xmin = result.pandas().xyxy[0]['xmin']
-            ymin = result.pandas().xyxy[0]['ymin']
-            xmax = result.pandas().xyxy[0]['xmax']
-            ymax = result.pandas().xyxy[0]['ymax']
-            try:
-                xmin = int(xmin)
-                ymin = int(ymin)
-                xmax = int(xmax)
-                ymax = int(ymax)
-                cv2.rectangle(img,(xmin,ymin),(xmax,ymax),(255,255,0),3)
-                cv2.putText(img,str(name[0]),(xmin,ymin),cv2.FONT_HERSHEY_SIMPLEX,2,(255,255,0),2,cv2.LINE_AA)
-            except:
-                pass
-            cv2.imshow("test", img)
+            # xmin = result.pandas().xyxy[0]['xmin']
+            # ymin = result.pandas().xyxy[0]['ymin']
+            # xmax = result.pandas().xyxy[0]['xmax']
+            # ymax = result.pandas().xyxy[0]['ymax']
+            # try:
+            #     xmin = int(xmin)
+            #     ymin = int(ymin)
+            #     xmax = int(xmax)
+            #     ymax = int(ymax)
+            #     cv2.rectangle(img,(xmin,ymin),(xmax,ymax),(255,255,0),3)
+            #     cv2.putText(img,str(name[0]),(xmin,ymin),cv2.FONT_HERSHEY_SIMPLEX,2,(255,255,0),2,cv2.LINE_AA)
+            # except:
+            #     pass
+            # cv2.imshow("test", img)
             cv2.waitKey(1)
 
             if name.empty:

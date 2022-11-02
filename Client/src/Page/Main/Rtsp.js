@@ -39,10 +39,10 @@ function Rtsp(props) {
           .post("http://localhost:8000/auth/rtsp", body , {params} )
           .then((res) => console.log(res));
         alert('rtsp 추가!');
-        navigate('/cctv');
-        window.location.reload();
+        // navigate('/cctv');
+        // window.location.reload();
       };
-
+      
     return (
         <div
             style={{
