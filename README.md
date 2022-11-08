@@ -1,6 +1,6 @@
 [2022 캡스톤 졸업작품 BUBBA]
 =================
-## 장애인을 위한 아기 보육 시스템
+## 제목 : 장애인을 위한 영유아 보육 시스템
 
 ### 제작에 사용된 기술
 > Front-End : HTML, CSS, JavaScript, React, TypeScript
@@ -11,7 +11,7 @@
 
 > AI : ResNet50(MFCC), Yolov5
 
-## 제작 계획
+## 제작 계획(간트차트)
 
 
 ### 개발자
@@ -57,9 +57,13 @@
 | <b>20171177 백찬영</b> |  O  |  -  |   -   |          -          |
 <br>
 
-#### 제작 기간 : `2022.03.02 ~
+## 변경사항 
 
-#### 2022.08.17 변경사항
+#### 2022.05.29
+- RTSP 통신 완료 (React-Node)
+- TestMessage
+
+#### 2022.08.17
 - 프로시저
 DELIMITER $$
 CREATE PROCEDURE autoDel()
@@ -76,15 +80,12 @@ ON SCHEDULE    
  DO    
  CALL autoDel();
 
-#### 2022.05.29 진행 사항
-- RTSP 통신 완료 (React-Node)
-- TestMessage
-
-#### 2022.10.17 웹, AI, 알림 연동 완료
+#### 2022.10.17 웹, AI, 알림 연동 완료 (FCM-Node)
 - pt 파일이 자꾸 안올라가서 그냥 Git main에 올려놓겠습니다.
 
 #### 2022.10.26 ~ 10.27 캡스톤 디자인 종료
 - [Bubba 시연 영상](https://www.youtube.com/watch?v=Q10lJ1bpXZ8&t=26s)
+- [Bubba 수상 내용](https://aisw.hoseo.ac.kr/board/notice/view?idx=324)
 
 #### 마지막 변경 사항 (2022.10.25)
 * 실시간 음성 전송 -> 클릭 시 음성 분석
@@ -92,7 +93,9 @@ ON SCHEDULE    
 * flask에서 ai 분석 영상 -> 주석처리
 * 체온 측정 모듈 정확도 현저히 낮아 사용 x (랜덤 값 출력)
 
-#### 구성 요소
+## 구성 요소
 - Raspberry Pi 
 - HQ Camera
 - usb Mic
+
+#### 제작 기간 : `2022.03.02 ~ 2022.10.24`
