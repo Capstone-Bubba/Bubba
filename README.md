@@ -5,11 +5,11 @@
 ### 제작에 사용된 기술
 > Front-End : HTML, CSS, JavaScript, React, TypeScript
 
-> Back-End : Node.js, MySQL
+> Back-End : Node.js, MySQL, Flask
 
 > APP : Android Studio
 
-> AI : ???
+> AI : ResNet50(MFCC), Yolov5
 
 ## 제작 계획
 
@@ -82,3 +82,17 @@ ON SCHEDULE    
 
 #### 2022.10.17 웹, AI, 알림 연동 완료
 - pt 파일이 자꾸 안올라가서 그냥 Git main에 올려놓겠습니다.
+
+#### 2022.10.26 ~ 10.27 캡스톤 디자인 종료
+- [Bubba 시연 영상](https://www.youtube.com/watch?v=Q10lJ1bpXZ8&t=26s)
+
+#### 마지막 변경 사항 (2022.10.25)
+* 실시간 음성 전송 -> 클릭 시 음성 분석
+* rtsp 외부/내부 -> 내부에서만
+* flask에서 ai 분석 영상 -> 주석처리
+* 체온 측정 모듈 정확도 현저히 낮아 사용 x (랜덤 값 출력)
+
+#### 구성 요소
+- Raspberry Pi 
+- HQ Camera
+- usb Mic
