@@ -16,7 +16,6 @@
 - [Bubba 서류 작성진행, 완료](https://remarkable-aster-023.notion.site/19bb0fae87d44260bbe09c7135cc9536?v=e36a73c88dc34159b02693be6b0daf6d)
 - [Bubba 간트차트](https://remarkable-aster-023.notion.site/abd0abc78a9b4c3a9b16d2660ff188ba)
 - [Bubba 회의록](https://remarkable-aster-023.notion.site/6525eedefef640c68f42b3cd74c8f28b)
-- [Bubba 문서 양식](https://remarkable-aster-023.notion.site/6525eedefef640c68f42b3cd74c8f28b)
 
 ### 개발자
 
