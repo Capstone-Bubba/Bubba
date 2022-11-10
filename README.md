@@ -89,6 +89,7 @@ ON SCHEDULE    
 #### 2022.10.26 ~ 10.27 캡스톤 디자인 종료
 - [Bubba 시연 영상](https://www.youtube.com/watch?v=Q10lJ1bpXZ8&t=26s)
 - [Bubba 수상 내용](https://aisw.hoseo.ac.kr/board/notice/view?idx=324)
+- [논문](http://www.earticle.net/Article/A412373)
 
 #### 마지막 변경 사항 (2022.10.25)
 * 실시간 음성 전송 -> 클릭 시 음성 분석
